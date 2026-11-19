@@ -1,0 +1,60 @@
+/* ==========================================================================
+   お知らせ・固定ページ ｜ このページだけの組み方
+   値は tokens.css の変数だけを使う（designSystem/README.md の決まり）。
+   .entry-body の中身は WordPress のエディターで書いた HTML。
+   ========================================================================== */
+
+.page-main { min-height: 60vh; }
+/* LP の HERO と同じく、ヘッダーの下まで背景を敷く */
+.page-hero { margin-top: calc(-1 * var(--header-h)); padding: calc(var(--header-h) + clamp(40px, 6vw, 72px)) 0 clamp(28px, 4vw, 40px); background: var(--grad-hero); }
+.page-hero .wrap, .entry .wrap { max-width: 800px; }
+.page-hero .section-title { margin-top: 0; }
+.page-meta { margin-top: 14px; font-size: var(--text-note); color: var(--ink-3); }
+.entry { padding: clamp(40px, 6vw, 72px) 0 var(--section-y); }
+
+/* お知らせの一覧 */
+.news-list { border-top: 1px solid var(--line); }
+.news-item { border-bottom: 1px solid var(--line); }
+.news-item a { display: grid; grid-template-columns: 9.5em 1fr; gap: 4px 24px; align-items: baseline; padding: 22px 4px; text-decoration: none; transition: color var(--dur-base); }
+.news-item a:hover { color: var(--blue-deep); }
+.news-item time { font-size: var(--text-note); color: var(--ink-3); font-variant-numeric: tabular-nums; }
+.news-item h2 { font-size: var(--text-body); font-weight: var(--weight-bold); line-height: var(--leading-note); }
+.news-empty { padding: 32px 0; color: var(--ink-3); }
+.back-link { display: inline-block; margin-top: 48px; font-size: var(--text-small); font-weight: var(--weight-bold); color: var(--blue-deep); text-decoration: none; }
+.back-link:hover { text-decoration: underline; }
+
+@media (max-width: 860px) {
+  .news-item a { grid-template-columns: 1fr; }
+}
+
+/* 記事のアイキャッチ */
+.entry-thumb { margin-bottom: 36px; border-radius: var(--radius-lg); overflow: hidden; }
+.entry-thumb img { width: 100%; height: auto; }
+
+/* 本文（WordPress の HTML） */
+.entry-body { color: var(--ink); overflow-wrap: anywhere; }
+.entry-body > * + * { margin-top: 1.4em; }
+.entry-body h2 { margin-top: 2.2em; padding-bottom: .45em; border-bottom: 2px solid var(--line); font-size: var(--text-heading); font-weight: var(--weight-heavy); }
+.entry-body h3 { margin-top: 1.9em; font-size: var(--text-subheading); font-weight: var(--weight-heavy); }
+.entry-body h4 { margin-top: 1.6em; font-size: var(--text-body); font-weight: var(--weight-heavy); }
+.entry-body a { color: var(--blue-deep); }
+.entry-body ul, .entry-body ol { padding-left: 1.5em; }
+.entry-body ul { list-style: disc; }
+.entry-body ol { list-style: decimal; }
+.entry-body li + li { margin-top: .4em; }
+.entry-body img { height: auto; border-radius: var(--radius-sm); }
+.entry-body figure { margin: 0; }
+.entry-body figcaption { margin-top: 8px; font-size: var(--text-caption); color: var(--ink-3); text-align: center; }
+.entry-body blockquote { margin: 0; padding: 4px 0 4px 20px; border-left: 4px solid var(--sky); color: var(--ink-2); }
+.entry-body hr { border: 0; border-top: 1px solid var(--line); }
+.entry-body table { width: 100%; border-collapse: collapse; font-size: var(--text-body-sm); }
+.entry-body th, .entry-body td { padding: 10px 12px; border: 1px solid var(--line); text-align: left; vertical-align: top; }
+.entry-body th { background: var(--tint); }
+.entry-body code { padding: 2px 6px; border-radius: var(--radius-xs); background: var(--tint); font-size: .92em; }
+.entry-body pre { padding: 16px 18px; border-radius: var(--radius-sm); background: var(--tint); overflow-x: auto; }
+.entry-body pre code { padding: 0; background: none; }
+.entry-body .aligncenter { margin-inline: auto; }
+.entry-body .has-text-align-center { text-align: center; }
+.entry-body .has-text-align-right { text-align: right; }
+.entry-body .wp-block-image img { margin-inline: auto; }
+.entry-body .wp-block-embed iframe, .entry-body iframe { max-width: 100%; }

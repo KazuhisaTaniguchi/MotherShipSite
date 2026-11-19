@@ -1,0 +1,8 @@
+/* デザインシステム（値 → 土台 → 部品）。mock/design/designSystem/ からそのまま写したもの */
+@import "../styles/tokens.css";
+@import "../styles/base.css";
+@import "../styles/components.css";
+/* LP だけの組み方（mock/design/styles.css の写し） */
+@import "../styles/lp.css";
+/* お知らせ・固定ページの本文（WordPress から来る HTML） */
+@import "../styles/content.css";
