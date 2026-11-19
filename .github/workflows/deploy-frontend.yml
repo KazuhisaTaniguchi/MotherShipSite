@@ -35,9 +35,9 @@ jobs:
       run:
         working-directory: frontend
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v5
         with:
           node-version: 24
           cache: npm
@@ -57,6 +57,12 @@ jobs:
           printf '%s\n' "${{ secrets.XSERVER_SSH_KEY }}" > ~/.ssh/id_deploy
           chmod 600 ~/.ssh/id_deploy
           ssh-keyscan -p "$SSH_PORT" "$SSH_HOST" >> ~/.ssh/known_hosts
+
+      # 接続だけを先に試す。失敗したときに、どの段階で切られたかがログでわかる（-v）
+      - name: 接続テスト
+        run: |
+          echo "ランナーの IP: $(curl -s https://api.ipify.org)"
+          ssh -v -o BatchMode=yes -o ConnectTimeout=20 -p "$SSH_PORT" -i ~/.ssh/id_deploy "$SSH_USER@$SSH_HOST" 'echo CONNECTED'
 
       # 重要：public_html の中には WordPress（api.mothershipremote.com/）がある。
       # --delete で消さないよう、Next.js 以外のものは必ず除外する（先頭の / は public_html 直下の意味）。
