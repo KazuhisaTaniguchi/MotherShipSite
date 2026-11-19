@@ -1,0 +1,76 @@
+# Next.js（frontend）をビルドして、エックスサーバーの mothershipremote.com へ置く
+# きっかけ：WordPress で公開中の記事・固定ページが変わったとき（repository_dispatch）、
+#           frontend/ のコードを main に push したとき、手動（Actions タブの Run workflow）
+name: Build & Deploy frontend
+
+on:
+  repository_dispatch:
+    types: [wordpress-updated]
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "frontend/**"
+      - ".github/workflows/deploy-frontend.yml"
+
+# 続けて保存されたときは、古いビルドを止めて最新の 1 回だけ実行する
+concurrency:
+  group: deploy-frontend
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+env:
+  SSH_HOST: xs082238.xsrv.jp
+  SSH_PORT: "10022"
+  SSH_USER: xs082238
+  DEPLOY_PATH: /home/xs082238/mothershipremote.com/public_html/
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    defaults:
+      run:
+        working-directory: frontend
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+
+      - run: npm ci
+
+      - run: npm run build
+        env:
+          WORDPRESS_GRAPHQL_ENDPOINT: https://api.mothershipremote.com/graphql
+          NEXT_PUBLIC_SITE_URL: https://mothershipremote.com
+          NEXT_TELEMETRY_DISABLED: "1"
+
+      - name: SSH の準備
+        run: |
+          install -m 700 -d ~/.ssh
+          printf '%s\n' "${{ secrets.XSERVER_SSH_KEY }}" > ~/.ssh/id_deploy
+          chmod 600 ~/.ssh/id_deploy
+          ssh-keyscan -p "$SSH_PORT" "$SSH_HOST" >> ~/.ssh/known_hosts
+
+      # 重要：public_html の中には WordPress（api.mothershipremote.com/）がある。
+      # --delete で消さないよう、Next.js 以外のものは必ず除外する（先頭の / は public_html 直下の意味）。
+      - name: エックスサーバーへアップロード
+        run: |
+          rsync -rlz --delete --checksum \
+            --exclude='/api.mothershipremote.com/' \
+            --exclude='/.htaccess' \
+            --exclude='/.user.ini' \
+            --exclude='/default_page.png' \
+            --exclude='/.well-known/' \
+            -e "ssh -p $SSH_PORT -i ~/.ssh/id_deploy" \
+            out/ "$SSH_USER@$SSH_HOST:$DEPLOY_PATH"
+
+      - name: 後片付け
+        if: always()
+        run: rm -f ~/.ssh/id_deploy

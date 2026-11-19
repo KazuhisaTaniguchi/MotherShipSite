@@ -179,3 +179,6 @@ return count( $comments_by_type['comment'] );
 return $count;
 }
 }
+
+// 記事・固定ページが変わったら、Next.js（mothershipremote.com）をビルドし直す
+require_once get_template_directory() . '/inc/frontend-build-hook.php';
