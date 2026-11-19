@@ -6,7 +6,7 @@
 <div class="wrap clearfix">
 
   <?php bzb_breadcrumb(); ?>
-  
+
   <div id="main"<?php bzb_layout_main(); ?> role="main">
 
     <div class="main-inner">
