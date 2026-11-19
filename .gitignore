@@ -60,3 +60,5 @@
 .sass-cache/f48c6d0dfbaffcb0dcb7cbd5eb99977caf490fd1/_common.scssc
 .sass-cache/f59e04aa028eba0c4aa33dfa33ffeaffca121558/_compass.scssc
 .sass-cache/f7c9e65fc31bd97083e08227c68352dbea22b659/_utilities.scssc
+
+**.vscode**

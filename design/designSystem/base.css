@@ -1,0 +1,42 @@
+/* ==========================================================================
+   Mothership デザインシステム ｜ 2. 土台
+   どのページにも共通する、いちばん下の決まり（初期化・本文・幅・フォーカス）。
+   tokens.css のあとに読み込む。
+   ========================================================================== */
+
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: calc(var(--header-h) + 16px); -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--font-sans); font-size: var(--text-body); line-height: var(--leading-body); -webkit-font-smoothing: antialiased; }
+img, video { display: block; max-width: 100%; }
+a { color: inherit; }
+h1, h2, h3, p, ul, ol, figure { margin: 0; }
+ul, ol { padding: 0; list-style: none; }
+h1, h2, h3 { line-height: var(--leading-heading); letter-spacing: var(--tracking-heading); text-wrap: balance; }
+
+/* マーカー（文の中で、いちばん伝えたい言葉に 1 か所だけ） */
+mark { background: linear-gradient(transparent 62%, rgba(var(--sky-rgb), .38) 62%); color: var(--ink); font-weight: var(--weight-heavy); padding: 0 2px; }
+
+/* 幅：本文は .wrap の中に入れる */
+.wrap { width: min(var(--wrap), 100% - 2 * var(--gutter)); margin-inline: auto; }
+
+/* 小さな道具 */
+.sp { display: none; }                 /* スマホのときだけ効く改行：<br class="sp"> */
+.nb { display: inline-block; }         /* 途中で折り返したくない言葉のまとまり */
+.center { text-align: center; }
+
+/* キーボードで操作する人のための枠（消さない） */
+:focus-visible { outline: 3px solid var(--blue); outline-offset: 3px; border-radius: var(--radius-xs); }
+
+/* 本文へ移動（ページの最初に置く） */
+.skip-link { position: absolute; left: 16px; top: -60px; z-index: var(--z-skip); background: var(--ink); color: var(--on-dark); padding: 10px 16px; border-radius: var(--radius-sm); text-decoration: none; }
+.skip-link:focus { top: 12px; }
+
+@media (max-width: 860px) {
+  .sp { display: inline; }
+}
+
+/* 「視差効果を減らす」を選んでいる人には、動かさない */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  * { transition: none !important; }
+}
