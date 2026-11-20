@@ -19,7 +19,7 @@ export default function Home() {
           <div className="hero-copy">
             <p className="pill pill-glass hero-label">離れたMacを、スマホから。</p>
             <h1 id="hero-title">指で動かす。<br /><span className="grad-text">声で書く。</span></h1>
-            <p className="hero-lead">AIもビルドも、家のMacに任せたまま。<br />進み具合を見て、次の指示は話すだけ。</p>
+            <p className="hero-lead">家のMacで、AIが作業中。<br />進み具合を指で確かめて、直しは話すだけ。</p>
             <a className="hero-voice" href="#voice">
               <span className="hero-voice-text"><span className="hero-voice-kicker">声で書く</span><b>Aqua Voiceに対応</b><span className="hero-voice-sub"><span className="nb">話すだけで文字が入るから、</span><span className="nb"><mark>キーボードいらず。</mark></span></span><span className="hero-voice-note">Aqua Voiceは別の会社のアプリです。</span></span>
               <span className="hero-voice-arrow" aria-hidden="true">→</span>

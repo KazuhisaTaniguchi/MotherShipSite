@@ -38,7 +38,7 @@ python3 -m http.server 8765 --bind 127.0.0.1
 
 ## HERO の文言（2026-11-20 改訂）
 
-ラベル「離れたMacを、スマホから。」／見出し「指で動かす。声で書く。」／リード「AIもビルドも、家のMacに任せたまま。進み具合を見て、次の指示は話すだけ。」。声のカードに注記「Aqua Voiceは別の会社のアプリです。」を足した（`styles.css` の `.hero-voice-note`）。OGP・description・「こんなとき」の順番・「声で入力」の絵の例文も合わせた。原稿は `../contents/lp-content.md` の S0・S1。**本番（`frontend/`）にはまだ反映していない**（アニメの案が決まってから、文言とアニメをまとめて反映する。そのとき `.hero-voice-note` を `frontend/src/styles/lp.css` にも写す）。
+ラベル「離れたMacを、スマホから。」／見出し「指で動かす。声で書く。」／リード「家のMacで、AIが作業中。進み具合を指で確かめて、直しは話すだけ。」。声のカードに注記「Aqua Voiceは別の会社のアプリです。」を足した（`styles.css` の `.hero-voice-note`）。OGP・description・「こんなとき」の順番・「声で入力」の絵の例文も合わせた。原稿は `../contents/lp-content.md` の S0・S1。**本番（`frontend/`）にはまだ反映していない**（アニメの案が決まってから、文言とアニメをまとめて反映する。そのとき `.hero-voice-note` を `frontend/src/styles/lp.css` にも写す）。
 
 ## この案の特徴
 
