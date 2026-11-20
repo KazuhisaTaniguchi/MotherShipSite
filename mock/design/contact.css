@@ -69,8 +69,11 @@ select.input { appearance: none; padding-right: 44px; background: var(--surface)
 
 .form-actions { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-4); margin-top: var(--space-8); }
 .form-actions .btn { min-width: 220px; border: 0; cursor: pointer; font-family: inherit; }
-.form-actions .btn[disabled] { opacity: .6; cursor: progress; }
+/* 同意のチェックが入るまでは押せない（灰色）。送信中は .is-sending */
+.form-actions .btn:disabled { background: rgba(var(--ink-rgb), .12); color: var(--ink-3); box-shadow: none; transform: none; cursor: not-allowed; }
+.form-actions .btn.is-sending { background: var(--ink); color: var(--on-dark); opacity: .7; cursor: progress; }
 .form-actions .fine { margin-top: 0; }
+.form-actions .fine.is-locked { color: var(--ink-2); font-weight: var(--weight-bold); }
 
 /* エラー */
 .error-text { display: none; margin-top: var(--space-2); font-size: var(--text-note); font-weight: var(--weight-bold); color: var(--error); }
@@ -88,6 +91,7 @@ select.input { appearance: none; padding-right: 44px; background: var(--surface)
 .form-done-icon svg { width: 30px; height: 30px; fill: none; stroke: var(--on-dark); stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; }
 .form-done h3 { margin-top: var(--space-5); font-size: var(--text-heading); font-weight: var(--weight-heavy); }
 .form-done p { margin-top: var(--space-3); color: var(--ink-2); }
+.form-done .form-done-note { max-width: 520px; margin: var(--space-5) auto 0; padding: var(--space-4) var(--space-5); border-radius: var(--radius-md); background: var(--tint); font-size: var(--text-note); line-height: var(--leading-note); color: var(--ink-2); text-align: left; }
 .form-done .btn { margin-top: var(--space-8); }
 
 /* 右の補足 */

@@ -158,8 +158,9 @@
               </div>
 
               <div class="form-actions">
-                <button class="btn btn-primary" type="submit">内容を送信する <span aria-hidden="true">→</span></button>
-                <p class="fine">送信すると、確認のメールが届きます。</p>
+                <!-- 同意のチェックが入るまで押せない（contact.js が切り替える） -->
+                <button class="btn btn-primary" type="submit" disabled aria-describedby="submit-note">内容を送信する <span aria-hidden="true">→</span></button>
+                <p class="fine is-locked" id="submit-note">利用規約とプライバシーポリシーに同意すると、送信できます。</p>
               </div>
               <p class="form-status" role="alert" aria-live="assertive"></p>
             </form>
@@ -169,6 +170,7 @@
               <span class="form-done-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m6 12.5 4 4L18 8"/></svg></span>
               <h3>送信しました</h3>
               <p>お問い合わせ、ありがとうございます。<br>内容を確認のうえ、順にお返事します。</p>
+              <p class="form-done-note">ご入力のメールアドレスに、受付の確認メールをお送りしました。届いていない場合は、迷惑メールのフォルダーもご確認ください。それでも見当たらないときは、メールアドレスに誤りがないかお確かめのうえ、もう一度お送りください。</p>
               <a class="btn btn-ghost" href="index.html">トップページへ</a>
             </div>
           </div>

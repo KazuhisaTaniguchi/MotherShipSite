@@ -35,6 +35,7 @@ export function ContactForm() {
   const [errors, setErrors] = useState<Partial<Record<string, boolean>>>({});
   const [status, setStatus] = useState("");
   const [sending, setSending] = useState(false);
+  const [agreed, setAgreed] = useState(false); // 同意のチェックが入っているときだけ送信ボタンを押せる
   const [done, setDone] = useState(false);
   const doneRef = useRef<HTMLDivElement>(null);
 
@@ -101,6 +102,7 @@ export function ContactForm() {
         <span className="form-done-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m6 12.5 4 4L18 8" /></svg></span>
         <h3>送信しました</h3>
         <p>お問い合わせ、ありがとうございます。<br />内容を確認のうえ、順にお返事します。</p>
+        <p className="form-done-note">ご入力のメールアドレスに、受付の確認メールをお送りしました。届いていない場合は、迷惑メールのフォルダーもご確認ください。それでも見当たらないときは、メールアドレスに誤りがないかお確かめのうえ、もう一度お送りください。</p>
         <Link className="btn btn-ghost" href="/">トップページへ</Link>
       </div>
     );
@@ -172,17 +174,19 @@ export function ContactForm() {
 
       <div className={fieldClass("acceptance-privacy", "agree-wrap")}>
         <label className="agree">
-          <input type="checkbox" name="acceptance-privacy" value="1" required aria-invalid={invalid("acceptance-privacy")} aria-describedby="agree-error" />
+          <input type="checkbox" name="acceptance-privacy" value="1" required checked={agreed} onChange={(e) => setAgreed(e.target.checked)} aria-invalid={invalid("acceptance-privacy")} aria-describedby="agree-error" />
           <span><Link href="/terms-of-service/">利用規約</Link>と<a href="#">プライバシーポリシー</a><span className="tbd">【未確定：URL】</span>を読み、内容に同意して送信します。</span>
         </label>
         <p className="error-text" id="agree-error">送信するには、同意のチェックが必要です。</p>
       </div>
 
       <div className="form-actions">
-        <button className="btn btn-primary" type="submit" disabled={sending}>
+        <button className={`btn btn-primary${sending ? " is-sending" : ""}`} type="submit" disabled={!agreed || sending} aria-describedby="submit-note">
           {sending ? "送信しています…" : <>内容を送信する <span aria-hidden="true">→</span></>}
         </button>
-        <p className="fine">送信すると、確認のメールが届きます。</p>
+        <p className={`fine${agreed ? "" : " is-locked"}`} id="submit-note">
+          {agreed ? "送信すると、確認のメールが届きます。" : "利用規約とプライバシーポリシーに同意すると、送信できます。"}
+        </p>
       </div>
       <p className={`form-status${status ? " is-error" : ""}`} role="alert" aria-live="assertive">{status}</p>
     </form>

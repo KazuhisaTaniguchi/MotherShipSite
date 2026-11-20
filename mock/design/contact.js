@@ -12,6 +12,22 @@
   const API_BASE = 'https://api.mothershipremote.com/wp-json/contact-form-7/v1/contact-forms/';
   const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
+  // 同意のチェックが入っているときだけ、送信ボタンを押せるようにする
+  const agree = form.querySelector('[name="acceptance-privacy"]');
+  const submitNote = document.getElementById('submit-note');
+  let sending = false;
+  const updateSubmit = () => {
+    const agreed = agree.checked;
+    submit.disabled = !agreed || sending;
+    submit.classList.toggle('is-sending', sending);
+    submitNote.classList.toggle('is-locked', !agreed);
+    submitNote.textContent = agreed
+      ? '送信すると、確認のメールが届きます。'
+      : '利用規約とプライバシーポリシーに同意すると、送信できます。';
+  };
+  agree.addEventListener('change', updateSubmit);
+  updateSubmit();
+
   const wrapOf = (el) => el.closest('.field, .agree-wrap');
   const isValid = (el) => {
     if (el.type === 'checkbox') return el.checked;
@@ -61,7 +77,8 @@
       return;
     }
 
-    submit.disabled = true;
+    sending = true;
+    updateSubmit();
     try {
       const body = new FormData(form);
       body.append('_wpcf7_unit_tag', `wpcf7-f${id}-o1`);   // Contact Form 7 の 5.8 以降で必要
@@ -81,7 +98,8 @@
       status.textContent = `送信できませんでした。時間をおいて、もう一度お試しください。（${err.message}）`;
       status.classList.add('is-error');
     } finally {
-      submit.disabled = false;
+      sending = false;
+      updateSubmit();
     }
   });
 })();
