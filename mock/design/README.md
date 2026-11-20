@@ -9,6 +9,7 @@
 | `designSystem/` | **デザインシステム**。色・文字・余白などの値（`tokens.css`）、土台（`base.css`）、使い回す部品（`components.css`）、見本帳（`index.html`）、決まり（`README.md`）。LP はこれを読み込んでいる |
 | `styles.css` | この LP だけの組み方（HERO とアニメ、各セクションの並べ方）。値と部品は `designSystem/` のものを使う |
 | `terms-of-service.html`・`legal.css` | 利用規約（2026-11-20 追加。スラッグ `terms-of-service`）。目次つき、全 20 条と「かんたんにまとめると」。`legal.css` はプライバシーポリシーなど同じ形の文書にも使える。運営者名・連絡先・日付・裁判所・プライバシーポリシーの URL は【未確定】（`.tbd` で赤く囲んで表示。公開前に埋めて消す）。**公開前に専門家の確認を受けること** |
+| `privacy-policy.html` | プライバシーポリシー（2026-11-20 追加。スラッグ `privacy-policy`）。`legal.css` を利用規約と共用。全 15 項目と「かんたんにまとめると」、許可とほかの会社のサービスは表（スマホでは 1 行ずつカード。`td` の `data-label` を見出しに使う）。運営者名・日付は【未確定】。**公開前に専門家の確認を受けること** |
 | `contact.html`・`contact.css`・`contact.js` | お問い合わせ（2026-11-20 追加。スラッグ `contact`）。「お問い合わせの前に」（よくある質問・つながらないとき・購入と返金）、フォーム、右に補足（不具合のときに書いてほしいこと、お返事、パスワードを書かない）。`contact.js` は入力の確認と、Contact Form 7 の REST API への送信（フォームの `data-cf7-id` が空のモックでは送らず、送信後の表示だけ出す）。項目の name は Contact Form 7 のタグ名（`your-name`・`your-email`・`your-subject`・`your-message`・`inquiry-type`・`device[]`・`macos-version`・`app-version`・`acceptance-privacy`）。エラーの色は `--error`（このとき `tokens.css` に追加） |
 | `404.html`・`404.css` | 404 ページ（2026-11-20 追加）。ヘッダー・フッターは LP と同じ。部品は `.pill`・`.btn`・`.phone`・`.dot`、値はトークンだけ。リンクは `index.html#…` の相対パス（本番に組み込むときは `/` からのパスにする） |
 | `script.js` | スマホのメニュー、ヘッダー、HERO のアニメと動画の制御 |

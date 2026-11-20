@@ -14,6 +14,7 @@ export function SiteFooter() {
             <Link href="/#download">ダウンロード</Link>
             <Link href="/news/">お知らせ</Link>
             <Link href="/terms-of-service/">利用規約</Link>
+            <Link href="/privacy-policy/">プライバシーポリシー</Link>
             <Link href="/contact/">お問い合わせ</Link>
           </nav>
         </div>

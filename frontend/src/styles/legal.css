@@ -23,12 +23,12 @@
 .legal-toc { position: sticky; top: calc(var(--header-h) + var(--space-6)); max-height: calc(100vh - var(--header-h) - var(--space-12)); overflow-y: auto; padding-right: var(--space-2); }
 .legal-toc-title { font-size: var(--text-note); font-weight: var(--weight-heavy); letter-spacing: var(--tracking-label); color: var(--blue-deep); }
 .legal-toc ol { margin-top: var(--space-3); border-left: 2px solid var(--line); }
-.legal-toc a { display: block; padding: 5px 0 5px var(--space-4); margin-left: -2px; border-left: 2px solid transparent; font-size: var(--text-note); line-height: 1.5; color: var(--ink-2); text-decoration: none; transition: color var(--dur-base), border-color var(--dur-base); }
+.legal-toc a { display: flex; padding: 5px 0 5px var(--space-4); margin-left: -2px; border-left: 2px solid transparent; font-size: var(--text-note); line-height: 1.5; color: var(--ink-2); text-decoration: none; transition: color var(--dur-base), border-color var(--dur-base); }
 .legal-toc a:hover { color: var(--blue-deep); border-left-color: var(--blue); }
-.legal-toc .no { display: inline-block; min-width: 3.6em; color: var(--ink-3); font-variant-numeric: tabular-nums; }
+.legal-toc .no { flex: none; min-width: 3.6em; color: var(--ink-3); font-variant-numeric: tabular-nums; }
 
 /* 本文 */
-.legal { max-width: 760px; }
+.legal { max-width: 760px; min-width: 0; }   /* min-width：広い表があっても列が広がらず、表だけが横にスクロールする */
 .legal-intro { color: var(--ink-2); }
 
 /* かんたんなまとめ（白いカード） */
@@ -58,6 +58,20 @@
 .terms-list dt { font-weight: var(--weight-bold); }
 .terms-list dd { margin: 0; color: var(--ink-2); }
 
+/* 表（プライバシーポリシーの「許可」など）。狭い画面では横にスクロール */
+.legal-table-wrap { margin-top: var(--space-4); overflow-x: auto; border: 1px solid var(--line); border-radius: var(--radius-md); background: var(--surface); }
+.legal-table { width: 100%; min-width: 560px; border-collapse: collapse; font-size: var(--text-body-sm); }
+.legal-table th, .legal-table td { padding: var(--space-3) var(--space-4); text-align: left; vertical-align: top; border-bottom: 1px solid var(--line); line-height: var(--leading-note); }
+.legal-table thead th { background: var(--tint); font-size: var(--text-note); font-weight: var(--weight-heavy); color: var(--ink-2); white-space: nowrap; }
+.legal-table tbody th { font-weight: var(--weight-bold); white-space: nowrap; }
+.legal-table td { color: var(--ink-2); }
+.legal-table tr:last-child th, .legal-table tr:last-child td { border-bottom: 0; }
+
+/* 条の中の小見出し */
+.article h3 { margin-top: var(--space-8); font-size: var(--text-subheading); font-weight: var(--weight-heavy); }
+.article h3 + p, .article h3 + ul, .article h3 + ol { margin-top: var(--space-3); }
+.article .ticks { margin-top: var(--space-3); }
+
 .legal a { color: var(--blue-deep); }
 .legal-end { margin-top: var(--space-16); padding-top: var(--space-6); border-top: 1px solid var(--line); font-size: var(--text-small); color: var(--ink-2); }
 .legal-end p + p { margin-top: var(--space-2); }
@@ -67,7 +81,7 @@
 
 /* 1 列（目次は本文の上に） */
 @media (max-width: 980px) {
-  .legal-layout { grid-template-columns: 1fr; gap: var(--space-10); padding-top: var(--space-10); }
+  .legal-layout { grid-template-columns: minmax(0, 1fr); gap: var(--space-10); padding-top: var(--space-10); }
   .legal-toc { position: static; max-height: none; overflow: visible; padding: var(--space-5) var(--space-6); background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-lg); }
   .legal-toc ol { columns: 2; column-gap: var(--space-6); border-left: 0; }
   .legal-toc a { padding-left: 0; margin-left: 0; border-left: 0; break-inside: avoid; }
@@ -76,6 +90,15 @@
 @media (max-width: 860px) {
   .legal-summary { padding: var(--space-6) var(--space-5) var(--space-5); }
   .terms-list div { grid-template-columns: 1fr; gap: var(--space-1); }
+  /* 表は 1 行ずつカードの形に（列の名前は td の data-label から出す） */
+  .legal-table-wrap { overflow: visible; border: 0; background: none; }
+  .legal-table { min-width: 0; }
+  .legal-table thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+  .legal-table tbody, .legal-table tr, .legal-table th, .legal-table td { display: block; }
+  .legal-table tr { margin-top: var(--space-3); padding: var(--space-4); border: 1px solid var(--line); border-radius: var(--radius-md); background: var(--surface); }
+  .legal-table tbody th, .legal-table td { padding: 0; border: 0; white-space: normal; }
+  .legal-table td { margin-top: var(--space-2); }
+  .legal-table td::before { content: attr(data-label); display: block; font-size: var(--text-caption); font-weight: var(--weight-heavy); color: var(--ink-3); }
 }
 
 @media (max-width: 480px) {

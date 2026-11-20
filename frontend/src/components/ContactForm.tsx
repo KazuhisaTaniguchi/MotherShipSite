@@ -175,7 +175,7 @@ export function ContactForm() {
       <div className={fieldClass("acceptance-privacy", "agree-wrap")}>
         <label className="agree">
           <input type="checkbox" name="acceptance-privacy" value="1" required checked={agreed} onChange={(e) => setAgreed(e.target.checked)} aria-invalid={invalid("acceptance-privacy")} aria-describedby="agree-error" />
-          <span><Link href="/terms-of-service/">利用規約</Link>と<a href="#">プライバシーポリシー</a><span className="tbd">【未確定：URL】</span>を読み、内容に同意して送信します。</span>
+          <span><Link href="/terms-of-service/">利用規約</Link>と<Link href="/privacy-policy/">プライバシーポリシー</Link>を読み、内容に同意して送信します。</span>
         </label>
         <p className="error-text" id="agree-error">送信するには、同意のチェックが必要です。</p>
       </div>
