@@ -179,6 +179,9 @@
   const inRanges = (ranges, t) => ranges.some(([a, b]) => t >= a && t < b);
 
 const KEY = 'v2b';
+// 再生の速さ（2026-11-20 に 1.2・1.4・1.6 倍を比べて 1.4 倍に決定。1 周 約20.9秒）。
+// 時刻を SPEED 倍で進め、CSS の動き（transition・animation）も SPEED 倍にする
+const SPEED = 1.4;
 export const HERO_HTML = template(VARIANTS[KEY]);
 
 export function mountHeroDemo(root) {
@@ -232,9 +235,10 @@ export function mountHeroDemo(root) {
     let raf = 0;
     const snap = (t) => { root.classList.add('is-snap'); el.demo.classList.add('is-snap'); render(t); void root.offsetWidth; root.classList.remove('is-snap'); el.demo.classList.remove('is-snap'); };
     const frame = (now) => {
-      if (last !== null) elapsed += now - last;
+      if (last !== null) elapsed += (now - last) * SPEED;
       last = now;
       if (elapsed >= v.length) { elapsed %= v.length; snap(elapsed); } else render(elapsed);
+      if (SPEED !== 1) root.getAnimations({ subtree: true }).forEach((a) => { if (a.playbackRate !== SPEED) a.playbackRate = SPEED; });
       raf = requestAnimationFrame(frame);
     };
     const running = () => raf !== 0;

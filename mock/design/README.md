@@ -32,6 +32,10 @@ python3 -m http.server 8765 --bind 127.0.0.1
 
 （`index.html` を直接開く方法は確かめていません。）
 
+## HERO のアニメの速さ（2026-11-20 決定）
+
+1.2倍・1.4倍・1.6倍を並べて比べ、**1.4倍** に決定（1 周 約20.9秒）。`VARIANTS` の時刻はそのままで、再生のときに 1.4 倍で進め、CSS の動き（窓や端末の動き）も 1.4 倍にする。モックは `hero-variants.js` の `SPEEDS`（2 つ以上入れると、また並べて比べられる）、本番は `frontend/src/components/hero-demo-script.js` の `SPEED`。
+
 ## 製品名の表記（2026-11-20 ユーザー決定）
 
 トップページ（`index.html` と HERO のアニメ）では、製品名をすべて大文字で書く：「MOTHERSHIP」「MOTHERSHIP HOST」。title・description・代替テキスト・フッターも同じ。ほかのページ（利用規約、プライバシーポリシー、特定商取引法に基づく表記、お問い合わせ、お知らせ、404）は「Mothership」のまま（今回は変えていない）。

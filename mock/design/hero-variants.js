@@ -195,9 +195,11 @@
   const inRanges = (ranges, t) => ranges.some(([a, b]) => t >= a && t < b);
   window.__heroDemo = {};
 
-  const start = (root, key) => {
+  // speed：再生の速さ（1 ＝ いまの速さ）。時刻の進み方と、CSS の動き（transition・animation）の両方を speed 倍にする
+  const start = (root, key, speed = 1, id = key) => {
     const v = VARIANTS[key];
     root.dataset.variant = key;
+    root.dataset.speed = String(speed);
     root.innerHTML = template(v);
     const el = { root, lap: root.querySelector('.lm-in'), pad: root.querySelector('.hv-pad'), demo: root.querySelector('.demo') };
     const toggle = root.querySelector('.video-toggle');
@@ -244,9 +246,10 @@
     let raf = 0;
     const snap = (t) => { root.classList.add('is-snap'); el.demo.classList.add('is-snap'); render(t); void root.offsetWidth; root.classList.remove('is-snap'); el.demo.classList.remove('is-snap'); };
     const frame = (now) => {
-      if (last !== null) elapsed += now - last;
+      if (last !== null) elapsed += (now - last) * speed;
       last = now;
       if (elapsed >= v.length) { elapsed %= v.length; snap(elapsed); } else render(elapsed);
+      if (speed !== 1) root.getAnimations({ subtree: true }).forEach((a) => { if (a.playbackRate !== speed) a.playbackRate = speed; });
       raf = requestAnimationFrame(frame);
     };
     const running = () => raf !== 0;
@@ -265,36 +268,40 @@
     document.addEventListener('visibilitychange', () => { last = null; });
     snap(elapsed);
     apply();
-    window.__heroDemo[key] = { seek: (t) => { userPaused = true; elapsed = t; apply(); snap(t); }, time: () => elapsed, length: v.length };
+    window.__heroDemo[id] = { seek: (t) => { userPaused = true; elapsed = t; apply(); snap(t); }, time: () => elapsed, length: v.length };
   };
 
-  // 案が 2 つ以上あるときは、HERO を案の数だけ増やして、案の名前と説明を付ける（いまは 1 つなので、そのまま 1 つの HERO に入れる）
-  const keys = Object.keys(VARIANTS);
-  const sections = keys.map((key, i) => {
+  // 再生の速さ：2026-11-20 に 1.2・1.4・1.6 倍を並べて比べ、1.4 倍に決定（1 周 約20.9秒）。
+  // VARIANTS の時刻はそのままで、再生のときに 1.4 倍で進める。SPEEDS に 2 つ以上入れると、HERO を並べて比べられる
+  const key = Object.keys(VARIANTS)[0];
+  const SPEEDS = [1.4];
+  const sec = (ms) => `約${(Math.round(ms / 100) / 10).toFixed(1)}秒`;
+  const slug = (x) => String(x).replace('.', '_');
+  const sections = SPEEDS.map((speed, i) => {
     const section = i === 0 ? hero : hero.cloneNode(true);
     if (i > 0) {
       section.classList.add('is-clone');
-      section.querySelectorAll('[id]').forEach((n) => { n.id = `${n.id}-${key}`; });
-      section.setAttribute('aria-labelledby', `hero-title-${key}`);
+      section.querySelectorAll('[id]').forEach((n) => { n.id = `${n.id}-x${slug(speed)}`; });
+      section.setAttribute('aria-labelledby', `hero-title-x${slug(speed)}`);
     }
-    if (keys.length > 1) section.id = `hero-${key}`;
+    if (SPEEDS.length > 1) section.id = `hero-x${slug(speed)}`;
     return section;
   });
   sections.forEach((section, i) => {
-    const key = keys[i];
+    const speed = SPEEDS[i];
     if (i > 0) sections[i - 1].after(section);
-    if (keys.length > 1) {
+    if (SPEEDS.length > 1) {
       const pick = document.createElement('div');
       pick.className = 'wrap';
-      pick.innerHTML = `<div class="hv-pick"><b>${VARIANTS[key].label}</b><strong>${VARIANTS[key].name}</strong><span>${VARIANTS[key].note}</span></div>`;
+      pick.innerHTML = `<div class="hv-pick"><b>${speed === 1 ? '1倍（いま）' : `${speed}倍`}</b><strong>1 周 ${sec(VARIANTS[key].length / speed)}</strong><span>${speed === 1 ? 'いまの速さです。' : `いまの HERO のアニメを ${speed} 倍の速さで再生しています（場面の切り替わりも、窓や端末の動きも ${speed} 倍）。`}比べるための表示で、決まったら消します。</span></div>`;
       section.querySelector('.hero-grid').before(pick);
     }
-    start(section.querySelector('[data-hv]'), key);
+    start(section.querySelector('[data-hv]'), key, speed, SPEEDS.length > 1 && i > 0 ? `${key}x${slug(speed)}` : key);
   });
-  if (keys.length < 2) return;
+  if (SPEEDS.length < 2) return;
   const jump = document.createElement('nav');
   jump.className = 'hv-jump';
-  jump.setAttribute('aria-label', 'HERO の案へ移動');
-  jump.innerHTML = `HERO の案${keys.map((k) => `<a href="#hero-${k}">${VARIANTS[k].label}</a>`).join('')}`;
+  jump.setAttribute('aria-label', 'HERO の速さの比較へ移動');
+  jump.innerHTML = `HERO の速さ${SPEEDS.map((x) => `<a href="#hero-x${slug(x)}">${x}倍</a>`).join('')}`;
   document.body.append(jump);
 })();
