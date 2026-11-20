@@ -10,6 +10,9 @@
 @import "../styles/content.css";
 /* 利用規約など（mock/design/legal.css の写し） */
 @import "../styles/legal.css";
+/* ヘルプ（mock/design/help.css・help-figs.css の写し。help-figs.css は mock/design/tools/help-figs/build.py が書き出したもの） */
+@import "../styles/help.css";
+@import "../styles/help-figs.css";
 /* お問い合わせ（mock/design/contact.css の写し） */
 @import "../styles/contact.css";
 /* 404 ページ（mock/design/404.css の写し） */

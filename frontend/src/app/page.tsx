@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { HeroDemo } from "@/components/HeroDemo";
 
 // トップページ（LP）。mock/design/index.html の <main> をそのまま JSX にしたもの（原稿は mock/contents/lp-content.md の第2版）。
-// モックで赤い枠の「未確定：…」を付けた所（Mac のロック解除 2 か所、Google Play の購入、ヘルプページへのリンク）は、
+// モックで赤い枠の「未確定：…」を付けた所（Mac のロック解除 2 か所、Google Play の購入）は、
 // 対応を確かめるまで、いま確かな文だけを出している（くわしくは mock/contents/README.md の未確定事項 5・7）。
 export const metadata: Metadata = {
   title: { absolute: "MOTHERSHIP｜スマホからMacをリモート操作。指で動かす、声で書く" },
@@ -582,6 +583,7 @@ export default function Home() {
             </li>
           </ol>
           <p className="how-note">イメージです（実際の画面とは異なります）</p>
+          <p className="how-more"><Link className="btn btn-ghost" href="/help/">くわしい手順は、ヘルプへ <span aria-hidden="true">→</span></Link></p>
 
           <aside className="how-prep" aria-labelledby="prep-title">
             <div className="how-prep-head">
@@ -589,9 +591,9 @@ export default function Home() {
               <p>外から使うときは、準備が少しあります。</p>
             </div>
             <ul className="prep-list">
-              <li><div className="prep-item"><b>外からつなぐ</b><span>Tailscaleを、Macとデバイスに。</span></div></li>
-              <li><div className="prep-item"><b>Macを起こしておく</b><span>スリープさせない設定を、オンに。</span></div></li>
-              <li><div className="prep-item"><b>声で書く</b><span>Aqua VoiceとBlackHole 2chを、Macに。</span></div></li>
+              <li><Link href="/help/#outside"><b>外からつなぐ</b><span>Tailscaleを、Macとデバイスに。</span><i>くわしく <span aria-hidden="true">→</span></i></Link></li>
+              <li><Link href="/help/#keep-awake"><b>Macを起こしておく</b><span>スリープさせない設定を、オンに。</span><i>くわしく <span aria-hidden="true">→</span></i></Link></li>
+              <li><Link href="/help/#voice"><b>声で書く</b><span>Aqua VoiceとBlackHole 2chを、Macに。</span><i>くわしく <span aria-hidden="true">→</span></i></Link></li>
             </ul>
           </aside>
         </div>

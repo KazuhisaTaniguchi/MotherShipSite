@@ -12,6 +12,7 @@ export function SiteFooter() {
               <Link key={item.href} href={item.href}>{item.label}</Link>
             ))}
             <Link href="/#download">ダウンロード</Link>
+            <Link href="/help/">ヘルプ</Link>
             <Link href="/news/">お知らせ</Link>
             <Link href="/terms-of-service/">利用規約</Link>
             <Link href="/privacy-policy/">プライバシーポリシー</Link>
