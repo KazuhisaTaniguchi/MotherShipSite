@@ -1,0 +1,118 @@
+/* ==========================================================================
+   Mothership お問い合わせ ｜ このページだけの組み方
+   designSystem/tokens.css → base.css → components.css → この contact.css の順に読み込む。
+   値はトークン（var(--…)）だけを使う。部品は .pill・.btn・.card・.ticks・.callout をそのまま使う。
+   ========================================================================== */
+
+/* 見出しの帯（LP の HERO と同じ背景を、ヘッダーの下まで敷く） */
+.contact-hero { position: relative; margin-top: calc(-1 * var(--header-h)); padding: calc(var(--header-h) + clamp(48px, 7vw, 88px)) 0 clamp(36px, 5vw, 56px); overflow: hidden; }
+.contact-hero-bg { position: absolute; inset: 0; background: var(--grad-hero); }
+.contact-hero .wrap { position: relative; }
+.contact-hero .pill { margin-bottom: var(--space-5); }
+.contact-hero h1 { font-size: var(--text-title); font-weight: var(--weight-heavy); }
+.contact-hero-lead { max-width: 720px; margin-top: var(--space-5); font-size: var(--text-lead); font-weight: var(--weight-medium); color: var(--ink-2); }
+
+/* お問い合わせの前に（3 枚のカード） */
+.before { padding: var(--space-16) 0 0; }
+.before h2, .form-section h2 { font-size: var(--text-heading-lg); font-weight: var(--weight-heavy); }
+.before-lead { margin-top: var(--space-3); color: var(--ink-2); }
+.before-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-5); margin-top: var(--space-8); }
+.before-grid .card { display: flex; flex-direction: column; padding: var(--space-8) var(--space-6) var(--space-6); }
+.before-grid h3 { font-size: var(--text-subheading); font-weight: var(--weight-heavy); }
+.before-grid p { margin-top: var(--space-2); font-size: var(--text-body-sm); color: var(--ink-2); }
+.before-grid .ticks { margin-top: var(--space-4); }
+.before-grid .ticks li { font-size: var(--text-small); }
+.card-link { margin-top: auto; padding-top: var(--space-5); font-size: var(--text-small); font-weight: var(--weight-bold); color: var(--blue-deep); text-decoration: none; }
+.card-link::after { content: " →"; }
+.card-link:hover { text-decoration: underline; }
+
+/* フォームと、右の補足 */
+.form-section { padding: var(--space-16) 0 var(--section-y); }
+.form-layout { display: grid; grid-template-columns: minmax(0, 1fr) 340px; gap: var(--space-12); align-items: start; margin-top: var(--space-8); }
+
+.contact-form { padding: var(--space-10); background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-xl); }
+.form-note { font-size: var(--text-small); color: var(--ink-2); }
+.form-note .req { margin-right: 2px; }
+
+.field { margin-top: var(--space-6); }
+.field > label, .field > legend { display: flex; align-items: center; gap: var(--space-2); padding: 0; font-weight: var(--weight-bold); font-size: var(--text-body-sm); }
+.field fieldset, fieldset.field { margin-inline: 0; padding: 0; border: 0; }
+.req, .opt { display: inline-block; padding: 1px 8px; border-radius: var(--radius-pill); font-size: var(--text-caption); font-weight: var(--weight-heavy); line-height: 1.6; }
+.req { color: var(--on-dark); background: var(--blue-deep); }
+.opt { color: var(--ink-3); background: var(--tint); }
+.hint { margin-top: var(--space-1); font-size: var(--text-note); color: var(--ink-3); line-height: var(--leading-note); }
+
+.input { display: block; width: 100%; margin-top: var(--space-2); padding: 12px 14px; border: 1.5px solid var(--line); border-radius: var(--radius-sm); background: var(--surface); color: var(--ink); font: inherit; font-size: var(--text-body); line-height: 1.6; transition: border-color var(--dur-base), box-shadow var(--dur-base); }
+.input::placeholder { color: var(--ink-3); opacity: .8; }
+.input:hover { border-color: rgba(var(--blue-rgb), .45); }
+.input:focus { outline: none; border-color: var(--blue); box-shadow: 0 0 0 4px rgba(var(--blue-rgb), .16); }
+textarea.input { min-height: 200px; resize: vertical; }
+select.input { appearance: none; padding-right: 44px; background: var(--surface) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='none' stroke='%23385cf4' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m5 7.5 5 5 5-5'/%3E%3C/svg%3E") right 14px center / 18px no-repeat; }
+/* 矢印の色は画像の中に直接書いてある（%23385cf4 = --blue）。色を変えたら、ここも直す */
+
+.field-row { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-5); }
+
+/* 選択肢（チェックボックス） */
+.choices { display: flex; flex-wrap: wrap; gap: var(--space-2); margin-top: var(--space-2); }
+.choice { position: relative; }
+.choice input { position: absolute; opacity: 0; inset: 0; margin: 0; cursor: pointer; }
+.choice span { display: inline-flex; align-items: center; gap: var(--space-2); padding: 9px 16px; border: 1.5px solid var(--line); border-radius: var(--radius-pill); font-size: var(--text-small); font-weight: var(--weight-semibold); color: var(--ink-2); background: var(--surface); transition: background var(--dur-base), border-color var(--dur-base), color var(--dur-base); }
+.choice span::before { content: ""; width: 14px; height: 14px; border-radius: 4px; border: 1.5px solid rgba(var(--ink-rgb), .3); background: var(--surface); }
+.choice input:checked + span { border-color: var(--blue); background: rgba(var(--blue-rgb), .08); color: var(--blue-deep); }
+.choice input:checked + span::before { border-color: var(--blue); background: var(--blue) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='none' stroke='%23fff' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m5 10.5 3.2 3.2L15 6.5'/%3E%3C/svg%3E") center / 12px no-repeat; }
+.choice input:focus-visible + span { outline: 3px solid var(--blue); outline-offset: 2px; }
+
+/* 同意 */
+.agree { display: flex; gap: var(--space-3); align-items: flex-start; margin-top: var(--space-8); padding: var(--space-4) var(--space-5); border-radius: var(--radius-md); background: var(--tint); font-size: var(--text-small); color: var(--ink-2); }
+.agree input { flex: none; width: 20px; height: 20px; margin: 3px 0 0; accent-color: var(--blue); }
+.agree a { color: var(--blue-deep); }
+
+.form-actions { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-4); margin-top: var(--space-8); }
+.form-actions .btn { min-width: 220px; border: 0; cursor: pointer; font-family: inherit; }
+.form-actions .btn[disabled] { opacity: .6; cursor: progress; }
+.form-actions .fine { margin-top: 0; }
+
+/* エラー */
+.error-text { display: none; margin-top: var(--space-2); font-size: var(--text-note); font-weight: var(--weight-bold); color: var(--error); }
+.field.is-invalid .input, .field.is-invalid .choice span { border-color: var(--error); }
+.field.is-invalid .error-text, .agree-wrap.is-invalid .error-text { display: block; }
+.agree-wrap.is-invalid .agree { box-shadow: inset 0 0 0 1.5px var(--error); }
+
+/* 送信の結果 */
+.form-status { margin-top: var(--space-6); padding: var(--space-4) var(--space-5); border-radius: var(--radius-md); font-size: var(--text-small); font-weight: var(--weight-bold); }
+.form-status:empty { display: none; }
+.form-status.is-error { color: var(--error); background: rgba(var(--error-rgb), .08); }
+.form-done { text-align: center; padding: var(--space-12) var(--space-6); }
+.form-done:focus { outline: none; }   /* 送信後に読み上げのためフォーカスを移す。操作する部品ではないので枠は出さない */
+.form-done-icon { display: inline-grid; place-items: center; width: 64px; height: 64px; border-radius: 50%; background: var(--grad-accent); }
+.form-done-icon svg { width: 30px; height: 30px; fill: none; stroke: var(--on-dark); stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; }
+.form-done h3 { margin-top: var(--space-5); font-size: var(--text-heading); font-weight: var(--weight-heavy); }
+.form-done p { margin-top: var(--space-3); color: var(--ink-2); }
+.form-done .btn { margin-top: var(--space-8); }
+
+/* 右の補足 */
+.form-aside { display: grid; gap: var(--space-5); position: sticky; top: calc(var(--header-h) + var(--space-6)); }
+.aside-box { padding: var(--space-6); border-radius: var(--radius-lg); background: var(--surface); border: 1px solid var(--line); }
+.aside-box h3 { font-size: var(--text-body); font-weight: var(--weight-heavy); }
+.aside-box p { margin-top: var(--space-2); font-size: var(--text-small); color: var(--ink-2); line-height: var(--leading-note); }
+.aside-box .ticks { margin-top: var(--space-3); gap: var(--space-2); }
+.aside-box .ticks li { font-size: var(--text-small); line-height: var(--leading-note); }
+.form-aside .callout { margin-top: 0; }
+.form-aside .callout h3 { font-size: var(--text-body); font-weight: var(--weight-heavy); }
+.form-aside .callout p { margin-top: var(--space-2); font-size: var(--text-small); color: var(--ink-2); line-height: var(--leading-note); }
+.aside-box a, .callout a { color: var(--blue-deep); }
+
+/* 公開前に決める箇所（公開するときに消す） */
+.tbd { padding: 1px 6px; border-radius: var(--radius-xs); background: rgba(var(--rec-rgb), .1); color: var(--ink); font-weight: var(--weight-bold); box-shadow: inset 0 0 0 1px rgba(var(--rec-rgb), .45); }
+
+@media (max-width: 980px) {
+  .before-grid { grid-template-columns: 1fr; }
+  .form-layout { grid-template-columns: 1fr; }
+  .form-aside { position: static; }
+}
+
+@media (max-width: 860px) {
+  .contact-form { padding: var(--space-6) var(--space-5); border-radius: var(--radius-lg); }
+  .field-row { grid-template-columns: 1fr; gap: 0; }
+  .form-actions .btn { width: 100%; }
+}

@@ -75,6 +75,7 @@ python3 -m http.server 8765 --bind 127.0.0.1
 | `--on-dark`〜`--on-dark-4` | #ffffff／#dfe7fa／#c7d3ee／#93a3c8 | 暗い面の上の文字（見出し／本文／補足／注記） |
 | `--glass`／`--glass-line` | 白 8%／白 16% | 暗い面の上のパネルと枠 |
 | `--live`／`--rec` | #2fbf8a／#ff536b | つながっている／声を送っている |
+| `--error` | #c81e3c | フォームのエラーの文字・枠（2026-11-20 追加。白の上で 5.67 : 1、`--bg` の上で 5.29 : 1。`--rec` は文字には薄いので使わない） |
 | `--device`／`--device-screen` | #121a30／#0b1020 | 端末の枠／画面の地 |
 
 グラデーション：`--grad-brand`（文字・目立たせる枠）、`--grad-accent`（アイコンの台・番号）、`--grad-navy`（夜のパネル）、`--grad-wash`（図の台）、`--grad-hero`（明るい背景）、`--grad-night`（夜の背景）。

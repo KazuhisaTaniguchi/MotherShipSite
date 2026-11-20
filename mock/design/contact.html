@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#e9eefa">
+  <meta name="description" content="Mothershipのお問い合わせ窓口です。使い方のご質問、不具合のご報告、購入・ライセンスについて、ご意見・ご要望をお寄せください。">
+  <title>お問い合わせ｜Mothership</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <!-- デザインシステム（値 → 土台 → 部品）のあとに、このページだけの組み方 -->
+  <link rel="stylesheet" href="designSystem/tokens.css">
+  <link rel="stylesheet" href="designSystem/base.css">
+  <link rel="stylesheet" href="designSystem/components.css">
+  <link rel="stylesheet" href="contact.css">
+  <!-- スマホのメニューとヘッダーの背景（HERO の部分は、このページでは何もしない） -->
+  <script src="script.js" defer></script>
+  <!-- フォームの確認と送信（モックでは送信しない。contact.js の先頭を参照） -->
+  <script src="contact.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">本文へ移動</a>
+
+  <header class="site-header" id="top">
+    <div class="wrap header-inner">
+      <a class="brand" href="index.html" aria-label="Mothership トップページへ">
+        <svg class="brand-mark" viewBox="0 0 128 128" aria-hidden="true"><defs><linearGradient id="bm" x2="1" y2="1"><stop stop-color="#1e3ec0"/><stop offset=".55" stop-color="#385cf4"/><stop offset="1" stop-color="#38afee"/></linearGradient></defs><rect width="128" height="128" rx="27" fill="url(#bm)"/><path d="M60 28 22 86 49 80 60 91 60 75 48 70 60 54Z" fill="#fff"/><path d="M68 28 106 86 79 80 68 91 68 75 80 70 68 54Z" fill="#a8f8ff"/><path d="M64 86 72 98 64 105 56 98Z" fill="#fff"/></svg>
+        <span>MOTHERSHIP</span>
+      </a>
+      <button class="menu-toggle" type="button" aria-label="メニューを開く" aria-controls="site-nav" aria-expanded="false"><span></span><span></span></button>
+      <nav class="site-nav" id="site-nav" aria-label="メインナビゲーション">
+        <a href="index.html#features">特長</a>
+        <a href="index.html#voice">声で入力</a>
+        <a href="index.html#how">使い方</a>
+        <a href="index.html#pricing">料金</a>
+        <a href="index.html#faq">よくある質問</a>
+        <a class="nav-cta" href="index.html#download">ダウンロード</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="contact-hero" aria-labelledby="contact-title">
+      <div class="contact-hero-bg" aria-hidden="true"></div>
+      <div class="wrap">
+        <p class="pill pill-glass">お問い合わせ</p>
+        <h1 id="contact-title">お問い合わせ</h1>
+        <p class="contact-hero-lead">使い方のご質問、不具合のご報告、ご意見・ご要望など、<span class="nb">Mothershipについて、</span><span class="nb">お気軽にお寄せください。</span></p>
+      </div>
+    </section>
+
+    <!-- 送る前に、自分で解決できるかもしれないこと -->
+    <section class="before" aria-labelledby="before-title">
+      <div class="wrap">
+        <h2 id="before-title">お問い合わせの前に</h2>
+        <p class="before-lead">よくあるご質問は、すぐに答えが見つかるかもしれません。</p>
+        <div class="before-grid">
+          <article class="card">
+            <h3>よくある質問</h3>
+            <p>料金、外出先からの使い方、アカウント、声で入力するときに必要なものなど、よくいただくご質問をまとめています。</p>
+            <a class="card-link" href="index.html#faq">よくある質問を見る</a>
+          </article>
+          <article class="card">
+            <h3>つながらないときは</h3>
+            <p>まず、次の点を確かめてください。</p>
+            <ul class="ticks small">
+              <li>Macがスリープしていないか（「待機中もMacをスリープさせない」をオン）</li>
+              <li>Macで「画面収録」と「アクセシビリティ」を許可しているか</li>
+              <li>自宅では、Macとデバイスが同じWi-Fiにいるか</li>
+              <li>外出先では、両方のTailscaleが同じアカウントでログインしているか</li>
+            </ul>
+          </article>
+          <article class="card">
+            <h3>購入と返金について</h3>
+            <p>代金の支払いと返金は、App Store・Google Playが行います。返金をご希望のときは、購入したストアにお申し出ください。機種を変えたときは、アプリの「購入を復元」で引き継げます。</p>
+            <a class="card-link" href="terms-of-service.html#art-7">利用規約（支払いと返金）を見る</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="form-section" aria-labelledby="form-title">
+      <div class="wrap">
+        <h2 id="form-title">お問い合わせフォーム</h2>
+        <div class="form-layout">
+          <div class="form-wrap">
+            <!-- WordPress の Contact Form 7 に送る（フォームの ID は data-cf7-id に入れる）。
+                 name はContact Form 7 のフォームのタグ名にそろえる（your-name など） -->
+            <form class="contact-form" id="contact-form" novalidate data-cf7-id="" aria-describedby="form-note">
+              <p class="form-note" id="form-note"><span class="req">必須</span> は、かならずご記入ください。</p>
+
+              <div class="field">
+                <label for="inquiry-type">お問い合わせの種類 <span class="req">必須</span></label>
+                <select class="input" id="inquiry-type" name="inquiry-type" required aria-describedby="inquiry-type-error">
+                  <option value="">選んでください</option>
+                  <option>使い方について</option>
+                  <option>不具合のご報告</option>
+                  <option>購入・ライセンスについて</option>
+                  <option>ご意見・ご要望</option>
+                  <option>そのほか（取材など）</option>
+                </select>
+                <p class="error-text" id="inquiry-type-error">お問い合わせの種類を選んでください。</p>
+              </div>
+
+              <div class="field-row">
+                <div class="field">
+                  <label for="your-name">お名前 <span class="req">必須</span></label>
+                  <input class="input" id="your-name" name="your-name" type="text" autocomplete="name" required placeholder="例：山田 太郎" aria-describedby="your-name-error">
+                  <p class="error-text" id="your-name-error">お名前を入力してください。</p>
+                </div>
+                <div class="field">
+                  <label for="your-email">メールアドレス <span class="req">必須</span></label>
+                  <input class="input" id="your-email" name="your-email" type="email" autocomplete="email" inputmode="email" required placeholder="例：you@example.com" aria-describedby="your-email-hint your-email-error">
+                  <p class="hint" id="your-email-hint">お返事は、このアドレスにお送りします。</p>
+                  <p class="error-text" id="your-email-error">メールアドレスを正しく入力してください。</p>
+                </div>
+              </div>
+
+              <fieldset class="field" aria-describedby="device-hint">
+                <legend>お使いのデバイス <span class="opt">任意</span></legend>
+                <p class="hint" id="device-hint">Macを操作している側のデバイスを選んでください（いくつでも）。</p>
+                <div class="choices">
+                  <label class="choice"><input type="checkbox" name="device[]" value="iPhone"><span>iPhone</span></label>
+                  <label class="choice"><input type="checkbox" name="device[]" value="iPad"><span>iPad</span></label>
+                  <label class="choice"><input type="checkbox" name="device[]" value="Android"><span>Android</span></label>
+                  <label class="choice"><input type="checkbox" name="device[]" value="Mac"><span>別のMac</span></label>
+                </div>
+              </fieldset>
+
+              <div class="field-row">
+                <div class="field">
+                  <label for="macos-version">操作されるMacのmacOS <span class="opt">任意</span></label>
+                  <input class="input" id="macos-version" name="macos-version" type="text" placeholder="例：macOS 15.3（Mac mini M2）">
+                </div>
+                <div class="field">
+                  <label for="app-version">アプリのバージョン <span class="opt">任意</span></label>
+                  <input class="input" id="app-version" name="app-version" type="text" placeholder="例：Host 1.0.0／iPhone 1.0.0">
+                </div>
+              </div>
+
+              <div class="field">
+                <label for="your-subject">件名 <span class="req">必須</span></label>
+                <input class="input" id="your-subject" name="your-subject" type="text" required placeholder="例：外出先からつながらない" aria-describedby="your-subject-error">
+                <p class="error-text" id="your-subject-error">件名を入力してください。</p>
+              </div>
+
+              <div class="field">
+                <label for="your-message">お問い合わせの内容 <span class="req">必須</span></label>
+                <textarea class="input" id="your-message" name="your-message" required placeholder="不具合のときは、何をしたときに、どうなったかを書いていただけると助かります。" aria-describedby="your-message-error"></textarea>
+                <p class="error-text" id="your-message-error">お問い合わせの内容を入力してください。</p>
+              </div>
+
+              <div class="agree-wrap">
+                <label class="agree">
+                  <input type="checkbox" name="acceptance-privacy" value="1" required aria-describedby="agree-error">
+                  <span><a href="terms-of-service.html">利用規約</a>と<a href="#">プライバシーポリシー</a><span class="tbd">【未確定：URL】</span>を読み、内容に同意して送信します。</span>
+                </label>
+                <p class="error-text" id="agree-error">送信するには、同意のチェックが必要です。</p>
+              </div>
+
+              <div class="form-actions">
+                <button class="btn btn-primary" type="submit">内容を送信する <span aria-hidden="true">→</span></button>
+                <p class="fine">送信すると、確認のメールが届きます。</p>
+              </div>
+              <p class="form-status" role="alert" aria-live="assertive"></p>
+            </form>
+
+            <!-- 送信できたら、フォームの代わりにこれを出す -->
+            <div class="contact-form form-done" id="form-done" hidden tabindex="-1">
+              <span class="form-done-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m6 12.5 4 4L18 8"/></svg></span>
+              <h3>送信しました</h3>
+              <p>お問い合わせ、ありがとうございます。<br>内容を確認のうえ、順にお返事します。</p>
+              <a class="btn btn-ghost" href="index.html">トップページへ</a>
+            </div>
+          </div>
+
+          <aside class="form-aside" aria-label="お問い合わせについて">
+            <div class="aside-box">
+              <h3>不具合のご報告のときは</h3>
+              <p>次のことを書いていただくと、原因を早く見つけられます。</p>
+              <ul class="ticks small">
+                <li>操作されるMacの機種と、macOSのバージョン</li>
+                <li>操作する側のデバイスと、OSのバージョン</li>
+                <li>自宅のWi-Fiか、外出先（Tailscale）か</li>
+                <li>何をしたときに、どうなったか</li>
+                <li>Mothership Hostのメニューに出ているメッセージ</li>
+              </ul>
+            </div>
+            <div class="aside-box">
+              <h3>お返事について</h3>
+              <p>内容を確認のうえ、順にお返事します。お返事まで、数日いただくことがあります。土日・祝日は、お返事が遅くなることがあります。</p>
+            </div>
+            <div class="callout">
+              <h3>パスワードは書かないでください</h3>
+              <p>Macのパスワード、Tailscaleのパスワード、QRコードの画像など、ログインや登録に使う情報は、お問い合わせに書かないでください。こちらからお聞きすることもありません。</p>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="footer-top">
+        <a class="brand" href="index.html"><span>MOTHERSHIP</span></a>
+        <nav aria-label="フッターナビゲーション"><a href="index.html#features">特長</a><a href="index.html#voice">声で入力</a><a href="index.html#how">使い方</a><a href="index.html#pricing">料金</a><a href="index.html#faq">よくある質問</a><a href="index.html#download">ダウンロード</a><a href="terms-of-service.html">利用規約</a><a href="contact.html" aria-current="page">お問い合わせ</a></nav>
+      </div>
+      <p class="trademark">Mac、macOS、iPhone、iPad、iPadOS、App Store、Face ID、Touch ID、Mission Controlは、米国およびその他の国や地域で登録されたApple Inc.の商標です。iPhoneの商標は、アイホン株式会社のライセンスにもとづき使用されています。Android、Google PlayはGoogle LLCの商標です。Galaxy Z Foldは、Samsung Electronics Co., Ltd.の商標または登録商標です。TailscaleはTailscale Inc.の商標です。Aqua Voice、BlackHoleは、それぞれの権利者の商標または製品名です。</p>
+      <p class="trademark">Mothershipは独立して開発されたアプリであり、Apple Inc.、Google LLC、Tailscale Inc.、Aqua Voiceの提供元が認定・後援・承認したものではありません。</p>
+      <div class="footer-bottom"><small>© 2026 Mothership</small><a href="#top">ページの先頭へ ↑</a></div>
+    </div>
+  </footer>
+</body>
+</html>

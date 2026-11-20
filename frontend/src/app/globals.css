@@ -8,5 +8,7 @@
 @import "../styles/content.css";
 /* 利用規約など（mock/design/legal.css の写し） */
 @import "../styles/legal.css";
+/* お問い合わせ（mock/design/contact.css の写し） */
+@import "../styles/contact.css";
 /* 404 ページ（mock/design/404.css の写し） */
 @import "../styles/404.css";
