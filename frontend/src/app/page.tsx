@@ -377,10 +377,39 @@ export default async function Home() {
 
           <aside className="voice-need">
             <h3>使うために必要なもの</h3>
-            <p>Aqua Voiceは、MOTHERSHIPとは別の会社が提供している音声入力アプリです（MOTHERSHIPには含まれません）。Macに「Aqua Voice」と、無料の仮想オーディオ「BlackHole 2ch」を入れ、Aqua Voiceのマイクを「BlackHole 2ch」にしておきます。文字にする精度は、Aqua Voiceによります。</p>
+            <p className="vn-lead">声で書くには、Macで準備が3つ要ります。どれも、はじめに1回だけです。</p>
+            {/* 準備の 3 つ（2026-11-21）。9 秒で 1 周、カードが順に明るくなり、図の中で「入れる」「選ぶ」が進む。CSS だけ */}
+            <ol className="vn-steps">
+              <li className="vn-s vn-s1">
+                <div className="vn-fig" aria-hidden="true">
+                  <div className="vn-app"><i className="vn-ico">あ</i><b>Aqua Voice</b><u className="vn-prog"><i></i></u></div>
+                  <span className="vn-done">✓ 入れた</span>
+                </div>
+                <h4><span className="vn-n">1</span>「Aqua Voice」を入れる</h4>
+                <p>声を文字にする、音声入力のアプリです。MOTHERSHIPとは別の会社のアプリです。</p>
+              </li>
+              <li className="vn-s vn-s2">
+                <div className="vn-fig" aria-hidden="true">
+                  <div className="vn-app"><i className="vn-ico">🎤</i><b>BlackHole 2ch</b><u className="vn-prog"><i></i></u></div>
+                  <span className="vn-done">✓ 入れた</span>
+                </div>
+                <h4><span className="vn-n">2</span>「BlackHole 2ch」を入れる</h4>
+                <p>声をAqua Voiceへ渡す、仮想のマイクです。無料で使えます。</p>
+              </li>
+              <li className="vn-s vn-s3">
+                <div className="vn-fig" aria-hidden="true">
+                  <div className="vn-set"><p>Aqua Voiceの設定</p><div className="vn-row"><span>マイク</span><span className="vn-sel"><em className="vn-old">Macのマイク</em><em className="vn-new">BlackHole 2ch</em><i>▾</i></span></div></div>
+                  <span className="vn-tap"></span>
+                  <span className="vn-done">✓ 選んだ</span>
+                </div>
+                <h4><span className="vn-n">3</span>マイクを「BlackHole 2ch」にする</h4>
+                <p>Aqua Voiceの設定で、聞き取るマイクを選びます。</p>
+              </li>
+            </ol>
+            <p className="voice-need-sub">文字にする精度は、Aqua Voiceによります（Aqua Voiceは、MOTHERSHIPには含まれません）。くわしい手順は、<Link href="/help/#voice">ヘルプ</Link>にあります。</p>
             {/* 図 4：声の通り道（6 秒で 1 周。左から順に明るくなる） */}
             <div className="voice-flow" role="img" aria-label="声の通り道の図。手もとのデバイスで話した声は、MacのMOTHERSHIP HOSTに届く。MOTHERSHIP HOSTは、その声を仮想のマイク「BlackHole 2ch」に流す。Aqua VoiceがBlackHole 2chの声を聞いて文字にし、開いているアプリのカーソルの位置に入力する。Macに入れておくのは、BlackHole 2chとAqua Voiceの2つ。">
-              <p className="vf-title" aria-hidden="true">声の通り道</p>
+              <p className="vf-title" aria-hidden="true">しくみ：声の通り道</p>
               <div className="vf-row" aria-hidden="true">
                 <div className="vf-node vf-n1"><b>手もとのデバイス</b><span>🎤を押している間、声を送る</span></div>
                 <i className="vf-link vf-l1"></i>
