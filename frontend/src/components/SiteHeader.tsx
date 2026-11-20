@@ -28,7 +28,7 @@ export function SiteHeader() {
   return (
     <header className={`site-header${scrolled ? " is-scrolled" : ""}`} id="top">
       <div className="wrap header-inner">
-        <Link className="brand" href="/" aria-label="Mothership トップページへ">
+        <Link className="brand" href="/" aria-label="MOTHERSHIP トップページへ">
           <BrandMark />
           <span>MOTHERSHIP</span>
         </Link>

@@ -4,20 +4,20 @@ import { SiteFooter } from "@/components/SiteFooter";
 import "./globals.css";
 
 const DESCRIPTION =
-  "Mothershipは、iPhone・iPad・Android・別のMacから、自宅や職場のMacを操作できるリモートデスクトップアプリです。デバイスの画面にぴったり合う専用の画面を用意するので、小さな画面でも文字がくっきり。14日間、すべての機能を無料で試せます。";
+  "MOTHERSHIPは、iPhone・iPad・Android・別のMacから、家のMacを操作できるリモートデスクトップアプリです。AIやビルドに任せた作業の進み具合を見て、指で動かし、次の指示は声で（Aqua Voiceに対応）。デバイスの形にぴったり合う画面で、小さな文字までくっきり。買い切り・月額なし。14日間、すべての機能を無料で試せます。";
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "https://mothershipremote.com"),
   title: {
-    default: "Mothership｜スマホ・タブレットからMacをリモート操作",
+    default: "MOTHERSHIP｜スマホからMacをリモート操作。指で動かす、声で書く",
     template: "%s｜Mothership",
   },
   description: DESCRIPTION,
   icons: { icon: { url: "/favicon.svg", type: "image/svg+xml" } },
   openGraph: {
-    title: "離れていても、Macはそばに。｜Mothership",
-    description: "スマホから、いつものMacへ。作業の続きに、どこからでも。",
-    siteName: "Mothership",
+    title: "指で動かす。声で書く。離れたMacを、スマホから。｜MOTHERSHIP",
+    description: "AIもビルドも、家のMacに任せたまま。進み具合を見て、次の指示は話すだけ。",
+    siteName: "MOTHERSHIP",
     locale: "ja_JP",
     type: "website",
   },
