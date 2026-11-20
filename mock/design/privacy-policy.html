@@ -117,13 +117,14 @@
           </ul>
 
           <h3>端末の中に保存する情報</h3>
-          <p>本アプリは、動くために必要な次の情報を、<b>利用者のMacとデバイスの中にだけ</b>保存します。運営者には送りません。</p>
+          <p>本アプリは、動くために必要な次の情報を、<b>利用者のMacとデバイスの中にだけ</b>保存します（ライセンスに加えたMacの一覧だけは、iPhone・iPadでは利用者のiCloudにも保存します）。運営者には送りません。</p>
           <ul class="ticks small">
             <li>登録したMacの名前と接続先のアドレス、通信を確かめるための証明書の情報</li>
             <li>デバイスごとの鍵。デバイスの安全な領域（Secure Enclave、Android Keystoreなど）に保存し、外に取り出せません</li>
             <li>MOTHERSHIP HOSTに登録したデバイスの一覧（デバイスの名前と、確かめるための公開鍵）</li>
             <li>画質・表示・キーボードなどの設定</li>
             <li>試用期間の始まりの時刻と、購入済みかどうかの印（MOTHERSHIP HOST）。試用期間をやり直せないよう、アプリを削除しても、Macのキーチェーンなどに残ることがあります</li>
+            <li>ライセンスに加えたMacの一覧（MacのID・名前・加えた日）と、つながずに外した日時（デバイス）。iPhone・iPadでは、同じApple IDの端末で共有するため、利用者のiCloudにも保存します</li>
           </ul>
 
           <h3>運営者に送られる情報</h3>
@@ -156,6 +157,7 @@
             <li>ライセンスの購入と代金の支払いは、App Store・Google Playが行います。運営者は、利用者の名前、住所、クレジットカードなどの支払いの情報を受け取りません。</li>
             <li>購入したあと、ストアが署名した「購入の証明」を、デバイスからホストのMacに送り、<b>Macの中で</b>確かめます。確かめるために、運営者のサーバーやインターネットは使いません。</li>
             <li>MOTHERSHIP HOSTは、購入済みであることの印と、取引の番号を変換した値（ハッシュ）だけを保存します。個人を特定できる情報は保存しません。</li>
+            <li>1回の購入で使えるMac（3台まで）を数えるため、デバイスは、購入ごとに、ライセンスに加えたMacの一覧を保存します（3.）。数えるのはデバイスの中で、運営者のサーバーは使いません。</li>
             <li>ストアでの購入の情報の扱いは、Apple・Googleのプライバシーポリシーによります。</li>
           </ol>
         </section>
@@ -216,6 +218,7 @@
               <tbody>
                 <tr><th scope="row">App Store</th><td data-label="提供元">Apple Inc.</td><td data-label="関わる場面">iPhone・iPad版の入手と、ライセンスの購入</td></tr>
                 <tr><th scope="row">Google Play</th><td data-label="提供元">Google LLC</td><td data-label="関わる場面">Android版の入手と、ライセンスの購入</td></tr>
+                <tr><th scope="row">iCloud</th><td data-label="提供元">Apple Inc.</td><td data-label="関わる場面">iPhone・iPadで、ライセンスに加えたMacの一覧を、同じApple IDの端末で共有するとき</td></tr>
                 <tr><th scope="row">Google Play 開発者サービスのコードスキャナー</th><td data-label="提供元">Google LLC</td><td data-label="関わる場面">Android版で、QRコードを読み取るとき</td></tr>
                 <tr><th scope="row">Tailscale</th><td data-label="提供元">Tailscale Inc.</td><td data-label="関わる場面">外出先から接続するとき（利用者が自分で入れて、ログインします）</td></tr>
                 <tr><th scope="row">Aqua Voice</th><td data-label="提供元">Aqua Voiceの提供元</td><td data-label="関わる場面">声で入力するとき。声を文字にするのはAqua Voiceです</td></tr>
@@ -239,7 +242,7 @@
         <section class="article" id="pp-11" aria-labelledby="pp-11-title">
           <h2 id="pp-11-title"><span class="no">11.</span>保存する期間と削除</h2>
           <ol class="clauses">
-            <li>端末の中に保存する情報（3.）は、利用者が本アプリを削除したり、登録を解除したりすると消えます。ただし、試用期間の情報は、アプリを削除してもMacに残ることがあります。</li>
+            <li>端末の中に保存する情報（3.）は、利用者が本アプリを削除したり、登録を解除したりすると消えます。ただし、試用期間の情報は、アプリを削除してもMacに残ることがあります。また、ライセンスに加えたMacの一覧は、アプリを削除してもiCloudに残ることがあります（同じApple IDでアプリを入れ直したときに、数を引き継ぐため）。</li>
             <li>デバイスをなくしたときは、MOTHERSHIP HOSTのメニューの「登録済みの端末」から、そのデバイスを削除してください。</li>
             <li>お問い合わせの内容と添付ファイルは、お返事と、その後のやり取りに必要な間だけ保存し、必要がなくなったら削除します。</li>
           </ol>
