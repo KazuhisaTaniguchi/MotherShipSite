@@ -1,14 +1,16 @@
-// HERO のアニメの 2 案（案 C-2 をもとにした「AI に指示して Mac を動かす」案 1・案 2。くらべて選ぶための一時的なファイル。決まったら script.js に移して消す）
+// HERO のアニメ（案 2：資料づくり ── AI に指示して Mac を動かす。2026-11-20 にユーザーが決定）
+// まだ一時的なファイル。動きを確かめてもらったら、styles.css・script.js・index.html に移して、このファイルは消す。
 // 見出し「指で動かす。声で書く。」と、リード「AIもビルドも、家のMacに任せたまま。進み具合を見て、次の指示は話すだけ。」の実演にする。
-// 共通の流れ：MacBook で「端末を追加」→ iPad が横向きで登場して「つなぐ」→ 横長の画面に「AI アシスタント｜できあがるもの」
-//            → 進み具合を見る → 指で動かす → 声で書く（次の指示）→ AI が動く → 縦に回すと、横幅ぴったりに作り直る → 最初へ
-// ・index.html の HERO（.hero）を 2 つに増やし、それぞれに案を入れる
-// ・画面の状態は時刻 t だけで決まる（render）。案ごとの違いは、下の VARIANTS だけ
+// 流れ：MacBook で「端末を追加」→ iPad が横向きで登場して「つなぐ」→ 横長の画面に「AI アシスタント｜売上レポート」
+//      → 進み具合を見る → 指で動かす（スクロール）→ 声で書く（直しの指示）→ AI が直す
+//      → レポートの窓を指で広げる → 縦に回すと、レポートが横幅ぴったりで大きく映る → 最初へ
+// ・向きを変えても、Mac の窓は自動では並び直らない。だから「窓を広げてから回す」形にしている（広げた窓は、画面の形に合わせて変わる）
+// ・画面の状態は時刻 t だけで決まる（render）。内容と時刻は、下の VARIANTS にまとめてある
 // ・声の入力は実物と同じ順番：🎤 を押している間は話した言葉が吹き出しに出て、離すと Mac に文字が入る
 // ・AI の窓は、特定の製品に見えないように描いた絵（名前は「AI アシスタント」。数字や実在の名前は書かない）
-// ・確認用：URL に ?demo=12000 を付けると、2 案ともその時刻（ミリ秒）で止まる。__heroDemo.ai1.seek(12000) でも止められる
-// ・本物の動画（media/hero-demo.mp4）への切り替えは入れていない（案が決まってから戻す）
-// ・前の案は Git の履歴にある（4 案 A〜D：e05bc58 ／ 3 案 C-1〜C-3：2d81c28）
+// ・確認用：URL に ?demo=12000 を付けると、その時刻（ミリ秒）で止まる。__heroDemo.ai2.seek(12000) でも止められる
+// ・本物の動画（media/hero-demo.mp4）への切り替えは入れていない（片付けのときに戻す）
+// ・前の案は Git の履歴にある（4 案 A〜D：e05bc58 ／ 3 案 C-1〜C-3：2d81c28 ／ 2 案（開発・資料づくり）：dad0f1d）
 (() => {
   const hero = document.querySelector('.hero');
   const first = hero && hero.querySelector('[data-hv]');
@@ -33,16 +35,17 @@
   // 案の内容から、クラスを付ける時刻の一覧を組み立てる
   //   utter:  { hold: [🎤 を押す, 離す], say: 話す言葉 } … 離すと、AI への指示の欄（.m-text-ai）に文字が入る
   //   sendAt: バーの Enter で送る時刻。指示の欄が空になり、同じ文がやりとりの欄に出る
-  //   rotAt:  縦に回しはじめる時刻。そこから 5 秒で 1 周が終わる
+  //   zoomAt: レポートの窓の緑のボタンを指でタップする時刻。0.5 秒後から、窓が横いっぱいに広がる
+  //   rotAt:  縦に回しはじめる時刻。そこから 4.6 秒で 1 周が終わる
   const plan = (o) => {
-    const R = o.rotAt; const L = R + 5000; const u = o.utter;
+    const R = o.rotAt; const L = R + 4600; const u = o.utter; const Z = o.zoomAt;
     return {
       ...o, length: L,
       typing: [{ sel: '.m-text-ai', text: u.say, at: u.hold[1] + 250, per: TYPE_MS, until: o.sendAt }],
       root: {
         'is-mac': [[200, MAC_END]],                  // くり返しの頭は、フェードインで入る
         'is-pad': [[MAC_END - 200, L - 600]],        // 終わりは、フェードアウトで抜ける
-        'is-badge': [[u.hold[0] + 400, R - 300]],
+        'is-badge': [[u.hold[0] + 400, Z - 200]],
         'is-bubble': [[u.hold[0] + 150, u.hold[1] + 450]],
         'is-fit': [[R + 1500, L - 700]],
       },
@@ -54,47 +57,28 @@
         'is-tap': [[4700, 5300]], 'is-connecting': [[5300, LIVE]], 'is-live': [[LIVE, L]],
         'is-ghost': [o.ghostAt], 'is-voice': [[o.ghostAt[1], L]], 'is-mic': [u.hold],
         'is-enter': [[o.sendAt - 200, o.sendAt + 250]],
+        // 広げる：指の印 → 広がる間だけ位置の動きを付ける（is-zooming）→ 広げたまま（is-zoom）で縦へ
+        'is-zoomtap': [[Z, Z + 550]], 'is-zooming': [[Z + 450, Z + 1300]], 'is-zoom': [[Z + 500, L + 1]],
         ...(o.demo || {}),
       },
     };
   };
 
   const BADGE = 'キーボードは、しまったまま。<br><mark>画面は、広いまま。</mark>';
-  const scenes = (finger, voice, rot) => [[0, 'Macで、端末を追加'], [MAC_END, 'iPadから、つなぐ'], [LIVE, 'AIの進み具合を見る'], [finger, '指で動かす'], [voice, '声で書く'], [rot, '縦にしても、横幅ぴったり']];
+  const scenes = (finger, voice, zoom) => [[0, 'Macで、端末を追加'], [MAC_END, 'iPadから、つなぐ'], [LIVE, 'AIの進み具合を見る'], [finger, '指で動かす'], [voice, '声で書く'], [zoom, '広げて、縦に。横幅ぴったり']];
 
   // やりとりの欄の 1 行：
   //   me   … 自分の指示（at から出る）
   //   step … AI の作業（at から「run」の文と回る印、doneAt から「done」の文と ✓）
-  //   ask  … AI からの確認（at から出て、tapAt でボタンを指で押し、hideAt で消える）
-  const SAY1 = 'テストが通ったら、プルリクエストを作ってください。';
   const SAY2 = 'いちばん売上が高い月を、目立たせてください。';
   const VARIANTS = {
-    // 案 1：開発 ── AI の確認に指で答えて、次の作業を声で頼む
-    ai1: plan({
-      label: '案 1', name: '開発 ── 指で許可して、声で次を頼む',
-      note: 'AI にコードの修正を任せている場面です。AI からの確認「テストを実行してもよいですか？」を指でタップして許可し、テストが動いている間に、次の指示「テストが通ったら、プルリクエストを作ってください。」を声で送ります。右の窓には、コードの変更と、テスト・プルリクエストの状態が出ます。',
-      badge: BADGE, still: 16700, out: 'code', outTitle: 'コードの変更',
-      scenes: scenes(8900, 10900, 19900),
-      ghostAt: [11000, 12700], utter: { hold: [13100, 16000], say: SAY1 }, sendAt: 17300, rotAt: 19900,
-      chat: [
-        { kind: 'me', text: 'ログインの不具合を、直してください。', at: 0 },
-        { kind: 'step', run: '原因を調べています…', done: '原因を見つけました', at: 6900, doneAt: 7500 },
-        { kind: 'step', run: 'コードを直しています…', done: 'コードを直しました', at: 7600, doneAt: 8300 },
-        { kind: 'ask', text: 'テストを実行してもよいですか？', button: '許可する', at: 8600, tapAt: 9700, hideAt: 10300 },
-        { kind: 'step', run: 'テストを実行中…', done: 'テストが通りました', at: 10300, doneAt: 18000 },
-        { kind: 'me', text: SAY1, at: 17300 },
-        { kind: 'step', run: 'プルリクエストを作成中…', done: 'プルリクエストを作りました', at: 18400, doneAt: 19300 },
-      ],
-      demo: { 'is-diff': [[7800, 99999]], 'is-test-run': [[10300, 18000]], 'is-test-ok': [[18000, 99999]], 'is-pr-run': [[18400, 19300]], 'is-pr-ok': [[19300, 99999]] },
-    }),
-
-    // 案 2：資料づくり ── AI が作ったものを指で確かめて、直しを声で頼む
+    // 案 2：資料づくり ── AI が作ったものを指で確かめて、直しを声で頼み、広げて縦で読む
     ai2: plan({
       label: '案 2', name: '資料づくり ── 指で確かめて、声で直しを頼む',
       note: 'AI に売上のレポートを任せている場面です。できあがったレポートを指でスクロールしてグラフを確かめ、直しの指示「いちばん売上が高い月を、目立たせてください。」を声で送ります。送ると、グラフのいちばん高い棒の色が変わります。',
       badge: BADGE, still: 16700, out: 'report', outTitle: '売上レポート',
-      scenes: scenes(9200, 10900, 19500),
-      ghostAt: [11000, 12700], utter: { hold: [13100, 16000], say: SAY2 }, sendAt: 17300, rotAt: 19500,
+      scenes: scenes(9200, 10900, 19300),
+      ghostAt: [11000, 12700], utter: { hold: [13100, 16000], say: SAY2 }, sendAt: 17300, zoomAt: 19400, rotAt: 20900,
       chat: [
         { kind: 'me', text: '先月の売上を、レポートにまとめてください。', at: 0 },
         { kind: 'step', run: 'データを読み込んでいます…', done: 'データを読み込みました', at: 6900, doneAt: 7500 },
@@ -121,18 +105,10 @@
 
   const chatItem = (c, i) => {
     if (c.kind === 'me') return `<p class="ai-item ai-me" data-i="${i}">${c.text}</p>`;
-    if (c.kind === 'ask') return `<div class="ai-item ai-ask" data-i="${i}"><p>${c.text}</p><span class="ai-btn">${c.button}</span><span class="ai-tapdot"></span></div>`;
     return `<p class="ai-item ai-step" data-i="${i}"><i class="ai-mark"></i><span class="t-run">${c.run}</span><span class="t-done">${c.done}</span></p>`;
   };
   // 右の窓：AI が作っているもの
   const outBody = {
-    // コードの変更：消した行（赤）と足した行（緑）。文字は書かない
-    code: `
-      <div class="out-pills">
-        <span class="out-pill p-test">テスト<b class="s-wait">まだ</b><b class="s-run">実行中</b><b class="s-ok">✓ 成功</b></span>
-        <span class="out-pill p-pr">プルリクエスト<b class="s-wait">まだ</b><b class="s-run">作成中</b><b class="s-ok">✓ 作成</b></span>
-      </div>
-      <div class="out-diff"><i></i><i class="del"></i><i class="add"></i><i class="add"></i><i></i><i></i><i class="del"></i><i class="add"></i><i></i></div>`,
     // 売上レポート：見出し・本文の行・棒グラフ
     report: `
       <div class="out-scroll">
@@ -157,7 +133,7 @@
         </div></div>
         <div class="hv-lbase"></div>
       </div>
-      <figure class="phone tablet hero-phone hv-pad" role="img" aria-label="Mothershipの使い方のイメージ。Macで端末を追加し、横向きのiPadからつなぐと、AIが作業しているMacの画面がiPadに映る。指でタップやスクロールをし、iPadに話しかけると、AIへの次の指示がMacに入る。iPadを縦向きにすると、Macの画面も縦長になり、横幅がぴったり合う">
+      <figure class="phone tablet hero-phone hv-pad" role="img" aria-label="Mothershipの使い方のイメージ。Macで端末を追加し、横向きのiPadからつなぐと、AIが作業しているMacの画面がiPadに映る。指でスクロールし、iPadに話しかけると、AIへの次の指示がMacに入る。できあがったレポートの窓を指で広げてからiPadを縦向きにすると、Macの画面も縦長になり、レポートが横幅ぴったりで大きく映る">
         <div class="phone-screen">
           <div class="demo" data-scene="1" aria-hidden="true">
             <!-- つなぐ前の画面（横向き。描いた絵で、実際の画面とは見た目が違う） -->
@@ -180,7 +156,7 @@
                 </div>
                 <!-- 右（縦向きは下）：AI が作っているもの -->
                 <div class="m-window m-out out-${v.out}">
-                  <div class="m-title"><i></i><i></i><i></i><span>${v.outTitle}</span></div>
+                  <div class="m-title"><i></i><i></i><i></i><span>${v.outTitle}</span><b class="out-zoomtap"></b></div>
                   <div class="m-body out-body">${outBody[v.out]}</div>
                 </div>
                 <div class="m-dock">${rep(5)}</div>
@@ -230,12 +206,11 @@
       ['root', 'lap', 'pad', 'demo'].forEach((target) => {
         Object.entries(v[target] || {}).forEach(([cls, ranges]) => el[target].classList.toggle(cls, inRanges(ranges, t)));
       });
-      // やりとりの欄：1 行ずつ、出す／✓ にする／ボタンを押している、を時刻で決める
+      // やりとりの欄：1 行ずつ、出す／✓ にする、を時刻で決める
       v.chat.forEach((c, i) => {
         const node = items[i];
         node.classList.toggle('is-on', t >= c.at && (c.hideAt == null || t < c.hideAt));
         node.classList.toggle('is-done', c.doneAt != null && t >= c.doneAt);
-        node.classList.toggle('is-press', c.tapAt != null && t >= c.tapAt && t < c.tapAt + 550);
       });
       // Mac に入る文字（until を過ぎたら消す ＝ 送った）
       const typed = {};
@@ -285,7 +260,7 @@
     window.__heroDemo[key] = { seek: (t) => { userPaused = true; elapsed = t; apply(); snap(t); }, time: () => elapsed, length: v.length };
   };
 
-  // HERO を案の数だけ増やして、案の名前と説明を付ける
+  // 案が 2 つ以上あるときは、HERO を案の数だけ増やして、案の名前と説明を付ける（いまは 1 つなので、そのまま 1 つの HERO に入れる）
   const keys = Object.keys(VARIANTS);
   const sections = keys.map((key, i) => {
     const section = i === 0 ? hero : hero.cloneNode(true);
@@ -294,18 +269,21 @@
       section.querySelectorAll('[id]').forEach((n) => { n.id = `${n.id}-${key}`; });
       section.setAttribute('aria-labelledby', `hero-title-${key}`);
     }
-    section.id = `hero-${key}`;
+    if (keys.length > 1) section.id = `hero-${key}`;
     return section;
   });
   sections.forEach((section, i) => {
     const key = keys[i];
     if (i > 0) sections[i - 1].after(section);
-    const pick = document.createElement('div');
-    pick.className = 'wrap';
-    pick.innerHTML = `<div class="hv-pick"><b>${VARIANTS[key].label}</b><strong>${VARIANTS[key].name}</strong><span>${VARIANTS[key].note}</span></div>`;
-    section.querySelector('.hero-grid').before(pick);
+    if (keys.length > 1) {
+      const pick = document.createElement('div');
+      pick.className = 'wrap';
+      pick.innerHTML = `<div class="hv-pick"><b>${VARIANTS[key].label}</b><strong>${VARIANTS[key].name}</strong><span>${VARIANTS[key].note}</span></div>`;
+      section.querySelector('.hero-grid').before(pick);
+    }
     start(section.querySelector('[data-hv]'), key);
   });
+  if (keys.length < 2) return;
   const jump = document.createElement('nav');
   jump.className = 'hv-jump';
   jump.setAttribute('aria-label', 'HERO の案へ移動');
