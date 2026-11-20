@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Mothership LP ｜ このページだけの組み方
+   MOTHERSHIP LP ｜ このページだけの組み方
    色・文字・角丸などの値と、使い回す部品は designSystem/ にある：
      designSystem/tokens.css → base.css → components.css → この styles.css の順に読み込む
    ここに書くのは、HERO（アニメを含む）と、各セクションの並べ方だけ。

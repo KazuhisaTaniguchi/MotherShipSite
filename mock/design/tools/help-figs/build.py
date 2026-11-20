@@ -65,7 +65,7 @@ def pop(rows, cls=''):
     return '<div class="hf-pop %s">%s</div>' % (cls, ''.join(rows))
 
 
-R_TITLE = '<div class="hf-r"><b>Mothership Host</b><small>接続を待っています</small></div>'
+R_TITLE = '<div class="hf-r"><b>MOTHERSHIP HOST</b><small>接続を待っています</small></div>'
 
 
 def r_dev(btn_cls=''):
@@ -133,9 +133,9 @@ CSS.append('''
     STEPS('hf2-pop', T, [(0, 'opacity: 0; transform: scale(.9)'), (4.45, 'opacity: 1; transform: none')], .3),
     CUR('hf2-cur', T, [(0, 12, 16), (.6, 12, 16), (1.4, 7.6, 7.2), (3.2, 7.6, 7.2), (4.2, 27.9, 1), (5, 27.9, 1), (5.8, 21, 17.6)], [1.5, 1.8, 4.35]),
 ))
-FIGS.append(fig('hf2', 'Mothership Hostを開くと、Macのメニューバーにアイコンが出る。アイコンをクリックすると、メニューが開く様子',
+FIGS.append(fig('hf2', 'MOTHERSHIP HOSTを開くと、Macのメニューバーにアイコンが出る。アイコンをクリックすると、メニューが開く様子',
     mbar('hf2-tray')
-    + '<div class="hf-win hf2-finder">' + wbar('アプリケーション') + '<div class="hf-wbody"><span class="hf2-app"><span class="hf-ico">' + MARK + '</span><small>Mothership Host</small></span><i></i><i></i><i></i><i></i><i></i></div></div>'
+    + '<div class="hf-win hf2-finder">' + wbar('アプリケーション') + '<div class="hf-wbody"><span class="hf2-app"><span class="hf-ico">' + MARK + '</span><small>MOTHERSHIP HOST</small></span><i></i><i></i><i></i><i></i><i></i></div></div>'
     + pop([R_TITLE, r_dev(), r_perm('画面収録'), r_perm('アクセシビリティ'), r_tg('ログイン時に起動'), r_tg('待機中も Mac をスリープさせない')], 'hf2-pop')
     + CURSOR.format(c='hf2-cur')))
 
@@ -171,10 +171,10 @@ CSS.append('''
     KF('hf3-b2', T, [(5.15, 'background: #e6ecf8; opacity: 1'), (5.26, 'background: #b3c5f5; opacity: 1'), (5.6, 'background: #e6ecf8; opacity: 1'), (7.4, 'background: #e6ecf8; opacity: 1'), (7.6, 'background: #e6ecf8; opacity: 0')]),
     CUR('hf3-cur', T, [(0, 18, 14.5), (.4, 18, 14.5), (1.2, 28.3, 8.05), (2.2, 28.3, 8.05), (3, 19.6, 18.6), (4.3, 19.6, 18.6), (5.1, 28.3, 10.05), (6, 28.3, 10.05), (6.8, 19.6, 18.6), (7.6, 19.6, 18.6), (8.4, 24, 21.5)], [1.3, 3.1, 5.2, 6.9]),
 ))
-FIGS.append(fig('hf3', 'メニューの「設定を開く」を押すと、Macのシステム設定が開く。「Mothership Host」のスイッチをオンにすると、メニューの印が緑のチェックに変わる。「画面収録」と「アクセシビリティ」の2つで、同じことをする様子',
+FIGS.append(fig('hf3', 'メニューの「設定を開く」を押すと、Macのシステム設定が開く。「MOTHERSHIP HOST」のスイッチをオンにすると、メニューの印が緑のチェックに変わる。「画面収録」と「アクセシビリティ」の2つで、同じことをする様子',
     mbar()
     + pop([R_TITLE, r_dev(), r_perm('画面収録', 'hf3-d1', 'hf3-b1'), r_perm('アクセシビリティ', 'hf3-d2', 'hf3-b2')])
-    + '<div class="hf-win hf3-win">' + wbar('システム設定') + '<div class="hf-wbody"><p class="hf3-h"><span>画面収録</span><span>アクセシビリティ</span></p><div class="hf3-app"><span class="hf-ico">' + MARK + '</span><b>Mothership Host</b><i class="hf-tg"></i></div><div class="hf-skel"></div><div class="hf-skel"></div></div></div>'
+    + '<div class="hf-win hf3-win">' + wbar('システム設定') + '<div class="hf-wbody"><p class="hf3-h"><span>画面収録</span><span>アクセシビリティ</span></p><div class="hf3-app"><span class="hf-ico">' + MARK + '</span><b>MOTHERSHIP HOST</b><i class="hf-tg"></i></div><div class="hf-skel"></div><div class="hf-skel"></div></div></div>'
     + CURSOR.format(c='hf3-cur'), tall=True))
 
 # ================================================================ 図 4：端末を追加… → QR コードのウィンドウ

@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Mothership LP ｜ HERO のアニメ（資料づくり ── AI に指示して Mac を動かす。案 2-B に決定。まだ一時的なファイル）
+   MOTHERSHIP LP ｜ HERO のアニメ（資料づくり ── AI に指示して Mac を動かす。案 2-B に決定。まだ一時的なファイル）
    designSystem/ → styles.css → この hero-variants.css の順に読み込む。
    端末の枠と Mac のデスクトップ（.demo、.d-mac、.m-window、.m-title、.m-bars、.m-dock、.d-host など）は styles.css のものをそのまま使い、
    ここには「MacBook の場面」「横向きの層」「AI の窓と、AI が作っているものの窓」「音声入力のバー（6 個）」「端末の外の札」だけを書く。
@@ -48,7 +48,7 @@
 .lm-win i:nth-child(2n) { width: 62%; }
 .lm-win i:nth-child(3n) { width: 78%; }
 
-/* メニューバーの Mothership Host のメニュー */
+/* メニューバーの MOTHERSHIP HOST のメニュー */
 .lm-menu { position: absolute; right: 6%; top: 8%; width: 38%; padding: .5em; border-radius: .8em; background: rgba(255, 255, 255, .96); box-shadow: 0 1.2em 2.6em -.8em rgba(var(--navy-rgb), .6); font-size: .9em; font-weight: var(--weight-semibold); opacity: 0; transform: translateY(-.6em) scale(.97); transform-origin: 85% 0; }
 .is-menu .lm-menu { opacity: 1; transform: none; }
 .lm-menu p { padding: .42em .8em; border-radius: .45em; white-space: nowrap; }

@@ -1,4 +1,4 @@
-# Mothership LP（design）
+# MOTHERSHIP LP（design）
 
 `../contents/lp-content.md` の原稿をもとに作った、LP の静的なページです（作成：2026-11-19 Claude Code）。
 このフォルダーは、はじめ `design2` という名前でした（2026-11-20 に `design` へ変更）。配色とロゴは、前にあった配色の案「08 Gradient」を引き継いでいます。
@@ -16,6 +16,7 @@
 | `contact.html`・`contact.css`・`contact.js` | お問い合わせ（2026-11-20 追加。スラッグ `contact`）。「お問い合わせの前に」（よくある質問・つながらないとき・購入と返金）、フォーム、右に補足（不具合のときに書いてほしいこと、お返事、パスワードを書かない）。`contact.js` は入力の確認と、Contact Form 7 の REST API への送信（フォームの `data-cf7-id` が空のモックでは送らず、送信後の表示だけ出す）。項目の name は Contact Form 7 のタグ名（`your-name`・`your-email`・`your-subject`・`your-message`・`inquiry-type`・`device[]`・`macos-version`・`app-version`・`acceptance-privacy`）。エラーの色は `--error`（このとき `tokens.css` に追加） | **2026-11-21：添付ファイル（任意）を追加**。JPEG・PNG・PDF だけ、1 つ 5MB まで、3 つまで。`contact.js` が拡張子と中身（先頭の数バイト）を確かめ、送るときに `your-file-1〜3` として付ける。Contact Form 7（ID 13）にも同じ名前の [file] を 3 つ足し、メールに添付するように設定済み。WordPress の側の中身の確認は `api_theme/inc/contact-attachments.php`。「パスワードは書かない・写さない」の注意も足した
 | `help.html`・`help.css` | **ヘルプ（2026-11-20 追加。下書き。本番の予定は `/help/`）**。まず中身と構成を決めるためのページで、見た目は最小限。ヘッダー・フッター・目次つきの 2 列は `legal.css` を共用し、ヘルプだけの部品（手順の番号、コマンドの枠、補足と注意、困ったときの一覧）を `help.css` に置いた。**図は 16 個（`help-figs.css`。2026-11-21。どれも CSS だけで動く）**。くわしくは下の「ヘルプページ」 |
 | `help-figs.css`・`tools/help-figs/` | ヘルプの図のスタイルと動き。**`help-figs.css` は `tools/help-figs/build.py` が書き出したもの**（図の HTML と、秒で書いた動きを持つ。`python3 tools/help-figs/build.py` で、`help.html` の `<!-- fig:番号 -->` の間と `help-figs.css` を書き直す。共通の部品のスタイルは `tools/help-figs/kit.css`）。図を直すときは、`build.py` か `kit.css` を直して実行する |
+| ― | **2026-11-21：本番にそろえた**。製品名を全ページ大文字に、ヘルプの「未確定」の注記 3 つを本番と同じ文に（「（近日公開）」、ロック解除の注記は削除）、ヘルプのフッターの並び（ヘルプ・お知らせ）、トップのロゴのリンクと読み上げ（`index.html`・「MOTHERSHIP トップページへ」） |
 | ― | **フッター**：全ページに「ヘルプ」（`help.html`）を足した（2026-11-21。本番と同じ並び：…ダウンロード・ヘルプ・お知らせ…） |
 | `404.html`・`404.css` | 404 ページ（2026-11-20 追加）。ヘッダー・フッターは LP と同じ。部品は `.pill`・`.btn`・`.phone`・`.dot`、値はトークンだけ。リンクは `index.html#…` の相対パス（本番に組み込むときは `/` からのパスにする） |
 | `script.js` | スマホのメニュー、ヘッダー、HERO のアニメと動画の制御 |
@@ -94,7 +95,7 @@ python3 -m http.server 8765 --bind 127.0.0.1
 **書き方の決まり**
 
 - 画面の文言（ボタンや設定の名前）は、アプリのコードにあるとおりに書く（「端末を追加…」「QR コードを読み取ってペアリング」「接続」「設定を開く」など）。トップページの絵の「つなぐ」は、実際のボタンでは「接続」。
-- 製品名は、トップページと同じ大文字（MOTHERSHIP・MOTHERSHIP HOST）。アプリの画面と macOS の設定の一覧では「Mothership Host」「Mothership」と出るので、先頭で 1 回ことわり、一覧の名前を指すときだけ画面どおりに書く。**どちらにそろえるかは、ユーザーに確認中。**
+- 製品名は、トップページと同じ大文字（MOTHERSHIP・MOTHERSHIP HOST）。アプリの画面と macOS の設定の一覧では「Mothership Host」「Mothership」と出るので、先頭で 1 回だけことわる（その一文だけ画面どおり。一覧の名前を指すときも、本文は大文字）。2026-11-21 に全ページ大文字に決定（下の「製品名の表記」）。
 - コマンドは紺色の枠（`.help-code`）。クリックで全体が選ばれる（`user-select: all`）。コピーのボタンは、まだ無い。
 - **図は 16 個**（2026-11-21。前は灰色の枠だった所。下の「ヘルプの図」）。
 - 確かめていないことは、赤い枠（`.tbd`）。**2026-11-21 に 3 か所を確かめて外した**（Aqua Voice の公式サイト＝`https://aquavoice.com/mac`、はじめの録音キー＝fn・押している間だけ聞き取る、マイクを選ぶ所＝設定の「Audio」、キーの設定＝「Keybindings」。どれも aquavoice.com の公式の案内で確認）。残りは 3 か所（HOST の配布、ストアの配布、ロックの解除）：HOST の入手先、ストアの配布、Aqua Voice の公式サイト、Aqua Voice の録音キーの初期設定、Aqua Voice の設定の表記（0.22 で「オーディオ › マイク」）、ロックされた Mac の解除。
@@ -151,7 +152,7 @@ python3 -m http.server 8765 --bind 127.0.0.1
 
 ## 製品名の表記（2026-11-20 ユーザー決定）
 
-トップページ（`index.html` と HERO のアニメ）では、製品名をすべて大文字で書く：「MOTHERSHIP」「MOTHERSHIP HOST」。title・description・代替テキスト・フッターも同じ。ほかのページ（利用規約、プライバシーポリシー、特定商取引法に基づく表記、お問い合わせ、お知らせ、404）は「Mothership」のまま（今回は変えていない）。
+トップページ（`index.html` と HERO のアニメ）では、製品名をすべて大文字で書く：「MOTHERSHIP」「MOTHERSHIP HOST」。title・description・代替テキスト・フッターも同じ。**2026-11-21 ユーザー決定：全ページで大文字にそろえた**（利用規約、プライバシーポリシー、特定商取引法に基づく表記、お問い合わせ、お知らせ、ヘルプ、404、デザインシステムの見本帳も。本番 `b914551` と同じ）。例外は、アプリの実際の表示名を説明するヘルプの一文「（アプリの画面では、「Mothership Host」「Mothership」と表示されます）」だけ。`media/README.md` の撮影手順も、実機の画面の名前なのでそのまま。
 
 ## HERO の文言（2026-11-20 改訂）
 
@@ -188,7 +189,7 @@ python3 -m http.server 8765 --bind 127.0.0.1
 - iPhone・iPad の対応する OS：「公開時にご案内します」。
 - サポート・お問い合わせ、プライバシーポリシー：リンクをまだ置いていません（URL が決まったらフッターに追加）。
 - Aqua Voice の提供元の正式な社名、名前を出すことの確認。
-- フッターの名義（© 2026 Mothership）。
+- フッターの名義（© 2026 MOTHERSHIP）。
 
 くわしくは `../contents/README.md` の「未確定事項」。
 
