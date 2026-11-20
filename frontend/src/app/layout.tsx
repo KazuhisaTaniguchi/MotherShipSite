@@ -15,7 +15,7 @@ export const metadata: Metadata = {
   description: DESCRIPTION,
   icons: { icon: { url: "/favicon.svg", type: "image/svg+xml" } },
   openGraph: {
-    title: "指で動かす。声で書く。離れたMacを、スマホから。｜MOTHERSHIP",
+    title: "指で動かす。声で書く。AIが働くMacを、手もとから。｜MOTHERSHIP",
     description: "家のMacで、AIが作業中。進み具合を指で確かめて、直しは話すだけ。",
     siteName: "MOTHERSHIP",
     locale: "ja_JP",

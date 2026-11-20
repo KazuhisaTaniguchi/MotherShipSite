@@ -17,7 +17,7 @@ export default function Home() {
         <div className="hero-bg" aria-hidden="true"></div>
         <div className="wrap hero-grid">
           <div className="hero-copy">
-            <p className="pill pill-glass hero-label">離れたMacを、スマホから。</p>
+            <p className="pill pill-glass hero-label">AIが働くMacを、手もとから。</p>
             <h1 id="hero-title">指で動かす。<br /><span className="grad-text">声で書く。</span></h1>
             <p className="hero-lead">家のMacで、AIが作業中。<br />進み具合を指で確かめて、直しは話すだけ。</p>
             <a className="hero-voice" href="#voice">
