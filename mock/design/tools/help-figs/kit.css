@@ -1,5 +1,5 @@
 /* ==========================================================================
-   ヘルプ（help.html）の図（2026-11-21）。16 個。どれも CSS だけで動く。
+   ヘルプ（help.html）の図（2026-11-21）。29 個（17〜29 は、かんたんにまとめると・困ったときの図）。どれも CSS だけで動く。
    - 場面の図（.hf）：Mac やデバイスの画面を描いた絵。図の中は em で組む（1em = 図の幅の 3%。
      横 33.3em × 縦 20.8em、.is-tall は縦 25em）。図ごとに 1 つの時計（--d 秒で 1 周）で動く。
    - 流れの図（.hflow・.hfv）：箱と矢印。文字は実寸で、スマホでは縦に並ぶ。
@@ -216,5 +216,32 @@
   .hflow a::after, .hfv-node::after, .hfv-link::after, .hfv-tunnel i { animation: none; }
   .hfv-case span { animation: none; opacity: 1; position: static; display: inline-block; margin-right: 6px; }
 }
+
+/* ---- 困ったときの小さな図（.is-mini。2026-11-21 追加）----
+   16:9（33.3em × 18.75em）。左にデバイス（.hfm-ph）、右に Mac の側（.hfm-side）。下の札（.hfm-tag）で「症状 → 確かめる・直す → 直った」 */
+.hf.is-mini { max-width: 440px; aspect-ratio: 16 / 9; background: var(--grad-wash); }
+.help-qa dd .hf { margin-top: 10px; }
+.legal-summary .hf { margin-top: var(--space-4); }
+.hfm-ph { left: 1.3em; top: 1.2em; width: 9.4em; height: 16.4em; background: #121a2e; }
+.hfm-desk { position: absolute; inset: 0; background: linear-gradient(160deg, #c9d8f4, #eaf0fb); }
+.hfm-desk > .hf-w1 { left: 8%; right: 8%; top: 10%; height: 40%; }
+.hfm-desk > .hf-w2 { left: 8%; right: 8%; top: 56%; bottom: 8%; }
+.hfm-ban { position: absolute; z-index: 3; left: .45em; right: .45em; top: .8em; display: flex; align-items: flex-start; gap: .45em; padding: .55em; border-radius: .7em; background: #fff1d6; color: #7a4a00; box-shadow: 0 .5em 1.2em -.6em rgba(0, 0, 0, .5); }
+.hfm-ban > i { flex: none; display: grid; place-items: center; width: 1.2em; height: 1.2em; border-radius: 50%; background: #f0a020; color: #fff; font-size: .8em; font-style: normal; font-weight: 800; }
+.hfm-ban > span { font-size: .62em; font-weight: 700; line-height: 1.4; }
+.hfm-ban.is-ok { background: #e2f5e7; color: #1d6e36; }
+.hfm-ban.is-ok > i { background: #2fae54; }
+.hfm-side { position: absolute; left: 12.3em; right: 1.2em; top: 1.2em; }
+.hfm-card { padding: .8em .9em; border-radius: .8em; background: #fff; box-shadow: 0 1em 2.4em -1em rgba(var(--navy-rgb), .55); }
+.hfm-h { margin-bottom: .45em !important; font-size: .66em; font-weight: 800; letter-spacing: .04em; color: var(--ink-3); line-height: 1.3; }
+.hfm-ck { display: flex; align-items: center; gap: .5em; min-height: 2em; }
+.hfm-ck > i { flex: none; position: relative; width: 1.15em; height: 1.15em; border-radius: 50%; border: .12em solid #c4cde0; }
+.hfm-ck > i::after { content: "✓"; position: absolute; inset: -.12em; display: grid; place-items: center; border-radius: 50%; background: #2fae54; color: #fff; font-size: .7em; font-weight: 800; opacity: var(--ok); }
+.hfm-ck > span { font-size: .7em; font-weight: 700; line-height: 1.35; }
+.hfm-sel { display: inline-grid; vertical-align: middle; padding: .1em .45em; border: 1px solid #c9d3e6; border-radius: .35em; background: #f6f8fc; }
+.hfm-sel > b { grid-area: 1 / 1; font-weight: 700; white-space: nowrap; }
+.hfm-tag { left: 12.3em; top: 15.5em; }
+.hfm-btn { position: absolute; left: .7em; right: .7em; display: grid; place-items: center; height: 1.9em; border-radius: .6em; background: var(--blue); color: #fff; }
+.hfm-btn > span { font-size: .66em; font-weight: 800; }
 
 /* ---- ここから下は、図ごとの配置と動き（build.py が書き出す）---- */
