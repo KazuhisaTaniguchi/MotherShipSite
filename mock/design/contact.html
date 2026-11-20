@@ -149,6 +149,20 @@
                 <p class="error-text" id="your-message-error">お問い合わせの内容を入力してください。</p>
               </div>
 
+              <!-- 添付ファイル（任意）。JPEG・PNG・PDF だけ、1 つ 5MB まで、3 つまで（contact.js が確かめて、送るときに your-file-1〜3 として付ける） -->
+              <div class="field attach" id="attach-field">
+                <p class="attach-label" id="attach-label">添付ファイル <span class="opt">任意</span></p>
+                <p class="hint" id="attach-hint">画面の写真（スクリーンショット）があると、状況がよく分かります。JPEG・PNG・PDF、1つ5MBまで、3つまで。</p>
+                <p class="attach-warn" id="attach-warn">パスワード、QRコード、ほかの方の個人情報が写った画像は、送らないでください。写る場合は、その部分を隠してから添付してください。</p>
+                <div class="attach-pick">
+                  <input class="attach-input" id="attach-input" type="file" multiple accept=".jpg,.jpeg,.png,.pdf,image/jpeg,image/png,application/pdf" aria-labelledby="attach-label attach-button" aria-describedby="attach-hint attach-warn attach-error">
+                  <label class="btn btn-ghost attach-button" id="attach-button" for="attach-input"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 11.5 12.6 20a5.2 5.2 0 0 1-7.4-7.4l8.8-8.8a3.5 3.5 0 0 1 4.9 4.9l-8.8 8.8a1.7 1.7 0 0 1-2.5-2.5l8.1-8.1"/></svg>ファイルを選ぶ</label>
+                  <span class="attach-count" id="attach-count">0 / 3</span>
+                </div>
+                <ul class="attach-list" id="attach-list" aria-label="添付するファイル"></ul>
+                <p class="error-text" id="attach-error" role="status"></p>
+              </div>
+
               <div class="agree-wrap">
                 <label class="agree">
                   <input type="checkbox" name="acceptance-privacy" value="1" required aria-describedby="agree-error">
@@ -192,8 +206,8 @@
               <p>内容を確認のうえ、順にお返事します。お返事まで、数日いただくことがあります。土日・祝日は、お返事が遅くなることがあります。</p>
             </div>
             <div class="callout">
-              <h3>パスワードは書かないでください</h3>
-              <p>Macのパスワード、Tailscaleのパスワード、QRコードの画像など、ログインや登録に使う情報は、お問い合わせに書かないでください。こちらからお聞きすることもありません。</p>
+              <h3>パスワードは書かない・写さない</h3>
+              <p>Macのパスワード、Tailscaleのパスワード、QRコードの画像など、ログインや登録に使う情報は、お問い合わせに書かないでください。添付する画像にも、写らないようにしてください。こちらからお聞きすることもありません。</p>
             </div>
           </aside>
         </div>

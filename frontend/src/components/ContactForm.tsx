@@ -1,9 +1,9 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useRef, useState, type FormEvent } from "react";
+import { useEffect, useRef, useState, type ChangeEvent, type FormEvent } from "react";
 
-// お問い合わせフォーム（mock/design/contact.html のフォームと contact.js を React にしたもの）
+// お問い合わせフォーム（mock/design/contact.html のフォームと contact.js を React にしたもの）。添付ファイルは JPEG・PNG・PDF、1 つ 5MB まで、3 つまで
 // 送信先：WordPress の Contact Form 7 の REST API
 //   POST {NEXT_PUBLIC_WORDPRESS_URL}/wp-json/contact-form-7/v1/contact-forms/{ID}/feedback
 // ID は環境変数 NEXT_PUBLIC_CF7_CONTACT_FORM_ID（ビルドのときに埋め込まれる）。
@@ -14,6 +14,30 @@ const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 type RequiredName = "inquiry-type" | "your-name" | "your-email" | "your-subject" | "your-message" | "acceptance-privacy";
 const REQUIRED: RequiredName[] = ["inquiry-type", "your-name", "your-email", "your-subject", "your-message", "acceptance-privacy"];
+
+// 添付ファイル：JPEG・PNG・PDF だけ、1 つ 5MB まで、3 つまで。拡張子と、先頭の数バイト（中身の種類）の両方を確かめる。
+// WordPress の側（Contact Form 7 の your-file-1〜3 と、テーマの確認）でも、もう一度確かめる
+const MAX_FILES = 3;
+const MAX_BYTES = 5 * 1024 * 1024;
+const KINDS: Record<string, "jpeg" | "png" | "pdf"> = { jpg: "jpeg", jpeg: "jpeg", png: "png", pdf: "pdf" };
+type Attachment = { file: File; url: string };
+
+const sizeText = (n: number) => (n < 1024 * 1024 ? `${Math.max(1, Math.round(n / 1024))}KB` : `${(n / 1024 / 1024).toFixed(1)}MB`);
+
+const sniff = async (file: File): Promise<string> => {
+  const b = new Uint8Array(await file.slice(0, 8).arrayBuffer());
+  if (b[0] === 0xff && b[1] === 0xd8 && b[2] === 0xff) return "jpeg";
+  if (b[0] === 0x89 && b[1] === 0x50 && b[2] === 0x4e && b[3] === 0x47) return "png";
+  if (b[0] === 0x25 && b[1] === 0x50 && b[2] === 0x44 && b[3] === 0x46) return "pdf"; // %PDF
+  return "";
+};
+
+function AttachThumb({ item }: { item: Attachment }) {
+  const [broken, setBroken] = useState(false);
+  if (!item.url || broken) return <span className="attach-thumb">{item.url ? "IMG" : "PDF"}</span>;
+  // eslint-disable-next-line @next/next/no-img-element
+  return <span className="attach-thumb"><img src={item.url} alt="" onError={() => setBroken(true)} /></span>;
+}
 
 type Cf7Response = {
   status: string;
@@ -38,6 +62,40 @@ export function ContactForm() {
   const [agreed, setAgreed] = useState(false); // 同意のチェックが入っているときだけ送信ボタンを押せる
   const [done, setDone] = useState(false);
   const doneRef = useRef<HTMLDivElement>(null);
+  const [files, setFiles] = useState<Attachment[]>([]);
+  const [attachErrors, setAttachErrors] = useState<string[]>([]);
+  const attachRef = useRef<HTMLInputElement>(null);
+  const filesRef = useRef<Attachment[]>([]);
+
+  // ページを離れるときに、サムネイル用の URL を片付ける
+  useEffect(() => { filesRef.current = files; }, [files]);
+  useEffect(() => () => filesRef.current.forEach((f) => { if (f.url) URL.revokeObjectURL(f.url); }), []);
+
+  const onPick = async (e: ChangeEvent<HTMLInputElement>) => {
+    const picked = Array.from(e.target.files ?? []);
+    e.target.value = ""; // 同じファイルを、外したあとにもう一度選べるように
+    const next = [...files];
+    const errs: string[] = [];
+    for (const file of picked) {
+      const ext = (file.name.split(".").pop() ?? "").toLowerCase();
+      if (next.some((f) => f.file.name === file.name && f.file.size === file.size)) continue;
+      if (next.length >= MAX_FILES) { errs.push(`添付できるのは${MAX_FILES}つまでです。`); break; }
+      if (!KINDS[ext]) { errs.push(`「${file.name}」：JPEG・PNG・PDFのファイルだけ添付できます。`); continue; }
+      if (file.size > MAX_BYTES) { errs.push(`「${file.name}」：5MBより大きいため、添付できません（${sizeText(file.size)}）。`); continue; }
+      if ((await sniff(file)) !== KINDS[ext]) { errs.push(`「${file.name}」：ファイルの中身が、JPEG・PNG・PDFではないようです。`); continue; }
+      next.push({ file, url: KINDS[ext] === "pdf" ? "" : URL.createObjectURL(file) });
+    }
+    setFiles(next);
+    setAttachErrors(errs);
+  };
+
+  const removeFile = (index: number) => {
+    const target = files[index];
+    if (target?.url) URL.revokeObjectURL(target.url);
+    setFiles(files.filter((_, i) => i !== index));
+    setAttachErrors([]);
+    attachRef.current?.focus();
+  };
 
   useEffect(() => {
     if (!done) return;
@@ -78,6 +136,7 @@ export function ContactForm() {
     try {
       const body = new FormData(form);
       body.append("_wpcf7_unit_tag", `wpcf7-f${FORM_ID}-o1`); // Contact Form 7 の 5.8 以降で必要
+      files.forEach((f, i) => body.append(`your-file-${i + 1}`, f.file)); // Contact Form 7 のファイルの項目（your-file-1〜3）
       const res = await fetch(`${WP_URL}/wp-json/contact-form-7/v1/contact-forms/${FORM_ID}/feedback`, { method: "POST", body });
       const json = (await res.json()) as Cf7Response;
       if (json.status === "mail_sent") {
@@ -86,7 +145,12 @@ export function ContactForm() {
       }
       // 項目ごとのエラー（Contact Form 7 の判定）を、その項目の下に出す
       const fromServer: Record<string, boolean> = {};
-      (json.invalid_fields ?? []).forEach((f) => { fromServer[f.field.replace(/\[\]$/, "")] = true; });
+      const fileErrors: string[] = [];
+      (json.invalid_fields ?? []).forEach((f) => {
+        if (/^your-file-/.test(f.field)) { fileErrors.push(f.message); return; } // 添付ファイルのエラー
+        fromServer[f.field.replace(/\[\]$/, "")] = true;
+      });
+      if (fileErrors.length) setAttachErrors(fileErrors);
       setErrors((prev) => ({ ...prev, ...fromServer }));
       setStatus(json.message || "送信できませんでした。");
     } catch {
@@ -170,6 +234,30 @@ export function ContactForm() {
         <label htmlFor="your-message">お問い合わせの内容 <span className="req">必須</span></label>
         <textarea className="input" id="your-message" name="your-message" required placeholder="不具合のときは、何をしたときに、どうなったかを書いていただけると助かります。" aria-invalid={invalid("your-message")} aria-describedby="your-message-error"></textarea>
         <p className="error-text" id="your-message-error">お問い合わせの内容を入力してください。</p>
+      </div>
+
+      {/* 添付ファイル（任意）。JPEG・PNG・PDF だけ、1 つ 5MB まで、3 つまで。送るときに your-file-1〜3 として付ける */}
+      <div className={`field attach${attachErrors.length ? " is-invalid" : ""}`} id="attach-field">
+        <p className="attach-label" id="attach-label">添付ファイル <span className="opt">任意</span></p>
+        <p className="hint" id="attach-hint">画面の写真（スクリーンショット）があると、状況がよく分かります。JPEG・PNG・PDF、1つ5MBまで、3つまで。</p>
+        <p className="attach-warn" id="attach-warn">パスワード、QRコード、ほかの方の個人情報が写った画像は、送らないでください。写る場合は、その部分を隠してから添付してください。</p>
+        <div className="attach-pick">
+          <input ref={attachRef} className="attach-input" id="attach-input" type="file" multiple accept=".jpg,.jpeg,.png,.pdf,image/jpeg,image/png,application/pdf" disabled={files.length >= MAX_FILES} onChange={onPick} aria-labelledby="attach-label attach-button" aria-describedby="attach-hint attach-warn attach-error" />
+          <label className="btn btn-ghost attach-button" id="attach-button" htmlFor="attach-input"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 11.5 12.6 20a5.2 5.2 0 0 1-7.4-7.4l8.8-8.8a3.5 3.5 0 0 1 4.9 4.9l-8.8 8.8a1.7 1.7 0 0 1-2.5-2.5l8.1-8.1" /></svg>ファイルを選ぶ</label>
+          <span className="attach-count">{files.length} / {MAX_FILES}</span>
+        </div>
+        {files.length > 0 && (
+          <ul className="attach-list" aria-label="添付するファイル">
+            {files.map((f, i) => (
+              <li className="attach-item" key={`${f.file.name}-${f.file.size}`}>
+                <AttachThumb item={f} />
+                <span className="attach-meta"><span className="attach-name">{f.file.name}</span><span className="attach-size">{sizeText(f.file.size)}</span></span>
+                <button type="button" className="attach-remove" aria-label={`${f.file.name}を外す`} onClick={() => removeFile(i)}>外す</button>
+              </li>
+            ))}
+          </ul>
+        )}
+        <p className="error-text" id="attach-error" role="status">{attachErrors.join("\n")}</p>
       </div>
 
       <div className={fieldClass("acceptance-privacy", "agree-wrap")}>

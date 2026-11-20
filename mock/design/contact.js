@@ -1,5 +1,6 @@
 // お問い合わせフォーム：入力の確認と送信
 // ・送る前に、必須の項目とメールアドレスの形を確かめ、エラーをその項目の下に出す
+// ・添付ファイル（任意）は、JPEG・PNG・PDF だけ、1 つ 5MB まで、3 つまで。送るときに your-file-1〜3 として付ける
 // ・送信先は WordPress の Contact Form 7 の REST API（フォームの data-cf7-id にフォームの ID を入れる）
 //     POST https://api.mothershipremote.com/wp-json/contact-form-7/v1/contact-forms/{ID}/feedback
 //   ID が空のとき（このモック）は送らずに、送信できたときの表示だけを見せる
@@ -27,6 +28,78 @@
   };
   agree.addEventListener('change', updateSubmit);
   updateSubmit();
+
+  // ---- 添付ファイル（JPEG・PNG・PDF、1 つ 5MB まで、3 つまで）----
+  // 拡張子と、ファイルの先頭の数バイト（中身の種類）の両方を確かめる。WordPress の側でも、もう一度確かめる
+  const MAX_FILES = 3;
+  const MAX_BYTES = 5 * 1024 * 1024;
+  const KINDS = { jpg: 'jpeg', jpeg: 'jpeg', png: 'png', pdf: 'pdf' };
+  const attachInput = document.getElementById('attach-input');
+  const attachList = document.getElementById('attach-list');
+  const attachCount = document.getElementById('attach-count');
+  const attachError = document.getElementById('attach-error');
+  const attachField = document.getElementById('attach-field');
+  let files = [];   // { file, url }
+  const sizeText = (n) => (n < 1024 * 1024 ? `${Math.max(1, Math.round(n / 1024))}KB` : `${(n / 1024 / 1024).toFixed(1)}MB`);
+  const sniff = async (file) => {
+    const b = new Uint8Array(await file.slice(0, 8).arrayBuffer());
+    if (b[0] === 0xff && b[1] === 0xd8 && b[2] === 0xff) return 'jpeg';
+    if (b[0] === 0x89 && b[1] === 0x50 && b[2] === 0x4e && b[3] === 0x47) return 'png';
+    if (b[0] === 0x25 && b[1] === 0x50 && b[2] === 0x44 && b[3] === 0x46) return 'pdf';   // %PDF
+    return '';
+  };
+  const showAttachError = (messages) => {
+    attachError.textContent = messages.join('\n');
+    attachField.classList.toggle('is-invalid', messages.length > 0);
+  };
+  const renderAttach = () => {
+    attachList.textContent = '';
+    files.forEach((f, i) => {
+      const li = document.createElement('li');
+      li.className = 'attach-item';
+      const thumb = document.createElement('span');
+      thumb.className = 'attach-thumb';
+      if (f.url) { const img = document.createElement('img'); img.alt = ''; img.onerror = () => { thumb.textContent = 'IMG'; }; img.src = f.url; thumb.append(img); } else thumb.textContent = 'PDF';
+      const meta = document.createElement('span');
+      meta.className = 'attach-meta';
+      meta.innerHTML = '<span class="attach-name"></span><span class="attach-size"></span>';
+      meta.firstChild.textContent = f.file.name;
+      meta.lastChild.textContent = sizeText(f.file.size);
+      const remove = document.createElement('button');
+      remove.type = 'button';
+      remove.className = 'attach-remove';
+      remove.textContent = '外す';
+      remove.setAttribute('aria-label', `${f.file.name}を外す`);
+      remove.addEventListener('click', () => {
+        if (files[i].url) URL.revokeObjectURL(files[i].url);
+        files.splice(i, 1);
+        showAttachError([]);
+        renderAttach();
+        attachInput.focus();
+      });
+      li.append(thumb, meta, remove);
+      attachList.append(li);
+    });
+    attachCount.textContent = `${files.length} / ${MAX_FILES}`;
+    attachInput.disabled = files.length >= MAX_FILES;
+  };
+  attachInput.addEventListener('change', async () => {
+    const picked = [...attachInput.files];
+    attachInput.value = '';   // 同じファイルを、外したあとにもう一度選べるように
+    const errors = [];
+    for (const file of picked) {
+      const ext = (file.name.split('.').pop() || '').toLowerCase();
+      if (files.some((f) => f.file.name === file.name && f.file.size === file.size)) continue;
+      if (files.length >= MAX_FILES) { errors.push(`添付できるのは${MAX_FILES}つまでです。`); break; }
+      if (!KINDS[ext]) { errors.push(`「${file.name}」：JPEG・PNG・PDFのファイルだけ添付できます。`); continue; }
+      if (file.size > MAX_BYTES) { errors.push(`「${file.name}」：5MBより大きいため、添付できません（${sizeText(file.size)}）。`); continue; }
+      if ((await sniff(file)) !== KINDS[ext]) { errors.push(`「${file.name}」：ファイルの中身が、JPEG・PNG・PDFではないようです。`); continue; }
+      files.push({ file, url: KINDS[ext] === 'pdf' ? '' : URL.createObjectURL(file) });
+    }
+    showAttachError(errors);
+    renderAttach();
+  });
+  renderAttach();
 
   const wrapOf = (el) => el.closest('.field, .agree-wrap');
   const isValid = (el) => {
@@ -82,6 +155,7 @@
     try {
       const body = new FormData(form);
       body.append('_wpcf7_unit_tag', `wpcf7-f${id}-o1`);   // Contact Form 7 の 5.8 以降で必要
+      files.forEach((f, i) => body.append(`your-file-${i + 1}`, f.file));   // Contact Form 7 のファイルの項目（your-file-1〜3）
       const res = await fetch(`${API_BASE}${id}/feedback`, { method: 'POST', body });
       const json = await res.json();
       if (json.status === 'mail_sent') {
@@ -89,6 +163,7 @@
       } else {
         // 項目ごとのエラー（Contact Form 7 の判定）を、その項目の下に出す
         (json.invalid_fields || []).forEach((f) => {
+          if (/^your-file-/.test(f.field)) { showAttachError([f.message]); return; }   // 添付ファイルのエラー
           const el = form.querySelector(`[name="${f.field}"], [name="${f.field}[]"]`);
           if (el) check(el) || wrapOf(el)?.classList.add('is-invalid');
         });

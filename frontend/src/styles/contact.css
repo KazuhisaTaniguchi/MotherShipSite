@@ -109,6 +109,29 @@ select.input { appearance: none; padding-right: 44px; background: var(--surface)
 /* 公開前に決める箇所（公開するときに消す） */
 .tbd { padding: 1px 6px; border-radius: var(--radius-xs); background: rgba(var(--rec-rgb), .1); color: var(--ink); font-weight: var(--weight-bold); box-shadow: inset 0 0 0 1px rgba(var(--rec-rgb), .45); }
 
+/* 添付ファイル（2026-11-21）。JPEG・PNG・PDF、1 つ 5MB まで、3 つまで */
+.attach-label { display: flex; align-items: center; gap: var(--space-2); font-weight: var(--weight-bold); font-size: var(--text-body-sm); }
+.attach-warn { margin-top: var(--space-2); padding: 10px 14px; border-radius: var(--radius-sm, 10px); background: #fff6e0; border-left: 3px solid #e2a700; font-size: var(--text-note); line-height: var(--leading-note); color: var(--ink-2); }
+.attach-pick { position: relative; display: flex; align-items: center; gap: var(--space-3); margin-top: var(--space-3); }
+.attach-input { position: absolute; width: 1px; height: 1px; opacity: 0; overflow: hidden; }
+.attach-button { min-height: 46px; padding: 0 20px; cursor: pointer; }
+.attach-button svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.attach-input:focus-visible + .attach-button { outline: 3px solid var(--blue); outline-offset: 2px; }
+.attach-input:disabled + .attach-button { opacity: .45; cursor: not-allowed; }
+.attach-count { font-size: var(--text-note); color: var(--ink-3); font-variant-numeric: tabular-nums; }
+.attach-list { display: grid; gap: var(--space-2); margin-top: var(--space-3); }
+.attach-list:empty { display: none; }
+.attach-item { display: flex; align-items: center; gap: var(--space-3); padding: 8px 10px 8px 8px; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); }
+.attach-thumb { flex: none; display: grid; place-items: center; width: 44px; height: 44px; border-radius: 8px; background: #eef2f9; overflow: hidden; font-size: 11px; font-weight: var(--weight-heavy); color: var(--ink-2); }
+.attach-thumb img { width: 100%; height: 100%; object-fit: cover; }
+.attach-meta { flex: 1; min-width: 0; display: grid; gap: 2px; }
+.attach-name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: var(--text-small); font-weight: var(--weight-bold); }
+.attach-size { font-size: var(--text-caption); color: var(--ink-3); }
+.attach-remove { flex: none; padding: 6px 12px; border: 1px solid var(--line); border-radius: var(--radius-pill); background: var(--surface); font: inherit; font-size: var(--text-note); font-weight: var(--weight-bold); color: var(--ink-2); cursor: pointer; }
+.attach-remove:hover { border-color: var(--error); color: var(--error); }
+.field.attach.is-invalid .attach-button { border-color: var(--error); }
+#attach-error { white-space: pre-line; }   /* ファイルごとのエラーを 1 行ずつ */
+
 @media (max-width: 980px) {
   .before-grid { grid-template-columns: 1fr; }
   .form-layout { grid-template-columns: 1fr; }
