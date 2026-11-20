@@ -488,11 +488,419 @@
 
 /* 安心・そのほか */
 .others-head { margin-top: var(--section-y); }
+
+/* ---- 安心：動く図（2026-11-21）----
+   左に家の Mac とそばにいる人、右に外出先のスマホ。12 秒で 1 周。右の 3 つの札も同じ時計で順に明るくなる：
+   0–33% 外からつなぐ（スマホが出て、点線でつながる。そばの人には Mac の画面が見えている 👀）
+   33–66% 自動で隠す（Mac の画面が黒くなり「画面を隠しています」。スマホには映ったまま。そばの人は ？）
+   66–100% 切断でロック（線が消えてスマホは「切断しました」。Mac はロックの画面に）
+   図の中は em で組む（1em = 図の幅の 2.5%。図は 40em × 20em） */
+.shield-demo { grid-column: 1 / -1; display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: 28px; align-items: center; margin-top: 8px; padding: 28px; border-radius: 24px; background: var(--grad-wash); }
+.sd-fig { position: relative; aspect-ratio: 2 / 1; border-radius: 18px; background: rgba(255, 255, 255, .55); overflow: hidden; container-type: inline-size; }
+.sd-in { position: absolute; inset: 0; font-size: 2.5cqw; line-height: 1.35; animation: sd-in 12s linear infinite; }
+.sd-in::before { content: ""; position: absolute; left: 25.6em; top: 0; right: 0; bottom: 0; background: rgba(255, 255, 255, .5); border-left: .12em dashed rgba(var(--navy-rgb), .18); }
+.sd-place { position: absolute; top: .7em; padding: .2em .8em; border-radius: var(--radius-pill); background: #fff; font-size: .8em; font-weight: var(--weight-heavy); color: var(--ink-2); box-shadow: 0 .4em 1em -.6em rgba(var(--navy-rgb), .5); }
+.sd-home { left: 2em; }
+.sd-away { left: 36.6em; animation: sd-away 12s ease infinite; }
+.sd-note { grid-column: 1 / -1; font-size: var(--text-caption); color: var(--ink-3); text-align: center; }
+/* 家の Mac */
+.sd-mac { position: absolute; left: 1.6em; top: 2.6em; width: 17.6em; }
+.sd-scr { position: relative; height: 11em; border: .45em solid var(--device); border-radius: .8em; background: linear-gradient(160deg, #c9d8f4, #eaf0fb); overflow: hidden; }
+.sd-stand { display: block; width: 3.4em; height: 1.4em; margin: 0 auto; background: linear-gradient(#c3cbdc, #9aa5bd); }
+.sd-stand::after { content: ""; display: block; width: 7em; height: .4em; margin-left: -1.8em; margin-top: 1.4em; border-radius: .3em; background: #9aa5bd; }
+/* 画面の中身（Mac とスマホで同じ部品） */
+.sd-ui { position: absolute; inset: 0; font-size: .5em; }
+.sd-w { position: absolute; display: flex; flex-direction: column; gap: .55em; padding-bottom: .8em; background: #fff; border-radius: .7em; box-shadow: 0 .8em 2em -1em rgba(var(--navy-rgb), .5); overflow: hidden; }
+.sd-w > b { flex: none; height: 1.4em; background: #e3e9f5; }
+.sd-w > p { margin: 0 .8em; font-weight: var(--weight-heavy); color: var(--ink); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.sd-w > i { flex: none; height: .55em; margin-inline: .8em; border-radius: .3em; background: #28508f; }
+.sd-w > i:nth-of-type(2n) { width: 62%; }
+.sd-w > i:nth-of-type(3) { background: #8fb0e8; }
+.sd-w > em { flex: 1; min-height: 0; display: flex; align-items: flex-end; gap: .5em; margin: 0 .8em; }
+.sd-w > em i { flex: 1; border-radius: .25em .25em 0 0; background: #8fb0e8; }
+.sd-w > em i:nth-child(1) { height: 45%; }
+.sd-w > em i:nth-child(2) { height: 75%; }
+.sd-w > em i:nth-child(3) { height: 58%; }
+.sd-w > em i:nth-child(4) { height: 92%; background: var(--blue); }
+.sd-mac .sd-mail { left: 1.2em; top: 1.2em; width: 15em; bottom: 1.2em; }
+.sd-mac .sd-rep { left: 17.4em; right: 1.2em; top: 2.4em; bottom: 3em; }
+/* 隠す（黒い画面）と、ロックの画面 */
+.sd-shield { position: absolute; inset: 0; display: grid; place-items: center; background: #04060c; opacity: 0; animation: sd-shield 12s ease infinite; }
+.sd-shield span { font-size: .85em; font-weight: var(--weight-bold); color: rgba(255, 255, 255, .45); }
+.sd-lock { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: .55em; background: linear-gradient(160deg, #3d5a99, #1b2747); opacity: 0; animation: sd-lock 12s ease infinite; }
+.sd-avatar { width: 2.4em; height: 2.4em; border-radius: 50%; background: rgba(255, 255, 255, .75); }
+.sd-pass { width: 6em; padding: .2em 0; border-radius: 1em; background: rgba(255, 255, 255, .22); font-size: .65em; text-align: center; color: rgba(255, 255, 255, .8); }
+.sd-lock small { font-size: .8em; font-weight: var(--weight-bold); color: #fff; }
+/* そばにいる人（見える 👀 → 見えない ？） */
+.sd-person { position: absolute; left: 20em; top: 9.4em; width: 3.6em; height: 7.6em; }
+.sd-head { position: absolute; left: .75em; top: 0; width: 2.1em; height: 2.1em; border-radius: 50%; background: #9aa5bd; }
+.sd-body { position: absolute; left: 0; top: 2.5em; width: 3.6em; height: 5.1em; border-radius: 1.8em 1.8em .4em .4em; background: #b7c1d6; }
+.sd-see, .sd-nope { position: absolute; left: 1.3em; top: -2.2em; display: grid; place-items: center; width: 2.2em; height: 1.8em; border-radius: .9em .9em .9em .2em; background: #fff; font-size: .9em; font-weight: var(--weight-heavy); color: var(--ink-2); box-shadow: 0 .5em 1em -.6em rgba(var(--navy-rgb), .6); opacity: 0; }
+.sd-see { animation: sd-see 12s ease infinite; }
+.sd-nope { animation: sd-nope 12s ease infinite; }
+/* 家と外出先をつなぐ線 */
+.sd-link { position: absolute; left: 19.8em; top: 5em; width: 9.2em; height: 0; border-top: .16em dashed rgba(var(--blue-rgb), .55); opacity: 0; animation: sd-link 12s ease infinite; }
+.sd-link i { position: absolute; left: 0; top: -.33em; width: .5em; height: .5em; border-radius: 50%; background: var(--blue); animation: sd-dot 1.4s linear infinite; }
+.sd-link span { position: absolute; left: 50%; bottom: .5em; transform: translateX(-50%); padding: .15em .6em; border-radius: 1em; background: #fff; font-size: .72em; font-weight: var(--weight-bold); color: var(--blue-deep); white-space: nowrap; box-shadow: 0 .4em 1em -.6em rgba(var(--navy-rgb), .5); }
+/* 外出先のスマホ */
+.sd-ph { position: absolute; left: 29.6em; top: 2.2em; width: 8em; height: 15.8em; border: .4em solid var(--device); border-radius: 1.4em; background: var(--device-screen); overflow: hidden; box-shadow: 0 1.4em 2.6em -1.2em rgba(var(--navy-rgb), .6); opacity: 0; animation: sd-ph 12s ease infinite; }
+.sd-ph-top { position: absolute; left: 0; right: 0; top: .25em; display: flex; align-items: center; justify-content: center; gap: .3em; font-size: .62em; font-weight: var(--weight-bold); color: rgba(255, 255, 255, .85); animation: sd-ph-on 12s ease infinite; }
+.sd-ph-top i { width: .7em; height: .7em; border-radius: 50%; background: #34c759; }
+.sd-ph .sd-ui { top: 1.4em; font-size: .4em; animation: sd-ph-on 12s ease infinite; }
+.sd-ph .sd-mail { left: .8em; right: .8em; top: 1em; height: 13em; }
+.sd-ph .sd-rep { left: .8em; right: .8em; top: 15em; bottom: 1em; }
+.sd-bye { position: absolute; inset: 0; display: grid; place-items: center; font-size: .8em; font-weight: var(--weight-bold); color: rgba(255, 255, 255, .75); opacity: 0; animation: sd-bye 12s ease infinite; }
+/* 右の 3 つの札（いまの場面が明るくなる） */
+.sd-steps { display: grid; gap: 8px; }
+.sd-steps li { padding: 10px 14px; border-radius: 12px; font-size: 13px; line-height: 1.55; color: var(--ink-2); background: rgba(255, 255, 255, 0); opacity: .55; animation: sd-step-1 12s ease infinite; }
+.sd-steps li b { display: block; font-size: 14px; color: var(--ink); }
+.sd-steps li:nth-child(2) { animation-name: sd-step-2; }
+.sd-steps li:nth-child(3) { animation-name: sd-step-3; }
+@keyframes sd-in { 0% { opacity: 0; } 2.5%, 96% { opacity: 1; } 99%, 100% { opacity: 0; } }
+@keyframes sd-away { 0%, 10% { opacity: .45; } 15%, 92% { opacity: 1; } 100% { opacity: .45; } }
+@keyframes sd-see { 0%, 4% { opacity: 0; transform: translateY(.4em); } 7%, 31% { opacity: 1; transform: none; } 34%, 100% { opacity: 0; } }
+@keyframes sd-nope { 0%, 37% { opacity: 0; transform: translateY(.4em); } 40%, 95% { opacity: 1; transform: none; } 98%, 100% { opacity: 0; } }
+@keyframes sd-ph { 0%, 9% { opacity: 0; transform: translateY(2em); } 15%, 90% { opacity: 1; transform: none; } 95%, 100% { opacity: 0; transform: translateY(2em); } }
+@keyframes sd-ph-on { 0%, 18% { opacity: 0; } 21%, 69% { opacity: 1; } 72%, 100% { opacity: 0; } }
+@keyframes sd-link { 0%, 16% { opacity: 0; } 20%, 69% { opacity: 1; } 72%, 100% { opacity: 0; } }
+@keyframes sd-dot { 0% { transform: translateX(0); opacity: 0; } 15% { opacity: 1; } 85% { opacity: 1; } 100% { transform: translateX(8.6em); opacity: 0; } }
+@keyframes sd-shield { 0%, 33% { opacity: 0; } 36.5%, 71% { opacity: 1; } 73%, 100% { opacity: 0; } }
+@keyframes sd-lock { 0%, 71% { opacity: 0; } 74%, 96% { opacity: 1; } 99%, 100% { opacity: 0; } }
+@keyframes sd-bye { 0%, 71% { opacity: 0; } 74%, 88% { opacity: 1; } 91%, 100% { opacity: 0; } }
+@keyframes sd-step-1 { 0%, 1% { opacity: .55; background: rgba(255, 255, 255, 0); box-shadow: none; } 3%, 31% { opacity: 1; background: rgba(255, 255, 255, .95); box-shadow: 0 10px 24px -16px rgba(var(--navy-rgb), .45); } 34%, 100% { opacity: .55; background: rgba(255, 255, 255, 0); box-shadow: none; } }
+@keyframes sd-step-2 { 0%, 33% { opacity: .55; background: rgba(255, 255, 255, 0); box-shadow: none; } 36%, 64% { opacity: 1; background: rgba(255, 255, 255, .95); box-shadow: 0 10px 24px -16px rgba(var(--navy-rgb), .45); } 67%, 100% { opacity: .55; background: rgba(255, 255, 255, 0); box-shadow: none; } }
+@keyframes sd-step-3 { 0%, 66% { opacity: .55; background: rgba(255, 255, 255, 0); box-shadow: none; } 69%, 95% { opacity: 1; background: rgba(255, 255, 255, .95); box-shadow: 0 10px 24px -16px rgba(var(--navy-rgb), .45); } 98%, 100% { opacity: .55; background: rgba(255, 255, 255, 0); box-shadow: none; } }
 .no-ai { margin-top: 20px; padding: 26px 28px; border-radius: var(--radius-lg); border: 1px dashed var(--line); }
 
 /* 公開前に確かめる文の印（モックだけ。本番に出すときは消す）。legal.css の .tbd と同じ見た目 */
 .tbd { margin-left: 4px; padding: 1px 6px; border-radius: var(--radius-xs); background: rgba(var(--rec-rgb), .1); color: var(--ink); font-size: var(--text-caption); font-weight: var(--weight-bold); box-shadow: inset 0 0 0 1px rgba(var(--rec-rgb), .45); }
 .keys { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 22px; }
+
+/* ---- そのほかの特長：6 つのカードの図（2026-11-21）----
+   どれも CSS だけで動く。カードの上に 16:9 の枠（.of-fig）。図の中は em で組む（1em = 図の幅の 3%。図は 33.3em × 18.75em）。
+   図の下の札（.of-cap）は、いまの場面の説明。札の位置は、札の文字の大きさ（.8em）で数える */
+.of-fig { position: relative; aspect-ratio: 16 / 9; margin-bottom: 22px; border-radius: 16px; background: var(--grad-wash); overflow: hidden; container-type: inline-size; }
+.of-in { position: absolute; inset: 0; font-size: 3cqw; line-height: 1.3; color: var(--ink); }
+.of-cap { position: absolute; padding: .3em .8em; border-radius: 1em; background: #fff; font-size: .8em; font-weight: var(--weight-heavy); color: var(--ink); white-space: nowrap; box-shadow: 0 .5em 1.2em -.7em rgba(var(--navy-rgb), .55); opacity: 0; }
+.of-f { position: absolute; z-index: 6; width: 1.3em; height: 1.3em; margin: -.65em 0 0 -.65em; border-radius: 50%; background: rgba(var(--ink-rgb), .28); border: .12em solid rgba(255, 255, 255, .9); opacity: 0; pointer-events: none; }
+.of-fig i, .of-fig em { font-style: normal; }
+@keyframes of-tap-pop { 0% { opacity: 0; transform: scale(1.6); } 30% { opacity: 1; transform: scale(1); } 55% { transform: scale(.75); } 80% { opacity: 1; transform: scale(1); } 100% { opacity: 0; } }
+
+/* 1 キーボード（10 秒）：3–30% ⌘ と C でコピー／33–60% バーの「ペースト」をタップ → 文字が入る／63–95% バーのボタンを並べ替え */
+.okb-dev { position: absolute; left: 2.5em; top: 1em; width: 28.3em; height: 16.75em; border: .45em solid var(--device); border-radius: 1em; background: #1d2333; overflow: hidden; }
+.okb-desk { position: absolute; left: 0; right: 0; top: 0; height: 6.6em; background: linear-gradient(160deg, #c9d8f4, #eaf0fb); }
+.okb-win { position: absolute; left: 1em; top: .8em; width: 12.5em; height: 5em; background: #fff; border-radius: .5em; box-shadow: 0 .6em 1.4em -.8em rgba(var(--navy-rgb), .5); overflow: hidden; }
+.okb-win b { display: block; height: .9em; background: #e3e9f5; }
+.okb-win p { margin: .55em .8em 0; font-size: .8em; font-weight: var(--weight-bold); white-space: nowrap; }
+.okb-l1 span { border-radius: .2em; animation: okb-sel 10s ease infinite; }
+.okb-l2 { opacity: 0; animation: okb-paste 10s ease infinite; }
+.okb-bar { position: absolute; left: 0; right: 0; top: 6.75em; height: 1.9em; }
+.okb-c { position: absolute; top: .25em; width: 5.6em; height: 1.4em; display: grid; place-items: center; border-radius: .7em; background: #2c3a63; color: #fff; }
+.okb-c small { font-size: .68em; font-weight: var(--weight-bold); white-space: nowrap; }
+.okb-c1 { left: .6em; animation: okb-c1 10s ease-in-out infinite; }
+.okb-c2 { left: 6.6em; animation: okb-c2 10s ease-in-out infinite; }
+.okb-c3 { left: 12.6em; z-index: 1; animation: okb-c3 10s ease-in-out infinite; }
+.okb-c4 { left: 18.6em; }
+.okb-keys { position: absolute; left: .5em; right: .5em; top: 8.9em; bottom: .35em; display: grid; grid-template-rows: repeat(4, 1fr); gap: .22em; }
+.okb-keys p { display: flex; justify-content: center; gap: .22em; }
+.okb-keys i { flex: 1; max-width: 2.4em; display: grid; place-items: center; border-radius: .3em; background: #3a4258; color: #dfe5f2; font-size: .78em; font-weight: var(--weight-bold); line-height: 1; }
+.okb-keys .okb-sp { flex: 6; max-width: none; }
+.okb-key-cmd { animation: okb-cmd 10s ease infinite; }
+.okb-key-c { animation: okb-keyc 10s ease infinite; }
+.okb-tap { left: 12.35em; top: 9.15em; animation: okb-tap 10s ease infinite; }
+.okb-drag { left: 18.35em; top: 9.15em; animation: okb-drag 10s ease-in-out infinite; }
+.okb-cap { right: 4.25em; top: 2.75em; }
+.okb-cap1 { animation: okb-cap1 10s ease infinite; }
+.okb-cap2 { animation: okb-cap2 10s ease infinite; }
+.okb-cap3 { animation: okb-cap3 10s ease infinite; }
+@keyframes okb-sel { 0%, 4% { background: transparent; } 6%, 30% { background: rgba(var(--blue-rgb), .35); } 33%, 100% { background: transparent; } }
+@keyframes okb-cmd { 0%, 6% { background: #3a4258; } 8%, 20% { background: var(--blue); } 23%, 100% { background: #3a4258; } }
+@keyframes okb-keyc { 0%, 11% { background: #3a4258; } 13%, 18% { background: var(--blue); } 21%, 100% { background: #3a4258; } }
+@keyframes okb-tap { 0%, 34% { opacity: 0; transform: scale(1.6); } 36% { opacity: 1; transform: scale(1); } 38% { transform: scale(.75); } 40% { opacity: 1; transform: scale(1); } 43%, 100% { opacity: 0; transform: scale(1); } }
+@keyframes okb-paste { 0%, 39% { opacity: 0; } 42%, 96% { opacity: 1; } 99%, 100% { opacity: 0; } }
+@keyframes okb-c1 { 0%, 65% { transform: none; } 72%, 94% { transform: translateX(6em); } 98%, 100% { transform: none; } }
+@keyframes okb-c2 {
+  0%, 37% { background: #2c3a63; transform: none; }
+  38%, 44% { background: var(--blue); transform: none; }
+  47%, 65% { background: #2c3a63; transform: none; }
+  72%, 94% { background: #2c3a63; transform: translateX(6em); }
+  98%, 100% { background: #2c3a63; transform: none; }
+}
+@keyframes okb-c3 {
+  0%, 63% { transform: none; background: #2c3a63; box-shadow: none; }
+  65% { transform: scale(1.08); background: var(--blue); box-shadow: 0 .5em 1em -.4em rgba(0, 0, 0, .6); }
+  72% { transform: translateX(-12em) scale(1.08); background: var(--blue); box-shadow: 0 .5em 1em -.4em rgba(0, 0, 0, .6); }
+  75%, 94% { transform: translateX(-12em); background: #2c3a63; box-shadow: none; }
+  98%, 100% { transform: none; background: #2c3a63; box-shadow: none; }
+}
+@keyframes okb-drag { 0%, 62% { opacity: 0; transform: none; } 64%, 66% { opacity: 1; transform: none; } 72% { opacity: 1; transform: translateX(-12em); } 75%, 100% { opacity: 0; transform: translateX(-12em); } }
+@keyframes okb-cap1 { 0%, 4% { opacity: 0; transform: translateY(.4em); } 7%, 29% { opacity: 1; transform: none; } 32%, 100% { opacity: 0; } }
+@keyframes okb-cap2 { 0%, 35% { opacity: 0; transform: translateY(.4em); } 38%, 59% { opacity: 1; transform: none; } 62%, 100% { opacity: 0; } }
+@keyframes okb-cap3 { 0%, 63% { opacity: 0; transform: translateY(.4em); } 66%, 93% { opacity: 1; transform: none; } 96%, 100% { opacity: 0; } }
+
+/* 2 日本語入力（12 秒）：4–10% 「かな」→ 入力が「あ」／10–37% Macで変換（にほんご → 候補 → 日本語）
+   46–50% 「スマホで変換」に切り替え／55–74% フリック入力で「をかくにん」→「を確認」／80–87% Macへ送る */
+.oim-mac { position: absolute; left: 1.2em; top: .9em; width: 30.9em; height: 7.8em; border: .35em solid var(--device); border-radius: .7em; background: linear-gradient(160deg, #c9d8f4, #eaf0fb); overflow: hidden; }
+.oim-menu { position: relative; height: .95em; background: rgba(255, 255, 255, .75); }
+.oim-mode { position: absolute; right: .6em; top: .1em; width: 1.3em; height: .75em; border-radius: .15em; background: var(--ink); }
+.oim-mode em { position: absolute; inset: 0; display: grid; place-items: center; font-size: .6em; font-weight: var(--weight-heavy); line-height: 1; color: #fff; }
+.oim-a { animation: oim-a 12s ease infinite; }
+.oim-k { opacity: 0; animation: oim-k 12s ease infinite; }
+.oim-win { position: absolute; left: .8em; right: .8em; top: 1.45em; bottom: .7em; background: #fff; border-radius: .5em; box-shadow: 0 .6em 1.4em -.8em rgba(var(--navy-rgb), .5); }
+.oim-win > b { display: block; height: .8em; border-radius: .5em .5em 0 0; background: #e3e9f5; }
+.oim-line { display: flex; align-items: baseline; margin: .75em .9em 0; font-size: .95em; font-weight: var(--weight-bold); white-space: nowrap; }
+.oim-line span { display: inline-block; overflow: hidden; white-space: nowrap; }
+.oim-mk { max-width: 0; box-shadow: inset 0 -.12em 0 var(--ink); animation: oim-mk 12s linear infinite; }
+.oim-c1 { max-width: 0; animation: oim-c1 12s ease infinite; }
+.oim-c2 { max-width: 0; color: var(--blue-deep); animation: oim-c2 12s ease infinite; }
+.oim-cand { position: absolute; left: 9.4em; top: 2.85em; display: flex; gap: .2em; padding: .2em; border-radius: .4em; background: #fff; border: 1px solid #d4def2; box-shadow: 0 .5em 1.2em -.7em rgba(var(--navy-rgb), .55); opacity: 0; animation: oim-cand 12s ease infinite; }
+.oim-cand span { padding: .15em .45em; border-radius: .25em; font-size: .72em; font-weight: var(--weight-bold); white-space: nowrap; }
+.oim-cand span:first-child { background: var(--blue); color: #fff; }
+.oim-toggle { position: absolute; left: 1.2em; top: 9.4em; width: 13.6em; height: 1.9em; display: grid; grid-template-columns: 1fr 1fr; align-items: center; border-radius: 1em; background: #dfe6f4; }
+.oim-toggle span { position: relative; z-index: 1; text-align: center; font-size: .72em; font-weight: var(--weight-heavy); }
+.oim-t1 { animation: oim-t1 12s ease infinite; }
+.oim-t2 { color: var(--ink-3); animation: oim-t2 12s ease infinite; }
+.oim-knob { position: absolute; left: .2em; top: .2em; width: 6.6em; height: 1.5em; border-radius: .8em; background: #fff; box-shadow: 0 .3em .8em -.4em rgba(var(--navy-rgb), .5); animation: oim-knob 12s ease-in-out infinite; }
+.oim-keys { position: absolute; left: 1.2em; top: 12.1em; display: flex; gap: .35em; animation: oim-keys 12s ease infinite; }
+.oim-keys span { display: grid; place-items: center; height: 2.2em; padding: 0 .8em; border-radius: .4em; background: #fff; border: 1px solid #d4def2; box-shadow: 0 .18em 0 #c8d2e6; font-size: .8em; font-weight: var(--weight-bold); }
+.oim-keys .oim-space { width: 7em; }
+.oim-kana { animation: oim-kana 12s ease infinite; }
+.oim-ph { position: absolute; left: 18.6em; top: 9.1em; width: 13.4em; height: 11em; border: .4em solid var(--device); border-radius: 1.2em; background: #1d2333; overflow: hidden; opacity: 0; animation: oim-ph 12s ease infinite; }
+.oim-pin { display: flex; align-items: center; height: 1.6em; margin: .45em .5em 0; padding: 0 .5em; border-radius: .4em; background: #fff; }
+.oim-pin span { display: inline-block; overflow: hidden; white-space: nowrap; max-width: 0; font-size: .8em; font-weight: var(--weight-bold); }
+.oim-p1 { box-shadow: inset 0 -.12em 0 var(--ink); animation: oim-p1 12s linear infinite; }
+.oim-p2 { animation: oim-p2 12s ease infinite; }
+.oim-pc { display: flex; align-items: center; gap: .4em; height: 1.2em; margin: .3em .5em 0; }
+.oim-pc span { padding: .1em .5em; border-radius: .3em; font-size: .68em; font-weight: var(--weight-bold); color: #dfe5f2; background: rgba(255, 255, 255, .08); opacity: 0; animation: oim-pc 12s ease infinite; }
+.oim-pc span:first-child { animation-name: oim-pc1; }
+.oim-pad { display: grid; grid-template-columns: repeat(3, 1fr); gap: .25em; margin: .35em .5em 0; }
+.oim-pad i { display: grid; place-items: center; height: 1.9em; border-radius: .3em; background: #3a4258; color: #fff; font-size: .75em; font-weight: var(--weight-bold); }
+.oim-pad i:nth-child(2) { animation: oim-ka 12s ease infinite; }
+.oim-flick { left: 25.3em; top: 14.1em; animation: oim-flick 12s ease infinite; }
+.oim-fly { position: absolute; left: 21.2em; top: 10.2em; padding: .15em .5em; border-radius: .4em; background: var(--blue); color: #fff; opacity: 0; animation: oim-fly 12s ease-in-out infinite; }
+.oim-fly small { font-size: .8em; font-weight: var(--weight-bold); white-space: nowrap; }
+.oim-cap { left: 1.5em; top: 19.25em; }
+.oim-cap1 { animation: oim-cap1 12s ease infinite; }
+.oim-cap2 { animation: oim-cap2 12s ease infinite; }
+@keyframes oim-a { 0%, 6% { opacity: 1; } 8%, 97% { opacity: 0; } 100% { opacity: 1; } }
+@keyframes oim-k { 0%, 6% { opacity: 0; } 8%, 97% { opacity: 1; } 100% { opacity: 0; } }
+@keyframes oim-kana { 0%, 4% { background: #fff; color: var(--ink); } 5%, 9% { background: var(--blue); color: #fff; } 11%, 100% { background: #fff; color: var(--ink); } }
+@keyframes oim-mk { 0%, 10% { max-width: 0; animation-timing-function: steps(4, end); } 22%, 36% { max-width: 4.2em; } 37%, 100% { max-width: 0; } }
+@keyframes oim-cand { 0%, 23% { opacity: 0; transform: translateY(.3em); } 25%, 35% { opacity: 1; transform: none; } 37%, 100% { opacity: 0; } }
+@keyframes oim-c1 { 0%, 36% { max-width: 0; } 37%, 97% { max-width: 3.2em; } 99%, 100% { max-width: 0; } }
+@keyframes oim-c2 { 0%, 85% { max-width: 0; } 87%, 97% { max-width: 3.2em; } 99%, 100% { max-width: 0; } }
+@keyframes oim-knob { 0%, 45% { transform: none; } 50%, 96% { transform: translateX(6.6em); } 99%, 100% { transform: none; } }
+@keyframes oim-t1 { 0%, 46% { color: var(--ink); } 50%, 96% { color: var(--ink-3); } 100% { color: var(--ink); } }
+@keyframes oim-t2 { 0%, 46% { color: var(--ink-3); } 50%, 96% { color: var(--ink); } 100% { color: var(--ink-3); } }
+@keyframes oim-keys { 0%, 44% { opacity: 1; } 47%, 97% { opacity: 0; } 100% { opacity: 1; } }
+@keyframes oim-ph { 0%, 47% { opacity: 0; transform: translateY(3em); } 52%, 96% { opacity: 1; transform: none; } 99%, 100% { opacity: 0; transform: translateY(3em); } }
+@keyframes oim-flick {
+  0%, 55% { opacity: 0; transform: scale(1.4); }
+  57% { opacity: 1; transform: none; }
+  60% { opacity: 1; transform: translateY(-.7em); }
+  62% { opacity: 0; transform: translateY(-.7em); }
+  63% { opacity: 0; transform: scale(1.4); }
+  65% { opacity: 1; transform: none; }
+  67% { opacity: 1; transform: translateX(.7em); }
+  69%, 100% { opacity: 0; transform: translateX(.7em); }
+}
+@keyframes oim-ka { 0%, 56% { background: #3a4258; } 57%, 61% { background: var(--blue); } 63% { background: #3a4258; } 65%, 68% { background: var(--blue); } 70%, 100% { background: #3a4258; } }
+@keyframes oim-p1 { 0%, 56% { max-width: 0; animation-timing-function: steps(5, end); } 68%, 73% { max-width: 5.2em; } 74%, 100% { max-width: 0; } }
+@keyframes oim-p2 { 0%, 73% { max-width: 0; } 74%, 80% { max-width: 3.2em; } 82%, 100% { max-width: 0; } }
+@keyframes oim-pc { 0%, 68% { opacity: 0; } 69%, 80% { opacity: 1; } 82%, 100% { opacity: 0; } }
+@keyframes oim-pc1 { 0%, 68% { opacity: 0; background: rgba(255, 255, 255, .08); } 69%, 71% { opacity: 1; background: rgba(255, 255, 255, .08); } 72%, 80% { opacity: 1; background: var(--blue); } 82%, 100% { opacity: 0; background: rgba(255, 255, 255, .08); } }
+@keyframes oim-fly { 0%, 80% { opacity: 0; transform: none; } 81% { opacity: 1; transform: none; } 86% { opacity: 1; transform: translate(-6.6em, -6em) scale(.9); } 87.5%, 100% { opacity: 0; transform: translate(-6.6em, -6em) scale(.9); } }
+@keyframes oim-cap1 { 0%, 2% { opacity: 0; transform: translateY(.4em); } 5%, 43% { opacity: 1; transform: none; } 46%, 100% { opacity: 0; } }
+@keyframes oim-cap2 { 0%, 50% { opacity: 0; transform: translateY(.4em); } 53%, 94% { opacity: 1; transform: none; } 97%, 100% { opacity: 0; } }
+
+/* 3 コピー・ファイル・音（12 秒）：0–33% スマホでコピー → Macにペースト／33–66% Macのファイル → スマホへ／66–100% Macの音 → スマホで聞く */
+.osh-mac { position: absolute; left: 1.2em; top: 1.3em; width: 17.6em; }
+.osh-scr { position: relative; height: 11em; border: .4em solid var(--device); border-radius: .7em; background: linear-gradient(160deg, #c9d8f4, #eaf0fb); overflow: hidden; }
+.osh-menu { display: block; height: .8em; background: rgba(255, 255, 255, .75); }
+.osh-memo, .osh-play { position: absolute; left: .7em; width: 9.6em; background: #fff; border-radius: .5em; box-shadow: 0 .6em 1.4em -.8em rgba(var(--navy-rgb), .5); overflow: hidden; }
+.osh-memo { top: 1.3em; height: 4.2em; }
+.osh-play { top: 6.1em; height: 3.3em; }
+.osh-memo b, .osh-play b { display: block; height: .75em; background: #e3e9f5; }
+.osh-paste { margin: .6em .7em 0; font-size: .78em; font-weight: var(--weight-bold); white-space: nowrap; border-radius: .2em; opacity: 0; animation: osh-paste 12s ease infinite; }
+.osh-file { position: absolute; left: 11.6em; top: 1.5em; display: grid; justify-items: center; gap: .3em; padding: .3em; border-radius: .4em; animation: osh-file 12s ease infinite; }
+.osh-file i, .osh-fly-f i, .osh-got i { position: relative; display: block; width: 2em; height: 2.5em; border-radius: .2em .7em .2em .2em; background: #fff; box-shadow: 0 .4em .9em -.5em rgba(var(--navy-rgb), .6); }
+.osh-file i::after, .osh-fly-f i::after, .osh-got i::after { content: ""; position: absolute; left: .25em; right: .25em; bottom: .35em; height: .45em; border-radius: .15em; background: #f2685f; }
+.osh-file small { font-size: .6em; font-weight: var(--weight-bold); white-space: nowrap; }
+.osh-play p { display: flex; align-items: center; gap: .5em; margin: .7em .7em 0; }
+.osh-tri { flex: none; width: 0; height: 0; border-left: .7em solid var(--blue); border-top: .45em solid transparent; border-bottom: .45em solid transparent; }
+.osh-bar { flex: 1; height: .35em; border-radius: .2em; background: #e3e9f5; overflow: hidden; }
+.osh-bar i { display: block; width: 0; height: 100%; background: var(--blue); animation: osh-bar 12s linear infinite; }
+.osh-stand { display: block; width: 3.4em; height: 1.2em; margin: 0 auto; background: linear-gradient(#c3cbdc, #9aa5bd); }
+.osh-stand::after { content: ""; display: block; width: 7em; height: .4em; margin-left: -1.8em; padding-top: 0; transform: translateY(1.2em); border-radius: .3em; background: #9aa5bd; }
+.osh-ph { position: absolute; left: 23.2em; top: 1.3em; width: 8.8em; height: 15.8em; border: .4em solid var(--device); border-radius: 1.3em; background: #f2f5fb; overflow: hidden; box-shadow: 0 1.4em 2.6em -1.2em rgba(var(--navy-rgb), .6); }
+.osh-pop { position: absolute; left: 1em; top: .6em; padding: .1em .55em; border-radius: .4em; background: var(--ink); color: #fff; opacity: 0; animation: osh-pop 12s ease infinite; }
+.osh-pop small { font-size: .62em; font-weight: var(--weight-bold); }
+.osh-msg { position: absolute; left: .6em; right: .6em; top: 1.9em; padding: .5em .6em; border-radius: .8em .8em .8em .2em; background: #fff; box-shadow: 0 .4em 1em -.6em rgba(var(--navy-rgb), .5); }
+.osh-msg span { font-size: .72em; font-weight: var(--weight-bold); border-radius: .2em; animation: osh-selm 12s ease infinite; }
+.osh-got { position: absolute; left: .5em; right: .5em; top: 6.2em; display: flex; align-items: center; gap: .4em; padding: .4em .5em; border-radius: .5em; background: #fff; opacity: 0; animation: osh-got 12s ease infinite; }
+.osh-got i { flex: none; width: 1.1em; height: 1.4em; }
+.osh-got i::after { left: .15em; right: .15em; bottom: .2em; height: .25em; }
+.osh-got small { flex: 1; font-size: .62em; font-weight: var(--weight-bold); }
+.osh-got b { color: #2fae54; font-size: .75em; }
+.osh-spk { position: absolute; left: 0; right: 0; top: 6.6em; text-align: center; font-size: 1.6em; opacity: 0; animation: osh-spk 12s ease infinite; }
+.osh-fly-t { position: absolute; left: 24.2em; top: 3.6em; padding: .15em .45em; border-radius: .35em; background: var(--blue); color: #fff; opacity: 0; animation: osh-fly-t 12s ease-in-out infinite; }
+.osh-fly-t small { font-size: .72em; font-weight: var(--weight-bold); white-space: nowrap; }
+.osh-fly-f { position: absolute; left: 14.2em; top: 3.1em; opacity: 0; transform-origin: 0 0; animation: osh-fly-f 12s ease-in-out infinite; }
+.osh-note { position: absolute; left: 11.2em; top: 8.4em; font-size: 1.1em; font-weight: var(--weight-heavy); color: var(--blue); opacity: 0; }
+.osh-n1 { animation: osh-n1 12s ease-in-out infinite; }
+.osh-n2 { animation: osh-n2 12s ease-in-out infinite; }
+.osh-n3 { animation: osh-n3 12s ease-in-out infinite; }
+.osh-cap { left: 1.5em; top: 19.4em; }
+.osh-cap1 { animation: osh-cap1 12s ease infinite; }
+.osh-cap2 { animation: osh-cap2 12s ease infinite; }
+.osh-cap3 { animation: osh-cap3 12s ease infinite; }
+@keyframes osh-selm { 0%, 4% { background: transparent; } 6%, 14% { background: rgba(var(--blue-rgb), .25); } 17%, 100% { background: transparent; } }
+@keyframes osh-pop { 0%, 5% { opacity: 0; transform: translateY(.3em); } 7%, 13% { opacity: 1; transform: none; } 15%, 100% { opacity: 0; } }
+@keyframes osh-fly-t { 0%, 13% { opacity: 0; transform: none; } 14% { opacity: 1; transform: none; } 23% { opacity: 1; transform: translate(-21.2em, .75em); } 25%, 100% { opacity: 0; transform: translate(-21.2em, .75em); } }
+@keyframes osh-paste { 0%, 23% { opacity: 0; background: transparent; } 25% { opacity: 1; background: rgba(var(--blue-rgb), .25); } 32%, 96% { opacity: 1; background: transparent; } 99%, 100% { opacity: 0; } }
+@keyframes osh-file { 0%, 36% { box-shadow: none; background: transparent; } 38%, 42% { box-shadow: 0 0 0 .15em var(--blue); background: rgba(var(--blue-rgb), .12); } 45%, 100% { box-shadow: none; background: transparent; } }
+@keyframes osh-fly-f { 0%, 39% { opacity: 0; transform: none; } 40% { opacity: 1; transform: none; } 51% { opacity: 1; transform: translate(10.3em, 4.8em) scale(.55); } 53%, 100% { opacity: 0; transform: translate(10.3em, 4.8em) scale(.55); } }
+@keyframes osh-got { 0%, 51% { opacity: 0; transform: translateY(.4em); } 54%, 96% { opacity: 1; transform: none; } 99%, 100% { opacity: 0; } }
+@keyframes osh-bar { 0%, 66% { width: 0; } 96% { width: 100%; } 99%, 100% { width: 0; } }
+@keyframes osh-n1 { 0%, 68% { opacity: 0; transform: none; } 70% { opacity: 1; transform: none; } 80% { opacity: 1; transform: translate(13.9em, 2.1em); } 82%, 100% { opacity: 0; transform: translate(13.9em, 2.1em); } }
+@keyframes osh-n2 { 0%, 74% { opacity: 0; transform: none; } 76% { opacity: 1; transform: none; } 86% { opacity: 1; transform: translate(13.9em, 2.1em); } 88%, 100% { opacity: 0; transform: translate(13.9em, 2.1em); } }
+@keyframes osh-n3 { 0%, 80% { opacity: 0; transform: none; } 82% { opacity: 1; transform: none; } 92% { opacity: 1; transform: translate(13.9em, 2.1em); } 94%, 100% { opacity: 0; transform: translate(13.9em, 2.1em); } }
+@keyframes osh-spk { 0%, 67% { opacity: 0; transform: scale(.8); } 70% { opacity: 1; transform: none; } 75% { transform: scale(1.15); } 80% { transform: none; } 85% { transform: scale(1.15); } 90%, 95% { opacity: 1; transform: none; } 98%, 100% { opacity: 0; } }
+@keyframes osh-cap1 { 0%, 2% { opacity: 0; transform: translateY(.4em); } 5%, 31% { opacity: 1; transform: none; } 34%, 100% { opacity: 0; } }
+@keyframes osh-cap2 { 0%, 34% { opacity: 0; transform: translateY(.4em); } 37%, 64% { opacity: 1; transform: none; } 67%, 100% { opacity: 0; } }
+@keyframes osh-cap3 { 0%, 67% { opacity: 0; transform: translateY(.4em); } 70%, 95% { opacity: 1; transform: none; } 98%, 100% { opacity: 0; } }
+
+/* 4 Macの切り替え（9 秒）：0–33% Mac mini（自宅）／33% MacBook Pro をタップ → 切り替え／67% iMac をタップ → 切り替え */
+.omc-ph { position: absolute; left: 2em; top: 1.2em; width: 11.4em; height: 16.4em; border: .4em solid var(--device); border-radius: 1.4em; background: #121a2e; overflow: hidden; box-shadow: 0 1.4em 2.6em -1.2em rgba(var(--navy-rgb), .6); }
+.omc-title { position: absolute; left: .7em; top: .55em; font-size: .72em; font-weight: var(--weight-heavy); color: #fff; }
+.omc-row, .omc-sel, .omc-add { position: absolute; left: .6em; right: .6em; height: 2.7em; border-radius: .6em; }
+.omc-row { display: flex; align-items: center; gap: .55em; padding: 0 .6em; background: rgba(255, 255, 255, .07); }
+.omc-r1 { top: 2.4em; }
+.omc-r2 { top: 5.55em; }
+.omc-r3 { top: 8.7em; }
+.omc-sel { z-index: 1; top: 2.4em; border: .14em solid var(--blue); background: rgba(var(--blue-rgb), .22); animation: omc-sel 9s ease-in-out infinite; }
+.omc-ico { position: relative; flex: none; width: 1.5em; height: 1em; border-radius: .15em; border: .14em solid #8fb0e8; }
+.omc-ico::after { content: ""; position: absolute; left: .45em; bottom: -.5em; width: .32em; height: .32em; background: #8fb0e8; }
+.omc-row span { display: grid; line-height: 1.25; }
+.omc-row b { font-size: .7em; color: #fff; white-space: nowrap; }
+.omc-row small { font-size: .58em; color: rgba(255, 255, 255, .6); }
+.omc-add { top: 11.85em; display: grid; place-items: center; border: .1em dashed rgba(255, 255, 255, .3); color: rgba(255, 255, 255, .7); }
+.omc-add small { font-size: .68em; font-weight: var(--weight-bold); }
+.omc-view { position: absolute; left: 15.4em; top: 1.6em; width: 16.6em; height: 10.6em; border: .4em solid var(--device); border-radius: .7em; overflow: hidden; }
+.omc-w { position: absolute; inset: 0; background: linear-gradient(160deg, #c9d8f4, #eaf0fb); }
+.omc-w2 { background: linear-gradient(160deg, #c3e8de, #eef8f4); opacity: 0; animation: omc-w2 9s ease infinite; }
+.omc-w3 { background: linear-gradient(160deg, #ddd0f3, #f4eefb); opacity: 0; animation: omc-w3 9s ease infinite; }
+.omc-win { position: absolute; left: 1em; top: 2em; width: 8.5em; height: 5.4em; display: flex; flex-direction: column; gap: .5em; background: #fff; border-radius: .5em; box-shadow: 0 .6em 1.4em -.8em rgba(var(--navy-rgb), .5); overflow: hidden; }
+.omc-win b { flex: none; height: .8em; background: #e3e9f5; }
+.omc-win i { height: .45em; margin-inline: .7em; border-radius: .3em; background: #28508f; }
+.omc-win i:nth-of-type(2) { width: 60%; background: #8fb0e8; }
+.omc-name { position: absolute; left: .55em; top: .45em; padding: .15em .6em; border-radius: 1em; background: rgba(255, 255, 255, .92); font-size: .7em; font-weight: var(--weight-heavy); white-space: nowrap; }
+.omc-n1 { animation: omc-n1 9s ease infinite; }
+.omc-n2 { opacity: 0; animation: omc-n2 9s ease infinite; }
+.omc-n3 { opacity: 0; animation: omc-n3 9s ease infinite; }
+.omc-conn { position: absolute; inset: 0; display: grid; place-items: center; background: rgba(11, 16, 32, .55); color: #fff; font-size: .8em; font-weight: var(--weight-bold); opacity: 0; animation: omc-conn 9s ease infinite; }
+.omc-tap2 { left: 7.7em; top: 8.5em; animation: omc-tap2 9s ease infinite; }
+.omc-tap3 { left: 7.7em; top: 11.65em; animation: omc-tap3 9s ease infinite; }
+.omc-txt { position: absolute; left: 15.4em; top: 13.1em; right: 1em; }
+.omc-cap { font-size: .82em; font-weight: var(--weight-heavy); }
+.omc-fine { margin-top: .35em; font-size: .68em; color: var(--ink-2); }
+@keyframes omc-sel { 0%, 33% { transform: none; } 37%, 66% { transform: translateY(3.15em); } 70%, 96% { transform: translateY(6.3em); } 99%, 100% { transform: none; } }
+@keyframes omc-w2 { 0%, 34% { opacity: 0; } 37%, 66% { opacity: 1; } 69%, 100% { opacity: 0; } }
+@keyframes omc-w3 { 0%, 67% { opacity: 0; } 70%, 96% { opacity: 1; } 99%, 100% { opacity: 0; } }
+@keyframes omc-n1 { 0%, 33% { opacity: 1; } 35%, 97% { opacity: 0; } 100% { opacity: 1; } }
+@keyframes omc-n2 { 0%, 35% { opacity: 0; } 38%, 66% { opacity: 1; } 68%, 100% { opacity: 0; } }
+@keyframes omc-n3 { 0%, 68% { opacity: 0; } 71%, 96% { opacity: 1; } 99%, 100% { opacity: 0; } }
+@keyframes omc-conn { 0%, 33% { opacity: 0; } 34%, 37% { opacity: 1; } 39%, 66% { opacity: 0; } 67%, 70% { opacity: 1; } 72%, 100% { opacity: 0; } }
+@keyframes omc-tap2 { 0%, 28% { opacity: 0; transform: scale(1.6); } 30% { opacity: 1; transform: none; } 32% { transform: scale(.75); } 34% { opacity: 1; transform: none; } 37%, 100% { opacity: 0; transform: none; } }
+@keyframes omc-tap3 { 0%, 61% { opacity: 0; transform: scale(1.6); } 63% { opacity: 1; transform: none; } 65% { transform: scale(.75); } 67% { opacity: 1; transform: none; } 70%, 100% { opacity: 0; transform: none; } }
+
+/* 5 MacBook から家の Mac へ（10 秒）：9–16% つなぐ（MOTHERSHIP の窓が開く）／18–84% 書き出し（家の Mac がフル回転）／86–96% 完了 */
+.of-mb .of-in::before { content: ""; position: absolute; left: 18.2em; top: 0; right: 0; bottom: 0; background: rgba(255, 255, 255, .45); border-left: .12em dashed rgba(var(--navy-rgb), .18); }
+.omb-place { position: absolute; top: 1em; padding: .2em .8em; border-radius: var(--radius-pill); background: #fff; font-size: .7em; font-weight: var(--weight-heavy); color: var(--ink-2); box-shadow: 0 .4em 1em -.6em rgba(var(--navy-rgb), .5); }
+.omb-away { left: 2em; }
+.omb-homep { left: 28.1em; }
+.omb-book { position: absolute; left: 1.6em; top: 2.6em; width: 14.6em; }
+.omb-lid { position: relative; height: 10em; border: .4em solid var(--device); border-radius: .7em .7em .15em .15em; background: linear-gradient(160deg, #e8e2f6, #f6f3fb); overflow: hidden; }
+.omb-menu { display: block; height: .7em; background: rgba(255, 255, 255, .75); }
+.omb-mw { position: absolute; left: .6em; right: .6em; top: 1.1em; bottom: .5em; display: flex; flex-direction: column; background: #fff; border-radius: .45em; box-shadow: 0 .6em 1.4em -.8em rgba(var(--navy-rgb), .5); overflow: hidden; opacity: 0; transform-origin: 50% 60%; animation: omb-mw 10s ease infinite; }
+.omb-mw > b { flex: none; padding: .1em .5em; background: var(--navy); line-height: 1.2; }
+.omb-mw > b small { font-size: .55em; font-weight: var(--weight-bold); color: #fff; white-space: nowrap; }
+.omb-desk { position: relative; flex: 1; background: linear-gradient(160deg, #c9d8f4, #eaf0fb); }
+.omb-job { position: absolute; left: 12%; right: 12%; top: 26%; display: grid; gap: .35em; padding: .5em .6em .6em; border-radius: .4em; background: #fff; box-shadow: 0 .5em 1.2em -.7em rgba(var(--navy-rgb), .55); }
+.omb-job small { grid-area: 1 / 1; font-size: .62em; font-weight: var(--weight-heavy); white-space: nowrap; }
+.omb-t1 { animation: omb-t1 10s ease infinite; }
+.omb-t2 { color: #2fae54; opacity: 0; animation: omb-t2 10s ease infinite; }
+.omb-prog { grid-area: 2 / 1; height: .4em; border-radius: .2em; background: #e3e9f5; overflow: hidden; }
+.omb-prog i { display: block; width: 0; height: 100%; background: var(--blue); animation: omb-prog 10s ease-in-out infinite; }
+.omb-base { display: block; height: .55em; margin: 0 -1.1em; border-radius: .1em .1em .7em .7em; background: linear-gradient(#dbe1ee, #aab4ca); }
+.omb-link { position: absolute; left: 16.8em; top: 7.6em; width: 2.6em; border-top: .16em dashed rgba(var(--blue-rgb), .55); opacity: 0; animation: omb-link 10s ease infinite; }
+.omb-link i { position: absolute; left: 0; top: -.33em; width: .5em; height: .5em; border-radius: 50%; background: var(--blue); animation: omb-dot 1.4s linear infinite; }
+.omb-home { position: absolute; left: 19.8em; top: 2.6em; width: 12.2em; }
+.omb-mon { position: relative; height: 7.8em; border: .4em solid var(--device); border-radius: .7em; background: linear-gradient(160deg, #c9d8f4, #eaf0fb); overflow: hidden; }
+.omb-stand { display: block; width: 2.6em; height: 1em; margin: 0 auto; background: linear-gradient(#c3cbdc, #9aa5bd); }
+.omb-mini { position: absolute; left: 20.6em; top: 12.1em; width: 10.6em; height: 1.7em; display: flex; align-items: center; justify-content: space-between; padding: 0 .6em; border-radius: .45em; background: linear-gradient(#f2f4f9, #ccd3e1); box-shadow: 0 .6em 1.2em -.8em rgba(var(--navy-rgb), .6); }
+.omb-mini small { font-size: .55em; font-weight: var(--weight-bold); color: var(--ink-3); }
+.omb-cpu { display: flex; align-items: flex-end; gap: .15em; height: 1em; opacity: .3; animation: omb-cpu-on 10s ease infinite; }
+.omb-cpu i { width: .28em; height: 25%; border-radius: .1em; background: var(--blue); animation: omb-cpu .9s ease-in-out infinite alternate; }
+.omb-cpu i:nth-child(2) { animation-delay: -.3s; }
+.omb-cpu i:nth-child(3) { animation-delay: -.6s; }
+.omb-cpu i:nth-child(4) { animation-delay: -.15s; }
+.omb-cpu i:nth-child(5) { animation-delay: -.45s; }
+.omb-cap { left: 2em; top: 19.25em; }
+.omb-cap1 { animation: omb-cap1 10s ease infinite; }
+.omb-cap2 { animation: omb-cap2 10s ease infinite; }
+.omb-cap3 { animation: omb-cap3 10s ease infinite; }
+@keyframes omb-mw { 0%, 9% { opacity: 0; transform: scale(.7); } 15%, 96% { opacity: 1; transform: none; } 99%, 100% { opacity: 0; transform: scale(.7); } }
+@keyframes omb-link { 0%, 13% { opacity: 0; } 16%, 96% { opacity: 1; } 99%, 100% { opacity: 0; } }
+@keyframes omb-dot { 0% { transform: translateX(0); opacity: 0; } 15% { opacity: 1; } 85% { opacity: 1; } 100% { transform: translateX(2.1em); opacity: 0; } }
+@keyframes omb-prog { 0%, 18% { width: 0; } 84%, 97% { width: 100%; } 99%, 100% { width: 0; } }
+@keyframes omb-t1 { 0%, 84% { opacity: 1; } 86%, 97% { opacity: 0; } 100% { opacity: 1; } }
+@keyframes omb-t2 { 0%, 84% { opacity: 0; } 86%, 97% { opacity: 1; } 99%, 100% { opacity: 0; } }
+@keyframes omb-cpu { from { height: 25%; } to { height: 100%; } }
+@keyframes omb-cpu-on { 0%, 17% { opacity: .3; } 20%, 84% { opacity: 1; } 87%, 100% { opacity: .3; } }
+@keyframes omb-cap1 { 0%, 2% { opacity: 0; transform: translateY(.4em); } 5%, 17% { opacity: 1; transform: none; } 19%, 100% { opacity: 0; } }
+@keyframes omb-cap2 { 0%, 19% { opacity: 0; transform: translateY(.4em); } 22%, 83% { opacity: 1; transform: none; } 85%, 100% { opacity: 0; } }
+@keyframes omb-cap3 { 0%, 85% { opacity: 0; transform: translateY(.4em); } 88%, 96% { opacity: 1; transform: none; } 98%, 100% { opacity: 0; } }
+
+/* 6 折りたたみスマホ（10 秒）：12–28% 折って机に置く（上の画面が起き上がる）／44–62% 下でなぞる → ポインターが動く
+   66–84% キーを打つ → 上の画面に文字／92–98% 開いて最初へ。上下の画面は、折り目（蝶番）を軸に 3D で回す */
+.ofd-top, .ofd-bot { position: absolute; left: 9.67em; width: 14em; height: 7.4em; border: .3em solid var(--device); background: #1d2333; overflow: hidden; }
+.ofd-top { top: 3em; border-radius: .9em .9em .15em .15em; transform-origin: 50% 100%; transform: perspective(40em) rotateX(55deg); animation: ofd-top 10s ease-in-out infinite; }
+.ofd-bot { top: 10.4em; border-radius: .15em .15em .9em .9em; transform-origin: 50% 0; transform: perspective(40em) rotateX(55deg); box-shadow: 0 1.2em 2em -1em rgba(var(--navy-rgb), .5); }
+.ofd-mac, .ofd-ctl { position: absolute; inset: 0; opacity: 0; animation: ofd-on 10s ease infinite; }
+.ofd-mac { background: linear-gradient(160deg, #c9d8f4, #eaf0fb); }
+.ofd-menu { display: block; height: .6em; background: rgba(255, 255, 255, .75); }
+.ofd-win { position: absolute; left: .8em; top: 1.1em; width: 8.5em; height: 4.4em; background: #fff; border-radius: .45em; box-shadow: 0 .6em 1.4em -.8em rgba(var(--navy-rgb), .5); overflow: hidden; }
+.ofd-win b { display: block; height: .65em; background: #e3e9f5; }
+.ofd-win p { display: flex; align-items: center; margin: .6em .6em 0; }
+.ofd-typed { display: inline-block; max-width: 0; overflow: hidden; white-space: nowrap; font-size: .72em; font-weight: var(--weight-bold); animation: ofd-typed 10s linear infinite; }
+.ofd-caret { width: .08em; height: .9em; background: var(--ink); }
+.ofd-ptr { position: absolute; left: 10.5em; top: 4.6em; width: .9em; height: 1.3em; background: var(--ink); clip-path: polygon(0 0, 0 78%, 24% 60%, 40% 96%, 56% 90%, 41% 55%, 72% 55%); animation: ofd-ptr 10s ease-in-out infinite; }
+.ofd-ctl { background: #1d2333; }
+.ofd-pad { position: absolute; left: 2.4em; right: 2.4em; top: .35em; height: 3.1em; border-radius: .45em; background: rgba(255, 255, 255, .08); border: .06em solid rgba(255, 255, 255, .15); }
+.ofd-finger { left: 7.3em; top: 2.2em; animation: ofd-finger 10s ease-in-out infinite; }
+.ofd-keys { position: absolute; left: .5em; right: .5em; top: 3.75em; bottom: .35em; display: grid; grid-template-rows: repeat(3, 1fr); gap: .2em; }
+.ofd-keys p { display: flex; gap: .2em; }
+.ofd-keys i { flex: 1; border-radius: .2em; background: #3a4258; }
+.ofd-keys .ofd-sp { flex: 4; }
+.ofd-keys p:nth-child(2) i:nth-child(3) { animation: ofd-k1 10s ease infinite; }
+.ofd-keys p:nth-child(1) i:nth-child(5) { animation: ofd-k2 10s ease infinite; }
+.ofd-keys p:nth-child(3) i:nth-child(4) { animation: ofd-k3 10s ease infinite; }
+.ofd-cap { left: 1.5em; top: 1em; }
+.ofd-cap1 { animation: ofd-cap1 10s ease infinite; }
+.ofd-cap2 { animation: ofd-cap2 10s ease infinite; }
+.ofd-cap3 { animation: ofd-cap3 10s ease infinite; }
+@keyframes ofd-top { 0%, 12% { transform: perspective(40em) rotateX(55deg); } 28%, 88% { transform: perspective(40em) rotateX(8deg); } 96%, 100% { transform: perspective(40em) rotateX(55deg); } }
+@keyframes ofd-on { 0%, 26% { opacity: 0; } 31%, 88% { opacity: 1; } 92%, 100% { opacity: 0; } }
+@keyframes ofd-ptr { 0%, 44% { transform: none; } 62%, 100% { transform: translate(-5.5em, -2.4em); } }
+@keyframes ofd-finger { 0%, 42% { opacity: 0; transform: none; } 44% { opacity: 1; transform: none; } 62% { opacity: 1; transform: translate(-5em, -1.6em); } 65%, 100% { opacity: 0; transform: translate(-5em, -1.6em); } }
+@keyframes ofd-typed { 0%, 66% { max-width: 0; animation-timing-function: steps(5, end); } 82%, 88% { max-width: 5.2em; } 90%, 100% { max-width: 0; } }
+@keyframes ofd-k1 { 0%, 67% { background: #3a4258; } 68%, 70% { background: var(--blue); } 71%, 74% { background: #3a4258; } 75%, 77% { background: var(--blue); } 78%, 100% { background: #3a4258; } }
+@keyframes ofd-k2 { 0%, 70% { background: #3a4258; } 71%, 73% { background: var(--blue); } 74%, 78% { background: #3a4258; } 79%, 81% { background: var(--blue); } 82%, 100% { background: #3a4258; } }
+@keyframes ofd-k3 { 0%, 81% { background: #3a4258; } 82%, 84% { background: var(--blue); } 85%, 100% { background: #3a4258; } }
+@keyframes ofd-cap1 { 0%, 2% { opacity: 0; transform: translateY(.4em); } 5%, 36% { opacity: 1; transform: none; } 39%, 100% { opacity: 0; } }
+@keyframes ofd-cap2 { 0%, 40% { opacity: 0; transform: translateY(.4em); } 43%, 63% { opacity: 1; transform: none; } 65%, 100% { opacity: 0; } }
+@keyframes ofd-cap3 { 0%, 65% { opacity: 0; transform: translateY(.4em); } 68%, 88% { opacity: 1; transform: none; } 91%, 100% { opacity: 0; } }
 
 /* 声で入力 */
 .voice { background: var(--grad-night); color: var(--on-dark); }
@@ -1033,6 +1441,7 @@
   .compare-table tbody td { border-top: 0; font-size: var(--text-small); }
   .feature-wide { gap: 12px; }
   .touch-demo { grid-template-columns: 1fr; gap: 16px; padding: 20px 14px; margin-top: 12px; }
+  .shield-demo { grid-template-columns: 1fr; gap: 16px; padding: 20px 14px; margin-top: 12px; }
   .td-steps { grid-template-columns: 1fr 1fr; gap: 6px; }
   .td-steps li { padding: 8px 10px; font-size: 12px; }
   .td-steps li b { font-size: 13px; }
@@ -1088,4 +1497,14 @@
   /* 場面の流れ：声で頼んで、いちばん高い棒が目立ったところ（92%）で止める。カードの枠は出さない */
   .flow-demo *, .flow-demo *::before, .flow-demo *::after { animation-delay: -14.7s !important; animation-play-state: paused !important; }
   .flow-list li::after { animation: none; }
+  /* 安心の図：画面を隠して、手もとにだけ映っているところ（50%）で止め、札は全部明るく */
+  .shield-demo .sd-fig *, .shield-demo .sd-fig *::before { animation-delay: -6s !important; animation-play-state: paused !important; }
+  .sd-steps li { animation: none; opacity: 1; }
+  /* そのほかの特長の 6 つの図：いちばん伝わる場面で止める */
+  .of-kb *, .of-kb *::before, .of-kb *::after { animation-delay: -4.1s !important; animation-play-state: paused !important; }
+  .of-ime *, .of-ime *::before, .of-ime *::after { animation-delay: -10.7s !important; animation-play-state: paused !important; }
+  .of-sh *, .of-sh *::before, .of-sh *::after { animation-delay: -6.8s !important; animation-play-state: paused !important; }
+  .of-mc *, .of-mc *::before, .of-mc *::after { animation-delay: -5s !important; animation-play-state: paused !important; }
+  .of-mb *, .of-mb *::before, .of-mb *::after { animation-delay: -6.5s !important; animation-play-state: paused !important; }
+  .of-fd *, .of-fd *::before, .of-fd *::after { animation-delay: -6.4s !important; animation-play-state: paused !important; }
 }
