@@ -67,6 +67,20 @@
 .legal-table td { color: var(--ink-2); }
 .legal-table tr:last-child th, .legal-table tr:last-child td { border-bottom: 0; }
 
+/* 項目と内容の 2 列の表（特定商取引法に基づく表記など） */
+.legal-table.is-spec { min-width: 0; }
+.legal-table.is-spec tbody th { width: 32%; white-space: normal; background: var(--tint); }
+.legal-table.is-spec td { color: var(--ink); }
+.legal-table.is-spec td p + p { margin-top: var(--space-2); }
+.legal-table.is-spec .sub { display: block; margin-top: var(--space-1); font-size: var(--text-note); color: var(--ink-3); }
+
+/* 目次なしの 1 列（短い文書） */
+.legal-layout.is-single { grid-template-columns: minmax(0, 1fr); }
+.legal-layout.is-single .legal { margin-inline: auto; }
+.legal .callout { margin-top: var(--space-8); }
+.legal .callout h2 { font-size: var(--text-body); font-weight: var(--weight-heavy); }
+.legal .callout p { margin-top: var(--space-2); font-size: var(--text-small); color: var(--ink-2); line-height: var(--leading-note); }
+
 /* 条の中の小見出し */
 .article h3 { margin-top: var(--space-8); font-size: var(--text-subheading); font-weight: var(--weight-heavy); }
 .article h3 + p, .article h3 + ul, .article h3 + ol { margin-top: var(--space-3); }
@@ -99,6 +113,8 @@
   .legal-table tbody th, .legal-table td { padding: 0; border: 0; white-space: normal; }
   .legal-table td { margin-top: var(--space-2); }
   .legal-table td::before { content: attr(data-label); display: block; font-size: var(--text-caption); font-weight: var(--weight-heavy); color: var(--ink-3); }
+  .legal-table.is-spec tbody th { width: auto; background: none; color: var(--blue-deep); font-size: var(--text-note); }
+  .legal-table.is-spec td::before { content: none; }
 }
 
 @media (max-width: 480px) {

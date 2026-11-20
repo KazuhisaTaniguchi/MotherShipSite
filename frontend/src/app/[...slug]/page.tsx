@@ -9,7 +9,8 @@ import { EMPTY_PARAM, getAllPages, toPlainText, uriToSegments, type Page } from 
 //   terms-of-service：利用規約（src/app/terms-of-service/。WordPress の固定ページは空のまま）
 //   contact：お問い合わせ（src/app/contact/。WordPress の固定ページ「お問い合わせ窓口」は使わない）
 //   privacy-policy：プライバシーポリシー（src/app/privacy-policy/。WordPress の固定ページは空のまま）
-const DEDICATED_ROUTES = new Set(["news", "terms-of-service", "contact", "privacy-policy"]);
+//   commercial-transactions：特定商取引法に基づく表記（src/app/commercial-transactions/。WordPress の固定ページは空のまま）
+const DEDICATED_ROUTES = new Set(["news", "terms-of-service", "contact", "privacy-policy", "commercial-transactions"]);
 
 // ビルド中に何度も読み込まないよう、1 回の結果を使い回す
 let pagesCache: Promise<Page[]> | null = null;
