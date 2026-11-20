@@ -4,9 +4,9 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#e9eefa">
-  <meta name="description" content="Mothershipは、iPhone・iPad・Android・別のMacから、自宅や職場のMacを操作できるリモートデスクトップアプリです。デバイスの画面にぴったり合う専用の画面を用意するので、小さな画面でも文字がくっきり。14日間、すべての機能を無料で試せます。">
-  <meta property="og:title" content="離れていても、Macはそばに。｜Mothership">
-  <meta property="og:description" content="スマホから、いつものMacへ。作業の続きに、どこからでも。">
+  <meta name="description" content="Mothershipは、iPhone・iPad・Android・別のMacから、自宅や職場のMacを操作できるリモートデスクトップアプリです。デバイスの画面にぴったり合う専用の画面を用意するので、小さな画面でも文字がくっきり。タッチで操作し、声で文字を入力（Aqua Voiceに対応）。AIに任せた作業の確認も、次の指示も、離れた場所から。14日間、すべての機能を無料で試せます。">
+  <meta property="og:title" content="指で動かす。声で書く。離れたMacを、スマホから。｜Mothership">
+  <meta property="og:description" content="AIもビルドも、家のMacに任せたまま。進み具合を見て、次の指示は話すだけ。">
   <title>Mothership｜スマホ・タブレットからMacをリモート操作</title>
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <!-- デザインシステム（値 → 土台 → 部品）のあとに、このページだけの組み方 -->
@@ -14,7 +14,7 @@
   <link rel="stylesheet" href="designSystem/base.css">
   <link rel="stylesheet" href="designSystem/components.css">
   <link rel="stylesheet" href="styles.css">
-  <!-- HERO のアニメの 3 案（案が決まったら消す） -->
+  <!-- HERO のアニメの 2 案（案が決まったら消す） -->
   <link rel="stylesheet" href="hero-variants.css">
   <script src="script.js" defer></script>
   <script src="hero-variants.js" defer></script>
@@ -47,26 +47,26 @@
       <div class="hero-bg" aria-hidden="true"></div>
       <div class="wrap hero-grid">
         <div class="hero-copy">
-          <p class="pill pill-glass hero-label">Macを、もっと自由に。</p>
-          <h1 id="hero-title">離れていても、<br><span class="grad-text">Macはそばに。</span></h1>
-          <p class="hero-lead">スマホから、いつものMacへ。<br>作業の続きに、どこからでも。</p>
+          <p class="pill pill-glass hero-label">離れたMacを、スマホから。</p>
+          <h1 id="hero-title">指で動かす。<br><span class="grad-text">声で書く。</span></h1>
+          <p class="hero-lead">AIもビルドも、家のMacに任せたまま。<br>進み具合を見て、次の指示は話すだけ。</p>
           <a class="hero-voice" href="#voice">
             <img class="hero-voice-icon" src="media/aqua-voice-icon.png" alt="Aqua Voiceのアイコン" width="56" height="56">
-            <span class="hero-voice-text"><span class="hero-voice-kicker">声で入力</span><b>Aqua Voiceにも対応</b><span class="hero-voice-sub"><span class="nb">話すだけで文字が入るから、</span><span class="nb"><mark>キーボードいらず。</mark></span></span></span>
+            <span class="hero-voice-text"><span class="hero-voice-kicker">声で書く</span><b>Aqua Voiceに対応</b><span class="hero-voice-sub"><span class="nb">話すだけで文字が入るから、</span><span class="nb"><mark>キーボードいらず。</mark></span></span><span class="hero-voice-note">Aqua Voiceは別の会社のアプリです。</span></span>
             <span class="hero-voice-arrow" aria-hidden="true">→</span>
           </a>
           <div class="hero-actions">
             <a class="btn btn-primary" href="#download">ダウンロード <span aria-hidden="true">→</span></a>
             <a class="btn btn-ghost" href="#features">特長を見る</a>
           </div>
-          <p class="hero-note">14日間、すべての機能を無料で。買い切り・月額なし。</p>
+          <p class="hero-note">14日間、すべての機能を無料で。<span class="nb">買い切り・月額なし・アカウント登録なし。</span></p>
           <p class="hero-platforms">iPhone <i>·</i> iPad <i>·</i> Android <i>·</i> Mac</p>
         </div>
 
         <div class="hero-stage">
           <div class="stage-glow" aria-hidden="true"></div>
-          <!-- HERO のアニメ：3 案（案 C をもとにした C-1・C-2・C-3）をくらべるため、hero-variants.js がこの HERO を 3 つに増やして、ここに案を入れる。
-               案が決まったら、選んだ案をここに書き戻す（前のアニメと 4 案は Git の履歴にある） -->
+          <!-- HERO のアニメ：2 案（AI に指示して Mac を動かす 案 1・案 2）をくらべるため、hero-variants.js がこの HERO を 2 つに増やして、ここに案を入れる。
+               案が決まったら、選んだ案をここに書き戻す（前のアニメと、前の 4 案・3 案は Git の履歴にある） -->
           <div class="hv" data-hv></div>
           <div class="stage-chip chip-a" aria-hidden="true"><b>60</b>fps まで</div>
           <div class="stage-chip chip-b" aria-hidden="true"><span class="dot"></span>暗号化して直接つなぐ</div>
@@ -104,9 +104,9 @@
       <div class="wrap">
         <h2 class="section-title" id="scenes-title">こんなとき、<br>Macがそばにあったら。</h2>
         <ol class="scene-list">
-          <li><span class="num">01</span><h3>外出先で、あのファイルを確かめたい</h3><p>カフェでも、移動中でも。自宅のMacを開いて、資料をさっと確認できます。</p></li>
-          <li><span class="num">02</span><h3>ソファから、デスクのMacを使いたい</h3><p>Mac miniやiMacの前に座らなくても大丈夫。iPadやスマホが、そのままMacの画面になります。</p></li>
-          <li><span class="num">03</span><h3>Macに任せた作業の様子を見たい</h3><p>書き出し、ビルド、AIに任せた長い作業。席を離れていても、進み具合を見て、次の指示を出せます。</p></li>
+          <li><span class="num">01</span><h3>Macに任せた作業の様子を見たい</h3><p>書き出し、ビルド、AIに任せた長い作業。席を離れていても、進み具合を見て、次の指示を出せます。</p></li>
+          <li><span class="num">02</span><h3>外出先で、あのファイルを確かめたい</h3><p>カフェでも、移動中でも。自宅のMacを開いて、資料をさっと確認できます。</p></li>
+          <li><span class="num">03</span><h3>ソファから、デスクのMacを使いたい</h3><p>Mac miniやiMacの前に座らなくても大丈夫。iPadやスマホが、そのままMacの画面になります。</p></li>
           <li><span class="num">04</span><h3>MacBookから、もう1台のMacへ</h3><p>持ち歩くのは軽いMacBookだけ。パワーが要る作業は、家のMacに任せましょう。</p></li>
         </ol>
       </div>
@@ -233,9 +233,9 @@
         <div class="voice-visual" aria-hidden="true">
           <div class="voice-card">
             <div class="voice-wave"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
-            <p class="voice-said">「あしたの打ち合わせは、15時からに変更でお願いします。」</p>
+            <p class="voice-said">「テストが通ったら、プルリクエストを作ってください。」</p>
             <div class="voice-arrow">↓</div>
-            <p class="voice-typed">あしたの打ち合わせは、15時からに変更でお願いします。<span class="caret"></span></p>
+            <p class="voice-typed">テストが通ったら、プルリクエストを作ってください。<span class="caret"></span></p>
             <div class="voice-buttons"><span class="vb vb-mic">🎤</span><span class="vb">⌫</span><span class="vb">⏎</span></div>
           </div>
           <p class="voice-visual-note">イメージ図です</p>

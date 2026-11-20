@@ -1,12 +1,14 @@
-// HERO のアニメの 3 案（案 C をもとにした C-1・C-2・C-3。くらべて選ぶための一時的なファイル。決まったら script.js に移して消す）
-// 共通の流れ：MacBook で「端末を追加」→ iPad が横向きで登場して「つなぐ」→ 横長の画面にメモとグラフ
-//            → 横向きのまま声で入力 → 縦に回すと、Mac の画面が横幅ぴったりに作り直る → 最初へ
-// ・index.html の HERO（.hero）を 3 つに増やし、それぞれに案を入れる
+// HERO のアニメの 2 案（案 C-2 をもとにした「AI に指示して Mac を動かす」案 1・案 2。くらべて選ぶための一時的なファイル。決まったら script.js に移して消す）
+// 見出し「指で動かす。声で書く。」と、リード「AIもビルドも、家のMacに任せたまま。進み具合を見て、次の指示は話すだけ。」の実演にする。
+// 共通の流れ：MacBook で「端末を追加」→ iPad が横向きで登場して「つなぐ」→ 横長の画面に「AI アシスタント｜できあがるもの」
+//            → 進み具合を見る → 指で動かす → 声で書く（次の指示）→ AI が動く → 縦に回すと、横幅ぴったりに作り直る → 最初へ
+// ・index.html の HERO（.hero）を 2 つに増やし、それぞれに案を入れる
 // ・画面の状態は時刻 t だけで決まる（render）。案ごとの違いは、下の VARIANTS だけ
 // ・声の入力は実物と同じ順番：🎤 を押している間は話した言葉が吹き出しに出て、離すと Mac に文字が入る
-// ・確認用：URL に ?demo=12000 を付けると、3 案ともその時刻（ミリ秒）で止まる。__heroDemo.c1.seek(12000) でも止められる
+// ・AI の窓は、特定の製品に見えないように描いた絵（名前は「AI アシスタント」。数字や実在の名前は書かない）
+// ・確認用：URL に ?demo=12000 を付けると、2 案ともその時刻（ミリ秒）で止まる。__heroDemo.ai1.seek(12000) でも止められる
 // ・本物の動画（media/hero-demo.mp4）への切り替えは入れていない（案が決まってから戻す）
-// ・前の 4 案（A〜D）は Git の履歴にある（コミット「mock：HERO のアニメの 4 案（A〜D）を並べる」）
+// ・前の案は Git の履歴にある（4 案 A〜D：e05bc58 ／ 3 案 C-1〜C-3：2d81c28）
 (() => {
   const hero = document.querySelector('.hero');
   const first = hero && hero.querySelector('[data-hv]');
@@ -28,21 +30,20 @@
     };
   };
 
-  // 案の内容（utter ＝ 1 回の発話）から、クラスを付ける時刻の一覧を組み立てる
-  //   utter: { hold: [🎤 を押す, 離す], say: 話す言葉, into: 入力先, text: 入る文字（省くと say と同じ） }
-  //   rotAt: 縦に回しはじめる時刻。そこから 5 秒で 1 周が終わる
+  // 案の内容から、クラスを付ける時刻の一覧を組み立てる
+  //   utter:  { hold: [🎤 を押す, 離す], say: 話す言葉 } … 離すと、AI への指示の欄（.m-text-ai）に文字が入る
+  //   sendAt: バーの Enter で送る時刻。指示の欄が空になり、同じ文がやりとりの欄に出る
+  //   rotAt:  縦に回しはじめる時刻。そこから 5 秒で 1 周が終わる
   const plan = (o) => {
-    const R = o.rotAt; const L = R + 5000;
-    const typing = [...(o.typing || [])];
-    o.utter.forEach((u) => typing.push({ sel: u.into, text: u.text ?? u.say, at: u.hold[1] + 250, per: TYPE_MS }));
-    typing.sort((a, b) => a.at - b.at);
+    const R = o.rotAt; const L = R + 5000; const u = o.utter;
     return {
-      ...o, length: L, typing,
+      ...o, length: L,
+      typing: [{ sel: '.m-text-ai', text: u.say, at: u.hold[1] + 250, per: TYPE_MS, until: o.sendAt }],
       root: {
         'is-mac': [[200, MAC_END]],                  // くり返しの頭は、フェードインで入る
         'is-pad': [[MAC_END - 200, L - 600]],        // 終わりは、フェードアウトで抜ける
-        'is-badge': [o.badgeAt],
-        'is-bubble': o.utter.map((u) => [u.hold[0] + 150, u.hold[1] + 450]),
+        'is-badge': [[u.hold[0] + 400, R - 300]],
+        'is-bubble': [[u.hold[0] + 150, u.hold[1] + 450]],
         'is-fit': [[R + 1500, L - 700]],
       },
       lap: macIntro(),
@@ -51,57 +52,58 @@
       demo: {
         'is-land': [[0, R + 1000]], 'is-reflow': [[R + 750, R + 1000]],
         'is-tap': [[4700, 5300]], 'is-connecting': [[5300, LIVE]], 'is-live': [[LIVE, L]],
-        'is-voice': [[o.voiceAt, L]], 'is-mic': o.utter.map((u) => u.hold), 'is-enter': o.enter || [],
+        'is-ghost': [o.ghostAt], 'is-voice': [[o.ghostAt[1], L]], 'is-mic': [u.hold],
+        'is-enter': [[o.sendAt - 200, o.sendAt + 250]],
         ...(o.demo || {}),
       },
     };
   };
 
-  const T1 = 'あしたの打ち合わせは、15時からに変更でお願いします。';
+  const BADGE = 'キーボードは、しまったまま。<br><mark>画面は、広いまま。</mark>';
+  const scenes = (finger, voice, rot) => [[0, 'Macで、端末を追加'], [MAC_END, 'iPadから、つなぐ'], [LIVE, 'AIの進み具合を見る'], [finger, '指で動かす'], [voice, '声で書く'], [rot, '縦にしても、横幅ぴったり']];
+
+  // やりとりの欄の 1 行：
+  //   me   … 自分の指示（at から出る）
+  //   step … AI の作業（at から「run」の文と回る印、doneAt から「done」の文と ✓）
+  //   ask  … AI からの確認（at から出て、tapAt でボタンを指で押し、hideAt で消える）
+  const SAY1 = 'テストが通ったら、プルリクエストを作ってください。';
+  const SAY2 = 'いちばん売上が高い月を、目立たせてください。';
   const VARIANTS = {
-    // C-1：速さ ── 話し終えたら、もう文字になっている
-    c1: plan({
-      label: 'C-1', name: '速さ ── 話し終えたら、もう文字に',
-      note: 'いちばん素直な形です。横向きのまま 2 文を続けて話し、🎤 を離すたびに、文字が一気にメモに入ります。1 文目のあとは、バーの Enter で改行します。',
-      badge: '話すだけで、<mark>一気に文字に。</mark>', badgeAt: [8600, 16600], still: 12000,
-      scenes: [[0, 'Macで、端末を追加'], [MAC_END, 'iPadから、つなぐ'], [LIVE, 'Macの画面が、手元に'], [7800, '声で入力。話し終えたら、文字に'], [17200, '縦にしても、横幅ぴったり']],
-      fit: '横幅ぴったり', voiceAt: 7800, rotAt: 17200,
-      utter: [
-        { hold: [8200, 11000], say: T1, into: '.m-text' },
-        { hold: [13200, 15400], say: '資料は、このあとすぐに送ります。', into: '.m-text' },
+    // 案 1：開発 ── AI の確認に指で答えて、次の作業を声で頼む
+    ai1: plan({
+      label: '案 1', name: '開発 ── 指で許可して、声で次を頼む',
+      note: 'AI にコードの修正を任せている場面です。AI からの確認「テストを実行してもよいですか？」を指でタップして許可し、テストが動いている間に、次の指示「テストが通ったら、プルリクエストを作ってください。」を声で送ります。右の窓には、コードの変更と、テスト・プルリクエストの状態が出ます。',
+      badge: BADGE, still: 16700, out: 'code', outTitle: 'コードの変更',
+      scenes: scenes(8900, 10900, 19900),
+      ghostAt: [11000, 12700], utter: { hold: [13100, 16000], say: SAY1 }, sendAt: 17300, rotAt: 19900,
+      chat: [
+        { kind: 'me', text: 'ログインの不具合を、直してください。', at: 0 },
+        { kind: 'step', run: '原因を調べています…', done: '原因を見つけました', at: 6900, doneAt: 7500 },
+        { kind: 'step', run: 'コードを直しています…', done: 'コードを直しました', at: 7600, doneAt: 8300 },
+        { kind: 'ask', text: 'テストを実行してもよいですか？', button: '許可する', at: 8600, tapAt: 9700, hideAt: 10300 },
+        { kind: 'step', run: 'テストを実行中…', done: 'テストが通りました', at: 10300, doneAt: 18000 },
+        { kind: 'me', text: SAY1, at: 17300 },
+        { kind: 'step', run: 'プルリクエストを作成中…', done: 'プルリクエストを作りました', at: 18400, doneAt: 19300 },
       ],
-      enter: [[12300, 12700]], typing: [{ sel: '.m-text', text: '\n', at: 12450, per: 1 }],
+      demo: { 'is-diff': [[7800, 99999]], 'is-test-run': [[10300, 18000]], 'is-test-ok': [[18000, 99999]], 'is-pr-run': [[18400, 19300]], 'is-pr-ok': [[19300, 99999]] },
     }),
 
-    // C-2：広さ ── キーボードを出さないから、画面を広く使える
-    c2: plan({
-      label: 'C-2', name: '広さ ── キーボードを出さないから、画面は広いまま',
-      note: '声の前に、「キーボードを出したら隠れる範囲」を点線で見せてから消します。小さなバーだけで、メモもグラフも見えたまま入力します。グラフを見ながら、気づいたことを話す例文にしています。',
-      badge: 'キーボードは、しまったまま。<br><mark>画面は、広いまま。</mark>', badgeAt: [10400, 17800], still: 13600,
-      scenes: [[0, 'Macで、端末を追加'], [MAC_END, 'iPadから、つなぐ'], [LIVE, 'Macの画面が、手元に'], [7600, 'キーボードを出さずに、声で入力'], [18400, '縦にすれば、縦長の画面に']],
-      fit: '横幅ぴったり', voiceAt: 7600, rotAt: 18400,
-      utter: [
-        { hold: [10000, 12800], say: '売上は、3か月続けて伸びています。', into: '.m-text' },
-        { hold: [14900, 16800], say: '来週の会議で、共有します。', into: '.m-text' },
+    // 案 2：資料づくり ── AI が作ったものを指で確かめて、直しを声で頼む
+    ai2: plan({
+      label: '案 2', name: '資料づくり ── 指で確かめて、声で直しを頼む',
+      note: 'AI に売上のレポートを任せている場面です。できあがったレポートを指でスクロールしてグラフを確かめ、直しの指示「いちばん売上が高い月を、目立たせてください。」を声で送ります。送ると、グラフのいちばん高い棒の色が変わります。',
+      badge: BADGE, still: 16700, out: 'report', outTitle: '売上レポート',
+      scenes: scenes(9200, 10900, 19500),
+      ghostAt: [11000, 12700], utter: { hold: [13100, 16000], say: SAY2 }, sendAt: 17300, rotAt: 19500,
+      chat: [
+        { kind: 'me', text: '先月の売上を、レポートにまとめてください。', at: 0 },
+        { kind: 'step', run: 'データを読み込んでいます…', done: 'データを読み込みました', at: 6900, doneAt: 7500 },
+        { kind: 'step', run: 'グラフを作っています…', done: 'グラフを作りました', at: 7600, doneAt: 8300 },
+        { kind: 'step', run: 'レポートを仕上げています…', done: 'レポートができました', at: 8400, doneAt: 9000 },
+        { kind: 'me', text: SAY2, at: 17300 },
+        { kind: 'step', run: 'グラフを更新中…', done: 'グラフを更新しました', at: 17800, doneAt: 18900 },
       ],
-      enter: [[14000, 14400]], typing: [{ sel: '.m-text', text: '\n', at: 14150, per: 1 }],
-      demo: { 'is-ghost': [[7700, 9500]] },
-    }),
-
-    // C-3：使い道 ── メモも、メールの返信も、声だけで
-    c3: plan({
-      label: 'C-3', name: '使い道 ── メモも、返信も、声だけで',
-      note: '1 文目はメモに入れます。そのあと右の窓がグラフからメールに変わり、2 文目は返信として入力して、バーの Enter で送ります。上の札の文言も、途中で「メモも」から「メールの返信も」に変わります。',
-      badge: 'メモも、<mark>声だけで。</mark>', badgeAt: [8600, 17200], still: 11600,
-      scenes: [[0, 'Macで、端末を追加'], [MAC_END, 'iPadから、つなぐ'], [LIVE, 'Macの画面が、手元に'], [7800, 'メモを、声で'], [12200, '返信も、声で'], [17800, '向きを変えても、ぴったり']],
-      fit: '横幅ぴったり', voiceAt: 7800, rotAt: 17800,
-      utter: [
-        { hold: [8200, 10800], say: T1, into: '.m-text' },
-        { hold: [13200, 15600], say: '承知しました。資料は、このあとお送りします。', into: '.m-text-mail' },
-      ],
-      enter: [[16500, 16900]],
-      demo: { 'is-mail': [[12200, 18800]], 'is-sent': [[16800, 18800]] },
-      swap: [{ sel: '.hv-badge', at: 0, html: 'メモも、<mark>声だけで。</mark>' }, { sel: '.hv-badge', at: 12200, html: 'メールの返信も、<mark>声だけで。</mark>' }],
+      demo: { 'is-doc': [[7200, 99999]], 'is-chart': [[7900, 99999]], 'is-finger': [[9500, 11000]], 'is-scrolled': [[10000, 99999]], 'is-mark': [[18900, 99999]] },
     }),
   };
 
@@ -117,6 +119,31 @@
   };
   const rep = (n, s = '<i></i>') => s.repeat(n);
 
+  const chatItem = (c, i) => {
+    if (c.kind === 'me') return `<p class="ai-item ai-me" data-i="${i}">${c.text}</p>`;
+    if (c.kind === 'ask') return `<div class="ai-item ai-ask" data-i="${i}"><p>${c.text}</p><span class="ai-btn">${c.button}</span><span class="ai-tapdot"></span></div>`;
+    return `<p class="ai-item ai-step" data-i="${i}"><i class="ai-mark"></i><span class="t-run">${c.run}</span><span class="t-done">${c.done}</span></p>`;
+  };
+  // 右の窓：AI が作っているもの
+  const outBody = {
+    // コードの変更：消した行（赤）と足した行（緑）。文字は書かない
+    code: `
+      <div class="out-pills">
+        <span class="out-pill p-test">テスト<b class="s-wait">まだ</b><b class="s-run">実行中</b><b class="s-ok">✓ 成功</b></span>
+        <span class="out-pill p-pr">プルリクエスト<b class="s-wait">まだ</b><b class="s-run">作成中</b><b class="s-ok">✓ 作成</b></span>
+      </div>
+      <div class="out-diff"><i></i><i class="del"></i><i class="add"></i><i class="add"></i><i></i><i></i><i class="del"></i><i class="add"></i><i></i></div>`,
+    // 売上レポート：見出し・本文の行・棒グラフ
+    report: `
+      <div class="out-scroll">
+        <h4>先月の売上</h4>
+        <ul>${rep(5, '<li></li>')}</ul>
+        <div class="m-bars">${rep(6)}</div>
+        <ul>${rep(3, '<li></li>')}</ul>
+      </div>
+      <span class="out-finger"></span>`,
+  };
+
   // .d-fit ＝ 端末の向きに合わせて形が変わる層（横向きのときは横長の箱になる）。Mac の画面（.d-mac）と同じ動きをする
   const template = (v) => `
     <div class="hv-stage">
@@ -130,7 +157,7 @@
         </div></div>
         <div class="hv-lbase"></div>
       </div>
-      <figure class="phone tablet hero-phone hv-pad" role="img" aria-label="Mothershipの使い方のイメージ。Macで端末を追加し、横向きのiPadからつなぐと、Macの画面がiPadに映る。iPadに話しかけると、Macに文字が入る。iPadを縦向きにすると、Macの画面も縦長になり、横幅がぴったり合う">
+      <figure class="phone tablet hero-phone hv-pad" role="img" aria-label="Mothershipの使い方のイメージ。Macで端末を追加し、横向きのiPadからつなぐと、AIが作業しているMacの画面がiPadに映る。指でタップやスクロールをし、iPadに話しかけると、AIへの次の指示がMacに入る。iPadを縦向きにすると、Macの画面も縦長になり、横幅がぴったり合う">
         <div class="phone-screen">
           <div class="demo" data-scene="1" aria-hidden="true">
             <!-- つなぐ前の画面（横向き。描いた絵で、実際の画面とは見た目が違う） -->
@@ -143,32 +170,23 @@
             <div class="d-live">
               <div class="d-mac">
                 <div class="m-menubar"><b></b><span>ファイル</span><span>編集</span><span>表示</span><i>9:41</i></div>
-                <div class="m-window m-doc">
-                  <div class="m-title"><i></i><i></i><i></i><span>メモ</span></div>
-                  <div class="m-body"><div class="m-scroll">
-                    <h4>打ち合わせメモ</h4>
-                    <p class="m-typed"><span class="m-text"></span><span class="m-caret"></span></p>
-                    <ul>${rep(8, '<li></li>')}</ul>
-                    <div class="m-fig"></div>
-                    <ul>${rep(4, '<li></li>')}</ul>
-                  </div></div>
-                </div>
-                <div class="m-window m-sheet">
-                  <div class="m-title"><i></i><i></i><i></i><span>グラフ</span></div>
-                  <div class="m-body"><div class="m-bars">${rep(6)}</div></div>
-                </div>
-                <div class="m-window m-mail">
-                  <div class="m-title"><i></i><i></i><i></i><span>メール</span></div>
-                  <div class="m-body">
-                    <p class="m-mailhead"><b>Re: お打ち合わせの件</b><span class="m-reply">返信</span><span class="m-sent">✓ 送信</span></p>
-                    <p class="m-typed"><span class="m-text-mail"></span><span class="m-caret"></span></p>
-                    <ul>${rep(3, '<li></li>')}</ul>
+                <!-- 左（縦向きは上）：AI アシスタント。やりとりの欄と、指示を書く欄 -->
+                <div class="m-window m-ai">
+                  <div class="m-title"><i></i><i></i><i></i><span>AI アシスタント</span></div>
+                  <div class="m-body ai-body">
+                    <div class="ai-chat">${v.chat.map(chatItem).join('')}</div>
+                    <div class="ai-prompt"><span class="ai-in"><span class="m-text-ai"></span><span class="m-caret"></span><span class="ai-ph">次の指示を入力</span></span><em>⏎</em></div>
                   </div>
+                </div>
+                <!-- 右（縦向きは下）：AI が作っているもの -->
+                <div class="m-window m-out out-${v.out}">
+                  <div class="m-title"><i></i><i></i><i></i><span>${v.outTitle}</span></div>
+                  <div class="m-body out-body">${outBody[v.out]}</div>
                 </div>
                 <div class="m-dock">${rep(5)}</div>
               </div>
               <div class="d-ui d-fit">
-                <!-- 画面のキーボードを出したら隠れる範囲（案 C-2） -->
+                <!-- 画面のキーボードを出したら隠れる範囲 -->
                 <div class="d-ghost"><p>キーボードを出すと、ここまで隠れます</p></div>
                 <!-- 音声入力のバー：ボタン 6 個（🎤・削除・Enter・Tab・コピー・ペースト）。つながっている間は、いつも出ている -->
                 <div class="d-vbar"><span class="v-grip">≡</span><div class="v-wave">${rep(6)}</div><span class="v-key v-mic">🎤</span><span class="v-key">⌫</span><span class="v-key v-enter">⏎</span><span class="v-key">⇥</span><span class="v-key"><small>コピー</small></span><span class="v-key"><small>ペースト</small></span></div>
@@ -179,7 +197,7 @@
       </figure>
       <div class="hv-bubble" aria-hidden="true"><span class="hv-bubble-text"></span></div>
       <div class="hv-badge" aria-hidden="true">${v.badge}</div>
-      <div class="hv-fit" aria-hidden="true"><i></i><b>${v.fit}</b><i></i></div>
+      <div class="hv-fit" aria-hidden="true"><i></i><b>横幅ぴったり</b><i></i></div>
     </div>
     <div class="demo-bar">
       <button class="video-toggle" type="button" aria-label="アニメーションを一時停止"><span class="icon-pause" aria-hidden="true"></span></button>
@@ -201,8 +219,8 @@
     const toggle = root.querySelector('.video-toggle');
     const label = root.querySelector('.d-label');
     const bubble = root.querySelector('.hv-bubble-text');
+    const items = [...root.querySelectorAll('.ai-item')];
     const find = (() => { const cache = {}; return (sel) => (cache[sel] ??= root.querySelector(sel)); })();
-    const swapped = {};
 
     const render = (t) => {
       let scene = 0;
@@ -212,26 +230,28 @@
       ['root', 'lap', 'pad', 'demo'].forEach((target) => {
         Object.entries(v[target] || {}).forEach(([cls, ranges]) => el[target].classList.toggle(cls, inRanges(ranges, t)));
       });
-      // Mac に入る文字（同じ入力先のものは、時刻の順につなぐ）
+      // やりとりの欄：1 行ずつ、出す／✓ にする／ボタンを押している、を時刻で決める
+      v.chat.forEach((c, i) => {
+        const node = items[i];
+        node.classList.toggle('is-on', t >= c.at && (c.hideAt == null || t < c.hideAt));
+        node.classList.toggle('is-done', c.doneAt != null && t >= c.doneAt);
+        node.classList.toggle('is-press', c.tapAt != null && t >= c.tapAt && t < c.tapAt + 550);
+      });
+      // Mac に入る文字（until を過ぎたら消す ＝ 送った）
       const typed = {};
       v.typing.forEach((seg) => {
-        const n = t >= seg.at ? Math.min(seg.text.length, Math.floor((t - seg.at) / seg.per) + 1) : 0;
+        const n = t >= seg.at && !(seg.until != null && t >= seg.until) ? Math.min(seg.text.length, Math.floor((t - seg.at) / seg.per) + 1) : 0;
         typed[seg.sel] = (typed[seg.sel] || '') + seg.text.slice(0, n);
       });
       Object.entries(typed).forEach(([sel, text]) => { const node = find(sel); if (node.textContent !== text) node.textContent = text; });
       // 吹き出し：🎤 を押している間に、話した言葉が少しずつ出る
-      let said = '';
-      v.utter.forEach((u) => {
-        if (t < u.hold[0]) return;
+      const u = v.utter; let said = '';
+      if (t >= u.hold[0]) {
         const full = `「${u.say}」`;
         const per = (u.hold[1] - u.hold[0] - 700) / full.length;
         said = full.slice(0, Math.max(0, Math.min(full.length, Math.floor((t - u.hold[0] - 250) / per) + 1)));
-      });
+      }
       if (bubble.textContent !== said) bubble.textContent = said;
-      // 途中で変わる文言（札など）
-      const now = {};
-      (v.swap || []).forEach((s) => { if (t >= s.at) now[s.sel] = s.html; });
-      Object.entries(now).forEach(([sel, html]) => { if (swapped[sel] !== html) { find(sel).innerHTML = html; swapped[sel] = html; } });
     };
 
     let userPaused = reduce || at > 0;
@@ -282,7 +302,7 @@
     if (i > 0) sections[i - 1].after(section);
     const pick = document.createElement('div');
     pick.className = 'wrap';
-    pick.innerHTML = `<div class="hv-pick"><b>案 ${VARIANTS[key].label}</b><strong>${VARIANTS[key].name}</strong><span>${VARIANTS[key].note}</span></div>`;
+    pick.innerHTML = `<div class="hv-pick"><b>${VARIANTS[key].label}</b><strong>${VARIANTS[key].name}</strong><span>${VARIANTS[key].note}</span></div>`;
     section.querySelector('.hero-grid').before(pick);
     start(section.querySelector('[data-hv]'), key);
   });
