@@ -474,7 +474,7 @@ FIGS.append(fig('hf11', 'Macの「システム設定」の「サウンド」の�
 # ================================================================ 図 12：Aqua Voice のマイクを BlackHole 2ch に
 T = 9
 CSS.append('''
-/* 図 12：Aqua Voice の設定 →「オーディオ」→「マイク」を「BlackHole 2ch」に（9 秒）。画面は説明用の絵 */
+/* 図 12：Aqua Voice の設定 →「Audio」→ マイクを「BlackHole 2ch」に（9 秒）。画面は説明用の絵（区分の名前は公式の案内に合わせた。2026-11-21） */
 .hf12 { --d: 9s; --fz: 7s; }
 .hf12-sel { position: absolute; left: .8em; top: .8em; width: 6.4em; height: 1.56em; border-radius: .41em; background: var(--blue); animation: %s var(--d) ease infinite; }
 .hf12 .hf-side span:nth-of-type(1) { animation: %s var(--d) ease infinite; }
@@ -511,11 +511,11 @@ CSS.append('''
     KF('hf12-item', T, [(4.1, 'background: rgba(var(--blue-rgb), 0); color: var(--ink)'), (4.25, 'background: var(--blue); color: #fff')]),
     CUR('hf12-cur', T, [(0, 15, 16.5), (.4, 15, 16.5), (1.1, 5.6, 6.7), (2, 5.6, 6.7), (2.8, 24.6, 7.95), (3.6, 24.6, 7.95), (4.2, 24.6, 12.4), (5, 24.6, 12.4), (5.8, 19.5, 17)], [1.2, 2.9, 4.5]),
 ))
-FIGS.append(fig('hf12', 'Aqua Voiceの設定で「オーディオ」を開き、「マイク」の一覧から「BlackHole 2ch」を選ぶ様子',
+FIGS.append(fig('hf12', 'Aqua Voiceの設定で「Audio」を開き、マイクの一覧から「BlackHole 2ch」を選ぶ様子',
     '<div class="hf-win hf-set">' + wbar('Aqua Voice') + '<div class="hf-wbody">'
-    + '<div class="hf-side"><i class="hf12-sel"></i><span>一般</span><span>オーディオ</span><span>ショートカット</span></div>'
+    + '<div class="hf-side"><i class="hf12-sel"></i><span>General</span><span>Audio</span><span>Keybindings</span></div>'
     + '<div class="hf-main"><div class="hf12-gen"><div class="hf-skel"></div><div class="hf-skel"></div><div class="hf-skel"></div><div class="hf-skel"></div></div>'
-    + '<div class="hf12-audio"><h4>オーディオ</h4><div class="hf12-mic"><b>マイク</b><div class="hf12-dd"><span>MacBookのマイク</span><span>BlackHole 2ch</span></div></div>'
+    + '<div class="hf12-audio"><h4>Audio</h4><div class="hf12-mic"><b>Microphone</b><div class="hf12-dd"><span>MacBookのマイク</span><span>BlackHole 2ch</span></div></div>'
     + '<div class="hf12-list"><span>MacBookのマイク</span><span>BlackHole 2ch</span><span>イヤホンのマイク</span></div></div>'
     + '</div></div></div>' + CURSOR.format(c='hf12-cur')))
 

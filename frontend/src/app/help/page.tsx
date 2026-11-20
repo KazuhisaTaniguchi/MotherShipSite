@@ -184,10 +184,10 @@ export default function Help() {
               <div className="help-note"><b>別の会社などのソフトです。</b>Aqua Voice・Homebrew・BlackHoleは、MOTHERSHIPとは別の会社や人たちが作っているソフトです（MOTHERSHIPには含まれません）。入れ方や画面の表記は、変わることがあります。</div>
   
               <h3 id="voice-aqua"><span className="no">3-1</span>Aqua Voiceを入れる</h3>
-              <p>Aqua Voiceの公式サイトから、Macに入れます。</p>
+              <p>Aqua Voiceの公式サイト（<a href="https://aquavoice.com/mac" rel="noopener noreferrer" target="_blank">aquavoice.com</a>）から、Mac版をダウンロードして入れます。Apple シリコンのMacにも、IntelのMacにも対応しています。</p>
               <p>入れたら、まず<b>Macの前でふつうに使えること</b>を確かめます。メモなど、文字を打てる場所をクリックします。キーボードの <kbd>fn</kbd> キーを押している間だけ話して、離します。話した文が入れば、大丈夫です。</p>
               {/* fig:8 */}<div className="hf hf8" role="img" aria-label="Macの前で、キーボードのfnキーを押している間だけ話す。キーを離すと、話した文がメモに入る様子"><div className="hf-in" aria-hidden="true"><div className="hf-win hf8-note"><div className="hf-wbar"><i></i><i></i><i></i><b>メモ</b></div><div className="hf-wbody"><p className="hf8-text"><span>明日の会議は、10時からです。</span><i className="hf-caret"></i></p></div></div><p className="hf8-bubble"><b>話す</b>「明日の会議は、10時からです」</p><p className="hf8-pill"><span className="hf-wave"><i></i><i></i><i></i><i></i><i></i></span>聞き取り中</p><div className="hf8-deck"></div><div className="hf8-keys"><span>fn</span><span>⌃</span><span>⌥</span><span>⌘</span><span></span><span>⌘</span><span>⌥</span></div><i className="hf-fin hf8-fin"></i></div></div>{/* /fig:8 */}
-              <div className="help-warn"><b>録音のキーは、fnのままに。</b>MOTHERSHIPは、Aqua Voiceの「fnを押している間だけ聞き取る」動きを使います。Aqua Voiceの録音のキーを別のキーに変えていると、デバイスから話しても文字になりません。</div>
+              <div className="help-warn"><b>録音のキーは、fnのままに。</b>MOTHERSHIPは、Aqua Voiceの「fnを押している間だけ聞き取る」動きを使います。Aqua Voiceの録音のキーを別のキーに変えていると、デバイスから話しても文字になりません。Aqua Voiceのはじめの設定は <kbd>fn</kbd> です。変えたかどうかは、Aqua Voiceの設定の「Keybindings」で確かめられます。</div>
   
               <h3 id="voice-terminal"><span className="no">3-2</span>ターミナルを開く</h3>
               <p>ここからは、Macにはじめから入っているアプリ「ターミナル」を使います。ターミナルは、文字の命令（コマンド）でMacを動かすアプリです。むずかしく見えますが、このページのコマンドを、そのまま貼り付けるだけです。</p>
@@ -253,10 +253,10 @@ export default function Help() {
   
               <h3 id="voice-mic"><span className="no">3-5</span>Aqua Voiceのマイクを「BlackHole 2ch」にする</h3>
               <ol className="help-steps">
-                <li><p>Aqua Voiceの設定を開きます。</p></li>
-                <li><p>「オーディオ」の「マイク」で、<b>「BlackHole 2ch」</b>を選びます。</p></li>
+                <li><p>Aqua Voiceの設定（Settings）を開きます。</p></li>
+                <li><p>「Audio」を開き、使うマイクに<b>「BlackHole 2ch」</b>を選びます。</p></li>
               </ol>
-              {/* fig:12 */}<div className="hf hf12" role="img" aria-label="Aqua Voiceの設定で「オーディオ」を開き、「マイク」の一覧から「BlackHole 2ch」を選ぶ様子"><div className="hf-in" aria-hidden="true"><div className="hf-win hf-set"><div className="hf-wbar"><i></i><i></i><i></i><b>Aqua Voice</b></div><div className="hf-wbody"><div className="hf-side"><i className="hf12-sel"></i><span>一般</span><span>オーディオ</span><span>ショートカット</span></div><div className="hf-main"><div className="hf12-gen"><div className="hf-skel"></div><div className="hf-skel"></div><div className="hf-skel"></div><div className="hf-skel"></div></div><div className="hf12-audio"><h4>オーディオ</h4><div className="hf12-mic"><b>マイク</b><div className="hf12-dd"><span>MacBookのマイク</span><span>BlackHole 2ch</span></div></div><div className="hf12-list"><span>MacBookのマイク</span><span>BlackHole 2ch</span><span>イヤホンのマイク</span></div></div></div></div></div><svg className="hf-cur hf12-cur" viewBox="0 0 12 16"><path d="M1 1v12l3.2-2.8 2 4.6 2-.9-2-4.5H11z" fill="#14203a" stroke="#fff" strokeWidth="1" strokeLinejoin="round"/></svg></div></div>{/* /fig:12 */}
+              {/* fig:12 */}<div className="hf hf12" role="img" aria-label="Aqua Voiceの設定で「Audio」を開き、マイクの一覧から「BlackHole 2ch」を選ぶ様子"><div className="hf-in" aria-hidden="true"><div className="hf-win hf-set"><div className="hf-wbar"><i></i><i></i><i></i><b>Aqua Voice</b></div><div className="hf-wbody"><div className="hf-side"><i className="hf12-sel"></i><span>General</span><span>Audio</span><span>Keybindings</span></div><div className="hf-main"><div className="hf12-gen"><div className="hf-skel"></div><div className="hf-skel"></div><div className="hf-skel"></div><div className="hf-skel"></div></div><div className="hf12-audio"><h4>Audio</h4><div className="hf12-mic"><b>Microphone</b><div className="hf12-dd"><span>MacBookのマイク</span><span>BlackHole 2ch</span></div></div><div className="hf12-list"><span>MacBookのマイク</span><span>BlackHole 2ch</span><span>イヤホンのマイク</span></div></div></div></div></div><svg className="hf-cur hf12-cur" viewBox="0 0 12 16"><path d="M1 1v12l3.2-2.8 2 4.6 2-.9-2-4.5H11z" fill="#14203a" stroke="#fff" strokeWidth="1" strokeLinejoin="round"/></svg></div></div>{/* /fig:12 */}
               <p>これで、準備は終わりです。</p>
   
               <h3 id="voice-mac">Macの前でも、今までどおり使えます</h3>
