@@ -528,6 +528,54 @@
 .voice-need h3 { font-size: var(--text-body); margin-bottom: 6px; color: var(--cyan); }
 .voice-need p { font-size: 14.5px; color: var(--on-dark-2); }
 .voice-need .voice-need-sub { margin-top: 10px; font-size: var(--text-note); color: var(--on-dark-3); }
+.voice-need .voice-need-sub a { color: var(--cyan); font-weight: var(--weight-bold); }
+
+/* ---- 使うために必要なもの：準備の 3 つ（2026-11-21）----
+   9 秒で 1 周。0–33% 1 Aqua Voice を入れる／33–66% 2 BlackHole 2ch を入れる／66–100% 3 マイクを選ぶ。
+   いまのカードが明るくなり、図の中でバーが伸びて「✓ 入れた」、3 は選ぶ欄が「BlackHole 2ch」に替わる。
+   アイコンは製品のものを使わず、文字（あ・🎤）で表す */
+.voice-need .vn-lead { margin-bottom: 14px; }
+.vn-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-bottom: 4px; }
+.vn-s { position: relative; padding: 12px 12px 16px; border-radius: 14px; background: rgba(255, 255, 255, .05); border: 1px solid rgba(255, 255, 255, .14); }
+.vn-s::after { content: ""; position: absolute; inset: -1px; border-radius: inherit; border: 1px solid var(--cyan); box-shadow: 0 0 0 3px rgba(var(--cyan-rgb), .18); opacity: 0; pointer-events: none; animation: vn-on-1 9s ease infinite; }
+.vn-s2::after { animation-name: vn-on-2; }
+.vn-s3::after { animation-name: vn-on-3; }
+.vn-s h4 { display: flex; align-items: center; gap: 8px; margin-top: 12px; font-size: 15px; line-height: 1.45; color: var(--on-dark); }
+.voice-need .vn-s p { margin-top: 4px; font-size: 13px; line-height: 1.6; color: var(--on-dark-3); }
+.vn-n { flex: none; display: grid; place-items: center; width: 24px; height: 24px; border-radius: 50%; background: var(--cyan); color: var(--navy-2); font-size: 13px; font-weight: var(--weight-heavy); }
+.vn-fig { position: relative; display: grid; place-items: center; height: 104px; border-radius: 10px; background: rgba(255, 255, 255, .06); overflow: hidden; }
+/* 1・2：アプリのカード（名前の下のバーが伸びて、入ったことを表す） */
+.vn-app { display: grid; grid-template-columns: auto 1fr; align-items: center; gap: 6px 10px; width: min(78%, 210px); padding: 10px 12px; border-radius: 10px; background: #fff; box-shadow: 0 10px 22px -14px rgba(0, 0, 0, .6); }
+.vn-ico { grid-row: span 2; display: grid; place-items: center; width: 34px; height: 34px; border-radius: 9px; background: var(--grad-accent); color: #fff; font-size: 17px; font-style: normal; font-weight: var(--weight-heavy); }
+.vn-app b { font-size: 13px; line-height: 1.3; color: var(--ink); white-space: nowrap; }
+.vn-prog { display: block; height: 5px; border-radius: 3px; background: #e3e9f5; overflow: hidden; }
+.vn-prog i { display: block; width: 0; height: 100%; border-radius: inherit; background: var(--blue); animation: vn-prog-1 9s ease-in-out infinite; }
+.vn-s2 .vn-prog i { animation-name: vn-prog-2; }
+.vn-done { position: absolute; right: 8px; bottom: 8px; padding: 2px 9px; border-radius: 99px; background: #34c759; color: #fff; font-size: 11px; font-weight: var(--weight-heavy); line-height: 1.5; opacity: 0; animation: vn-done-1 9s ease infinite; }
+.vn-s2 .vn-done { animation-name: vn-done-2; }
+.vn-s3 .vn-done { animation-name: vn-done-3; }
+/* 3：Aqua Voice の設定の、マイクを選ぶ欄 */
+.vn-set { width: min(86%, 230px); padding: 8px 10px 10px; border-radius: 10px; background: #fff; box-shadow: 0 10px 22px -14px rgba(0, 0, 0, .6); }
+.voice-need .vn-set > p { margin-bottom: 6px; font-size: 10.5px; font-weight: var(--weight-heavy); color: var(--ink-3); }
+.vn-row { display: flex; align-items: center; gap: 8px; font-size: 12px; font-weight: var(--weight-bold); color: var(--ink); }
+.vn-sel { position: relative; flex: 1; height: 26px; border: 1px solid #d4def2; border-radius: 6px; animation: vn-sel 9s ease infinite; }
+.vn-sel em { position: absolute; left: 8px; right: 18px; top: 50%; transform: translateY(-50%); font-style: normal; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.vn-old { color: var(--ink-3); animation: vn-old 9s ease infinite; }
+.vn-new { color: var(--blue-deep); opacity: 0; animation: vn-new 9s ease infinite; }
+.vn-sel i { position: absolute; right: 6px; top: 50%; transform: translateY(-50%); font-size: 10px; font-style: normal; color: var(--ink-3); }
+.vn-tap { position: absolute; left: 62%; top: 60%; width: 22px; height: 22px; margin: -11px 0 0 -11px; border-radius: 50%; background: rgba(var(--ink-rgb), .28); border: 2px solid rgba(255, 255, 255, .9); opacity: 0; pointer-events: none; animation: vn-tap 9s ease infinite; }
+@keyframes vn-on-1 { 0%, 1% { opacity: 0; } 3%, 31% { opacity: 1; } 34%, 100% { opacity: 0; } }
+@keyframes vn-on-2 { 0%, 33% { opacity: 0; } 36%, 64% { opacity: 1; } 67%, 100% { opacity: 0; } }
+@keyframes vn-on-3 { 0%, 66% { opacity: 0; } 69%, 95% { opacity: 1; } 98%, 100% { opacity: 0; } }
+@keyframes vn-prog-1 { 0%, 4% { width: 0; } 24%, 97% { width: 100%; } 100% { width: 0; } }
+@keyframes vn-prog-2 { 0%, 37% { width: 0; } 57%, 97% { width: 100%; } 100% { width: 0; } }
+@keyframes vn-done-1 { 0%, 24% { opacity: 0; transform: scale(.6); } 27%, 97% { opacity: 1; transform: none; } 100% { opacity: 0; } }
+@keyframes vn-done-2 { 0%, 57% { opacity: 0; transform: scale(.6); } 60%, 97% { opacity: 1; transform: none; } 100% { opacity: 0; } }
+@keyframes vn-done-3 { 0%, 81% { opacity: 0; transform: scale(.6); } 84%, 97% { opacity: 1; transform: none; } 100% { opacity: 0; } }
+@keyframes vn-tap { 0%, 70% { opacity: 0; transform: scale(1.6); } 72% { opacity: 1; transform: scale(1); } 74% { transform: scale(.75); } 76% { opacity: 1; transform: scale(1); } 79%, 100% { opacity: 0; } }
+@keyframes vn-sel { 0%, 74% { border-color: #d4def2; box-shadow: none; } 77%, 97% { border-color: var(--blue); box-shadow: 0 0 0 3px rgba(var(--blue-rgb), .2); } 100% { border-color: #d4def2; box-shadow: none; } }
+@keyframes vn-old { 0%, 74% { opacity: 1; } 76%, 97% { opacity: 0; } 100% { opacity: 1; } }
+@keyframes vn-new { 0%, 74% { opacity: 0; } 76%, 97% { opacity: 1; } 100% { opacity: 0; } }
 
 /* ---- 声で書く：動く図（2026-11-20）----
    どれも CSS だけで動く。同じ図の中の部品は、同じ長さの時計で合わせている。
@@ -1036,6 +1084,7 @@
   .vm p { margin-top: 0; }
   /* 声の通り道は、縦に並べる */
   .voice-flow { --vf-x: 0px; --vf-y: 14px; }
+  .vn-steps { grid-template-columns: 1fr; gap: 10px; }
   .vf-row, .vf-mac { flex-direction: column; }
   .vf-mac { padding: 30px 10px 10px; }
   .vf-row > .vf-node { margin: 0; }
@@ -1077,4 +1126,7 @@
   /* 場面の流れ：声で頼んで、いちばん高い棒が目立ったところ（92%）で止める。カードの枠は出さない */
   .flow-demo *, .flow-demo *::before, .flow-demo *::after { animation-delay: -14.7s !important; animation-play-state: paused !important; }
   .flow-list li::after { animation: none; }
+  /* 準備の 3 つ：ぜんぶ終わったところ（93%）で止め、カードの枠は出さない */
+  .vn-steps *, .vn-steps *::before { animation-delay: -8.4s !important; animation-play-state: paused !important; }
+  .vn-s::after { animation: none; }
 }
