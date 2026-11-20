@@ -451,7 +451,6 @@
           </div>
           <ul class="ticks small">
             <li>外出先からつないだときは、自動で画面を隠します。隠していた場合、切断するとMacをロックします。</li>
-            <li>ロックされたMacは、次につなぐときに、手もとのデバイスからパスワードを入れて解除できます。<span class="tbd">未確定：iPhone・iPad・Androidからの解除は対応予定。対応を確かめてから公開</span></li>
             <li>通信は暗号化（TLS 1.3など）。映像と操作は、Macとデバイスの間で直接やり取りします。MOTHERSHIPのサーバーは通りません。</li>
             <li>登録はQRコードで。登録したデバイスだけが接続できます。デバイスごとの鍵は、そのデバイスの安全な領域から取り出せません。</li>
             <li>アプリを開くときに、Face ID・Touch ID・指紋でロックをかけられます。</li>
@@ -615,7 +614,7 @@
           </li>
         </ol>
         <p class="how-note">イメージです（実際の画面とは異なります）</p>
-        <p class="how-more"><a class="btn btn-ghost" href="help.html">くわしい手順は、ヘルプへ <span aria-hidden="true">→</span></a><span class="tbd">未確定：ヘルプページは下書き（help.html。本番には、まだ無い）</span></p>
+        <p class="how-more"><a class="btn btn-ghost" href="help.html">くわしい手順は、ヘルプへ <span aria-hidden="true">→</span></a></p>
 
         <aside class="how-prep" aria-labelledby="prep-title">
           <div class="how-prep-head">
@@ -645,7 +644,7 @@
           <p class="fine">日本円の価格は、公開時にご案内します。</p>
           <ul class="ticks small">
             <li>一度の購入で、お持ちのMacを何台でも使えます。</li>
-            <li>購入は、MOTHERSHIPの中から。iPhone・iPadはApp Store、AndroidはGoogle Playの決済です。<span class="tbd">未確定：Google Playはストアの準備中。公開時の状況に合わせる</span></li>
+            <li>購入は、iPhone・iPadのMOTHERSHIPの中から（App Storeの決済）。</li>
             <li>機種を変えても、「購入を復元」で引き継げます。</li>
           </ul>
           <p class="fine">試用期間が終わると、購入するまでデバイスから接続できなくなります。</p>
@@ -679,7 +678,7 @@
         <div class="faq-list">
           <details><summary>外出先からも使えますか？</summary><p>はい。MacとデバイスにTailscale（個人なら無料で使えるVPNサービス）を入れておくと、外出先からも接続できます。ルーターの設定を変える必要はありません。</p></details>
           <details><summary>出かけている間、Macはつけたままにするのですか？</summary><p>はい。Macがスリープすると、外からつなげません。MOTHERSHIP HOSTの「待機中もMacをスリープさせない」をオンにしておきます。ノート型のMacは、ふたを閉じるとスリープすることがあります。</p></details>
-          <details><summary>Macがロックされているときは？</summary><p>手もとのデバイスから、Macのパスワードを入れて解除できます。<span class="tbd">未確定：iPhone・iPad・Androidは対応予定。対応を確かめてから公開</span></p></details>
+          <details><summary>Macがロックされているときは？</summary><p>Mac版のMOTHERSHIPでは、接続先のMacのパスワードを入力してロックを解除できます。</p></details>
           <details><summary>Macを再起動したあとは使えますか？</summary><p>Macにログインするまでは、MOTHERSHIP HOSTが動かないため接続できません。ログインしたあとは、自動で待ち受けをはじめます（「ログイン時に起動」をオンにした場合）。</p></details>
           <details><summary>通信量はどのくらいですか？</summary><p>画面の動きと回線の状態に合わせて、自動で調整します。画面が止まっている間は、ほとんど通信しません。</p></details>
           <details><summary>複数のデバイスから同時につなげますか？</summary><p>1台のMacにつなげるのは、一度に1台です。別のデバイスからつなぐと、そちらに切り替わります。</p></details>
@@ -717,13 +716,29 @@
         </div>
       </div>
     </section>
+
+    <!-- 最新のお知らせ（2026-11-21 追加）。本番では WordPress の投稿の新しい順に 3 件まで、タイトルだけを並べる（1 件なら 1 件、0 件ならこの節ごと出さない）。下の 3 件はサンプル -->
+    <section class="section latest-news" aria-labelledby="latest-news-title">
+      <div class="wrap latest-news-inner">
+        <div class="latest-news-head">
+          <p class="kicker">NEWS</p>
+          <h2 id="latest-news-title">お知らせ</h2>
+        </div>
+        <ul class="latest-news-list">
+          <li><a href="#">（サンプル）MOTHERSHIPを公開しました</a></li>
+          <li><a href="#">（サンプル）MOTHERSHIP HOST 1.0.1 を公開しました。接続の安定性を改善しています</a></li>
+          <li><a href="#">（サンプル）ウェブサイトを公開しました</a></li>
+        </ul>
+        <a class="btn btn-ghost latest-news-more" href="news.html">お知らせ一覧へ <span aria-hidden="true">→</span></a>
+      </div>
+    </section>
   </main>
 
   <footer class="site-footer">
     <div class="wrap">
       <div class="footer-top">
         <a class="brand" href="#top"><span>MOTHERSHIP</span></a>
-        <nav aria-label="フッターナビゲーション"><a href="#features">特長</a><a href="#voice">声で入力</a><a href="#how">使い方</a><a href="#pricing">料金</a><a href="#faq">よくある質問</a><a href="#download">ダウンロード</a><a href="news.html">お知らせ</a><a href="terms-of-service.html">利用規約</a><a href="privacy-policy.html">プライバシーポリシー</a><a href="commercial-transactions.html">特定商取引法に基づく表記</a><a href="contact.html">お問い合わせ</a></nav>
+        <nav aria-label="フッターナビゲーション"><a href="#features">特長</a><a href="#voice">声で入力</a><a href="#how">使い方</a><a href="#pricing">料金</a><a href="#faq">よくある質問</a><a href="#download">ダウンロード</a><a href="help.html">ヘルプ</a><a href="news.html">お知らせ</a><a href="terms-of-service.html">利用規約</a><a href="privacy-policy.html">プライバシーポリシー</a><a href="commercial-transactions.html">特定商取引法に基づく表記</a><a href="contact.html">お問い合わせ</a></nav>
       </div>
       <p class="trademark">Mac、macOS、iPhone、iPad、iPadOS、App Store、Face ID、Touch ID、Mission Controlは、米国およびその他の国や地域で登録されたApple Inc.の商標です。iPhoneの商標は、アイホン株式会社のライセンスにもとづき使用されています。Android、Google PlayはGoogle LLCの商標です。Galaxy Z Foldは、Samsung Electronics Co., Ltd.の商標または登録商標です。TailscaleはTailscale Inc.の商標です。Aqua Voice、BlackHoleは、それぞれの権利者の商標または製品名です。</p>
       <p class="trademark">MOTHERSHIPは独立して開発されたアプリであり、Apple Inc.、Google LLC、Tailscale Inc.、Aqua Voiceの提供元が認定・後援・承認したものではありません。</p>

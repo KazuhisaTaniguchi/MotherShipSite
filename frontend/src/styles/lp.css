@@ -856,6 +856,18 @@
 .soon { margin-top: 14px; }
 .download-panel .fine { color: var(--on-dark-3); margin-top: 26px; }
 
+/* 最新のお知らせ（2026-11-21）。ダウンロードのあと、フッターの直前。タイトルだけを 3 件まで。PC は 見出し｜一覧｜ボタン の 3 列、スマホは縦に */
+.latest-news { padding-top: 0; margin-top: calc(var(--section-y) * -.45); }   /* すぐ上のダウンロードの下の余白を、少し詰める */
+.latest-news-inner { display: grid; grid-template-columns: 200px minmax(0, 1fr) auto; gap: 16px 48px; align-items: center; padding-top: clamp(32px, 4vw, 48px); border-top: 1px solid var(--line); }
+.latest-news-head .kicker { margin-bottom: 4px; }
+.latest-news-head h2 { font-size: var(--text-heading); font-weight: var(--weight-heavy); }
+.latest-news-list { border-top: 1px solid var(--line); }
+.latest-news-list li { border-bottom: 1px solid var(--line); }
+.latest-news-list a { position: relative; display: block; padding: 16px 32px 16px 4px; font-weight: var(--weight-bold); line-height: var(--leading-note); color: var(--ink); text-decoration: none; transition: color var(--dur-base); }
+.latest-news-list a::after { content: "→"; position: absolute; right: 6px; top: 50%; transform: translateY(-50%); color: var(--ink-3); transition: transform var(--dur-base), color var(--dur-base); }
+.latest-news-list a:hover { color: var(--blue-deep); }
+.latest-news-list a:hover::after { color: var(--blue-deep); transform: translate(3px, -50%); }
+
 /* タブレット以下 */
 @media (max-width: 980px) {
   .feature-lead, .voice-grid, .pricing-grid { grid-template-columns: 1fr; }
@@ -884,6 +896,8 @@
   .td-steps li { padding: 8px 10px; font-size: 12px; }
   .td-steps li b { font-size: 13px; }
   .voice-steps { grid-template-columns: 1fr; }
+  .latest-news-inner { grid-template-columns: 1fr; gap: 16px; }
+  .latest-news-more { justify-self: start; }
   .how-steps { grid-template-columns: 1fr; gap: 16px; max-width: 460px; margin-inline: auto; }
   .how-prep { margin-top: 44px; padding: 22px 18px; }
   .prep-list { grid-template-columns: 1fr; gap: 10px; }

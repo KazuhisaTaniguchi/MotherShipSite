@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { HeroDemo } from "@/components/HeroDemo";
+import { getAllPosts } from "@/lib/wordpress";
 
 // トップページ（LP）。mock/design/index.html の <main> をそのまま JSX にしたもの（原稿は mock/contents/lp-content.md の第2版）。
 // モックで赤い枠の「未確定：…」を付けた所（Mac のロック解除 2 か所、Google Play の購入）は、
@@ -9,7 +10,10 @@ export const metadata: Metadata = {
   title: { absolute: "MOTHERSHIP｜スマホからMacをリモート操作。指で動かす、声で書く" },
 };
 
-export default function Home() {
+export default async function Home() {
+  // 最新のお知らせ（WordPress の投稿の新しい順に 3 件まで）。ビルドのときに読む。投稿が変わると、WordPress からの合図でサイトが作り直される
+  const latestPosts = (await getAllPosts()).slice(0, 3);
+
   return (
   <main id="main">
 
@@ -685,6 +689,24 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* 最新のお知らせ：タイトルだけを 3 件まで（1 件なら 1 件）。0 件のときは、この節ごと出さない */}
+      {latestPosts.length > 0 && (
+        <section className="section latest-news" aria-labelledby="latest-news-title">
+          <div className="wrap latest-news-inner">
+            <div className="latest-news-head">
+              <p className="kicker">NEWS</p>
+              <h2 id="latest-news-title">お知らせ</h2>
+            </div>
+            <ul className="latest-news-list">
+              {latestPosts.map((post) => (
+                <li key={post.databaseId}><Link href={`/news/${post.databaseId}/`}>{post.title}</Link></li>
+              ))}
+            </ul>
+            <Link className="btn btn-ghost latest-news-more" href="/news/">お知らせ一覧へ <span aria-hidden="true">→</span></Link>
+          </div>
+        </section>
+      )}
     </main>
   );
 }
