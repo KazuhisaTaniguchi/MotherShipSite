@@ -467,8 +467,8 @@ export default async function Home() {
             </article>
 
             <article className="feature">
-              <h3>Macは、何台でも。</h3>
-              <p>Macは何台でも登録して、切り替えて使えます。一度の購入で、どのMacにもつなげます。</p>
+              <h3>Macを、切り替えて。</h3>
+              <p>Macは何台でも登録して、切り替えて使えます。一度の購入で使えるMacは、3台までです。</p>
             </article>
 
             <article className="feature">
@@ -616,7 +616,7 @@ export default async function Home() {
             <p className="price"><span>US$</span>19.99</p>
             <p className="fine">日本円の価格は、公開時にご案内します。</p>
             <ul className="ticks small">
-              <li>一度の購入で、お持ちのMacを何台でも使えます。</li>
+              <li>一度の購入で、Macを3台まで使えます。</li>
               <li>購入は、iPhone・iPadのMOTHERSHIPの中から（App Storeの決済）。</li>
               <li>機種を変えても、「購入を復元」で引き継げます。</li>
             </ul>
@@ -668,7 +668,8 @@ export default async function Home() {
           <h3 className="faq-group">料金</h3>
           <div className="faq-list">
             <details><summary>月額料金はかかりますか？</summary><p>かかりません。14日間の試用のあとは、一度の購入でずっと使えます。</p></details>
-            <details><summary>Macを2台持っています。2回買う必要がありますか？</summary><p>いいえ。一度の購入で、お持ちのMacを何台でも使えます。</p></details>
+            <details><summary>Macを2台持っています。2回買う必要がありますか？</summary><p>いいえ。一度の購入で、Macを3台まで使えます。</p></details>
+            <details><summary>Macを買い替えたときや、4台目のMacで使うときは？</summary><p>デバイスの設定の「ライセンス」で、使わなくなったMacを外すと、別のMacに使えます。そのMacにつながずに外せるのは、90日に1回です。Macを手放す前に、MOTHERSHIP HOSTのメニューの「この Mac のライセンスを外す」で外しておくと確実です。</p></details>
           </div>
         </div>
       </section>
