@@ -79,6 +79,7 @@ LP 全体の原稿と、実画面の素材です。
 | 11 | フッターの名義（© の後ろ） | 販売者は個人名で出る予定。サイトの名義は未決定 | S17 |
 | 12 | Aqua Voice の名前を出すことの確認、提供元の正式な社名 | 未確認。「声で書く」は 3 つの柱の 1 つなので、公開前に必ず確かめる。**アイコンは 2026-11-20 に削除した**（名前を文字で書くだけ） | S1・S7・S17 |
 | 13 | OGP 画像（1200×630） | 未作成 | S0 |
+| 14 | ヘルプページ | **未作成**。トップの「使い方」から、細かい設定のリンクを 4 本張っている（`help.html`、`#outside`・`#keep-awake`・`#voice`。どれも仮）。ページを作ってから、スラッグとアンカーを決めて張り直す。作るまでは、本番にリンクを出さない | S13 |
 
 ### 実機で確かめてから載せること（原稿の【要確認】）
 
@@ -125,6 +126,7 @@ LP 全体の原稿と、実画面の素材です。
 | **（第2版）** 3 本指のスワイプ：上＝Mission Control、下＝アプリの窓の一覧、左右＝デスクトップの切り替え | iPhone・iPad：`ios-client/…/Input/TouchSurfaceView.swift`（`threeFinger`。⌃↑・⌃↓・⌃←・⌃→。直接タッチでも動く）。Android：`android-client/core/…/TrackpadView.kt`（トラックパッドのモード） |
 | **（第2版）** 向きを変えても、Mac の窓は自動では並び直らない | 仕様書 P0-4、iPad版仕様書 §3.1（「ウィンドウは位置が調整されて仮想モニターに残る」） |
 | **（第2版）** 音声入力のバーはボタン 6 個まで。はじめは 🎤・削除・Enter・Tab・コピー・ペースト。入れ替えられる。バーは動かせる | `ios-client/…/Input/VoiceBar.swift`、`android-client/…/VoiceBar.kt`（既定 `voice,backspace,enter,tab,cmdC,cmdV`）、`音声入力の中継 仕様書.md` §11（選べるのは「なし」・🎤・28 種類のキー） |
+| **（図）** 声の通り道：デバイスの声 → Mac の MOTHERSHIP HOST → 仮想マイク「BlackHole 2ch」→ Aqua Voice → 開いているアプリ | `音声入力の中継 仕様書.md` §3（Mac のアプリが、届いた声を仮想マイクに書き込む。Aqua Voice はその仮想マイクから録音する）、§5.1 案 A（BlackHole 2ch）、検証 C-2b（Aqua Voice のマイクを「BlackHole 2ch」にすると文字になった） |
 | **（第2版）** 画質「文字優先」 | `SettingsView.swift`「文字優先（30fps。文字がくっきり）」 |
 | **（第2版）** 「待機中も Mac をスリープさせない」「ログイン時に起動」 | `mac-host/…/App.swift` のメニューの切り替え |
 | **（第2版）** 外出先からつなぐと自動で画面を隠す（はじめの設定でオン）、隠していたら切断でロック（はじめの設定でオン） | iPhone・iPad `SettingsView.swift`（`autoShield = true`）、Android `InputSettings.kt`（`autoShield = true`）、ホスト `App.swift`「画面を隠していたときは、切断したら Mac をロックする」 |

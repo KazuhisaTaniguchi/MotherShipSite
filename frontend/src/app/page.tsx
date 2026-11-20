@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { HeroDemo } from "@/components/HeroDemo";
 
 // トップページ（LP）。mock/design/index.html の <main> をそのまま JSX にしたもの（原稿は mock/contents/lp-content.md の第2版）。
-// モックで赤い枠の「未確定：…」を付けた 3 か所（Mac のロック解除 2 か所、Google Play の購入）は、
+// モックで赤い枠の「未確定：…」を付けた所（Mac のロック解除 2 か所、Google Play の購入、ヘルプページへのリンク）は、
 // 対応を確かめるまで、いま確かな文だけを出している（くわしくは mock/contents/README.md の未確定事項 5・7）。
 export const metadata: Metadata = {
   title: { absolute: "MOTHERSHIP｜スマホからMacをリモート操作。指で動かす、声で書く" },
@@ -136,7 +136,7 @@ export default function Home() {
               <h3>小さな画面でも、<br />文字はくっきり。</h3>
               <p>27インチのモニターをそのままスマホに映すと、文字は小さすぎて読めません。MOTHERSHIPは、つないでいる間だけ、あなたのデバイスと同じ大きさ・同じ形の専用モニターをMacに追加します。画面いっぱいに、点と点がぴったり合った状態で映るので、ターミナルの小さな文字も、表の数字も、くっきり読めます。</p>
               <ul className="ticks">
-                <li>デバイスを縦にすれば縦長の画面に、横にすれば横長の画面に。どちらでも、横幅ぴったりで映ります。</li>
+                <li>デバイスを縦にすれば縦長の画面に、横にすれば横長の画面に。どちらでも、横幅ぴったりで映ります。縦にしたときは、窓を広げれば横幅いっぱいの大きさで読めます。</li>
                 <li>画面の動きが止まると、すぐに高画質で送り直します。AIが書いた文を読むときも、文字がにじみません。</li>
                 <li>細かい文字が多いときは、画質を「文字優先」に。</li>
                 <li>ピンチで拡大すると、見ている部分を高い解像度で取り込み直します。</li>
@@ -144,15 +144,33 @@ export default function Home() {
               </ul>
               <p className="fine">専用モニターは、接続を切ると自動で消えます。向きを変えても、Macの窓は自動では並び直りません（Macのふつうの動きです）。重なった窓は、3本指のスワイプで一覧にして選べます。</p>
             </div>
-            <div className="fit-diagram" role="img" aria-label="大きなモニターをそのまま縮めると文字が読めないが、デバイスと同じ形の専用モニターなら文字が大きく読める、という比較の図">
+            {/* 図：HERO のアニメと同じ流れ（横向き → 縦に回す → 窓が重なる → レポートを横幅いっぱいに）を、左右で同時に動かして比べる。CSS だけで動く */}
+            <div className="fit-diagram" role="img" aria-label="タブレットを横から縦に回したときの比較の図。大きな画面をそのまま映すと、縦では細い帯のように縮んで文字が読めない。MOTHERSHIPなら、縦にするとMacの画面も縦長になり、文字は大きいまま。重なった窓を広げると、横幅いっぱいに映る。">
               <div className="fit-col">
-                <div className="fit-phone"><div className="fit-screen fit-shrunk"><span></span><span></span><span></span><span></span><span></span><span></span></div></div>
-                <p><b>そのまま映すと</b>大きな画面が縮んで、文字が読めない</p>
+                <div className="fit-stage" aria-hidden="true">
+                  <div className="fit-dev">
+                    <div className="fit-mac fit-mac-shrunk">
+                      <i className="fit-mbar"></i>
+                      <div className="fit-win fw-1"><b></b><span></span><span></span><span></span><span></span></div>
+                      <div className="fit-win fw-2"><b></b><span></span><span></span><span></span></div>
+                      <div className="fit-win fw-3"><b></b><span></span><span></span><span></span><span></span></div>
+                    </div>
+                  </div>
+                </div>
+                <p><b>そのまま映すと</b>大きな画面が縮んで、文字が読めない。縦にすると、細い帯になる</p>
               </div>
               <div className="fit-arrow" aria-hidden="true">→</div>
               <div className="fit-col">
-                <div className="fit-phone is-good"><div className="fit-screen fit-native"><span></span><span></span><span></span><span></span></div></div>
-                <p><b>MOTHERSHIPなら</b>デバイスの形に合わせた画面で、文字が大きい</p>
+                <div className="fit-stage" aria-hidden="true">
+                  <div className="fit-dev is-good">
+                    <div className="fit-mac fit-mac-native">
+                      <i className="fit-mbar"></i>
+                      <div className="fit-win fit-ai"><b></b><span></span><span></span><span></span></div>
+                      <div className="fit-win fit-out"><b></b><em><i></i><i></i><i></i><i></i></em></div>
+                    </div>
+                  </div>
+                </div>
+                <p><b>MOTHERSHIPなら</b>縦でも横でも、デバイスの形の画面に。窓を広げれば、横幅いっぱい</p>
               </div>
             </div>
           </article>
@@ -172,6 +190,39 @@ export default function Home() {
                 <li>窓を選ぶ、広げる、閉じる。窓の左上のボタンも、指でそのまま押せます。</li>
                 <li>細かい場所をねらうときは、画面全体をトラックパッドとして使うモードに切り替えられます。</li>
               </ul>
+              {/* 図：指の操作を 4 つ、順に見せる（12 秒で 1 周。CSS だけで動く）。タップで「許可」→ 2本指でスクロール → 3本指で上にスワイプして窓の一覧、レポートを選ぶ → 緑のボタンで横幅いっぱい */}
+              <div className="touch-demo" role="img" aria-label="指でMacを動かす様子の図。AIの確認のボタンを指でタップして許可する。2本指でスクロールする。3本指で上にスワイプして開いている窓の一覧を出し、レポートを選ぶ。窓の緑のボタンを押して、横幅いっぱいに広げる。">
+                <div className="td-stage" aria-hidden="true">
+                  <div className="td-dev">
+                    <div className="td-mac">
+                      <i className="td-mbar"></i>
+                      <div className="td-win td-ai">
+                        <b></b>
+                        <div className="td-view"><div className="td-scroll"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div></div>
+                        <div className="td-ask"><span></span><em>許可</em></div>
+                      </div>
+                      <div className="td-win td-out">
+                        <b><i></i><i></i><i></i></b>
+                        <p className="td-name">売上レポート</p>
+                        <div className="td-bars"><i></i><i></i><i></i><i></i><i></i></div>
+                      </div>
+                      <i className="td-dim"></i>
+                      <span className="td-f td-tap1"></span>
+                      <span className="td-f2"><i></i><i></i></span>
+                      <span className="td-f3"><i></i><i></i><i></i></span>
+                      <span className="td-f td-tap2"></span>
+                      <span className="td-f td-tap3"></span>
+                    </div>
+                  </div>
+                </div>
+                <ol className="td-steps" aria-hidden="true">
+                  <li><b>タップ</b>AIの確認のボタンを、指で押す</li>
+                  <li><b>2本指</b>上へなぞって、スクロール</li>
+                  <li><b>3本指</b>上へスワイプで、窓の一覧。レポートを選ぶ</li>
+                  <li><b>広げる</b>緑のボタンで、横幅いっぱい</li>
+                </ol>
+                <p className="td-note">イメージです（実際の画面とは異なります）</p>
+              </div>
             </article>
           </div>
         </div>
@@ -189,6 +240,22 @@ export default function Home() {
               <li><b>話す</b><span>デバイスのマイクに向かって、ふつうに話します。</span></li>
               <li><b>離す</b><span>MacのAqua Voiceが文字にして、カーソルの位置に入力します。</span></li>
             </ol>
+          </div>
+
+          {/* 図 1：押す → 話す → 離す → Enter で送る（12 秒で 1 周。左の「押す・話す・離す」の枠も、同じ時計で明るくなる） */}
+          <div className="voice-visual" aria-hidden="true">
+            <div className="voice-card">
+              <div className="voice-wave"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+              <p className="voice-said"><span>「テストが通ったら、</span><span>プルリクエストを</span><span>作ってください。」</span></p>
+              <div className="voice-arrow">↓</div>
+              <p className="voice-typed"><span className="vt-start"><span className="caret"></span></span><span className="vt-text">テストが通ったら、プルリクエストを作ってください。</span><span className="vt-end"><span className="caret"></span></span><span className="vt-sent">⏎ Enterで送信</span></p>
+              <div className="voice-buttons"><span className="vb vb-mic">🎤</span><span className="vb">⌫</span><span className="vb vb-enter">⏎</span><span className="vb">⇥</span><span className="vb"><small>コピー</small></span><span className="vb"><small>ペースト</small></span></div>
+              <p className="voice-phase"><span><b>1</b>押す</span><span><b>2</b>話す</span><span><b>3</b>離すと、Macに文字が入る</span><span><b>4</b>Enterで送る。キーボードは出しません</span></p>
+            </div>
+            <p className="voice-visual-note">イメージ図です</p>
+          </div>
+
+          <div className="voice-more">
             <ul className="ticks small on-dark">
               <li>音声入力のバーには、ボタンを6個まで置けます。はじめは、🎤・削除・Enter・Tab・コピー・ペースト。話して、Enterで送る。ここまで、キーボードは出しません。</li>
               <li>バーのボタンは、よく使うキーに入れ替えられます（Esc、矢印、取り消す、Mission Controlなど）。バーは、好きな場所に動かせます。</li>
@@ -196,22 +263,82 @@ export default function Home() {
               <li>外付けキーボードの好きなキーを、「話すキー」にもできます。</li>
               <li>iPhone・iPad・Androidで使えます。</li>
             </ul>
+            {/* 図 3：バーの小わざ（上の箇条書きの 2・3 番目を絵にしたもの） */}
+            <div className="voice-minis" aria-hidden="true">
+              <div className="vm vm-cancel">
+                <div className="vm-fig"><div className="vm-in">
+                  <span className="vm-field"><span className="caret"></span></span>
+                  <span className="vm-tag">取り消し</span>
+                  <div className="vm-bar"><span className="vk vk-mic">🎤</span><span className="vk">⌫</span><span className="vk">⏎</span></div>
+                </div></div>
+                <p><b>滑らせて、取り消し</b>押したまま、指を外へ</p>
+              </div>
+              <div className="vm vm-move">
+                <div className="vm-fig"><div className="vm-in">
+                  <span className="vm-win"><b></b><i></i><i></i><i></i><i></i></span>
+                  <div className="vm-drag"><div className="vm-bar"><span className="vm-grip">≡</span><span className="vk vk-mic">🎤</span><span className="vk">⌫</span><span className="vk">⏎</span></div></div>
+                </div></div>
+                <p><b>バーを、好きな場所へ</b>重なったら、指で動かす</p>
+              </div>
+              <div className="vm vm-swap">
+                <div className="vm-fig"><div className="vm-in">
+                  <div className="vm-tray"><span>esc</span><span>←</span><span>→</span><span>⌃↑</span></div>
+                  <div className="vm-bar"><span className="vk vk-mic">🎤</span><span className="vk vk-flip"><em>⇥</em><em><small>esc</small></em></span><span className="vk vk-flip"><em><small>コピー</small></em><em>←</em></span><span className="vk vk-flip"><em><small>ペースト</small></em><em>→</em></span></div>
+                </div></div>
+                <p><b>ボタンを、入れ替え</b>よく使うキーを、バーに置く</p>
+              </div>
+            </div>
           </div>
 
-          <div className="voice-visual" aria-hidden="true">
-            <div className="voice-card">
-              <div className="voice-wave"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
-              <p className="voice-said">「テストが通ったら、プルリクエストを作ってください。」</p>
-              <div className="voice-arrow">↓</div>
-              <p className="voice-typed">テストが通ったら、プルリクエストを作ってください。<span className="caret"></span></p>
-              <div className="voice-buttons"><span className="vb vb-mic">🎤</span><span className="vb">⌫</span><span className="vb">⏎</span><span className="vb">⇥</span><span className="vb"><small>コピー</small></span><span className="vb"><small>ペースト</small></span></div>
+          {/* 図 2：キーボードで打つと／声で書くと（8 秒で 1 周） */}
+          <div className="voice-compare-wrap">
+            <div className="voice-compare" role="img" aria-label="キーボードで打つ場合と、声で書く場合を比べた図。キーボードを出すと、画面の下半分が隠れてレポートが見えなくなり、文字は少しずつしか入らない。声で書くと、画面は広いままで、話した文がまとめて入る。">
+              <div className="vc-col" aria-hidden="true">
+                <div className="vc-phone">
+                  <div className="vc-mac">
+                    <div className="vc-win vc-ai"><b></b><span></span><span></span><span></span><div className="vc-prompt"><i></i></div></div>
+                    <div className="vc-win vc-out"><b></b><em><i></i><i></i><i></i><i></i></em></div>
+                  </div>
+                  <div className="vc-kb"><i></i><i></i><i></i><i></i><span className="vc-tap"></span></div>
+                </div>
+                <p><b>キーボードで打つと</b>画面の半分が隠れる。<br />長い文は、打ちにくい</p>
+              </div>
+              <div className="vc-arrow" aria-hidden="true">→</div>
+              <div className="vc-col" aria-hidden="true">
+                <div className="vc-phone is-good">
+                  <div className="vc-mac">
+                    <div className="vc-win vc-ai"><b></b><span></span><span></span><span></span><div className="vc-prompt"><i></i><span className="vc-ok">✓</span></div></div>
+                    <div className="vc-win vc-out"><b></b><em><i></i><i></i><i></i><i></i></em></div>
+                  </div>
+                  <div className="vc-bar"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+                </div>
+                <p><b>声で書くと</b>画面は広いまま。<br />長い文も、話すだけ</p>
+              </div>
             </div>
-            <p className="voice-visual-note">イメージ図です</p>
+            <p className="voice-visual-note" aria-hidden="true">イメージ図です</p>
           </div>
 
           <aside className="voice-need">
             <h3>使うために必要なもの</h3>
             <p>Aqua Voiceは、MOTHERSHIPとは別の会社が提供している音声入力アプリです（MOTHERSHIPには含まれません）。Macに「Aqua Voice」と、無料の仮想オーディオ「BlackHole 2ch」を入れ、Aqua Voiceのマイクを「BlackHole 2ch」にしておきます。文字にする精度は、Aqua Voiceによります。</p>
+            {/* 図 4：声の通り道（6 秒で 1 周。左から順に明るくなる） */}
+            <div className="voice-flow" role="img" aria-label="声の通り道の図。手もとのデバイスで話した声は、MacのMOTHERSHIP HOSTに届く。MOTHERSHIP HOSTは、その声を仮想のマイク「BlackHole 2ch」に流す。Aqua VoiceがBlackHole 2chの声を聞いて文字にし、開いているアプリのカーソルの位置に入力する。Macに入れておくのは、BlackHole 2chとAqua Voiceの2つ。">
+              <p className="vf-title" aria-hidden="true">声の通り道</p>
+              <div className="vf-row" aria-hidden="true">
+                <div className="vf-node vf-n1"><b>手もとのデバイス</b><span>🎤を押している間、声を送る</span></div>
+                <i className="vf-link vf-l1"></i>
+                <div className="vf-mac">
+                  <p>Macの中</p>
+                  <div className="vf-node vf-n2"><b>MOTHERSHIP HOST</b><span>声を受け取って、流す</span></div>
+                  <i className="vf-link vf-l2"></i>
+                  <div className="vf-node vf-n3 is-need"><em>入れておく</em><b>BlackHole 2ch</b><span>声を渡す、仮想のマイク</span></div>
+                  <i className="vf-link vf-l3"></i>
+                  <div className="vf-node vf-n4 is-need"><em>入れておく</em><b>Aqua Voice</b><span>声を文字にする</span></div>
+                  <i className="vf-link vf-l4"></i>
+                  <div className="vf-node vf-n5"><b>開いているアプリ</b><span>カーソルの位置に入る</span></div>
+                </div>
+              </div>
+            </div>
             <p className="voice-need-sub">Aqua Voiceを使わないときは、アプリ内のキーボードか、スマホのキーボード（フリック入力など）で文字を入力できます。</p>
           </aside>
         </div>
@@ -376,34 +503,97 @@ export default function Home() {
         </div>
       </section>
 
-      {/* S13 使い方 */}
+      {/* S13 使い方（2026-11-20 作り直し：3 つのステップを、続きものの動く図で見せる。14 秒で 1 周。細かい設定は書かず、ヘルプへのリンクにする） */}
       <section className="section how" id="how" aria-labelledby="how-title">
-        <div className="wrap how-grid">
-          <div>
+        {/* 図で使い回す絵（ロゴの印と、QR コードふうの模様。模様は本物の QR コードではない） */}
+        <svg className="svg-defs" aria-hidden="true"><symbol id="hs-mark" viewBox="0 0 128 128"><path d="M60 28 22 86 49 80 60 91 60 75 48 70 60 54Z" fill="#fff"/><path d="M68 28 106 86 79 80 68 91 68 75 80 70 68 54Z" fill="#a8f8ff"/><path d="M64 86 72 98 64 105 56 98Z" fill="#fff"/></symbol><symbol id="hs-qr" viewBox="0 0 19 19"><path d="M0 0h7v1h-7zM8 0h2v1h-2zM12 0h7v1h-7zM0 1h1v1h-1zM6 1h1v1h-1zM8 1h1v1h-1zM10 1h1v1h-1zM12 1h1v1h-1zM18 1h1v1h-1zM0 2h1v1h-1zM2 2h3v1h-3zM6 2h1v1h-1zM8 2h1v1h-1zM10 2h1v1h-1zM12 2h1v1h-1zM14 2h3v1h-3zM18 2h1v1h-1zM0 3h1v1h-1zM2 3h3v1h-3zM6 3h1v1h-1zM8 3h3v1h-3zM12 3h1v1h-1zM14 3h3v1h-3zM18 3h1v1h-1zM0 4h1v1h-1zM2 4h3v1h-3zM6 4h1v1h-1zM8 4h1v1h-1zM10 4h1v1h-1zM12 4h1v1h-1zM14 4h3v1h-3zM18 4h1v1h-1zM0 5h1v1h-1zM6 5h1v1h-1zM8 5h1v1h-1zM12 5h1v1h-1zM18 5h1v1h-1zM0 6h7v1h-7zM9 6h1v1h-1zM12 6h7v1h-7zM8 7h1v1h-1zM10 7h1v1h-1zM0 8h3v1h-3zM4 8h1v1h-1zM7 8h1v1h-1zM9 8h3v1h-3zM13 8h2v1h-2zM16 8h2v1h-2zM1 9h1v1h-1zM6 9h1v1h-1zM8 9h2v1h-2zM11 9h1v1h-1zM13 9h1v1h-1zM18 9h1v1h-1zM3 10h1v1h-1zM8 10h1v1h-1zM13 10h2v1h-2zM16 10h1v1h-1zM18 10h1v1h-1zM8 11h2v1h-2zM11 11h3v1h-3zM15 11h2v1h-2zM0 12h7v1h-7zM10 12h3v1h-3zM15 12h4v1h-4zM0 13h1v1h-1zM6 13h1v1h-1zM10 13h4v1h-4zM0 14h1v1h-1zM2 14h3v1h-3zM6 14h1v1h-1zM9 14h1v1h-1zM14 14h3v1h-3zM18 14h1v1h-1zM0 15h1v1h-1zM2 15h3v1h-3zM6 15h1v1h-1zM8 15h10v1h-10zM0 16h1v1h-1zM2 16h3v1h-3zM6 16h1v1h-1zM9 16h5v1h-5zM18 16h1v1h-1zM0 17h1v1h-1zM6 17h1v1h-1zM8 17h3v1h-3zM12 17h2v1h-2zM16 17h1v1h-1zM18 17h1v1h-1zM0 18h7v1h-7zM12 18h3v1h-3zM18 18h1v1h-1z" fill="#14203a"/></symbol></svg>
+        <div className="wrap">
+          <div className="section-head center">
             <p className="kicker">使い方</p>
-            <h2 className="section-title" id="how-title">はじめかたは、<br />3ステップ。</h2>
-            <ol className="steps">
-              <li><span className="step-n">1</span><div><h3>MacにMOTHERSHIP HOSTを入れる</h3><p>操作したいMacに入れると、メニューバーに小さなアイコンが出ます。案内にそって「画面収録」と「アクセシビリティ」を許可してください。</p></div></li>
-              <li><span className="step-n">2</span><div><h3>デバイスでQRコードを読む</h3><p>iPhone・iPad・AndroidにMOTHERSHIPを入れ、Macに表示したQRコードを読み取ります。アカウントの登録は要りません。</p></div></li>
-              <li><span className="step-n">3</span><div><h3>つなぐ</h3><p>同じWi-Fiにいれば、Macが自動で見つかります。あとはタップするだけで、Macの画面が手もとに。</p></div></li>
-            </ol>
-            <aside className="callout">
-              <h3>出かける前に</h3>
-              <p>外から使うときは、この4つを確かめておきます。</p>
-              <ol className="check-list">
-                <li>MacとデバイスにTailscaleを入れて、同じアカウントでログインする。ルーターの設定は要りません。</li>
-                <li>MOTHERSHIP HOSTの「待機中もMacをスリープさせない」をオンにする。</li>
-                <li>MOTHERSHIP HOSTの「ログイン時に起動」をオンにする。</li>
-                <li>声で入力するなら、Macに「Aqua Voice」と「BlackHole 2ch」を入れておく（<a href="#voice">声で書く</a>）。</li>
-              </ol>
-              <p className="fine">はじめて外から使う前に、スマホのWi-Fiを切って、モバイル回線でつながるかを試しておくと安心です。</p>
-            </aside>
+            <h2 className="section-title" id="how-title">はじめかたは、<br className="sp" />3ステップ。</h2>
+            <p className="section-lead">家のWi-Fiなら、この3つで使いはじめられます。</p>
           </div>
-          <figure className="phone how-phone">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <div className="phone-screen"><img src="/images/app-iphone-connect-portrait.png" alt="MOTHERSHIPの最初の画面。Macを登録する手順が表示されている" loading="lazy" width="1206" height="2622" /></div>
-            <figcaption>シミュレーターで撮った画面です。実機では、QRコードを読み取るボタンが表示されます。</figcaption>
-          </figure>
+
+          <ol className="how-steps">
+            <li className="hs hs-1">
+              <div className="hs-fig" role="img" aria-label="MacにMOTHERSHIP HOSTを入れると、メニューバーにアイコンが出る。続けて「画面収録」と「アクセシビリティ」の2つの許可をオンにする様子">
+                <div className="hs-in" aria-hidden="true">
+                  <div className="hs-lap">
+                    <div className="hs-scr">
+                      <div className="hs-mbar"><i></i><b></b><b></b><b></b><span className="hs-tray"><svg viewBox="0 0 128 128"><use href="#hs-mark"/></svg></span><u></u><u></u></div>
+                      <span className="hs-app"><svg viewBox="0 0 128 128"><use href="#hs-mark"/></svg></span>
+                      <div className="hs-perm"><p><span>画面収録</span><i className="hs-tg"></i></p><p><span>アクセシビリティ</span><i className="hs-tg"></i></p></div>
+                      <svg className="hs-cur" viewBox="0 0 12 16"><path d="M1 1v12l3.2-2.8 2 4.6 2-.9-2-4.5H11z" fill="#14203a" stroke="#fff" strokeWidth="1" strokeLinejoin="round"/></svg>
+                    </div>
+                    <div className="hs-base"></div>
+                  </div>
+                </div>
+              </div>
+              <div className="hs-head"><span className="hs-n"><b>1</b><i>✓</i></span><h3>Macに入れる</h3></div>
+              <p>MOTHERSHIP HOSTを入れて、案内にそって2つの許可をオンにします。</p>
+            </li>
+            <li className="hs hs-2">
+              <div className="hs-fig" role="img" aria-label="Macに表示したQRコードを、スマホのMOTHERSHIPで読み取って登録する様子">
+                <div className="hs-in" aria-hidden="true">
+                  <div className="hs-lap">
+                    <div className="hs-scr">
+                      <div className="hs-mbar"><i></i><b></b><b></b><b></b><span className="hs-tray"><svg viewBox="0 0 128 128"><use href="#hs-mark"/></svg></span><u></u><u></u></div>
+                      <div className="hs-qrcard"><b>端末を追加</b><svg viewBox="0 0 19 19"><use href="#hs-qr"/></svg></div>
+                    </div>
+                    <div className="hs-base"></div>
+                  </div>
+                  <div className="hs-ph">
+                    <div className="hs-cam">
+                      <span className="hs-qrs"><svg viewBox="0 0 19 19"><use href="#hs-qr"/></svg></span>
+                      <span className="hs-find"><i></i><i></i><i></i><i></i></span>
+                      <span className="hs-scan"></span>
+                      <span className="hs-okb">✓</span>
+                      <em>QRコードを読み取る</em>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="hs-head"><span className="hs-n"><b>2</b><i>✓</i></span><h3>QRコードを読む</h3></div>
+              <p>デバイスにMOTHERSHIPを入れて、MacのQRコードを読み取ります。</p>
+            </li>
+            <li className="hs hs-3">
+              <div className="hs-fig" role="img" aria-label="スマホに登録済みのMacが出て、「つなぐ」をタップすると、Macの画面がスマホに映る様子">
+                <div className="hs-in" aria-hidden="true">
+                  <div className="hs-lap">
+                    <div className="hs-scr">
+                      <div className="hs-mbar"><i></i><b></b><b></b><b></b><span className="hs-tray"><svg viewBox="0 0 128 128"><use href="#hs-mark"/></svg></span><u></u><u></u></div>
+                      <span className="hs-w hs-w1"><b></b><i></i><i></i><i></i></span><span className="hs-w hs-w2"><b></b><em><i></i><i></i><i></i><i></i></em></span>
+                    </div>
+                    <div className="hs-base"></div>
+                  </div>
+                  <span className="hs-wifi"><i></i><i></i><i></i></span>
+                  <div className="hs-ph">
+                    <div className="hs-list">
+                      <p>登録済みのMac</p>
+                      <span className="hs-search"><i></i><i></i><i></i></span>
+                      <div className="hs-row"><b>Mac mini</b><small>自宅のMac</small><em>つなぐ</em></div>
+                    </div>
+                    <div className="hs-desk"><span className="hs-w hs-w1"><b></b><i></i><i></i><i></i></span><span className="hs-w hs-w2"><b></b><em><i></i><i></i><i></i><i></i></em></span></div>
+                  </div>
+                </div>
+              </div>
+              <div className="hs-head"><span className="hs-n"><b>3</b><i>✓</i></span><h3>つなぐ</h3></div>
+              <p>タップすると、Macの画面が手もとに。同じWi-Fiなら、Macは自動で見つかります。</p>
+            </li>
+          </ol>
+          <p className="how-note">イメージです（実際の画面とは異なります）</p>
+
+          <aside className="how-prep" aria-labelledby="prep-title">
+            <div className="how-prep-head">
+              <h3 id="prep-title">出かける前に</h3>
+              <p>外から使うときは、準備が少しあります。</p>
+            </div>
+            <ul className="prep-list">
+              <li><div className="prep-item"><b>外からつなぐ</b><span>Tailscaleを、Macとデバイスに。</span></div></li>
+              <li><div className="prep-item"><b>Macを起こしておく</b><span>スリープさせない設定を、オンに。</span></div></li>
+              <li><div className="prep-item"><b>声で書く</b><span>Aqua VoiceとBlackHole 2chを、Macに。</span></div></li>
+            </ul>
+          </aside>
         </div>
       </section>
 
