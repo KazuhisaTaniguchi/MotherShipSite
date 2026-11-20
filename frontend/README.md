@@ -42,37 +42,7 @@ npm run build                # out/ に書き出す
 | `WORDPRESS_GRAPHQL_ENDPOINT` | `https://api.mothershipremote.com/graphql` |
 | `NEXT_PUBLIC_SITE_URL` | `https://mothershipremote.com`（OGP・canonical の基準） |
 
-## デプロイ（mothershipremote.com へ）
-
-本番に出すのは、いつも **GitHub の `main` と同じコード** です。
-
-| きっかけ | 方法 |
-|---|---|
-| WordPress で記事・固定ページを公開・更新・削除 | 自動。テーマのフックが GitHub Actions（`.github/workflows/deploy-frontend.yml`）を呼ぶ |
-| このフォルダーのコードを変えた | 手元で **`./deploy.sh`**（commit・push してから） |
-| 手でやり直したい | GitHub の Actions タブ →「Build & Deploy frontend」→「Run workflow」 |
-
-push しただけではデプロイされません。
-
-```bash
-./deploy.sh --dry-run   # 何が変わるかを見るだけ（サーバーは変えない）
-./deploy.sh             # 確認 → ビルド → アップロード
-```
-
-- `deploy.sh` は、コミットしていない変更・push していないコミット・`main` 以外のブランチがあると止まります（WordPress の更新で Actions が `main` からビルドし直したときに、手元だけの変更が消えるのを防ぐため）。
-- 使うには、Mac ごとに `~/.ssh/config` へ接続名 `mothership` を登録します。
-
-  ```
-  Host mothership
-    HostName xs082238.xsrv.jp
-    Port 10022
-    User xs082238
-    IdentityFile ~/.ssh/（その Mac の鍵）
-    IdentitiesOnly yes
-  ```
-
-- **`deploy-exclude.txt` の `/api.mothershipremote.com/` を消さないこと。** `public_html` の中に WordPress があり、消すとデプロイのたびに WordPress が削除されます（`deploy.sh` も Actions も、この行が無いと止まるようにしてある）。
-
 ## まだのこと
 
+- 公開先へのアップロードの方法（`out/` を `mothershipremote.com` の `public_html` へ）と、記事を更新したときに自動でビルドする仕組み。
 - 下書きのプレビュー（静的書き出しでは使えない）。

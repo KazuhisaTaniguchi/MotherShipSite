@@ -1,14 +1,17 @@
 # Next.js（frontend）をビルドして、エックスサーバーの mothershipremote.com へ置く
 # きっかけ：WordPress で公開中の記事・固定ページが変わったとき（repository_dispatch）、
-#           手動（Actions タブの Run workflow）
-# コードの変更は、手元の frontend/deploy.sh で出す（push しただけではデプロイしない）。
-# どちらも GitHub の main のコードを出すので、本番はいつも main と同じになる。
+#           frontend/ のコードを main に push したとき、手動（Actions タブの Run workflow）
 name: Build & Deploy frontend
 
 on:
   repository_dispatch:
     types: [wordpress-updated]
   workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "frontend/**"
+      - ".github/workflows/deploy-frontend.yml"
 
 # 続けて保存されたときは、古いビルドを止めて最新の 1 回だけ実行する
 concurrency:
@@ -62,14 +65,15 @@ jobs:
           ssh -v -o BatchMode=yes -o ConnectTimeout=20 -p "$SSH_PORT" -i ~/.ssh/id_deploy "$SSH_USER@$SSH_HOST" 'echo CONNECTED'
 
       # 重要：public_html の中には WordPress（api.mothershipremote.com/）がある。
-      # --delete で消さないよう、除外の一覧は deploy-exclude.txt（deploy.sh と共通）から読む。
+      # --delete で消さないよう、Next.js 以外のものは必ず除外する（先頭の / は public_html 直下の意味）。
       - name: エックスサーバーへアップロード
         run: |
-          grep -q '^/api\.mothershipremote\.com/$' deploy-exclude.txt \
-            || { echo "deploy-exclude.txt に WordPress の除外がありません。中止します"; exit 1; }
-          [ -f out/index.html ] && [ -d out/_next ] \
-            || { echo "out/ にサイトが書き出されていません。中止します"; exit 1; }
-          rsync -rlz --delete --checksum --exclude-from=deploy-exclude.txt \
+          rsync -rlz --delete --checksum \
+            --exclude='/api.mothershipremote.com/' \
+            --exclude='/.htaccess' \
+            --exclude='/.user.ini' \
+            --exclude='/default_page.png' \
+            --exclude='/.well-known/' \
             -e "ssh -p $SSH_PORT -i ~/.ssh/id_deploy" \
             out/ "$SSH_USER@$SSH_HOST:$DEPLOY_PATH"
 
