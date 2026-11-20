@@ -49,6 +49,9 @@ jobs:
         env:
           WORDPRESS_GRAPHQL_ENDPOINT: https://api.mothershipremote.com/graphql
           NEXT_PUBLIC_SITE_URL: https://mothershipremote.com
+          # お問い合わせフォームの送信先（WordPress の Contact Form 7「Mothership お問い合わせ」の投稿 ID。秘密ではない）
+          NEXT_PUBLIC_WORDPRESS_URL: https://api.mothershipremote.com
+          NEXT_PUBLIC_CF7_CONTACT_FORM_ID: "13"
           NEXT_TELEMETRY_DISABLED: "1"
 
       - name: SSH の準備
