@@ -70,7 +70,7 @@ LP 全体の原稿と、実画面の素材です。
 | 2 | 日本円の価格 | US$19.99 は決定。日本円は App Store の価格表から選ぶ予定（仕様書の目安は約 3,000 円） | S14 |
 | 3 | iPhone・iPad の対応バージョン | いまのビルド設定は iOS／iPadOS 27.0 以上（`project.pbxproj` の `IPHONEOS_DEPLOYMENT_TARGET`）。下げるかどうかで LP の表記が変わる。**新しい OS だけだと、読む人のうち使える人が減る** | S12 |
 | 4 | Intel 搭載の Mac に対応するか | いまのビルドは arm64 だけ。原稿は「Appleシリコンで動作確認」としてある | S12 |
-| 5 | Android・Mac 版からの購入 | **Android（Google Play）は実装済み**（2026-11-20、`main` `88e625e`。エミュレーターで QA 用の購入まで確認）。本物の Google Play での購入は Play Console の準備の後。Mac 版は未対応。原稿は「App Store と Google Play」の文で書き、App Store だけで始める場合の文も添えてある | S14 |
+| 5 | Android・Mac 版からの購入 | **Android（Google Play）は実装済み**（2026-11-20、`main` `88e625e`。エミュレーターで QA 用の購入まで確認）。本物の Google Play での購入は Play Console の準備の後。Mac 版は未対応。原稿・本番・モックとも「App Store と Google Play」の文（2026-11-21 ユーザーの指示）。公開時に Google Play の準備が間に合わなければ、料金の文を戻す | S14 |
 | 6 | Mac 版クライアントの入手先 | このサイトか、Mac App Store か | S12・S16 |
 | 7 | **ロックされた Mac を、iPhone・iPad・Android から解除する** | **公開までに対応する（2026-11-20 ユーザーの方針）。** いまは Mac 版だけがロック解除の画面を持つ（コードで確認）。macOS 27 ではロック中は映像を取り込めず、外出先からつなぐと既定で「画面を隠す → 切断でロック」になるので、**スマホから外で何度もつなぐ使い方に必要**。原稿は対応後の文で書いてある。対応を確かめてから公開し、間に合わない場合は S10 の行を外して S15 の答えを差し替える | S10・S15 |
 | 8 | 画面の広さ 3 段階 | iPhone・iPad の設定で確認。Android・Mac 版の同じ設定は未確認 | S5 |

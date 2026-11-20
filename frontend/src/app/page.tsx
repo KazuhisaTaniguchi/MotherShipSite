@@ -4,7 +4,7 @@ import { HeroDemo } from "@/components/HeroDemo";
 import { getAllPosts } from "@/lib/wordpress";
 
 // トップページ（LP）。mock/design/index.html の <main> をそのまま JSX にしたもの（原稿は mock/contents/lp-content.md の第2版）。
-// モックで赤い枠の「未確定：…」を付けた所（Mac のロック解除 2 か所、Google Play の購入）は、
+// モックで赤い枠の「未確定：…」を付けた所（Mac のロック解除 2 か所）は、
 // 対応を確かめるまで、いま確かな文だけを出している（くわしくは mock/contents/README.md の未確定事項 5・7）。
 export const metadata: Metadata = {
   title: { absolute: "MOTHERSHIP｜スマホからMacをリモート操作。指で動かす、声で書く" },
@@ -617,7 +617,7 @@ export default async function Home() {
             <p className="fine">日本円の価格は、公開時にご案内します。</p>
             <ul className="ticks small">
               <li>一度の購入で、Macを3台まで使えます。</li>
-              <li>購入は、iPhone・iPadのMOTHERSHIPの中から（App Storeの決済）。</li>
+              <li>購入は、MOTHERSHIPの中から。iPhone・iPadはApp Store、AndroidはGoogle Playの決済です。</li>
               <li>機種を変えても、「購入を復元」で引き継げます。</li>
             </ul>
             <p className="fine">試用期間が終わると、購入するまでデバイスから接続できなくなります。</p>

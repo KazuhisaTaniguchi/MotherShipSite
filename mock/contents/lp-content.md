@@ -472,7 +472,7 @@ S2 の 3 つに、同じ順番で答えます。カードから、くわしい�
 
 - 買い切り：US$19.99【未確定：日本円の価格。App Store の価格表から選ぶ予定（目安は約3,000円）】
 - 一度の購入で、Macを3台まで使えます。（2026-11-21 変更。元は「お持ちのMacを何台でも」）
-- 購入は、MOTHERSHIPの中から。iPhone・iPadはApp Store、AndroidはGoogle Playの決済です。【未確定：Google Play での購入は実装済みで、ストアの準備中。Mac 版からの購入は未対応。公開時の状況に合わせて書き換える。App Store だけで始める場合は「購入は、iPhone・iPadのMOTHERSHIPの中から（App Storeの決済）。」に戻す】
+- 購入は、MOTHERSHIPの中から。iPhone・iPadはApp Store、AndroidはGoogle Playの決済です。（2026-11-21 ユーザーの指示で、本番とモックにも載せた。Google Play での購入は実装済みで、ストアの準備中。Mac 版からの購入は未対応）
 - 機種を変えても、「購入を復元」で引き継げます。
 
 **注記**：試用期間が終わると、購入するまでデバイスから接続できなくなります。
