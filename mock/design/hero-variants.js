@@ -1,16 +1,19 @@
-// HERO のアニメ（案 2：資料づくり ── AI に指示して Mac を動かす。2026-11-20 にユーザーが決定）
-// まだ一時的なファイル。動きを確かめてもらったら、styles.css・script.js・index.html に移して、このファイルは消す。
+// HERO のアニメ（資料づくり ── AI に指示して Mac を動かす）。最後の場面を 4 通りに作って見比べるための一時的なファイル。
+// 1 つに決まったら、styles.css・script.js・index.html に移して、このファイルは消す。
 // 見出し「指で動かす。声で書く。」と、リード「AIもビルドも、家のMacに任せたまま。進み具合を見て、次の指示は話すだけ。」の実演にする。
 // 流れ：MacBook で「端末を追加」→ iPad が横向きで登場して「つなぐ」→ 横長の画面に「AI アシスタント｜売上レポート」
 //      → 進み具合を見る → 指で動かす（スクロール）→ 声で書く（直しの指示）→ AI が直す
-//      → レポートの窓を指で広げる → 縦に回すと、レポートが横幅ぴったりで大きく映る → 最初へ
-// ・向きを変えても、Mac の窓は自動では並び直らない。だから「窓を広げてから回す」形にしている（広げた窓は、画面の形に合わせて変わる）
-// ・画面の状態は時刻 t だけで決まる（render）。内容と時刻は、下の VARIANTS にまとめてある
+//      → 縦に回す（窓は大きさを変えずに残り、重なる）→ Mission Control で窓の一覧 → レポートをタップ → グラフが見える
+// ・向きを変えても、Mac の窓は自動では並び直らない。だから、縦にしたあとは「重なった窓を Mission Control で選ぶ」形にしている
+// ・4 つの違い：Mission Control の開き方（案 1 ＝ 音声入力のバーのボタン／案 2 ＝ 3 本指で上にスワイプ）
+//              × 終わり方（A ＝ レポートが手前に出て終わる／B ＝ そのあと緑のボタンで広げて、横幅いっぱいで終わる）
+// ・画面の状態は時刻 t だけで決まる（render）。内容と時刻は、下の BASE と plan() にまとめてある
 // ・声の入力は実物と同じ順番：🎤 を押している間は話した言葉が吹き出しに出て、離すと Mac に文字が入る
-// ・AI の窓は、特定の製品に見えないように描いた絵（名前は「AI アシスタント」。数字や実在の名前は書かない）
-// ・確認用：URL に ?demo=12000 を付けると、その時刻（ミリ秒）で止まる。__heroDemo.ai2.seek(12000) でも止められる
+// ・AI の窓と Mission Control は、描いた絵（AI の名前は「AI アシスタント」。数字や実在の名前は書かない）
+// ・バーの Mission Control のボタンは、実物では「⌃↑」と表示される（ここでは、分かりやすいように窓が並んだ絵にしている）
+// ・確認用：URL に ?demo=12000 を付けると、4 つともその時刻（ミリ秒）で止まる。__heroDemo.v1a.seek(12000) でも止められる
 // ・本物の動画（media/hero-demo.mp4）への切り替えは入れていない（片付けのときに戻す）
-// ・前の案は Git の履歴にある（4 案 A〜D：e05bc58 ／ 3 案 C-1〜C-3：2d81c28 ／ 2 案（開発・資料づくり）：dad0f1d）
+// ・前の案は Git の履歴にある（4 案 A〜D：e05bc58 ／ 3 案 C-1〜C-3：2d81c28 ／ 2 案 開発・資料づくり：dad0f1d ／ 広げてから縦へ：aec01a1）
 (() => {
   const hero = document.querySelector('.hero');
   const first = hero && hero.querySelector('[data-hv]');
@@ -35,19 +38,27 @@
   // 案の内容から、クラスを付ける時刻の一覧を組み立てる
   //   utter:  { hold: [🎤 を押す, 離す], say: 話す言葉 } … 離すと、AI への指示の欄（.m-text-ai）に文字が入る
   //   sendAt: バーの Enter で送る時刻。指示の欄が空になり、同じ文がやりとりの欄に出る
-  //   zoomAt: レポートの窓の緑のボタンを指でタップする時刻。0.5 秒後から、窓が横いっぱいに広がる
-  //   rotAt:  縦に回しはじめる時刻。そこから 4.6 秒で 1 周が終わる
+  //   rotAt:  縦に回しはじめる時刻（R）。1 秒後に、Mac の画面が縦長に作り直り、2 つの窓が重なる
+  //   open:   Mission Control の開き方。'bar' ＝ バーのボタンをタップ ／ 'swipe' ＝ 3 本指で上にスワイプ
+  //   end:    終わり方。'front' ＝ レポートが手前に出て終わる ／ 'zoom' ＝ そのあと緑のボタンで広げて終わる
   const plan = (o) => {
-    const R = o.rotAt; const L = R + 4600; const u = o.utter; const Z = o.zoomAt;
+    const R = o.rotAt; const u = o.utter; const zoom = o.end === 'zoom';
+    const M = R + (zoom ? 1800 : 3400);            // Mission Control を開く操作
+    const Z = M + 3600;                            // 緑のボタンをタップ（zoom のときだけ）
+    const L = zoom ? M + 8000 : M + 5500;          // 1 周の長さ
+    const fit = zoom ? [M + 4800, M + 7300] : [R + 1400, R + 3200];
     return {
       ...o, length: L,
+      scenes: [[0, 'Macで、端末を追加'], [MAC_END, 'iPadから、つなぐ'], [LIVE, 'AIの進み具合を見る'], [o.fingerAt, '指で動かす'], [o.voiceAt, '声で書く'],
+        [R, zoom ? '縦にすると、縦長の画面に' : '縦にしても、横幅ぴったり'], [M - 200, 'Mission Controlで、窓を選ぶ'],
+        ...(zoom ? [[Z - 200, '広げて、横幅ぴったり']] : [])],
       typing: [{ sel: '.m-text-ai', text: u.say, at: u.hold[1] + 250, per: TYPE_MS, until: o.sendAt }],
       root: {
         'is-mac': [[200, MAC_END]],                  // くり返しの頭は、フェードインで入る
         'is-pad': [[MAC_END - 200, L - 600]],        // 終わりは、フェードアウトで抜ける
-        'is-badge': [[u.hold[0] + 400, Z - 200]],
+        'is-badge': [[u.hold[0] + 400, R - 300]],
         'is-bubble': [[u.hold[0] + 150, u.hold[1] + 450]],
-        'is-fit': [[R + 1500, L - 700]],
+        'is-fit': [fit],
       },
       lap: macIntro(),
       // 向き：はじめから横向き（枠＝is-rot、中身＝is-land）。R で枠を縦に戻し、少し遅れて中身を縦長に作り直す
@@ -57,39 +68,50 @@
         'is-tap': [[4700, 5300]], 'is-connecting': [[5300, LIVE]], 'is-live': [[LIVE, L]],
         'is-ghost': [o.ghostAt], 'is-voice': [[o.ghostAt[1], L]], 'is-mic': [u.hold],
         'is-enter': [[o.sendAt - 200, o.sendAt + 250]],
-        // 広げる：指の印 → 広がる間だけ位置の動きを付ける（is-zooming）→ 広げたまま（is-zoom）で縦へ
-        'is-zoomtap': [[Z, Z + 550]], 'is-zooming': [[Z + 450, Z + 1300]], 'is-zoom': [[Z + 500, L + 1]],
+        // Mission Control：開く操作 → 窓の一覧（is-mc）→ レポートをタップ（is-picktap）→ レポートが手前に（is-front）
+        ...(o.open === 'bar' ? { 'is-mctap': [[M, M + 550]] } : { 'is-swipe': [[M - 150, M + 850]], 'is-swiped': [[M + 200, M + 850]] }),
+        'is-mc': [[M + 500, M + 2500]], 'is-picktap': [[M + 2000, M + 2550]], 'is-front': [[M + 2500, L + 1]],
+        // 広げる（zoom のときだけ）：指の印 → 広がる間だけ位置の動きを付ける（is-zooming）→ 広げたまま（is-zoom）
+        ...(zoom ? { 'is-zoomtap': [[Z, Z + 550]], 'is-zooming': [[Z + 450, Z + 1300]], 'is-zoom': [[Z + 500, L + 1]] } : {}),
         ...(o.demo || {}),
       },
     };
   };
 
-  const BADGE = 'キーボードは、しまったまま。<br><mark>画面は、広いまま。</mark>';
-  const scenes = (finger, voice, zoom) => [[0, 'Macで、端末を追加'], [MAC_END, 'iPadから、つなぐ'], [LIVE, 'AIの進み具合を見る'], [finger, '指で動かす'], [voice, '声で書く'], [zoom, '広げて、縦に。横幅ぴったり']];
-
   // やりとりの欄の 1 行：
   //   me   … 自分の指示（at から出る）
   //   step … AI の作業（at から「run」の文と回る印、doneAt から「done」の文と ✓）
-  const SAY2 = 'いちばん売上が高い月を、目立たせてください。';
-  const VARIANTS = {
-    // 案 2：資料づくり ── AI が作ったものを指で確かめて、直しを声で頼み、広げて縦で読む
-    ai2: plan({
-      label: '案 2', name: '資料づくり ── 指で確かめて、声で直しを頼む',
-      note: 'AI に売上のレポートを任せている場面です。できあがったレポートを指でスクロールしてグラフを確かめ、直しの指示「いちばん売上が高い月を、目立たせてください。」を声で送ります。送ると、グラフのいちばん高い棒の色が変わります。',
-      badge: BADGE, still: 16700, out: 'report', outTitle: '売上レポート',
-      scenes: scenes(9200, 10900, 19300),
-      ghostAt: [11000, 12700], utter: { hold: [13100, 16000], say: SAY2 }, sendAt: 17300, zoomAt: 19400, rotAt: 20900,
-      chat: [
-        { kind: 'me', text: '先月の売上を、レポートにまとめてください。', at: 0 },
-        { kind: 'step', run: 'データを読み込んでいます…', done: 'データを読み込みました', at: 6900, doneAt: 7500 },
-        { kind: 'step', run: 'グラフを作っています…', done: 'グラフを作りました', at: 7600, doneAt: 8300 },
-        { kind: 'step', run: 'レポートを仕上げています…', done: 'レポートができました', at: 8400, doneAt: 9000 },
-        { kind: 'me', text: SAY2, at: 17300 },
-        { kind: 'step', run: 'グラフを更新中…', done: 'グラフを更新しました', at: 17800, doneAt: 18900 },
-      ],
-      demo: { 'is-doc': [[7200, 99999]], 'is-chart': [[7900, 99999]], 'is-finger': [[9500, 11000]], 'is-scrolled': [[10000, 99999]], 'is-mark': [[18900, 99999]] },
-    }),
+  const SAY = 'いちばん売上が高い月を、目立たせてください。';
+  // 4 つに共通の中身（場面 1〜5。18.9 秒で、いちばん高い棒の色が変わる）
+  const BASE = {
+    badge: 'キーボードは、しまったまま。<br><mark>画面は、広いまま。</mark>', still: 16700, outTitle: '売上レポート',
+    fingerAt: 9200, voiceAt: 10900, ghostAt: [11000, 12700], utter: { hold: [13100, 16000], say: SAY }, sendAt: 17300, rotAt: 19500,
+    chat: [
+      { kind: 'me', text: '先月の売上を、レポートにまとめてください。', at: 0 },
+      { kind: 'step', run: 'データを読み込んでいます…', done: 'データを読み込みました', at: 6900, doneAt: 7500 },
+      { kind: 'step', run: 'グラフを作っています…', done: 'グラフを作りました', at: 7600, doneAt: 8300 },
+      { kind: 'step', run: 'レポートを仕上げています…', done: 'レポートができました', at: 8400, doneAt: 9000 },
+      { kind: 'me', text: SAY, at: 17300 },
+      { kind: 'step', run: 'グラフを更新中…', done: 'グラフを更新しました', at: 17800, doneAt: 18900 },
+    ],
+    demo: { 'is-doc': [[7200, 99999]], 'is-chart': [[7900, 99999]], 'is-finger': [[9500, 11000]], 'is-scrolled': [[10000, 99999]], 'is-mark': [[18900, 99999]] },
   };
+  // 音声入力のバーの並び。案 1 は、Tab を Mission Control に入れ替えている（設定で入れ替えられる）
+  const OPEN = {
+    bar: { no: '1', name: 'バーのボタンで開く', bar: ['mic', 'bs', 'enter', 'copy', 'paste', 'mc'], note: '音声入力のバーの右端に置いた Mission Control のボタンを、指でタップして開きます（バーのボタンは設定で入れ替えられます。ここでは Tab と入れ替えています）。' },
+    swipe: { no: '2', name: '3 本指で上にスワイプして開く', bar: ['mic', 'bs', 'enter', 'tab', 'copy', 'paste'], note: '3 本の指を上に滑らせて開きます（設定なしで使える操作）。バーは、はじめの並びのままです。' },
+  };
+  const END = {
+    front: { no: 'A', name: 'グラフの窓が手前に出て終わる', note: '窓の一覧でレポートをタップすると、レポートが手前に出てグラフが見え、そこで終わります。「横幅ぴったり」の印は、縦に回した直後に出ます。' },
+    zoom: { no: 'B', name: '広げて、横幅いっぱいで終わる', note: 'レポートが手前に出たあと、緑のボタンを指でタップして広げ、横幅いっぱいの大きいグラフで終わります。「横幅ぴったり」の印は、最後に出ます。' },
+  };
+  const VARIANTS = {};
+  Object.entries(OPEN).forEach(([open, op]) => Object.entries(END).forEach(([end, en]) => {
+    VARIANTS[`v${op.no}${en.no.toLowerCase()}`] = plan({
+      ...BASE, open, end, bar: op.bar,
+      label: `案 ${op.no}-${en.no}`, name: `${op.name} ／ ${en.name}`, note: `${op.note}${en.note}`,
+    });
+  }));
 
   // QR コードの絵（本物ではない。読み取れない模様）
   const qr = () => {
@@ -103,6 +125,12 @@
   };
   const rep = (n, s = '<i></i>') => s.repeat(n);
 
+  // 音声入力のバーに置けるボタン（ここで使うものだけ）
+  const BAR_KEYS = {
+    mic: '<span class="v-key v-mic">🎤</span>', bs: '<span class="v-key">⌫</span>', enter: '<span class="v-key v-enter">⏎</span>', tab: '<span class="v-key">⇥</span>',
+    copy: '<span class="v-key"><small>コピー</small></span>', paste: '<span class="v-key"><small>ペースト</small></span>',
+    mc: '<span class="v-key v-mc"><i class="mc-ico"></i><b class="v-tapdot"></b></span>',
+  };
   const chatItem = (c, i) => {
     if (c.kind === 'me') return `<p class="ai-item ai-me" data-i="${i}">${c.text}</p>`;
     return `<p class="ai-item ai-step" data-i="${i}"><i class="ai-mark"></i><span class="t-run">${c.run}</span><span class="t-done">${c.done}</span></p>`;
@@ -133,7 +161,7 @@
         </div></div>
         <div class="hv-lbase"></div>
       </div>
-      <figure class="phone tablet hero-phone hv-pad" role="img" aria-label="Mothershipの使い方のイメージ。Macで端末を追加し、横向きのiPadからつなぐと、AIが作業しているMacの画面がiPadに映る。指でスクロールし、iPadに話しかけると、AIへの次の指示がMacに入る。できあがったレポートの窓を指で広げてからiPadを縦向きにすると、Macの画面も縦長になり、レポートが横幅ぴったりで大きく映る">
+      <figure class="phone tablet hero-phone hv-pad" role="img" aria-label="Mothershipの使い方のイメージ。Macで端末を追加し、横向きのiPadからつなぐと、AIが作業しているMacの画面がiPadに映る。指でスクロールし、iPadに話しかけると、AIへの次の指示がMacに入る。iPadを縦向きにすると、Macの画面も横幅ぴったりの縦長になり、2つの窓が重なる。Mission Controlで窓の一覧を出し、レポートをタップすると、グラフが見える">
         <div class="phone-screen">
           <div class="demo" data-scene="1" aria-hidden="true">
             <!-- つなぐ前の画面（横向き。描いた絵で、実際の画面とは見た目が違う） -->
@@ -155,17 +183,23 @@
                   </div>
                 </div>
                 <!-- 右（縦向きは下）：AI が作っているもの -->
-                <div class="m-window m-out out-${v.out}">
+                <div class="m-window m-out out-report">
                   <div class="m-title"><i></i><i></i><i></i><span>${v.outTitle}</span><b class="out-zoomtap"></b></div>
-                  <div class="m-body out-body">${outBody[v.out]}</div>
+                  <div class="m-body out-body">${outBody.report}</div>
                 </div>
                 <div class="m-dock">${rep(5)}</div>
+                <!-- Mission Control（窓の一覧）のときに出る、窓の名前と、レポートをタップする指の印 -->
+                <p class="mc-name mc-name-ai">AI アシスタント</p>
+                <p class="mc-name mc-name-out">売上レポート</p>
+                <span class="mc-pick"></span>
               </div>
               <div class="d-ui d-fit">
                 <!-- 画面のキーボードを出したら隠れる範囲 -->
                 <div class="d-ghost"><p>キーボードを出すと、ここまで隠れます</p></div>
+                <!-- 3 本指で上にスワイプ（案 2） -->
+                <div class="d-swipe"><i></i><i></i><i></i></div>
                 <!-- 音声入力のバー：ボタン 6 個（🎤・削除・Enter・Tab・コピー・ペースト）。つながっている間は、いつも出ている -->
-                <div class="d-vbar"><span class="v-grip">≡</span><div class="v-wave">${rep(6)}</div><span class="v-key v-mic">🎤</span><span class="v-key">⌫</span><span class="v-key v-enter">⏎</span><span class="v-key">⇥</span><span class="v-key"><small>コピー</small></span><span class="v-key"><small>ペースト</small></span></div>
+                <div class="d-vbar"><span class="v-grip">≡</span><div class="v-wave">${rep(6)}</div>${v.bar.map((k) => BAR_KEYS[k]).join('')}</div>
               </div>
             </div>
           </div>
@@ -190,6 +224,7 @@
   const start = (root, key) => {
     const v = VARIANTS[key];
     root.dataset.variant = key;
+    root.dataset.end = v.end;
     root.innerHTML = template(v);
     const el = { root, lap: root.querySelector('.lm-in'), pad: root.querySelector('.hv-pad'), demo: root.querySelector('.demo') };
     const toggle = root.querySelector('.video-toggle');

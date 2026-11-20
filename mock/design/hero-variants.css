@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Mothership LP ｜ HERO のアニメ（案 2：資料づくり ── AI に指示して Mac を動かす。まだ一時的なファイル）
+   Mothership LP ｜ HERO のアニメ（資料づくり ── AI に指示して Mac を動かす。最後の場面を 4 通り並べて見比べ中。まだ一時的なファイル）
    designSystem/ → styles.css → この hero-variants.css の順に読み込む。
    端末の枠と Mac のデスクトップ（.demo、.d-mac、.m-window、.m-title、.m-bars、.m-dock、.d-host など）は styles.css のものをそのまま使い、
    ここには「MacBook の場面」「横向きの層」「AI の窓と、AI が作っているものの窓」「音声入力のバー（6 個）」「端末の外の札」だけを書く。
@@ -7,7 +7,7 @@
    絵の中の色（Mac の壁紙・窓・キー・コードの行）は、styles.css と同じく「絵」として直接書いている。
    ========================================================================== */
 
-/* ---- 案を選ぶための表示（案が 2 つ以上あるときだけ使う。いまは 1 つなので出ない）---- */
+/* ---- 案を選ぶための表示（案が 2 つ以上あるときだけ使う。いまは 4 つ）---- */
 .hero.is-clone { margin-top: 0; }
 .hv-pick { position: relative; z-index: 2; display: flex; flex-wrap: wrap; align-items: baseline; gap: var(--space-2) var(--space-4); margin-bottom: var(--space-8); padding: var(--space-4) var(--space-5); border-radius: var(--radius-md); background: var(--surface); box-shadow: var(--shadow-card); }
 .hv-pick b { font-size: var(--text-subheading); font-weight: var(--weight-heavy); color: var(--blue-deep); }
@@ -105,15 +105,45 @@
 
 /* ---- Mac の画面の中身：AI アシスタントの窓（.m-ai）と、AI が作っているものの窓（.m-out）----
    横向き：左右に並べる。窓を少し低くして、音声入力のバーを窓と Dock の間に置く（指示を書く欄を隠さないため）
-   縦向き：横幅いっぱいの 1 つの窓（向きを変えても、Mac の窓は自動では並び直らない。だから、先に窓を広げてから回す） */
-.hv .demo .m-ai, .hv .demo .m-out { top: 6.5%; bottom: 21%; }
+   縦向き：向きを変えても、Mac の窓は自動では並び直らない。2 つの窓は大きさを変えずに残り、重なる
+          （AI の窓が手前の左上、レポートは後ろの右下）。Mission Control で選ぶと、レポートが手前に出る（.is-front） */
+.hv .demo .m-ai { left: 4%; right: 26%; top: 8%; bottom: 50%; z-index: 2; }
+.hv .demo .m-out { left: 42%; right: 4%; top: 24%; bottom: 34%; z-index: 1; }
+.hv .demo.is-front .m-out { z-index: 3; }
 .hv .demo.is-land .m-ai { left: 3%; right: 43%; top: 10%; bottom: 32%; }
 .hv .demo.is-land .m-out { left: 59%; right: 3%; top: 10%; bottom: 32%; }
-/* 広げる：右の窓の緑のボタンを指でタップ（.is-zoomtap）→ 横いっぱいに広がり、AI の窓は後ろに隠れる（.is-zoom）。
-   位置の動きは、広がる間（.is-zooming）だけ付ける（向きが変わる瞬間に、窓が滑って見えないように） */
+/* 広げる（終わり方 B）：レポートの窓の緑のボタンを指でタップ（.is-zoomtap）→ 横幅いっぱいに広がり、AI の窓は後ろに隠れる（.is-zoom）。
+   位置と大きさの動きは、広がる間（.is-zooming）だけ付ける（向きが変わる瞬間に、窓が滑って見えないように） */
 .hv .demo.is-zoom .m-ai { opacity: 0; }
-.hv .demo.is-land.is-zoom .m-out { left: 3%; }
-.hv .demo.is-zooming .m-out { transition: left .55s var(--ease-out), opacity var(--dur-slow) ease, transform .55s var(--ease-out) !important; }
+.hv .demo.is-zoom .m-out { left: 4%; right: 4%; top: 6.5%; bottom: 21%; }
+.hv .demo.is-zooming .m-out { transition: left .55s var(--ease-out), right .55s var(--ease-out), top .55s var(--ease-out), bottom .55s var(--ease-out), opacity var(--dur-slow) ease, transform .55s var(--ease-out) !important; }
+.hv .demo.is-zooming .out-body { transition: font-size .55s var(--ease-out) !important; }
+.hv .demo.is-zooming .m-bars { transition: height .55s var(--ease-out) !important; }
+
+/* ---- Mission Control（窓の一覧。描いた絵）：壁紙が暗くなり、2 つの窓が小さくなって重ならずに並ぶ。下に窓の名前 ---- */
+.hv .d-mac::before { content: ""; position: absolute; inset: 0; background: rgba(11, 16, 32, .62); opacity: 0; transition: opacity var(--dur-slow) ease; }
+.hv .demo.is-mc .d-mac::before { opacity: 1; }
+.hv .demo.is-snap .d-mac::before { transition: none; }
+.hv .demo.is-mc .m-ai { transform: translate(-11cqw, 9cqh) scale(.64); }
+.hv .demo.is-mc .m-out { transform: translate(5cqw, -7cqh) scale(.64); box-shadow: 0 0 0 .5em rgba(255, 255, 255, 0), 0 1.5em 3em -1em rgba(var(--navy-rgb), .55); }
+.hv .demo.is-mc.is-picktap .m-out { box-shadow: 0 0 0 .5em rgba(var(--blue-rgb), .9), 0 1.5em 3em -1em rgba(var(--navy-rgb), .55); }
+.mc-name { position: absolute; z-index: 4; top: 53.5%; transform: translate(-50%, .6em); padding: .3em .9em; border-radius: 99em; background: rgba(11, 16, 32, .7); color: #fff; font-size: 1.05em; font-weight: var(--weight-bold); white-space: nowrap; opacity: 0; }
+.mc-name-ai { left: 28%; } .mc-name-out { left: 74%; }
+.hv .demo.is-mc .mc-name { opacity: 1; transform: translate(-50%, 0); }
+.mc-pick { position: absolute; z-index: 5; left: 74%; top: 38%; width: 4em; height: 4em; margin: -2em; border-radius: 50%; background: rgba(var(--ink-rgb), .28); border: .15em solid rgba(255, 255, 255, .85); opacity: 0; transform: scale(.4); }
+.hv .demo.is-picktap .mc-pick { opacity: 1; transform: scale(1); }
+/* 開き方 1：バーの Mission Control のボタン（実物の表示は「⌃↑」。ここでは窓が並んだ絵）と、タップの印 */
+.d-vbar .v-mc { position: relative; }
+.mc-ico { width: 1.15em; height: .95em; background: linear-gradient(currentColor, currentColor) 0 0 / 100% .2em no-repeat, linear-gradient(currentColor, currentColor) 0 100% / 44% .58em no-repeat, linear-gradient(currentColor, currentColor) 100% 100% / 44% .58em no-repeat; }
+.v-tapdot { position: absolute; inset: -.35em; border-radius: 50%; background: rgba(255, 255, 255, .3); border: .12em solid rgba(255, 255, 255, .85); opacity: 0; transform: scale(.4); }
+.hv .demo.is-mctap .v-tapdot { opacity: 1; transform: scale(1); }
+.hv .demo.is-mctap .v-mc, .hv .demo.is-mc .v-mc { background: var(--blue); }
+/* 開き方 2：3 本指で上にスワイプ */
+.d-swipe { position: absolute; left: 50%; top: 66%; display: flex; gap: 1.1em; transform: translate(-50%, 0); opacity: 0; }
+.d-swipe i { width: 3.4em; height: 3.4em; border-radius: 50%; background: rgba(var(--ink-rgb), .28); border: .15em solid rgba(255, 255, 255, .85); }
+.d-swipe i:nth-child(2) { margin-top: -1em; }
+.hv .demo.is-swipe .d-swipe { opacity: 1; }
+.hv .demo.is-swiped .d-swipe { transform: translate(-50%, -22cqh); }
 .hv .m-out .m-title { position: relative; }
 .out-zoomtap { position: absolute; left: 2.3em; top: 50%; width: 3em; height: 3em; margin-top: -1.5em; border-radius: 50%; background: rgba(var(--ink-rgb), .28); border: .15em solid rgba(255, 255, 255, .85); opacity: 0; transform: scale(.4); }
 .hv .demo.is-zoomtap .out-zoomtap { opacity: 1; transform: scale(1); }
@@ -148,14 +178,14 @@
 /* AI が作っているもの */
 .hv .out-body { position: relative; padding: .9em 1em 0; }
 /* 売上レポート。本文の行 → 棒グラフの順にできあがる。横向きは指でスクロールすると、下のグラフが見える。
-   縦向き（広げた窓）は、スクロールを戻して見出しから全部見せ、文字とグラフを大きくする */
+   縦向きでも窓の大きさと中身はそのまま。広げたとき（.is-zoom）だけ、スクロールを戻して見出しから全部見せ、文字とグラフを大きくする */
 .out-scroll { transition-duration: 1.1s !important; }
-.hv .demo.is-land.is-scrolled .out-scroll { transform: translateY(-4.6em); }
+.hv .demo.is-scrolled:not(.is-zoom) .out-scroll { transform: translateY(-4.6em); }
 .out-report ul { opacity: 0; }
 .hv .demo.is-doc .out-report ul { opacity: 1; }
-.hv .demo:not(.is-land) .out-report .out-body { font-size: 1.25em; }
-.hv .demo .out-report .m-bars { height: 12em; gap: .6em; margin-bottom: 1em; padding-top: .5em; }
-.hv .demo.is-land .out-report .m-bars { height: 7em; }
+.hv .demo.is-zoom .out-report .out-body { font-size: 1.25em; }
+.hv .demo .out-report .m-bars { height: 7em; gap: .6em; margin-bottom: 1em; padding-top: .5em; }
+.hv .demo.is-zoom .out-report .m-bars { height: 12em; }
 .out-report .m-bars i { transform: scaleY(0); transform-origin: 50% 100%; }
 .hv .demo.is-chart .out-report .m-bars i { transform: none; }
 .out-report .m-bars i:nth-child(n+3) { transition-delay: .1s; }
@@ -199,6 +229,7 @@
 .hv.is-badge .hv-badge { opacity: 1; transform: translate(-50%, 0); }
 /* 縦に戻したあと：画面の幅いっぱいに伸びる「↔ 横幅ぴったり」。広げたレポートの窓の下のほうに出す */
 .hv-fit { position: absolute; z-index: 3; left: 3%; right: 3%; top: calc(70% - 17px); display: flex; align-items: center; gap: 10px; opacity: 0; transition: opacity .3s ease; pointer-events: none; }
+.hv[data-end="front"] .hv-fit { top: calc(73.5% - 17px); }
 .hv.is-fit .hv-fit { opacity: 1; }
 .hv-fit i { position: relative; flex: 1; height: 3px; border-radius: 2px; background: var(--blue); transform: scaleX(0); transition: transform .7s var(--ease-out); }
 .hv-fit i:first-child { transform-origin: 100% 50%; }
@@ -209,8 +240,8 @@
 .hv-fit i:last-child::after { right: 1px; transform: translateY(-50%) rotate(-135deg); }
 .hv-fit b { padding: 8px 16px; border-radius: var(--radius-pill); background: var(--ink); color: var(--on-dark); font-size: var(--text-small); font-weight: var(--weight-heavy); white-space: nowrap; box-shadow: var(--shadow-button); }
 
-/* 場面の点は、案によって 5 個か 6 個 */
-[data-scene="6"] .d-dots i:nth-child(6) { background: var(--blue); transform: scale(1.3); }
+/* 場面の点は、案によって 7 個か 8 個 */
+[data-scene="6"] .d-dots i:nth-child(6), [data-scene="7"] .d-dots i:nth-child(7), [data-scene="8"] .d-dots i:nth-child(8) { background: var(--blue); transform: scale(1.3); }
 
 @media (max-width: 860px) {
   .hv-bubble { top: 8%; max-width: 82%; padding: 10px 14px; font-size: var(--text-note); }
