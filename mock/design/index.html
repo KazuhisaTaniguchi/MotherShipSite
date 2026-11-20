@@ -539,6 +539,42 @@
             <li>接続と切断は、Macに通知します。</li>
             <li>ルーターの設定（ポートの開放）は要りません。</li>
           </ul>
+          <!-- 安心の図（2026-11-21）。12 秒で 1 周：外からつなぐ → Mac の画面は黒く隠れ、手もとにだけ映る → 切断すると Mac はロック。CSS だけ -->
+          <div class="shield-demo" role="img" aria-label="見られたくない画面を見せない様子の図。自宅のMacのそばに人がいる。外出先からスマホでつなぐと、Macの画面は黒く隠れ、そばの人には見えない。画面はスマホにだけ映り、そのまま操作できる。切断すると、Macはロックされる。">
+            <div class="sd-fig" aria-hidden="true">
+              <div class="sd-in">
+                <span class="sd-place sd-home">家</span>
+                <span class="sd-place sd-away">外出先</span>
+                <div class="sd-mac">
+                  <div class="sd-scr">
+                    <div class="sd-ui">
+                      <div class="sd-w sd-mail"><b></b><p>見積もり（社外秘）</p><i></i><i></i><i></i><i></i></div>
+                      <div class="sd-w sd-rep"><b></b><p>売上レポート</p><em><i></i><i></i><i></i><i></i></em></div>
+                    </div>
+                    <div class="sd-shield"><span>画面を隠しています</span></div>
+                    <div class="sd-lock"><i class="sd-avatar"></i><span class="sd-pass">パスワード</span><small>🔒 ロックしました</small></div>
+                  </div>
+                  <i class="sd-stand"></i>
+                </div>
+                <div class="sd-person"><i class="sd-head"></i><i class="sd-body"></i><span class="sd-see">👀</span><span class="sd-nope">？</span></div>
+                <div class="sd-link"><i></i><span>🔒 暗号化して直接</span></div>
+                <div class="sd-ph">
+                  <p class="sd-ph-top"><i></i>接続中</p>
+                  <div class="sd-ui">
+                    <div class="sd-w sd-mail"><b></b><p>見積もり（社外秘）</p><i></i><i></i><i></i><i></i></div>
+                    <div class="sd-w sd-rep"><b></b><p>売上レポート</p><em><i></i><i></i><i></i><i></i></em></div>
+                  </div>
+                  <p class="sd-bye">切断しました</p>
+                </div>
+              </div>
+            </div>
+            <ol class="sd-steps" aria-hidden="true">
+              <li><b>外からつなぐ</b>外出先のスマホから、家のMacに接続</li>
+              <li><b>自動で隠す</b>Macの画面は黒いまま。映るのは、手もとだけ</li>
+              <li><b>切断でロック</b>つなぐのをやめると、Macはロックされる</li>
+            </ol>
+            <p class="sd-note">イメージです（実際の画面とは異なります）</p>
+          </div>
         </article>
 
         <!-- S11 そのほか -->
@@ -548,16 +584,58 @@
         </div>
         <div class="feature-grid">
           <article class="feature">
+            <!-- 図：キーボード（10 秒で 1 周：⌘C でコピー → ショートカットバーで「ペースト」→ バーのボタンを並べ替え） -->
+            <div class="of-fig of-kb" role="img" aria-label="Mac配列のキーボードの図。アプリの中のキーボードには⌘や⌥がある。⌘とCでコピーし、ショートカットバーの「ペースト」をタップすると、Macに文字が入る。ショートカットバーのボタンは、指で並べ替えられる。">
+              <div class="of-in" aria-hidden="true">
+                <div class="okb-dev">
+                  <div class="okb-desk"><div class="okb-win"><b></b><p class="okb-l1"><span>売上レポートの下書き</span></p><p class="okb-l2">売上レポートの下書き</p></div></div>
+                  <div class="okb-bar"><span class="okb-c okb-c1"><small>コピー</small></span><span class="okb-c okb-c2"><small>ペースト</small></span><span class="okb-c okb-c3"><small>アプリ切替</small></span><span class="okb-c okb-c4"><small>取り消す</small></span></div>
+                  <div class="okb-keys">
+                    <p><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></p>
+                    <p><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></p>
+                    <p><i>⇧</i><i>Z</i><i>X</i><i class="okb-key-c">C</i><i>V</i><i>B</i><i>N</i><i>M</i><i>⇧</i></p>
+                    <p><i>fn</i><i>⌃</i><i>⌥</i><i class="okb-key-cmd">⌘</i><i class="okb-sp"></i><i>⌘</i><i>⌥</i></p>
+                  </div>
+                </div>
+                <span class="of-f okb-tap"></span>
+                <span class="of-f okb-drag"></span>
+                <span class="of-cap okb-cap okb-cap1">⌘C で、コピー</span>
+                <span class="of-cap okb-cap okb-cap2">ショートカットバーから、ワンタップ</span>
+                <span class="of-cap okb-cap okb-cap3">並びは、自分で変えられる</span>
+              </div>
+            </div>
             <h3>キーボードも、ちゃんとMac。</h3>
             <p>⌘や⌥がそろった、Mac配列のキーボードをアプリの中に用意しました。</p>
             <ul class="ticks small">
               <li>よく使う操作（コピー、ペースト、アプリの切り替えなど）は、ショートカットバーからワンタップで。並びは自分で変えられます。</li>
               <li>外付けのキーボードやマウスも、そのまま使えます（iPhoneはキーボードのみ）。</li>
             </ul>
-            <div class="keys" aria-hidden="true"><kbd>⌘</kbd><kbd>⌥</kbd><kbd>⌃</kbd><kbd>⇧</kbd><kbd>⌘C</kbd><kbd>⌘V</kbd></div>
           </article>
 
           <article class="feature">
+            <!-- 図：日本語入力（12 秒で 1 周：「かな」→ Macで変換 → 「スマホで変換」に切り替え → フリックで変換して送る） -->
+            <div class="of-fig of-ime" role="img" aria-label="日本語入力の図。「Macで変換」では、「かな」キーで日本語の入力にして、Macの日本語入力で「にほんご」を「日本語」に変換する。「スマホで変換」に切り替えると、スマホのキーボード（フリック入力）で「を確認」に変換してから、Macに送る。">
+              <div class="of-in" aria-hidden="true">
+                <div class="oim-mac">
+                  <div class="oim-menu"><span class="oim-mode"><em class="oim-a">A</em><em class="oim-k">あ</em></span></div>
+                  <div class="oim-win"><b></b>
+                    <p class="oim-line"><span>明日の会議の資料：</span><span class="oim-mk">にほんご</span><span class="oim-c1">日本語</span><span class="oim-c2">を確認</span></p>
+                    <div class="oim-cand"><span>1 日本語</span><span>2 にほんご</span><span>3 二本後</span></div>
+                  </div>
+                </div>
+                <div class="oim-toggle"><i class="oim-knob"></i><span class="oim-t1">Macで変換</span><span class="oim-t2">スマホで変換</span></div>
+                <div class="oim-keys"><span class="oim-eisu">英数</span><span class="oim-space"></span><span class="oim-kana">かな</span></div>
+                <div class="oim-ph">
+                  <p class="oim-pin"><span class="oim-p1">をかくにん</span><span class="oim-p2">を確認</span></p>
+                  <p class="oim-pc"><span>を確認</span><span>を各人</span></p>
+                  <div class="oim-pad"><i>あ</i><i>か</i><i>さ</i><i>た</i><i>な</i><i>は</i><i>ま</i><i>や</i><i>ら</i></div>
+                </div>
+                <span class="of-f oim-flick"></span>
+                <span class="oim-fly"><small>を確認</small></span>
+                <span class="of-cap oim-cap oim-cap1">Macの日本語入力で、変換</span>
+                <span class="of-cap oim-cap oim-cap2">スマホで変換してから、送る</span>
+              </div>
+            </div>
             <h3>日本語も、いつもどおりに打てる。</h3>
             <p>リモート操作でつまずきやすい日本語入力に、2つの方法を用意しました。Macの日本語入力でそのまま変換する方法と、スマホのキーボード（フリック入力など）で変換してから送る方法。ボタンひとつで切り替えられます。</p>
             <ul class="ticks small">
@@ -567,6 +645,32 @@
           </article>
 
           <article class="feature">
+            <!-- 図：コピー・ファイル・音（12 秒で 1 周：スマホでコピー → Macにペースト／Macのファイル → スマホへ／Macの音 → スマホで聞く） -->
+            <div class="of-fig of-sh" role="img" aria-label="コピー・ファイル・音の図。スマホでコピーした文字を、Macでペーストする。Macのファイルを、スマホへ送る。Macで流している音を、スマホで聞く。">
+              <div class="of-in" aria-hidden="true">
+                <div class="osh-mac">
+                  <div class="osh-scr">
+                    <i class="osh-menu"></i>
+                    <div class="osh-memo"><b></b><p class="osh-paste">会議は15時から</p></div>
+                    <div class="osh-file"><i></i><small>report.pdf</small></div>
+                    <div class="osh-play"><b></b><p><i class="osh-tri"></i><span class="osh-bar"><i></i></span></p></div>
+                  </div>
+                  <i class="osh-stand"></i>
+                </div>
+                <div class="osh-ph">
+                  <span class="osh-pop"><small>コピー</small></span>
+                  <p class="osh-msg"><span>会議は15時から</span></p>
+                  <p class="osh-got"><i></i><small>report.pdf</small><b>✓</b></p>
+                  <p class="osh-spk">🔊</p>
+                </div>
+                <span class="osh-fly-t"><small>会議は15時から</small></span>
+                <span class="osh-fly-f"><i></i></span>
+                <span class="osh-note osh-n1">♪</span><span class="osh-note osh-n2">♫</span><span class="osh-note osh-n3">♪</span>
+                <span class="of-cap osh-cap osh-cap1">コピーして、ペースト</span>
+                <span class="of-cap osh-cap osh-cap2">ファイルを、送る・受け取る</span>
+                <span class="of-cap osh-cap osh-cap3">Macの音を、手もとで聞く</span>
+              </div>
+            </div>
             <h3>コピーも、ファイルも、音も。</h3>
             <ul class="ticks small">
               <li>片方でコピーして、もう片方でペースト。文字も画像も共有できます。</li>
@@ -576,16 +680,82 @@
           </article>
 
           <article class="feature">
+            <!-- 図：Macの切り替え（9 秒で 1 周：一覧の Mac をタップすると、映る画面が替わる） -->
+            <div class="of-fig of-mc" role="img" aria-label="Macを切り替える図。アプリには、登録したMacが並ぶ。「Mac mini（自宅）」「MacBook Pro（仕事場）」「iMac（実家）」を順にタップすると、映る画面が切り替わる。Macは何台でも登録でき、一度の購入で使えるMacは3台まで。">
+              <div class="of-in" aria-hidden="true">
+                <div class="omc-ph">
+                  <p class="omc-title">登録済みのMac</p>
+                  <i class="omc-sel"></i>
+                  <p class="omc-row omc-r1"><i class="omc-ico"></i><span><b>Mac mini</b><small>自宅</small></span></p>
+                  <p class="omc-row omc-r2"><i class="omc-ico"></i><span><b>MacBook Pro</b><small>仕事場</small></span></p>
+                  <p class="omc-row omc-r3"><i class="omc-ico"></i><span><b>iMac</b><small>実家</small></span></p>
+                  <p class="omc-add"><small>＋ Macを追加</small></p>
+                </div>
+                <div class="omc-view">
+                  <i class="omc-w omc-w1"></i><i class="omc-w omc-w2"></i><i class="omc-w omc-w3"></i>
+                  <div class="omc-win"><b></b><i></i><i></i><i></i></div>
+                  <span class="omc-name omc-n1">Mac mini（自宅）</span><span class="omc-name omc-n2">MacBook Pro（仕事場）</span><span class="omc-name omc-n3">iMac（実家）</span>
+                  <p class="omc-conn">接続中…</p>
+                </div>
+                <span class="of-f omc-tap2"></span><span class="of-f omc-tap3"></span>
+                <div class="omc-txt"><p class="omc-cap">何台でも登録して、タップで切り替え</p><p class="omc-fine">一度の購入で使えるMacは、3台まで</p></div>
+              </div>
+            </div>
             <h3>Macを、切り替えて。</h3>
             <p>Macは何台でも登録して、切り替えて使えます。一度の購入で使えるMacは、3台までです。</p>
           </article>
 
           <article class="feature">
+            <!-- 図：MacBook から家の Mac へ（10 秒で 1 周：つなぐ → 重い書き出しは家の Mac が進める → 完了） -->
+            <div class="of-fig of-mb" role="img" aria-label="MacBookから家のMacを使う図。外出先のMacBookで、Mac版のMOTHERSHIPを開くと、家のMacの画面が映る。重い書き出しは家のMacが進め、終わったらMacBookで確かめる。">
+              <div class="of-in" aria-hidden="true">
+                <span class="omb-place omb-away">外出先</span><span class="omb-place omb-homep">家</span>
+                <div class="omb-book">
+                  <div class="omb-lid">
+                    <i class="omb-menu"></i>
+                    <div class="omb-mw"><b><small>MOTHERSHIP ─ 自宅のMac</small></b>
+                      <div class="omb-desk"><div class="omb-job"><small class="omb-t1">書き出し中…</small><small class="omb-t2">✓ 完了</small><span class="omb-prog"><i></i></span></div></div>
+                    </div>
+                  </div>
+                  <i class="omb-base"></i>
+                </div>
+                <div class="omb-link"><i></i></div>
+                <div class="omb-home">
+                  <div class="omb-mon"><i class="omb-menu"></i><div class="omb-job"><small class="omb-t1">書き出し中…</small><small class="omb-t2">✓ 完了</small><span class="omb-prog"><i></i></span></div></div>
+                  <i class="omb-stand"></i>
+                </div>
+                <div class="omb-mini"><small>Mac mini</small><span class="omb-cpu"><i></i><i></i><i></i><i></i><i></i></span></div>
+                <span class="of-cap omb-cap omb-cap1">MacBookで、家のMacにつなぐ</span>
+                <span class="of-cap omb-cap omb-cap2">重い作業は、家のMacが進める</span>
+                <span class="of-cap omb-cap omb-cap3">終わったら、手もとで確かめる</span>
+              </div>
+            </div>
             <h3>MacBookから、家のMacへ。</h3>
             <p>持ち歩くのは軽いMacBookだけ。パワーが要る作業は、家のMacに任せましょう。Mac版のMOTHERSHIPで、同じようにつなげます。</p>
           </article>
 
           <article class="feature">
+            <!-- 図：折りたたみスマホ（10 秒で 1 周：折って机に置く → 下でなぞるとポインターが動く → キーを打つと上の画面に文字） -->
+            <div class="of-fig of-fd" role="img" aria-label="折りたたみスマホの図。半分に折って机に置くと、上の画面にMacの画面が映り、下の画面がトラックパッドとキーボードになる。下でなぞるとポインターが動き、キーを打つと上の画面に文字が入る。">
+              <div class="of-in" aria-hidden="true">
+                <div class="ofd-top">
+                  <div class="ofd-mac"><i class="ofd-menu"></i><div class="ofd-win"><b></b><p><span class="ofd-typed">了解です。</span><i class="ofd-caret"></i></p></div><i class="ofd-ptr"></i></div>
+                </div>
+                <div class="ofd-bot">
+                  <div class="ofd-ctl">
+                    <div class="ofd-pad"><span class="of-f ofd-finger"></span></div>
+                    <div class="ofd-keys">
+                      <p><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></p>
+                      <p><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></p>
+                      <p><i></i><i></i><i></i><i class="ofd-sp"></i><i></i><i></i><i></i></p>
+                    </div>
+                  </div>
+                </div>
+                <span class="of-cap ofd-cap ofd-cap1">半分に折って、机に置く</span>
+                <span class="of-cap ofd-cap ofd-cap2">下でなぞると、ポインターが動く</span>
+                <span class="of-cap ofd-cap ofd-cap3">キーを打つと、上の画面に文字が入る</span>
+              </div>
+            </div>
             <h3>折りたたみスマホが、小さなMacになる。</h3>
             <p>半分に折って机に置くと、上の画面がMacのモニターに、下の画面がトラックパッドとキーボードになります。</p>
             <p class="fine">Galaxy Z Fold7で動作を確認しています。</p>
