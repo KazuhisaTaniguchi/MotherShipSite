@@ -612,7 +612,7 @@
 .hf23-msg b { grid-area: 1 / 1; font-size: .7em; line-height: 1.5; white-space: nowrap; }
 .hf23-x { color: var(--rec); animation: hf23-x var(--d) ease infinite; }
 .hf23-o { color: var(--ink-2); animation: hf23-o var(--d) ease infinite; }
-.hf23-btn { position: absolute; left: .9em; top: 8.4em; animation: hf23-btn var(--d) ease infinite; }
+.hf23-btn { position: absolute; left: 1.1em; top: 10.5em; animation: hf23-btn var(--d) ease infinite; }
 .hf23-cur { animation: hf23-cur var(--d) ease-in-out infinite; }
 .hf23-cam { position: absolute; inset: 0; display: grid; place-items: center; background: #0b0f1a; }
 .hf23-cam > span { position: relative; width: 5.4em; height: 5.4em; padding: .5em; border: .12em dashed rgba(255, 255, 255, .7); border-radius: .6em; }
@@ -885,7 +885,7 @@
 @keyframes hf23-x { 0% { opacity: 1 } 30% { opacity: 1 } 32.22% { opacity: 0 } 100% { opacity: 0 } }
 @keyframes hf23-o { 0% { opacity: 0 } 30% { opacity: 0 } 33.33% { opacity: 1 } 100% { opacity: 1 } }
 @keyframes hf23-btn { 0% { background: #e6ecf8 } 25.56% { background: #e6ecf8 } 26.67% { background: #c9d6f2 } 30% { background: #e6ecf8 } 100% { background: #e6ecf8 } }
-@keyframes hf23-cur { 0% { transform: translate(30em, 16em) scale(1) } 6.67% { transform: translate(30em, 16em) scale(1) } 21.11% { transform: translate(20.6em, 11.1em) scale(1) } 26.22% { transform: translate(20.6em, 11.1em) scale(1) } 26.67% { transform: translate(20.6em, 11.1em) scale(0.78) } 28.44% { transform: translate(20.6em, 11.1em) scale(1) } 35.56% { transform: translate(20.6em, 11.1em) scale(1) } 43.33% { transform: translate(30em, 15.5em) scale(1) } 100% { transform: translate(30em, 15.5em) scale(1) } }
+@keyframes hf23-cur { 0% { transform: translate(30em, 16em) scale(1) } 6.67% { transform: translate(30em, 16em) scale(1) } 21.11% { transform: translate(20.6em, 11.9em) scale(1) } 26.22% { transform: translate(20.6em, 11.9em) scale(1) } 26.67% { transform: translate(20.6em, 11.9em) scale(0.78) } 28.44% { transform: translate(20.6em, 11.9em) scale(1) } 35.56% { transform: translate(20.6em, 11.9em) scale(1) } 43.33% { transform: translate(30em, 15.5em) scale(1) } 100% { transform: translate(30em, 15.5em) scale(1) } }
 @keyframes hf23-camqr { 0% { opacity: 0 } 51.11% { opacity: 0 } 54.44% { opacity: 1 } 100% { opacity: 1 } }
 @keyframes hf23-ok { 0% { opacity: 0 } 66.67% { opacity: 0 } 70% { opacity: 1 } 100% { opacity: 1 } }
 @keyframes hf23-t1 { 0% { opacity: 0 } 3.33% { opacity: 0 } 6.67% { opacity: 1 } 46.67% { opacity: 1 } 50% { opacity: 0 } 100% { opacity: 0 } }
