@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "https://mothershipremote.com"),
   title: {
     default: "MOTHERSHIP｜スマホからMacをリモート操作。指で動かす、声で書く",
-    template: "%s｜Mothership",
+    template: "%s｜MOTHERSHIP",
   },
   description: DESCRIPTION,
   icons: { icon: { url: "/favicon.svg", type: "image/svg+xml" } },

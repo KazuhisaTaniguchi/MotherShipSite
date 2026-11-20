@@ -8,7 +8,7 @@ import { ContactForm } from "@/components/ContactForm";
 export const metadata: Metadata = {
   title: "お問い合わせ",
   description:
-    "Mothershipのお問い合わせ窓口です。使い方のご質問、不具合のご報告、購入・ライセンスについて、ご意見・ご要望をお寄せください。",
+    "MOTHERSHIPのお問い合わせ窓口です。使い方のご質問、不具合のご報告、購入・ライセンスについて、ご意見・ご要望をお寄せください。",
   alternates: { canonical: "/contact/" },
 };
 
@@ -20,7 +20,7 @@ export default function Contact() {
         <div className="wrap">
           <p className="pill pill-glass">お問い合わせ</p>
           <h1 id="contact-title">お問い合わせ</h1>
-          <p className="contact-hero-lead">使い方のご質問、不具合のご報告、ご意見・ご要望など、<span className="nb">Mothershipについて、</span><span className="nb">お気軽にお寄せください。</span></p>
+          <p className="contact-hero-lead">使い方のご質問、不具合のご報告、ご意見・ご要望など、<span className="nb">MOTHERSHIPについて、</span><span className="nb">お気軽にお寄せください。</span></p>
         </div>
       </section>
 
@@ -71,7 +71,7 @@ export default function Contact() {
                   <li>操作する側のデバイスと、OSのバージョン</li>
                   <li>自宅のWi-Fiか、外出先（Tailscale）か</li>
                   <li>何をしたときに、どうなったか</li>
-                  <li>Mothership Hostのメニューに出ているメッセージ</li>
+                  <li>MOTHERSHIP HOSTのメニューに出ているメッセージ</li>
                 </ul>
               </div>
               <div className="aside-box">

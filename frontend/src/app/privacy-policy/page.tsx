@@ -7,7 +7,7 @@ import Link from "next/link";
 export const metadata: Metadata = {
   title: "プライバシーポリシー",
   description:
-    "Mothership（Mothership Host と、iPhone・iPad・Android・Mac の Mothership）と、このウェブサイトのプライバシーポリシーです。画面や操作はMothershipのサーバーを通らず、アカウントの登録もありません。",
+    "MOTHERSHIP（MOTHERSHIP HOST と、iPhone・iPad・Android・Mac の MOTHERSHIP）と、このウェブサイトのプライバシーポリシーです。画面や操作はMOTHERSHIPのサーバーを通らず、アカウントの登録もありません。",
   alternates: { canonical: "/privacy-policy/" },
 };
 
@@ -18,8 +18,8 @@ export default function PrivacyPolicy() {
         <div className="legal-hero-bg" aria-hidden="true"></div>
         <div className="wrap">
           <p className="pill pill-glass">プライバシーポリシー</p>
-          <h1 id="legal-title">Mothership プライバシーポリシー</h1>
-          <p className="legal-hero-lead">あなたのMacの画面は、あなたのデバイスにだけ。<br />Mothershipが、どんな情報を、どう扱うかをまとめました。</p>
+          <h1 id="legal-title">MOTHERSHIP プライバシーポリシー</h1>
+          <p className="legal-hero-lead">あなたのMacの画面は、あなたのデバイスにだけ。<br />MOTHERSHIPが、どんな情報を、どう扱うかをまとめました。</p>
           <dl className="legal-dates">
             <div><dt>制定日</dt><dd><span className="tbd">【未確定：公開日】</span></dd></div>
             <div><dt>最終更新日</dt><dd><span className="tbd">【未確定：公開日】</span></dd></div>
@@ -50,12 +50,12 @@ export default function PrivacyPolicy() {
         </nav>
       
         <article className="legal">
-          <p className="legal-intro"><span className="tbd">【未確定：運営者の名前】</span>（以下「運営者」）は、リモートデスクトップアプリ「Mothership」と、ウェブサイト「mothershipremote.com」で扱う情報について、個人情報の保護に関する法律などの法令にしたがい、このプライバシーポリシー（以下「本ポリシー」）のとおり取り扱います。</p>
+          <p className="legal-intro"><span className="tbd">【未確定：運営者の名前】</span>（以下「運営者」）は、リモートデスクトップアプリ「MOTHERSHIP」と、ウェブサイト「mothershipremote.com」で扱う情報について、個人情報の保護に関する法律などの法令にしたがい、このプライバシーポリシー（以下「本ポリシー」）のとおり取り扱います。</p>
       
           <aside className="legal-summary" aria-labelledby="summary-title">
             <h2 id="summary-title">かんたんにまとめると</h2>
             <ul className="ticks small">
-              <li>画面・操作・クリップボード・ファイル・音・声は、Macとデバイスの間で暗号化して直接やり取りします。<b>Mothershipのサーバーは通りません。</b>運営者は、その中身を受け取りません。</li>
+              <li>画面・操作・クリップボード・ファイル・音・声は、Macとデバイスの間で暗号化して直接やり取りします。<b>MOTHERSHIPのサーバーは通りません。</b>運営者は、その中身を受け取りません。</li>
               <li><b>アカウントの登録はありません。</b>名前やメールアドレスを、アプリに入力する必要はありません。</li>
               <li>アプリには、<b>利用状況の分析や広告のための仕組みを入れていません。</b></li>
               <li>代金の支払いは、App Store・Google Playが行います。運営者は、クレジットカードなどの情報を受け取りません。</li>
@@ -66,15 +66,15 @@ export default function PrivacyPolicy() {
       
           <section className="article" id="pp-1" aria-labelledby="pp-1-title">
             <h2 id="pp-1-title"><span className="no">1.</span>基本の考え方</h2>
-            <p>Mothershipは、離れた場所から、自分のMacを使うためのアプリです。Macの画面には、仕事の書類やメール、写真など、大切な情報が映ります。そのためMothershipは、<b>運営者が利用者の情報を集めなくても動く</b>ように作っています。必要な情報は、できるだけ利用者のMacとデバイスの中だけで扱います。</p>
+            <p>MOTHERSHIPは、離れた場所から、自分のMacを使うためのアプリです。Macの画面には、仕事の書類やメール、写真など、大切な情報が映ります。そのためMOTHERSHIPは、<b>運営者が利用者の情報を集めなくても動く</b>ように作っています。必要な情報は、できるだけ利用者のMacとデバイスの中だけで扱います。</p>
           </section>
       
           <section className="article" id="pp-2" aria-labelledby="pp-2-title">
             <h2 id="pp-2-title"><span className="no">2.</span>このポリシーの対象</h2>
             <p>本ポリシーは、次のものに適用されます。</p>
             <ol className="items">
-              <li>操作されるMacに入れる「Mothership Host」</li>
-              <li>操作する側のiPhone・iPad・Android・Macに入れる「Mothership」</li>
+              <li>操作されるMacに入れる「MOTHERSHIP HOST」</li>
+              <li>操作する側のiPhone・iPad・Android・Macに入れる「MOTHERSHIP」</li>
               <li>ウェブサイト「mothershipremote.com」と、そのお問い合わせフォーム</li>
             </ol>
             <p>以下、1と2をまとめて「本アプリ」と呼びます。本アプリと組み合わせて使う、ほかの会社のサービスの情報の扱いは、それぞれの会社の定めによります（9.）。</p>
@@ -98,9 +98,9 @@ export default function PrivacyPolicy() {
             <ul className="ticks small">
               <li>登録したMacの名前と接続先のアドレス、通信を確かめるための証明書の情報</li>
               <li>デバイスごとの鍵。デバイスの安全な領域（Secure Enclave、Android Keystoreなど）に保存し、外に取り出せません</li>
-              <li>Mothership Hostに登録したデバイスの一覧（デバイスの名前と、確かめるための公開鍵）</li>
+              <li>MOTHERSHIP HOSTに登録したデバイスの一覧（デバイスの名前と、確かめるための公開鍵）</li>
               <li>画質・表示・キーボードなどの設定</li>
-              <li>試用期間の始まりの時刻と、購入済みかどうかの印（Mothership Host）。試用期間をやり直せないよう、アプリを削除しても、Macのキーチェーンなどに残ることがあります</li>
+              <li>試用期間の始まりの時刻と、購入済みかどうかの印（MOTHERSHIP HOST）。試用期間をやり直せないよう、アプリを削除しても、Macのキーチェーンなどに残ることがあります</li>
             </ul>
       
             <h3>運営者に送られる情報</h3>
@@ -132,7 +132,7 @@ export default function PrivacyPolicy() {
             <ol className="clauses">
               <li>ライセンスの購入と代金の支払いは、App Store・Google Playが行います。運営者は、利用者の名前、住所、クレジットカードなどの支払いの情報を受け取りません。</li>
               <li>購入したあと、ストアが署名した「購入の証明」を、デバイスからホストのMacに送り、<b>Macの中で</b>確かめます。確かめるために、運営者のサーバーやインターネットは使いません。</li>
-              <li>Mothership Hostは、購入済みであることの印と、取引の番号を変換した値（ハッシュ）だけを保存します。個人を特定できる情報は保存しません。</li>
+              <li>MOTHERSHIP HOSTは、購入済みであることの印と、取引の番号を変換した値（ハッシュ）だけを保存します。個人を特定できる情報は保存しません。</li>
               <li>ストアでの購入の情報の扱いは、Apple・Googleのプライバシーポリシーによります。</li>
             </ol>
           </section>
@@ -217,7 +217,7 @@ export default function PrivacyPolicy() {
             <h2 id="pp-11-title"><span className="no">11.</span>保存する期間と削除</h2>
             <ol className="clauses">
               <li>端末の中に保存する情報（3.）は、利用者が本アプリを削除したり、登録を解除したりすると消えます。ただし、試用期間の情報は、アプリを削除してもMacに残ることがあります。</li>
-              <li>デバイスをなくしたときは、Mothership Hostのメニューの「登録済みの端末」から、そのデバイスを削除してください。</li>
+              <li>デバイスをなくしたときは、MOTHERSHIP HOSTのメニューの「登録済みの端末」から、そのデバイスを削除してください。</li>
               <li>お問い合わせの内容と添付ファイルは、お返事と、その後のやり取りに必要な間だけ保存し、必要がなくなったら削除します。</li>
             </ol>
           </section>

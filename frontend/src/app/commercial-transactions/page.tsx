@@ -7,7 +7,7 @@ import Link from "next/link";
 export const metadata: Metadata = {
   title: "特定商取引法に基づく表記",
   description:
-    "Mothershipのライセンス（買い切り）の販売についての、特定商取引法に基づく表記です。販売価格、支払い方法、引き渡しの時期、返品・返金、動作環境を記載しています。",
+    "MOTHERSHIPのライセンス（買い切り）の販売についての、特定商取引法に基づく表記です。販売価格、支払い方法、引き渡しの時期、返品・返金、動作環境を記載しています。",
   alternates: { canonical: "/commercial-transactions/" },
 };
 
@@ -19,7 +19,7 @@ export default function CommercialTransactions() {
         <div className="wrap">
           <p className="pill pill-glass">特定商取引法に基づく表記</p>
           <h1 id="legal-title">特定商取引法に基づく表記</h1>
-          <p className="legal-hero-lead">Mothershipのライセンス（買い切り）の販売について、<br />特定商取引法にもとづいてお知らせします。</p>
+          <p className="legal-hero-lead">MOTHERSHIPのライセンス（買い切り）の販売について、<br />特定商取引法にもとづいてお知らせします。</p>
           <dl className="legal-dates">
             <div><dt>最終更新日</dt><dd><span className="tbd">【未確定：公開日】</span></dd></div>
           </dl>
@@ -30,7 +30,7 @@ export default function CommercialTransactions() {
         <article className="legal">
           <aside className="callout" aria-labelledby="store-note-title">
             <h2 id="store-note-title">ご購入は、App Store・Google Playから</h2>
-            <p>Mothershipのライセンスは、アプリの中から、App Store・Google Playの決済で購入します。代金のお支払いと返金の手続きは、それぞれのストアで行います。まずは14日間、すべての機能を無料でお試しください。</p>
+            <p>MOTHERSHIPのライセンスは、アプリの中から、App Store・Google Playの決済で購入します。代金のお支払いと返金の手続きは、それぞれのストアで行います。まずは14日間、すべての機能を無料でお試しください。</p>
           </aside>
       
           <section className="article" id="seller" aria-labelledby="seller-title">
@@ -54,7 +54,7 @@ export default function CommercialTransactions() {
             <div className="legal-table-wrap">
               <table className="legal-table is-spec">
                 <tbody>
-                  <tr><th scope="row">販売するもの</th><td>「Mothership」のライセンス（買い切り）<span className="sub">試用期間のあとも、Mothership Hostを入れたMacに、デバイスからずっと接続できるようになる権利です（アプリ内課金）。一度の購入で、お持ちのMacを何台でも使えます。</span></td></tr>
+                  <tr><th scope="row">販売するもの</th><td>「MOTHERSHIP」のライセンス（買い切り）<span className="sub">試用期間のあとも、MOTHERSHIP HOSTを入れたMacに、デバイスからずっと接続できるようになる権利です（アプリ内課金）。一度の購入で、お持ちのMacを何台でも使えます。</span></td></tr>
                   <tr><th scope="row">販売価格</th><td>US$19.99<span className="sub">日本円の価格は、<span className="tbd">【未確定：App Storeの価格表から選ぶ金額】</span>。購入画面に表示される金額が、お支払いの金額です（消費税を含みます）。</span></td></tr>
                   <tr><th scope="row">月額料金</th><td>ありません。一度の購入で、ずっと使えます。</td></tr>
                   <tr><th scope="row">試用期間</th><td>はじめてMacにつないだ日から14日間、すべての機能を無料で使えます。<span className="sub">試用期間が終わると、購入するまでデバイスから接続できなくなります。</span></td></tr>
@@ -72,10 +72,10 @@ export default function CommercialTransactions() {
                     <span className="sub">購入の前に、14日間の試用期間で、お使いの環境で動くことをお確かめください。</span>
                   </td></tr>
                   <tr><th scope="row">動作環境</th><td>
-                    <p>操作されるMac：Mothership Host（macOS 14以降。Appleシリコン搭載のMacで動作を確認）</p>
-                    <p>iPhone・iPad：Mothership（<span className="tbd">【未確定：対応するOS】</span>）</p>
-                    <p>Android：Mothership（Android 13以降）</p>
-                    <p>別のMac：Mothership（macOS 15以降）</p>
+                    <p>操作されるMac：MOTHERSHIP HOST（macOS 14以降。Appleシリコン搭載のMacで動作を確認）</p>
+                    <p>iPhone・iPad：MOTHERSHIP（<span className="tbd">【未確定：対応するOS】</span>）</p>
+                    <p>Android：MOTHERSHIP（Android 13以降）</p>
+                    <p>別のMac：MOTHERSHIP（macOS 15以降）</p>
                     <span className="sub">操作できるのはMacだけです。WindowsやLinuxのパソコンは操作できません。外出先から使うには、MacとデバイスにTailscaleが必要です。</span>
                   </td></tr>
                 </tbody>

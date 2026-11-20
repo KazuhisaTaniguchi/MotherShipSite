@@ -7,7 +7,7 @@ import Link from "next/link";
 export const metadata: Metadata = {
   title: "利用規約",
   description:
-    "Mothership（Mothership Host と、iPhone・iPad・Android・Mac の Mothership）の利用規約です。試用期間、購入、接続してよいMac、データの扱いなどを定めています。",
+    "MOTHERSHIP（MOTHERSHIP HOST と、iPhone・iPad・Android・Mac の MOTHERSHIP）の利用規約です。試用期間、購入、接続してよいMac、データの扱いなどを定めています。",
   alternates: { canonical: "/terms-of-service/" },
 };
 
@@ -18,8 +18,8 @@ export default function TermsOfService() {
         <div className="legal-hero-bg" aria-hidden="true"></div>
         <div className="wrap">
           <p className="pill pill-glass">利用規約</p>
-          <h1 id="legal-title">Mothership 利用規約</h1>
-          <p className="legal-hero-lead">Mothershipを安心して使っていただくための、約束ごとです。<br />はじめてMacにつなぐ前に、ひととおりお読みください。</p>
+          <h1 id="legal-title">MOTHERSHIP 利用規約</h1>
+          <p className="legal-hero-lead">MOTHERSHIPを安心して使っていただくための、約束ごとです。<br />はじめてMacにつなぐ前に、ひととおりお読みください。</p>
           <dl className="legal-dates">
             <div><dt>制定日</dt><dd><span className="tbd">【未確定：公開日】</span></dd></div>
             <div><dt>最終更新日</dt><dd><span className="tbd">【未確定：公開日】</span></dd></div>
@@ -55,7 +55,7 @@ export default function TermsOfService() {
         </nav>
       
         <article className="legal">
-          <p className="legal-intro">この利用規約（以下「本規約」）は、<span className="tbd">【未確定：運営者の名前】</span>（以下「運営者」）が提供するリモートデスクトップアプリ「Mothership」の使い方について、運営者と利用者のみなさまとの間の約束を定めるものです。</p>
+          <p className="legal-intro">この利用規約（以下「本規約」）は、<span className="tbd">【未確定：運営者の名前】</span>（以下「運営者」）が提供するリモートデスクトップアプリ「MOTHERSHIP」の使い方について、運営者と利用者のみなさまとの間の約束を定めるものです。</p>
       
           <aside className="legal-summary" aria-labelledby="summary-title">
             <h2 id="summary-title">かんたんにまとめると</h2>
@@ -63,7 +63,7 @@ export default function TermsOfService() {
               <li>つないでよいのは、<b>自分のMac</b>か、<b>持ち主から許可をもらったMac</b>だけです。</li>
               <li>はじめてMacにつないだ日から<b>14日間、すべての機能を無料で</b>試せます。そのあとは、一度の購入でずっと使えます。月額料金はありません。</li>
               <li>代金の支払いと返金は、App Store・Google Playの決まりにしたがいます。</li>
-              <li>画面と操作は、Macとデバイスの間で直接やり取りします。<b>Mothershipのサーバーは通りません。</b></li>
+              <li>画面と操作は、Macとデバイスの間で直接やり取りします。<b>MOTHERSHIPのサーバーは通りません。</b></li>
               <li>Tailscale・Aqua Voice・BlackHoleは、ほかの会社などのサービスです。それぞれの規約にしたがってお使いください。</li>
             </ul>
             <p className="fine">このまとめは、読みやすくするためのものです。正式な内容は、以下の各条のとおりです。</p>
@@ -83,9 +83,9 @@ export default function TermsOfService() {
             <h2 id="art-2-title"><span className="no">第2条</span>用語の意味</h2>
             <p>本規約で使う言葉の意味は、次のとおりです。</p>
             <dl className="terms-list">
-              <div><dt>本アプリ</dt><dd>操作されるMacに入れる「Mothership Host」と、操作する側のiPhone・iPad・Android・Macに入れる「Mothership」をまとめた呼び方です。更新版や、関連する説明・ウェブサイトを含みます。</dd></div>
-              <div><dt>ホストのMac</dt><dd>Mothership Hostを入れ、離れた場所から操作されるMacです。</dd></div>
-              <div><dt>デバイス</dt><dd>Mothershipを入れ、ホストのMacを操作するiPhone・iPad・Android・Macです。</dd></div>
+              <div><dt>本アプリ</dt><dd>操作されるMacに入れる「MOTHERSHIP HOST」と、操作する側のiPhone・iPad・Android・Macに入れる「MOTHERSHIP」をまとめた呼び方です。更新版や、関連する説明・ウェブサイトを含みます。</dd></div>
+              <div><dt>ホストのMac</dt><dd>MOTHERSHIP HOSTを入れ、離れた場所から操作されるMacです。</dd></div>
+              <div><dt>デバイス</dt><dd>MOTHERSHIPを入れ、ホストのMacを操作するiPhone・iPad・Android・Macです。</dd></div>
               <div><dt>ストア</dt><dd>App Store、Google Playなど、本アプリの配布や代金の支払いを行うサービスです。</dd></div>
               <div><dt>ライセンス</dt><dd>本アプリを、試用期間のあともずっと使える権利です。第6条の購入で手に入ります。</dd></div>
             </dl>
@@ -103,8 +103,8 @@ export default function TermsOfService() {
           <section className="article" id="art-4" aria-labelledby="art-4-title">
             <h2 id="art-4-title"><span className="no">第4条</span>必要な環境と準備</h2>
             <ol className="clauses">
-              <li>本アプリを使うには、運営者がウェブサイトなどで案内する環境（たとえば、Mothership Hostは macOS 14以降）が必要です。案内した環境でも、機種や設定によっては、一部の機能が動かないことがあります。</li>
-              <li>Mothership Hostが画面を映し、キーボードやマウスの操作を伝えるには、ホストのMacで「画面収録」と「アクセシビリティ」を許可する必要があります。許可は、利用者の判断で行ってください。</li>
+              <li>本アプリを使うには、運営者がウェブサイトなどで案内する環境（たとえば、MOTHERSHIP HOSTは macOS 14以降）が必要です。案内した環境でも、機種や設定によっては、一部の機能が動かないことがあります。</li>
+              <li>MOTHERSHIP HOSTが画面を映し、キーボードやマウスの操作を伝えるには、ホストのMacで「画面収録」と「アクセシビリティ」を許可する必要があります。許可は、利用者の判断で行ってください。</li>
               <li>操作できるのはMacだけです。WindowsやLinuxのパソコンは操作できません。</li>
               <li>外出先から使うには、ホストのMacとデバイスに、Tailscaleのアプリを入れておく必要があります。声で入力する機能を使うには、ホストのMacに「Aqua Voice」と「BlackHole 2ch」を入れておく必要があります。これらは、本アプリには含まれません（第12条）。</li>
               <li>ホストのMacがスリープしているとき、電源が入っていないとき、ログインしていないときは、接続できません。通信にかかる料金は、利用者の負担です。</li>
@@ -116,7 +116,7 @@ export default function TermsOfService() {
             <ol className="clauses">
               <li>本アプリは、ホストのMacごとに、はじめてデバイスからの接続が成り立った時点から<b>14日間</b>、すべての機能を無料で試せます（以下「試用期間」）。</li>
               <li>試用期間が終わると、ライセンスを購入するまで、デバイスからそのMacに接続できなくなります。接続中に試用期間が終わったときは、その時点で接続が切れます。</li>
-              <li>試用期間の残りは、Mothership Hostのメニューバーとメニュー、およびデバイスの画面でお知らせします。</li>
+              <li>試用期間の残りは、MOTHERSHIP HOSTのメニューバーとメニュー、およびデバイスの画面でお知らせします。</li>
               <li>アプリの入れ直し、時刻の変更、保存されたデータの削除などで、試用期間をやり直したり延ばしたりしないでください（第10条）。</li>
             </ol>
           </section>
@@ -125,7 +125,7 @@ export default function TermsOfService() {
             <h2 id="art-6-title"><span className="no">第6条</span>購入（買い切り）</h2>
             <ol className="clauses">
               <li>ライセンスは、<b>買い切り</b>です。一度購入すれば、月額料金や更新の料金はかかりません。価格は、ストアの購入画面に表示される金額です。</li>
-              <li>ライセンスは、デバイスのMothershipの中から、ストアの決済で購入します。購入できるデバイスとストアは、運営者がウェブサイトなどで案内します。</li>
+              <li>ライセンスは、デバイスのMOTHERSHIPの中から、ストアの決済で購入します。購入できるデバイスとストアは、運営者がウェブサイトなどで案内します。</li>
               <li>購入したデバイスからホストのMacに接続すると、そのMacが購入済みになります。<b>一度の購入で、利用者が持っているMacを何台でも</b>購入済みにできます。購入済みになったMacには、どのデバイスからでも接続できます。</li>
               <li>デバイスの機種を変えたときや、アプリを入れ直したときは、「購入を復元」で、同じストアのアカウントの購入を引き継げます。</li>
               <li>ライセンスは、購入した利用者のためのものです。ほかの人が持つMacを購入済みにするために使わないでください。</li>
@@ -155,7 +155,7 @@ export default function TermsOfService() {
             <h2 id="art-9-title"><span className="no">第9条</span>利用者が管理すること</h2>
             <ol className="clauses">
               <li>ホストのMacとデバイスは、利用者の責任で管理してください。とくに、デバイスには、パスコードやFace ID・Touch ID・指紋によるロックをかけておくことをおすすめします。</li>
-              <li>デバイスをなくしたとき、手放すときは、Mothership Hostのメニューの「登録済みの端末」から、そのデバイスを削除してください。削除したデバイスからは、接続できなくなります。</li>
+              <li>デバイスをなくしたとき、手放すときは、MOTHERSHIP HOSTのメニューの「登録済みの端末」から、そのデバイスを削除してください。削除したデバイスからは、接続できなくなります。</li>
               <li>Tailscaleのアカウントなど、外部のサービスのアカウントとパスワードは、利用者の責任で管理してください。</li>
               <li>本アプリの「画面を隠す」機能は、ホストのMacのそばにいる人から画面を見えにくくするためのものです。すべての状況で画面が見えないことを保証するものではありません。Macの近くに人がいる場所では、十分に注意してお使いください。</li>
               <li>大切なデータは、利用者自身でバックアップを取ってください。</li>
@@ -182,7 +182,7 @@ export default function TermsOfService() {
           <section className="article" id="art-11" aria-labelledby="art-11-title">
             <h2 id="art-11-title"><span className="no">第11条</span>データの扱い</h2>
             <ol className="clauses">
-              <li>画面の映像、キーボードやマウスの操作、クリップボード、ファイル、音、声は、ホストのMacとデバイスの間で、暗号化して直接やり取りします。<b>Mothershipのサーバーは通りません。</b>運営者は、これらの中身を受け取りません。</li>
+              <li>画面の映像、キーボードやマウスの操作、クリップボード、ファイル、音、声は、ホストのMacとデバイスの間で、暗号化して直接やり取りします。<b>MOTHERSHIPのサーバーは通りません。</b>運営者は、これらの中身を受け取りません。</li>
               <li>本アプリは、アカウントの登録を求めません。購入の確認は、ストアが署名した購入の証明を、ホストのMacの中で確かめることで行います。</li>
               <li>本アプリは、入力した文字やクリップボードの中身を、記録（ログ）に残しません。声は保存しません。声はデバイスからホストのMacへ送られ、Macの中でAqua Voiceに渡されます。</li>
               <li>個人の情報の扱いについては、別に定める<Link href="/privacy-policy/">プライバシーポリシー</Link>にしたがいます。</li>
@@ -195,7 +195,7 @@ export default function TermsOfService() {
               <li>本アプリは、Tailscale（VPNサービス）、Aqua Voice（音声入力アプリ）、BlackHole（仮想オーディオ）など、運営者以外が提供するサービスやソフトウェア（以下「外部サービス」）と組み合わせて使う機能があります。</li>
               <li>外部サービスは、本アプリに含まれません。それぞれの提供元の規約にしたがって、利用者の判断でお使いください。料金がかかる場合は、利用者の負担です。</li>
               <li>外部サービスの内容、動作、提供の終了、文字にする精度などについて、運営者は責任を負いません。</li>
-              <li>Mothershipは独立して開発されたアプリです。Apple Inc.、Google LLC、Tailscale Inc.、Aqua Voiceの提供元などが、認定・後援・承認したものではありません。</li>
+              <li>MOTHERSHIPは独立して開発されたアプリです。Apple Inc.、Google LLC、Tailscale Inc.、Aqua Voiceの提供元などが、認定・後援・承認したものではありません。</li>
             </ol>
           </section>
       

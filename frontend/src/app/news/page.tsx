@@ -5,7 +5,7 @@ import { formatDate, getAllPosts } from "@/lib/wordpress";
 
 export const metadata: Metadata = {
   title: "お知らせ",
-  description: "Mothershipからのお知らせ",
+  description: "MOTHERSHIPからのお知らせ",
 };
 
 export default async function NewsIndex() {
