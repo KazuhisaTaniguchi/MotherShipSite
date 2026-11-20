@@ -8,6 +8,7 @@
 | `index.html` | LP 本体（HERO、3つの約束、こんなときに、特長、声で入力、対応デバイス、使い方、料金、よくある質問、ダウンロード、フッター） |
 | `designSystem/` | **デザインシステム**。色・文字・余白などの値（`tokens.css`）、土台（`base.css`）、使い回す部品（`components.css`）、見本帳（`index.html`）、決まり（`README.md`）。LP はこれを読み込んでいる |
 | `styles.css` | この LP だけの組み方（HERO とアニメ、各セクションの並べ方）。値と部品は `designSystem/` のものを使う |
+| `404.html`・`404.css` | 404 ページ（2026-11-20 追加）。ヘッダー・フッターは LP と同じ。部品は `.pill`・`.btn`・`.phone`・`.dot`、値はトークンだけ。リンクは `index.html#…` の相対パス（本番に組み込むときは `/` からのパスにする） |
 | `script.js` | スマホのメニュー、ヘッダー、HERO のアニメと動画の制御 |
 | `favicon.svg` | アイコン |
 | `media/` | HERO の動画の置き場所（`media/README.md` に決まりと台本） |

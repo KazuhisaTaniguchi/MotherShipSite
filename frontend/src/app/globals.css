@@ -6,3 +6,5 @@
 @import "../styles/lp.css";
 /* お知らせ・固定ページの本文（WordPress から来る HTML） */
 @import "../styles/content.css";
+/* 404 ページ（mock/design/404.css の写し） */
+@import "../styles/404.css";
