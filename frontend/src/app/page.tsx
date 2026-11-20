@@ -9,7 +9,7 @@ export default function Home() {
         <div className="hero-bg" aria-hidden="true"></div>
         <div className="wrap hero-grid">
           <div className="hero-copy">
-            <p className="pill pill-glass hero-label">1Macを、もっと自由に。</p>
+            <p className="pill pill-glass hero-label">Macを、もっと自由に。</p>
             <h1 id="hero-title">
               離れていても、
               <br />
