@@ -7,6 +7,7 @@
 |---|---|
 | `index.html` | LP 本体（HERO、3つの約束、こんなときに、特長、声で入力、対応デバイス、使い方、料金、よくある質問、ダウンロード、フッター） |
 | `designSystem/` | **デザインシステム**。色・文字・余白などの値（`tokens.css`）、土台（`base.css`）、使い回す部品（`components.css`）、見本帳（`index.html`）、決まり（`README.md`）。LP はこれを読み込んでいる |
+| `hero-variants.css`・`hero-variants.js` | **HERO のアニメの 4 案（2026-11-20。くらべて選ぶための一時的なファイル）**。`index.html` の HERO を 4 つに増やし、案 A〜D を入れる。流れ：MacBook でアイコン →「端末を追加」→ iPad が縦向きで登場 → つなぐ → メモとグラフ → 声で入力（バーのボタンは 6 個：🎤・削除・Enter・Tab・コピー・ペースト）→ 向きを変える。`?demo=15000` で 4 案ともその時刻で止まる。案が決まったら、選んだ案を `styles.css`・`script.js`・`index.html` に移して消す。本物の動画（`media/hero-demo.mp4`）への切り替えは 4 案には入れていない。前のアニメ（`script.js` の HERO の部分と `styles.css` の絵）は残してある |
 | `styles.css` | この LP だけの組み方（HERO とアニメ、各セクションの並べ方）。値と部品は `designSystem/` のものを使う |
 | `terms-of-service.html`・`legal.css` | 利用規約（2026-11-20 追加。スラッグ `terms-of-service`）。目次つき、全 20 条と「かんたんにまとめると」。`legal.css` はプライバシーポリシーなど同じ形の文書にも使える。運営者名・連絡先・日付・裁判所・プライバシーポリシーの URL は【未確定】（`.tbd` で赤く囲んで表示。公開前に埋めて消す）。**公開前に専門家の確認を受けること** |
 | `news.html`・`content.css` | お知らせの一覧（2026-11-20 追加。本番の `/news/`）。`content.css` は frontend の `src/styles/content.css` の写し（本番が元。直すときは両方）。記事は本番では WordPress の投稿が新しい順に並ぶ。モックの 3 件は「（サンプル）」と書いた仮のもので、リンク先は無い（`#`） |

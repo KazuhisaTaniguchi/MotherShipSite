@@ -14,7 +14,10 @@
   <link rel="stylesheet" href="designSystem/base.css">
   <link rel="stylesheet" href="designSystem/components.css">
   <link rel="stylesheet" href="styles.css">
+  <!-- HERO のアニメの 4 案（案が決まったら消す） -->
+  <link rel="stylesheet" href="hero-variants.css">
   <script src="script.js" defer></script>
+  <script src="hero-variants.js" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#main">本文へ移動</a>
@@ -62,58 +65,9 @@
 
         <div class="hero-stage">
           <div class="stage-glow" aria-hidden="true"></div>
-          <figure class="phone tablet hero-phone" data-hero-player role="img" aria-label="Mothershipの使い方のイメージ。つなぐと、Macの画面がiPadに映り、キーボードや声で操作できる。iPadの向きを変えると、Macの画面もその形に変わる">
-            <div class="phone-screen">
-              <!-- 自作のアニメ（イメージ）。本物の動画 media/hero-demo.mp4 を置くと、そちらに切り替わる（media/README.md） -->
-              <div class="demo" data-scene="1" aria-hidden="true">
-                <div class="d-connect">
-                  <img src="../contents/images/app-ipad-connect-portrait.png" alt="" width="1640" height="2360">
-                  <div class="d-list"><p>登録済みのMac</p><div class="d-host"><b>Mac mini</b><span>自宅のMac</span><em>つなぐ</em></div></div>
-                  <span class="d-tap"></span>
-                  <div class="d-connecting"><i></i>接続中…</div>
-                </div>
-                <div class="d-live">
-                  <div class="d-mac">
-                    <div class="m-menubar"><b></b><span>ファイル</span><span>編集</span><span>表示</span><i>9:41</i></div>
-                    <div class="m-window m-doc">
-                      <div class="m-title"><i></i><i></i><i></i><span>メモ</span></div>
-                      <div class="m-body"><div class="m-scroll">
-                        <h4>打ち合わせメモ</h4>
-                        <p class="m-typed"><span class="m-text"></span><span class="m-caret"></span></p>
-                        <ul><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li></ul>
-                        <div class="m-fig"></div>
-                        <ul><li></li><li></li><li></li><li></li></ul>
-                      </div></div>
-                    </div>
-                    <div class="m-window m-sheet">
-                      <div class="m-title"><i></i><i></i><i></i><span>グラフ</span></div>
-                      <div class="m-body"><div class="m-bars"><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
-                    </div>
-                    <div class="m-dock"><i></i><i></i><i></i><i></i><i></i></div>
-                  </div>
-                  <div class="d-keys">
-                    <div class="k-bar"><span>コピー</span><span>ペースト</span><span class="k-switch">アプリ切替</span><span>Spotlight</span></div>
-                    <div class="k-row"><i>q</i><i>w</i><i>e</i><i>r</i><i>t</i><i>y</i><i>u</i><i>i</i><i>o</i><i>p</i></div>
-                    <div class="k-row"><i>a</i><i>s</i><i>d</i><i>f</i><i>g</i><i>h</i><i>j</i><i>k</i><i>l</i></div>
-                    <div class="k-row"><i>⇧</i><i>z</i><i>x</i><i>c</i><i>v</i><i>b</i><i>n</i><i>m</i><i>⌫</i></div>
-                    <div class="k-row k-mod"><i>⌃</i><i>⌥</i><i class="k-cmd">⌘</i><i class="k-space"></i><i class="k-tab">⇥</i><i>⏎</i></div>
-                  </div>
-                  <div class="d-voice"><div class="d-wave"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><span class="d-mic">🎤</span><span>⌫</span><span>⏎</span></div>
-                  <span class="d-finger"></span>
-                </div>
-              </div>
-              <video class="hero-video" muted loop playsinline preload="metadata"
-                     aria-label="iPadのMothershipから、Macを操作している様子">
-                <source src="media/hero-demo.mp4" type="video/mp4">
-              </video>
-            </div>
-            <div class="demo-bar">
-              <button class="video-toggle" type="button" aria-label="アニメーションを一時停止"><span class="icon-pause" aria-hidden="true"></span></button>
-              <span class="d-label" aria-hidden="true">つなぐ</span>
-              <span class="d-dots" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span>
-            </div>
-            <figcaption class="demo-note">イメージです（実際の画面とは異なります）</figcaption>
-          </figure>
+          <!-- HERO のアニメ：4 案をくらべるため、hero-variants.js がこの HERO を 4 つに増やして、ここに案 A〜D を入れる。
+               案が決まったら、選んだ案をここに書き戻す（前のアニメは Git の履歴にある） -->
+          <div class="hv" data-hv></div>
           <div class="stage-chip chip-a" aria-hidden="true"><b>60</b>fps まで</div>
           <div class="stage-chip chip-b" aria-hidden="true"><span class="dot"></span>暗号化して直接つなぐ</div>
         </div>

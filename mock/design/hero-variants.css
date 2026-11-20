@@ -1,0 +1,143 @@
+/* ==========================================================================
+   Mothership LP ｜ HERO のアニメの 4 案（くらべて選ぶための一時的なファイル）
+   designSystem/ → styles.css → この hero-variants.css の順に読み込む。
+   端末の中の絵（.demo、.d-mac、.m-window、.d-keys など）は styles.css のものをそのまま使い、
+   ここには「MacBook の場面」「音声入力のバー（6 個）」「案ごとの違い」だけを書く。
+   案が決まったら、選んだ案を styles.css・script.js・index.html に移して、このファイルは消す。
+   絵の中の色（Mac の壁紙・窓・キー）は、styles.css と同じく「絵」として直接書いている。
+   ========================================================================== */
+
+/* ---- 案を選ぶための表示 ------------------------------------------------ */
+.hero.is-clone { margin-top: 0; }
+.hv-pick { position: relative; z-index: 2; display: flex; flex-wrap: wrap; align-items: baseline; gap: var(--space-2) var(--space-4); margin-bottom: var(--space-8); padding: var(--space-4) var(--space-5); border-radius: var(--radius-md); background: var(--surface); box-shadow: var(--shadow-card); }
+.hv-pick b { font-size: var(--text-subheading); font-weight: var(--weight-heavy); color: var(--blue-deep); }
+.hv-pick strong { font-weight: var(--weight-heavy); }
+.hv-pick span { flex-basis: 100%; font-size: var(--text-small); color: var(--ink-2); line-height: var(--leading-note); }
+.hv-jump { position: fixed; left: 50%; bottom: 16px; z-index: var(--z-header); transform: translateX(-50%); display: flex; align-items: center; gap: var(--space-2); padding: var(--space-2) var(--space-3); border-radius: var(--radius-pill); background: var(--ink); box-shadow: var(--shadow-button); font-size: var(--text-note); font-weight: var(--weight-bold); color: var(--on-dark-3); white-space: nowrap; }
+.hv-jump a { display: grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; background: var(--glass); color: var(--on-dark); text-decoration: none; }
+.hv-jump a:hover { background: var(--blue); }
+
+/* ---- 舞台：MacBook と iPad を同じ場所に重ねて、入れ替える ---------------- */
+.hv { position: relative; display: grid; justify-items: center; width: 100%; }
+.hv-stage { position: relative; display: grid; place-items: center; }
+.hv-pad { transition: opacity .6s ease, transform .8s var(--ease-out); }
+.hv:not(.is-pad) .hv-pad { opacity: 0; transform: translateY(4%) scale(.94); }
+.hv-laptop { position: absolute; z-index: 2; left: -6%; width: 112%; top: 50%; transform: translateY(-50%); transition: opacity .6s ease, transform .9s var(--ease-out); pointer-events: none; }
+.hv:not(.is-mac) .hv-laptop { opacity: 0; transform: translateY(-50%) scale(.96); }
+.hv.is-snap .hv-pad, .hv.is-snap .hv-laptop, .hv.is-snap .hv-laptop *, .hv.is-snap .hv-badge, .hv.is-snap .hv-bubble { transition: none !important; }
+
+/* MacBook（画面と土台） */
+.hv-lscreen { position: relative; aspect-ratio: 16 / 10; container-type: size; overflow: hidden; border: 8px solid var(--device); border-radius: 14px 14px 4px 4px; box-shadow: var(--shadow-device); background: linear-gradient(165deg, #5b7cf7 0%, #7fc4f5 45%, var(--mint) 75%, #ffc9a8 100%); }
+/* 文字の大きさは画面の幅に合わせる（1em = 画面の幅の 2.3%）。cqw は親の入れ物を見るので、内側の箱に書く */
+.lm-in { position: absolute; inset: 0; font-size: 2.3cqw; line-height: 1.4; color: var(--ink); text-align: left; }
+.hv-lbase { position: relative; height: 11px; margin: 0 -5%; border-radius: 2px 2px 14px 14px; background: linear-gradient(#dfe5f1, #aab4c9); }
+.hv-lbase::before { content: ""; position: absolute; left: 50%; top: 0; width: 16%; height: 4px; transform: translateX(-50%); border-radius: 0 0 6px 6px; background: #98a3ba; }
+.hv-lscreen * { transition: opacity .3s ease, transform .35s var(--ease-out), background-color var(--dur-base), left .8s var(--ease-out), top .8s var(--ease-out); }
+
+.lm-bar { display: flex; align-items: center; gap: 1.1em; height: 2.1em; padding: 0 1em; background: rgba(255, 255, 255, .6); font-size: .82em; font-weight: var(--weight-semibold); }
+.lm-bar b { width: 1em; height: 1em; border-radius: 30%; background: var(--ink); }
+.lm-bar .lm-icon { margin-left: auto; width: 1.5em; height: 1.5em; border-radius: .4em; background: var(--grad-accent); box-shadow: 0 0 0 0 rgba(var(--blue-rgb), 0); }
+.lm-bar em { font-style: normal; }
+.is-menu .lm-icon, .is-qr .lm-icon { box-shadow: 0 0 0 .3em rgba(var(--blue-rgb), .3); }
+.lm-win { position: absolute; left: 5%; top: 13%; width: 52%; height: 62%; border-radius: .8em; background: var(--surface); box-shadow: 0 1.2em 2.4em -1em rgba(var(--navy-rgb), .5); overflow: hidden; }
+.lm-win::before { content: ""; display: block; height: 2em; background: var(--tint); border-bottom: 1px solid var(--line); }
+.lm-win i { display: block; height: .6em; margin: 1em 1.2em 0; border-radius: .3em; background: var(--line); }
+.lm-win i:nth-child(2n) { width: 62%; }
+.lm-win i:nth-child(3n) { width: 78%; }
+
+/* メニューバーの Mothership Host のメニュー */
+.lm-menu { position: absolute; right: 6%; top: 8%; width: 38%; padding: .5em; border-radius: .8em; background: rgba(255, 255, 255, .96); box-shadow: 0 1.2em 2.6em -.8em rgba(var(--navy-rgb), .6); font-size: .9em; font-weight: var(--weight-semibold); opacity: 0; transform: translateY(-.6em) scale(.97); transform-origin: 85% 0; }
+.is-menu .lm-menu { opacity: 1; transform: none; }
+.lm-menu p { padding: .42em .8em; border-radius: .45em; white-space: nowrap; }
+.lm-menu .lm-head { font-weight: var(--weight-heavy); }
+.lm-menu .lm-state { display: flex; align-items: center; gap: .5em; font-size: .88em; color: var(--ink-3); }
+.lm-menu .lm-state i { width: .6em; height: .6em; border-radius: 50%; background: var(--live); }
+.lm-menu hr { margin: .3em .5em; border: 0; border-top: 1px solid var(--line); }
+.is-cur-add .lm-add { background: var(--blue); color: var(--on-dark); }
+
+/* 端末を追加：QR コードの窓 */
+.lm-qr { position: absolute; left: 50%; top: 54%; width: 46%; padding: 1.2em 1.2em 1em; border-radius: 1em; background: var(--surface); box-shadow: 0 1.6em 3em -1em rgba(var(--navy-rgb), .65); text-align: center; opacity: 0; transform: translate(-50%, -46%) scale(.94); }
+.is-qr .lm-qr { opacity: 1; transform: translate(-50%, -50%); }
+.lm-qr h4 { margin: 0 0 .7em; font-size: 1.05em; font-weight: var(--weight-heavy); }
+.lm-qr p { margin-top: .7em; font-size: .78em; line-height: 1.5; color: var(--ink-2); }
+.hv-qr { display: grid; grid-template-columns: repeat(11, 1fr); gap: 0; width: 62%; aspect-ratio: 1; margin: 0 auto; padding: 5%; border-radius: .5em; background: #fff; }
+.hv-qr i { background: transparent; }
+.hv-qr i.on { background: var(--ink); }
+
+/* マウスのポインター */
+.lm-cursor { position: absolute; left: 44%; top: 62%; width: 1.5em; height: 1.5em; background: var(--ink); clip-path: polygon(0 0, 0 82%, 24% 62%, 42% 100%, 58% 92%, 40% 56%, 72% 56%); filter: drop-shadow(0 0 1px #fff); z-index: 3; }
+.is-cur-icon .lm-cursor { left: 84%; top: 2.6%; }
+.is-cur-add .lm-cursor { left: 74%; top: 37%; }
+.lm-click { position: absolute; left: 44%; top: 62%; width: 2.6em; height: 2.6em; margin: -.9em 0 0 -1.1em; border-radius: 50%; background: rgba(var(--blue-rgb), .35); opacity: 0; transform: scale(.3); z-index: 2; }
+.is-cur-icon .lm-click { left: 84%; top: 2.6%; }
+.is-cur-add .lm-click { left: 74%; top: 37%; }
+.is-click .lm-click { opacity: 1; transform: scale(1); }
+/* iPad から操作されている間（案 B） */
+.lm-linked { position: absolute; left: 50%; bottom: 9%; transform: translate(-50%, 1em); display: flex; align-items: center; gap: .6em; padding: .7em 1.4em; border-radius: 99em; background: rgba(8, 12, 26, .88); color: var(--on-dark); font-size: 1.5em; font-weight: var(--weight-bold); white-space: nowrap; opacity: 0; }
+.lm-linked i { width: .7em; height: .7em; border-radius: 50%; background: var(--live); box-shadow: 0 0 0 .3em rgba(var(--live-rgb), .3); }
+.is-linked .lm-linked { opacity: 1; transform: translate(-50%, 0); }
+.is-linked .lm-cursor { opacity: 0; }
+
+/* ---- iPad の中：styles.css は data-scene で場面を切り替えるが、ここではクラスで切り替える ---- */
+.hv .demo.is-live .d-live { opacity: 1; transform: none; }
+.hv .demo.is-live .d-connect { opacity: 0; }
+.hv .demo.is-keys .d-keys { transform: none; }
+.hv .demo.is-voice .m-caret { opacity: 1; }
+.hv .m-text { white-space: pre-line; }
+.hv .demo.is-keys .k-row:nth-child(2) i:nth-child(1), .hv .demo.is-keys .k-row:nth-child(3) i:nth-child(2), .hv .demo.is-keys .k-row:nth-child(4) i:nth-child(6) { animation: hv-key 1.1s ease-in-out infinite; }
+.hv .demo.is-keys .k-row:nth-child(3) i:nth-child(2) { animation-delay: -.4s; }
+.hv .demo.is-keys .k-row:nth-child(4) i:nth-child(6) { animation-delay: -.75s; }
+@keyframes hv-key { 0%, 60%, 100% { background: #263257; } 20% { background: var(--blue); } }
+.hv.is-paused-all .k-row i, .hv.is-paused-all .d-scan-line, .hv.is-paused-all .v-wave i { animation-play-state: paused !important; }
+
+/* 音声入力のバー：ボタン 6 個（はじめの並び：🎤・削除・Enter・Tab・コピー・ペースト）。≡ はつまみ */
+.d-vbar { position: absolute; left: 50%; bottom: 15%; transform: translate(-50%, 1.2em); display: flex; align-items: center; gap: .5em; padding: .55em .7em; border-radius: 99em; background: rgba(11, 16, 32, .92); box-shadow: 0 1em 2.4em -1em rgba(0, 0, 0, .7); opacity: 0; white-space: nowrap; }
+.hv .demo.is-voice .d-vbar { opacity: 1; transform: translate(-50%, 0); }
+.hv .demo.is-land .d-vbar { opacity: 0; }
+.d-vbar .v-grip { width: 1.1em; color: var(--on-dark-4); font-size: 1.1em; text-align: center; }
+.d-vbar .v-key { display: grid; place-items: center; width: 2.7em; height: 2.7em; border-radius: 50%; background: #263257; color: var(--on-dark); font-size: 1.3em; font-weight: var(--weight-bold); }
+.d-vbar .v-key small { font-size: .5em; letter-spacing: 0; }
+.hv .demo.is-mic .v-mic { background: var(--rec); box-shadow: 0 0 0 .5em rgba(var(--rec-rgb), .3); transform: scale(1.08); }
+.hv .demo.is-enter .v-enter, .hv .demo.is-copy .v-copy { background: var(--blue); box-shadow: 0 0 0 .4em rgba(var(--blue-rgb), .35); }
+.v-wave { display: flex; align-items: center; gap: .22em; height: 2.6em; width: 0; overflow: hidden; opacity: 0; transition: width .3s, opacity .3s !important; }
+.hv .demo.is-mic .v-wave { width: 4.4em; opacity: 1; }
+.v-wave i { width: .34em; height: 30%; border-radius: .2em; background: var(--cyan); animation: wave 1s ease-in-out infinite; }
+.v-wave i:nth-child(2n) { animation-delay: -.25s; }
+.v-wave i:nth-child(3n) { animation-delay: -.55s; }
+
+/* QR コードの読み取り（案 D） */
+.d-scan { position: absolute; inset: 0; display: grid; place-content: center; justify-items: center; gap: 1.6em; background: #05080f; opacity: 0; pointer-events: none; }
+.hv .demo.is-scan .d-scan { opacity: 1; }
+.d-scan-frame { position: relative; width: 52cqw; aspect-ratio: 1; padding: 6%; border-radius: 1.6em; box-shadow: 0 0 0 .25em rgba(255, 255, 255, .85), 0 0 0 100cqh rgba(5, 8, 15, .55); background: #fff; }
+.d-scan-frame .hv-qr { width: 100%; padding: 0; }
+.d-scan-line { position: absolute; left: 4%; right: 4%; top: 8%; height: .3em; border-radius: 99em; background: var(--cyan); box-shadow: 0 0 1.2em .3em rgba(var(--cyan-rgb), .8); animation: hv-scan 1.5s ease-in-out infinite; }
+@keyframes hv-scan { 0%, 100% { top: 8%; } 50% { top: 90%; } }
+.d-scan p { position: relative; font-size: 1.15em; font-weight: var(--weight-bold); color: var(--on-dark); }
+.d-reg { position: absolute; left: 50%; top: 9%; transform: translate(-50%, -1em); display: flex; align-items: center; gap: .5em; padding: .7em 1.3em; border-radius: 99em; background: var(--live); color: var(--navy-2); font-size: 1.05em; font-weight: var(--weight-heavy); white-space: nowrap; opacity: 0; }
+.hv .demo.is-reg .d-reg { opacity: 1; transform: translate(-50%, 0); }
+
+/* ---- 端末の外に出す札 -------------------------------------------------- */
+.hv-badge { position: absolute; z-index: 3; left: 50%; top: -18px; transform: translate(-50%, -8px) scale(.94); padding: 10px 18px; border-radius: var(--radius-pill); background: var(--ink); color: var(--on-dark); font-size: var(--text-small); font-weight: var(--weight-heavy); white-space: nowrap; box-shadow: var(--shadow-button); opacity: 0; transition: opacity .4s ease, transform .5s var(--ease-out); }
+.hv-badge mark { background: none; padding: 0; color: var(--cyan); }
+.hv.is-badge .hv-badge { opacity: 1; transform: translate(-50%, 0); }
+.hv-bubble { position: absolute; z-index: 3; left: -4%; top: 34%; max-width: 62%; padding: 14px 18px; border-radius: 20px 20px 20px 6px; background: var(--surface); color: var(--ink); font-size: var(--text-body-sm); font-weight: var(--weight-bold); line-height: 1.6; text-align: left; box-shadow: var(--shadow-card); opacity: 0; transform: translateY(8px) scale(.96); transform-origin: 0 100%; transition: opacity .35s ease, transform .45s var(--ease-out); }
+.hv-bubble::before { content: "🎤"; margin-right: 6px; }
+.hv.is-bubble .hv-bubble { opacity: 1; transform: none; }
+
+/* 場面の点は、案によって 5 個か 6 個 */
+[data-scene="6"] .d-dots i:nth-child(6) { background: var(--blue); transform: scale(1.3); }
+
+/* ---- 案 B：MacBook を消さずに、小さくして左上に残す ---------------------- */
+.hv[data-variant="b"].is-pad .hv-laptop { opacity: 1; transform: translate(-30%, -137%) scale(.4); }
+.hv[data-variant="b"].is-pad .hv-lbase { opacity: .9; }
+.hv[data-variant="b"] .hv-pad { margin-top: 7%; }
+.hv[data-variant="b"] .hv-badge { top: 3.5%; left: 66%; }
+
+/* ---- 案 C：声が主役。話した言葉を吹き出しで見せる ------------------------ */
+.hv[data-variant="c"] .hv-badge { top: -22px; font-size: var(--text-body); padding: 12px 22px; }
+
+@media (max-width: 860px) {
+  .hv-bubble { left: -1%; max-width: 78%; font-size: var(--text-small); }
+  .hv-badge { font-size: var(--text-note); padding: 8px 14px; }
+  .hv-jump { bottom: 10px; }
+}
