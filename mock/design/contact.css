@@ -22,9 +22,9 @@
 .before-grid p { margin-top: var(--space-2); font-size: var(--text-body-sm); color: var(--ink-2); }
 .before-grid .ticks { margin-top: var(--space-4); }
 .before-grid .ticks li { font-size: var(--text-small); }
-.card-link { margin-top: auto; padding-top: var(--space-5); font-size: var(--text-small); font-weight: var(--weight-bold); color: var(--blue-deep); text-decoration: none; }
-.card-link::after { content: " →"; }
-.card-link:hover { text-decoration: underline; }
+.before-grid .card-link { margin-top: auto; padding-top: var(--space-5); font-size: var(--text-small); font-weight: var(--weight-bold); color: var(--blue-deep); text-decoration: none; }
+.before-grid .card-link::after { content: " →"; }
+.before-grid .card-link:hover { text-decoration: underline; }
 
 /* フォームと、右の補足 */
 .form-section { padding: var(--space-16) 0 var(--section-y); }
