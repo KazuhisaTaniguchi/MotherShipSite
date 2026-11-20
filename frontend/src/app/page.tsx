@@ -99,6 +99,58 @@ export default async function Home() {
             <h2 className="section-title" id="flow-title">AIに任せて、出かける。</h2>
             <p className="section-lead">家のMacは、働かせたまま。<span className="nb">あなたは、スマホを持って出かけるだけです。</span></p>
           </div>
+          {/* 場面の流れの図（2026-11-21）。下の 4 つの手順と同じ時計で動く（16 秒で 1 周）。CSS だけ */}
+          <div className="flow-demo" role="img" aria-label="AIに任せて出かける流れの図。家のMacで、AIにレポートづくりを頼み、Macを起こしたままにして出かける。外出先でスマホを開くと、Macの画面が映り、AIが確認を待っているのが分かる。指で「許可」を押し、スクロールして結果を確かめる。スマホの🎤を押して「いちばん売上が高い月を、目立たせてください。」と話すと、Macの入力欄に入り、グラフのいちばん高い棒が目立つ。">
+            <div className="fd-fig" aria-hidden="true">
+              <div className="fd-in">
+                <span className="fd-place fd-home">家</span>
+                <span className="fd-place fd-away">外出先</span>
+                <div className="fd-mac">
+                  <div className="fd-scr">
+                    <div className="fd-mbar"><i></i><b></b><b></b><span className="fd-awake">スリープさせない<u></u></span></div>
+                    <div className="fd-ui">
+                      <div className="fd-ai">
+                        <b>AI アシスタント</b>
+                        <div className="fd-log"><div className="fd-logi">
+                          <p className="fd-me fd-me1">先月の売上を、レポートにまとめてください。</p>
+                          <div className="fd-work"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+                          <p className="fd-done">✓ レポートができました</p>
+                          <p className="fd-me fd-me2">いちばん売上が高い月を、目立たせてください。</p>
+                        </div></div>
+                        <div className="fd-ask"><span>続けてよいですか？</span><em>許可</em></div>
+                        <div className="fd-input"><span className="fd-hint">次の指示を入力</span><span className="fd-t fd-t1">先月の売上を、レポートにまとめてください。</span><span className="fd-t fd-t2">いちばん売上が高い月を、目立たせてください。</span></div>
+                      </div>
+                      <div className="fd-rep"><b><i></i><i></i><i></i></b><p>売上レポート</p><em><i></i><i></i><i></i><i></i><i></i></em></div>
+                    </div>
+                  </div>
+                  <i className="fd-stand"></i>
+                </div>
+                <div className="fd-link"><i></i></div>
+                <div className="fd-ph">
+                  <div className="fd-ui">
+                    <div className="fd-ai">
+                      <b>AI アシスタント</b>
+                      <div className="fd-log"><div className="fd-logi">
+                        <p className="fd-me fd-me1">先月の売上を、レポートにまとめてください。</p>
+                        <div className="fd-work"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+                        <p className="fd-done">✓ レポートができました</p>
+                        <p className="fd-me fd-me2">いちばん売上が高い月を、目立たせてください。</p>
+                      </div></div>
+                      <div className="fd-ask"><span>続けてよいですか？</span><em>許可</em></div>
+                      <div className="fd-input"><span className="fd-hint">次の指示を入力</span><span className="fd-t fd-t2">いちばん売上が高い月を、目立たせてください。</span></div>
+                    </div>
+                  </div>
+                  <div className="fd-bar"><span className="fd-mic">🎤</span><i></i><i></i><i></i><i></i></div>
+                </div>
+                <span className="fd-f fd-tap"></span>
+                <span className="fd-f2"><i></i><i></i></span>
+                <span className="fd-f fd-press"></span>
+                <p className="fd-said">いちばん売上が高い月を、目立たせてください。</p>
+              </div>
+            </div>
+            <p className="fd-note">イメージです（実際の画面とは異なります）</p>
+          </div>
+
           <ol className="flow-list">
             <li><span className="step-n">1</span><h3>出かける前に、頼んでおく</h3><p>いつものMacで、いつものAIに。MOTHERSHIP HOSTの設定で、Macを起こしたままにしておけます。</p></li>
             <li><span className="step-n">2</span><h3>出先で、のぞく</h3><p>MOTHERSHIPを開いて、Macをタップ。Macの画面が、そのまま手もとに映ります。進んだのか、止まっているのか、ひと目で分かります。</p></li>
