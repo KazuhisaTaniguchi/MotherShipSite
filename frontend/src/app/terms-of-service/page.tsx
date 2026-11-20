@@ -1,0 +1,281 @@
+import type { Metadata } from "next";
+import Link from "next/link";
+
+// 利用規約。mock/design/terms-of-service.html の <main> を JSX にしたもの（スタイルは src/styles/legal.css）
+// WordPress にも同じスラッグの固定ページ（中身は空）があるが、表示はこのファイルの内容を使う
+// （src/app/[...slug]/page.tsx は、このスラッグを書き出さない）
+export const metadata: Metadata = {
+  title: "利用規約",
+  description:
+    "Mothership（Mothership Host と、iPhone・iPad・Android・Mac の Mothership）の利用規約です。試用期間、購入、接続してよいMac、データの扱いなどを定めています。",
+  alternates: { canonical: "/terms-of-service/" },
+};
+
+export default function TermsOfService() {
+  return (
+    <main id="main">
+      <section className="legal-hero" aria-labelledby="legal-title">
+        <div className="legal-hero-bg" aria-hidden="true"></div>
+        <div className="wrap">
+          <p className="pill pill-glass">利用規約</p>
+          <h1 id="legal-title">Mothership 利用規約</h1>
+          <p className="legal-hero-lead">Mothershipを安心して使っていただくための、約束ごとです。<br />はじめてMacにつなぐ前に、ひととおりお読みください。</p>
+          <dl className="legal-dates">
+            <div><dt>制定日</dt><dd><span className="tbd">【未確定：公開日】</span></dd></div>
+            <div><dt>最終更新日</dt><dd><span className="tbd">【未確定：公開日】</span></dd></div>
+          </dl>
+        </div>
+      </section>
+      
+      <div className="wrap legal-layout">
+        <nav className="legal-toc" aria-label="目次">
+          <p className="legal-toc-title">目次</p>
+          <ol>
+            <li><a href="#art-1"><span className="no">第1条</span>この規約について</a></li>
+            <li><a href="#art-2"><span className="no">第2条</span>用語の意味</a></li>
+            <li><a href="#art-3"><span className="no">第3条</span>使ってよい範囲</a></li>
+            <li><a href="#art-4"><span className="no">第4条</span>必要な環境と準備</a></li>
+            <li><a href="#art-5"><span className="no">第5条</span>試用期間</a></li>
+            <li><a href="#art-6"><span className="no">第6条</span>購入（買い切り）</a></li>
+            <li><a href="#art-7"><span className="no">第7条</span>支払いと返金</a></li>
+            <li><a href="#art-8"><span className="no">第8条</span>つないでよいMac</a></li>
+            <li><a href="#art-9"><span className="no">第9条</span>利用者が管理すること</a></li>
+            <li><a href="#art-10"><span className="no">第10条</span>してはいけないこと</a></li>
+            <li><a href="#art-11"><span className="no">第11条</span>データの扱い</a></li>
+            <li><a href="#art-12"><span className="no">第12条</span>ほかの会社のサービス</a></li>
+            <li><a href="#art-13"><span className="no">第13条</span>権利の帰属</a></li>
+            <li><a href="#art-14"><span className="no">第14条</span>変更・中断・終了</a></li>
+            <li><a href="#art-15"><span className="no">第15条</span>保証しないこと</a></li>
+            <li><a href="#art-16"><span className="no">第16条</span>責任の範囲</a></li>
+            <li><a href="#art-17"><span className="no">第17条</span>利用の停止</a></li>
+            <li><a href="#art-18"><span className="no">第18条</span>規約の変更</a></li>
+            <li><a href="#art-19"><span className="no">第19条</span>準拠法と裁判所</a></li>
+            <li><a href="#art-20"><span className="no">第20条</span>お問い合わせ</a></li>
+          </ol>
+        </nav>
+      
+        <article className="legal">
+          <p className="legal-intro">この利用規約（以下「本規約」）は、<span className="tbd">【未確定：運営者の名前】</span>（以下「運営者」）が提供するリモートデスクトップアプリ「Mothership」の使い方について、運営者と利用者のみなさまとの間の約束を定めるものです。</p>
+      
+          <aside className="legal-summary" aria-labelledby="summary-title">
+            <h2 id="summary-title">かんたんにまとめると</h2>
+            <ul className="ticks small">
+              <li>つないでよいのは、<b>自分のMac</b>か、<b>持ち主から許可をもらったMac</b>だけです。</li>
+              <li>はじめてMacにつないだ日から<b>14日間、すべての機能を無料で</b>試せます。そのあとは、一度の購入でずっと使えます。月額料金はありません。</li>
+              <li>代金の支払いと返金は、App Store・Google Playの決まりにしたがいます。</li>
+              <li>画面と操作は、Macとデバイスの間で直接やり取りします。<b>Mothershipのサーバーは通りません。</b></li>
+              <li>Tailscale・Aqua Voice・BlackHoleは、ほかの会社などのサービスです。それぞれの規約にしたがってお使いください。</li>
+            </ul>
+            <p className="fine">このまとめは、読みやすくするためのものです。正式な内容は、以下の各条のとおりです。</p>
+          </aside>
+      
+          <section className="article" id="art-1" aria-labelledby="art-1-title">
+            <h2 id="art-1-title"><span className="no">第1条</span>この規約について</h2>
+            <ol className="clauses">
+              <li>本規約は、本アプリ（第2条で定めます）を使うすべての方に適用されます。</li>
+              <li>利用者は、本アプリを入れて使いはじめた時点で、本規約に同意したものとみなします。同意いただけない場合は、本アプリを使わないでください。</li>
+              <li>未成年の方は、保護者など法定代理人の同意を得たうえでお使いください。</li>
+              <li>App Store・Google Playなど、本アプリを配布するストアの規約と本規約の内容が異なる場合、そのストアから入手した本アプリについては、ストアの規約が優先する範囲で、ストアの規約が適用されます。</li>
+            </ol>
+          </section>
+      
+          <section className="article" id="art-2" aria-labelledby="art-2-title">
+            <h2 id="art-2-title"><span className="no">第2条</span>用語の意味</h2>
+            <p>本規約で使う言葉の意味は、次のとおりです。</p>
+            <dl className="terms-list">
+              <div><dt>本アプリ</dt><dd>操作されるMacに入れる「Mothership Host」と、操作する側のiPhone・iPad・Android・Macに入れる「Mothership」をまとめた呼び方です。更新版や、関連する説明・ウェブサイトを含みます。</dd></div>
+              <div><dt>ホストのMac</dt><dd>Mothership Hostを入れ、離れた場所から操作されるMacです。</dd></div>
+              <div><dt>デバイス</dt><dd>Mothershipを入れ、ホストのMacを操作するiPhone・iPad・Android・Macです。</dd></div>
+              <div><dt>ストア</dt><dd>App Store、Google Playなど、本アプリの配布や代金の支払いを行うサービスです。</dd></div>
+              <div><dt>ライセンス</dt><dd>本アプリを、試用期間のあともずっと使える権利です。第6条の購入で手に入ります。</dd></div>
+            </dl>
+          </section>
+      
+          <section className="article" id="art-3" aria-labelledby="art-3-title">
+            <h2 id="art-3-title"><span className="no">第3条</span>使ってよい範囲</h2>
+            <ol className="clauses">
+              <li>運営者は利用者に対し、本規約にしたがって本アプリを使う権利を与えます。この権利は、利用者だけのもので、ほかの人に譲ったり、貸したりすることはできません。</li>
+              <li>本アプリは、利用者自身がMacを使うためのものです。個人の用途のほか、仕事で自分の作業に使うこともできます。</li>
+              <li>本アプリそのものの権利は、利用者に売り渡すものではありません。利用者が手に入れるのは、本規約の範囲で使う権利です。</li>
+            </ol>
+          </section>
+      
+          <section className="article" id="art-4" aria-labelledby="art-4-title">
+            <h2 id="art-4-title"><span className="no">第4条</span>必要な環境と準備</h2>
+            <ol className="clauses">
+              <li>本アプリを使うには、運営者がウェブサイトなどで案内する環境（たとえば、Mothership Hostは macOS 14以降）が必要です。案内した環境でも、機種や設定によっては、一部の機能が動かないことがあります。</li>
+              <li>Mothership Hostが画面を映し、キーボードやマウスの操作を伝えるには、ホストのMacで「画面収録」と「アクセシビリティ」を許可する必要があります。許可は、利用者の判断で行ってください。</li>
+              <li>操作できるのはMacだけです。WindowsやLinuxのパソコンは操作できません。</li>
+              <li>外出先から使うには、ホストのMacとデバイスに、Tailscaleのアプリを入れておく必要があります。声で入力する機能を使うには、ホストのMacに「Aqua Voice」と「BlackHole 2ch」を入れておく必要があります。これらは、本アプリには含まれません（第12条）。</li>
+              <li>ホストのMacがスリープしているとき、電源が入っていないとき、ログインしていないときは、接続できません。通信にかかる料金は、利用者の負担です。</li>
+            </ol>
+          </section>
+      
+          <section className="article" id="art-5" aria-labelledby="art-5-title">
+            <h2 id="art-5-title"><span className="no">第5条</span>試用期間</h2>
+            <ol className="clauses">
+              <li>本アプリは、ホストのMacごとに、はじめてデバイスからの接続が成り立った時点から<b>14日間</b>、すべての機能を無料で試せます（以下「試用期間」）。</li>
+              <li>試用期間が終わると、ライセンスを購入するまで、デバイスからそのMacに接続できなくなります。接続中に試用期間が終わったときは、その時点で接続が切れます。</li>
+              <li>試用期間の残りは、Mothership Hostのメニューバーとメニュー、およびデバイスの画面でお知らせします。</li>
+              <li>アプリの入れ直し、時刻の変更、保存されたデータの削除などで、試用期間をやり直したり延ばしたりしないでください（第10条）。</li>
+            </ol>
+          </section>
+      
+          <section className="article" id="art-6" aria-labelledby="art-6-title">
+            <h2 id="art-6-title"><span className="no">第6条</span>購入（買い切り）</h2>
+            <ol className="clauses">
+              <li>ライセンスは、<b>買い切り</b>です。一度購入すれば、月額料金や更新の料金はかかりません。価格は、ストアの購入画面に表示される金額です。</li>
+              <li>ライセンスは、デバイスのMothershipの中から、ストアの決済で購入します。購入できるデバイスとストアは、運営者がウェブサイトなどで案内します。</li>
+              <li>購入したデバイスからホストのMacに接続すると、そのMacが購入済みになります。<b>一度の購入で、利用者が持っているMacを何台でも</b>購入済みにできます。購入済みになったMacには、どのデバイスからでも接続できます。</li>
+              <li>デバイスの機種を変えたときや、アプリを入れ直したときは、「購入を復元」で、同じストアのアカウントの購入を引き継げます。</li>
+              <li>ライセンスは、購入した利用者のためのものです。ほかの人が持つMacを購入済みにするために使わないでください。</li>
+            </ol>
+          </section>
+      
+          <section className="article" id="art-7" aria-labelledby="art-7-title">
+            <h2 id="art-7-title"><span className="no">第7条</span>支払いと返金</h2>
+            <ol className="clauses">
+              <li>代金の支払いは、ストアが行います。支払いの方法、税金、領収書などは、ストアの規約と表示にしたがいます。運営者は、利用者のクレジットカードなどの支払いの情報を受け取りません。</li>
+              <li>返金は、ストアの決まりと手続きにしたがって、ストアに申し出てください。運営者は、ストアを通さずに直接返金することはできません。</li>
+              <li>返金を受けた場合、そのライセンスは失われます。返金を受けたライセンスで購入済みにしたMacを、引き続き使わないでください。</li>
+              <li>試用期間があるため、購入の前に、お使いの環境で動くことを確かめてから購入してください。</li>
+            </ol>
+          </section>
+      
+          <section className="article" id="art-8" aria-labelledby="art-8-title">
+            <h2 id="art-8-title"><span className="no">第8条</span>つないでよいMac</h2>
+            <ol className="clauses">
+              <li>本アプリでつないでよいのは、<b>利用者自身が持っているMac</b>、または<b>持ち主や管理者から操作の許可をもらっているMac</b>だけです。</li>
+              <li>勤め先や学校のMacにつなぐときは、その組織の決まりにしたがってください。許可が必要なときは、先に許可をもらってください。</li>
+              <li>ホストのMacをほかの人も使っている場合、その人に知らせずに、画面を見たり操作したりしないでください。</li>
+            </ol>
+          </section>
+      
+          <section className="article" id="art-9" aria-labelledby="art-9-title">
+            <h2 id="art-9-title"><span className="no">第9条</span>利用者が管理すること</h2>
+            <ol className="clauses">
+              <li>ホストのMacとデバイスは、利用者の責任で管理してください。とくに、デバイスには、パスコードやFace ID・Touch ID・指紋によるロックをかけておくことをおすすめします。</li>
+              <li>デバイスをなくしたとき、手放すときは、Mothership Hostのメニューの「登録済みの端末」から、そのデバイスを削除してください。削除したデバイスからは、接続できなくなります。</li>
+              <li>Tailscaleのアカウントなど、外部のサービスのアカウントとパスワードは、利用者の責任で管理してください。</li>
+              <li>本アプリの「画面を隠す」機能は、ホストのMacのそばにいる人から画面を見えにくくするためのものです。すべての状況で画面が見えないことを保証するものではありません。Macの近くに人がいる場所では、十分に注意してお使いください。</li>
+              <li>大切なデータは、利用者自身でバックアップを取ってください。</li>
+            </ol>
+          </section>
+      
+          <section className="article" id="art-10" aria-labelledby="art-10-title">
+            <h2 id="art-10-title"><span className="no">第10条</span>してはいけないこと</h2>
+            <p>利用者は、本アプリを使って、または本アプリについて、次のことをしてはいけません。</p>
+            <ol className="items">
+              <li>持ち主や管理者の許可なく、ほかの人のMacに接続すること</li>
+              <li>本人に知らせずに、ほかの人の画面や操作を見ること。のぞき見や監視の目的で使うこと</li>
+              <li>法令や公序良俗に反すること、犯罪につながること</li>
+              <li>サポートを名乗って、ほかの人に本アプリを入れさせ、そのMacを操作すること。だましてお金や情報を取ること</li>
+              <li>ほかの人の権利（著作権、プライバシーなど）を侵すこと</li>
+              <li>本アプリを分解・解析（リバースエンジニアリング）すること、改変すること。ただし、法令で認められる範囲を除きます</li>
+              <li>試用期間やライセンスの仕組みを、迂回・改ざん・無効化すること</li>
+              <li>本アプリを、ほかの人に売ったり、配ったり、貸したりすること</li>
+              <li>本アプリや、ほかの利用者のMac・デバイス、運営者のシステムの動作を妨げること</li>
+              <li>そのほか、運営者が不適切と判断すること</li>
+            </ol>
+          </section>
+      
+          <section className="article" id="art-11" aria-labelledby="art-11-title">
+            <h2 id="art-11-title"><span className="no">第11条</span>データの扱い</h2>
+            <ol className="clauses">
+              <li>画面の映像、キーボードやマウスの操作、クリップボード、ファイル、音、声は、ホストのMacとデバイスの間で、暗号化して直接やり取りします。<b>Mothershipのサーバーは通りません。</b>運営者は、これらの中身を受け取りません。</li>
+              <li>本アプリは、アカウントの登録を求めません。購入の確認は、ストアが署名した購入の証明を、ホストのMacの中で確かめることで行います。</li>
+              <li>本アプリは、入力した文字やクリップボードの中身を、記録（ログ）に残しません。声は保存しません。声はデバイスからホストのMacへ送られ、Macの中でAqua Voiceに渡されます。</li>
+              <li>個人の情報の扱いについては、別に定めるプライバシーポリシー（<span className="tbd">【未確定：URL】</span>）にしたがいます。</li>
+            </ol>
+          </section>
+      
+          <section className="article" id="art-12" aria-labelledby="art-12-title">
+            <h2 id="art-12-title"><span className="no">第12条</span>ほかの会社のサービス</h2>
+            <ol className="clauses">
+              <li>本アプリは、Tailscale（VPNサービス）、Aqua Voice（音声入力アプリ）、BlackHole（仮想オーディオ）など、運営者以外が提供するサービスやソフトウェア（以下「外部サービス」）と組み合わせて使う機能があります。</li>
+              <li>外部サービスは、本アプリに含まれません。それぞれの提供元の規約にしたがって、利用者の判断でお使いください。料金がかかる場合は、利用者の負担です。</li>
+              <li>外部サービスの内容、動作、提供の終了、文字にする精度などについて、運営者は責任を負いません。</li>
+              <li>Mothershipは独立して開発されたアプリです。Apple Inc.、Google LLC、Tailscale Inc.、Aqua Voiceの提供元などが、認定・後援・承認したものではありません。</li>
+            </ol>
+          </section>
+      
+          <section className="article" id="art-13" aria-labelledby="art-13-title">
+            <h2 id="art-13-title"><span className="no">第13条</span>権利の帰属</h2>
+            <ol className="clauses">
+              <li>本アプリと、そのプログラム、画面、名前、ロゴ、説明などの権利は、運営者または正当な権利者に帰属します。</li>
+              <li>本アプリには、オープンソースのソフトウェアなど、ほかの権利者のソフトウェアが含まれることがあります。それらには、それぞれのライセンスが適用されます。</li>
+              <li>利用者から運営者に寄せられたご意見やご提案は、運営者が本アプリの改善のために、自由に使えるものとします。</li>
+            </ol>
+          </section>
+      
+          <section className="article" id="art-14" aria-labelledby="art-14-title">
+            <h2 id="art-14-title"><span className="no">第14条</span>変更・中断・終了</h2>
+            <ol className="clauses">
+              <li>運営者は、本アプリをよりよくするため、機能の追加・変更・削除を行うことがあります。</li>
+              <li>macOS・iOS・iPadOS・Androidの更新、ストアの決まりの変更、外部サービスの変更などにより、本アプリの一部または全部が使えなくなることがあります。運営者は、できるだけ早く対応するよう努めますが、対応をお約束するものではありません。</li>
+              <li>運営者は、本アプリの提供や更新を終えることがあります。終えるときは、できるだけ前もって、ウェブサイトなどでお知らせします。</li>
+            </ol>
+          </section>
+      
+          <section className="article" id="art-15" aria-labelledby="art-15-title">
+            <h2 id="art-15-title"><span className="no">第15条</span>保証しないこと</h2>
+            <ol className="clauses">
+              <li>本アプリは、提供する時点の状態のままで提供します。運営者は、本アプリにまちがい（バグ）がないこと、止まらずに動き続けること、特定の目的に合うことを保証しません。</li>
+              <li>通信の速さ、画面の滑らかさ、遅れの少なさは、回線やMac・デバイスの状態によって変わります。運営者は、特定の画質や速さを保証しません。動きの激しいゲームなど、遅れが問題になる用途には向きません。</li>
+              <li>本アプリは、人の生命・身体・財産に大きな影響を与える用途（医療機器、交通や設備の制御など）のために作られたものではありません。そうした用途には使わないでください。</li>
+            </ol>
+          </section>
+      
+          <section className="article" id="art-16" aria-labelledby="art-16-title">
+            <h2 id="art-16-title"><span className="no">第16条</span>責任の範囲</h2>
+            <ol className="clauses">
+              <li>運営者は、本アプリを使ったこと、または使えなかったことで利用者に生じた損害について、運営者に故意または重大な過失がある場合を除き、責任を負いません。</li>
+              <li>前項にかかわらず、運営者が責任を負う場合（消費者契約法などの法令により、責任の免除が認められない場合を含みます）も、運営者に故意または重大な過失がある場合を除き、運営者が負う責任は、利用者に直接、通常生じた損害に限り、その額は、利用者が本アプリのライセンスに支払った金額を上限とします。</li>
+              <li>利用者が本規約に反したことで、運営者やほかの人に損害が生じたときは、利用者がその損害を賠償するものとします。</li>
+            </ol>
+          </section>
+      
+          <section className="article" id="art-17" aria-labelledby="art-17-title">
+            <h2 id="art-17-title"><span className="no">第17条</span>利用の停止</h2>
+            <ol className="clauses">
+              <li>利用者が本規約に反したとき、運営者は、前もって知らせることなく、その利用者による本アプリの利用を止めるために必要な措置をとることがあります。</li>
+              <li>利用者は、いつでも本アプリを削除して、利用をやめることができます。ストアでの購入の扱いは、第7条とストアの決まりにしたがいます。</li>
+            </ol>
+          </section>
+      
+          <section className="article" id="art-18" aria-labelledby="art-18-title">
+            <h2 id="art-18-title"><span className="no">第18条</span>規約の変更</h2>
+            <ol className="clauses">
+              <li>運営者は、法令の変更、本アプリの内容の変更などに合わせて、本規約を変更することがあります。変更は、民法の定めにしたがい、利用者の一般の利益に合う場合、または変更の必要性・内容の相当性などに照らして合理的な場合に行います。</li>
+              <li>本規約を変更するときは、変更の内容と、変更が効力を持つ日を、前もってウェブサイトなどでお知らせします。</li>
+              <li>変更が効力を持つ日のあとに本アプリを使ったときは、変更後の本規約に同意したものとみなします。</li>
+            </ol>
+          </section>
+      
+          <section className="article" id="art-19" aria-labelledby="art-19-title">
+            <h2 id="art-19-title"><span className="no">第19条</span>準拠法と裁判所</h2>
+            <ol className="clauses">
+              <li>本規約は、日本の法律にしたがって解釈されます。</li>
+              <li>本アプリや本規約について、運営者と利用者の間で争いが生じたときは、まず話し合いで解決するよう努めます。それでも解決しないときは、<span className="tbd">【未確定：地方裁判所の名前】</span>を、第一審の専属的な合意管轄裁判所とします。</li>
+              <li>本規約の一部が、法令などにより無効と判断された場合でも、そのほかの部分は引き続き効力を持ちます。</li>
+            </ol>
+          </section>
+      
+          <section className="article" id="art-20" aria-labelledby="art-20-title">
+            <h2 id="art-20-title"><span className="no">第20条</span>お問い合わせ</h2>
+            <p>本規約と本アプリについてのお問い合わせは、次の窓口で受け付けます。</p>
+            <dl className="terms-list">
+              <div><dt>運営者</dt><dd><span className="tbd">【未確定：運営者の名前】</span></dd></div>
+              <div><dt>お問い合わせ</dt><dd><span className="tbd">【未確定：お問い合わせのフォームの URL、またはメールアドレス】</span></dd></div>
+            </dl>
+          </section>
+      
+          <div className="legal-end">
+            <p>附則：本規約は、<span className="tbd">【未確定：公開日】</span>から適用します。</p>
+            <p><Link href="/">← トップページへ</Link></p>
+          </div>
+        </article>
+      </div>
+    </main>
+  );
+}

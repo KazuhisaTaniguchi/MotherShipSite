@@ -1,10 +1,13 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { PageHero } from "@/components/PageHero";
-import { getAllPages, toPlainText, uriToSegments, type Page } from "@/lib/wordpress";
+import { EMPTY_PARAM, getAllPages, toPlainText, uriToSegments, type Page } from "@/lib/wordpress";
 
 // 固定ページは WordPress の URL のまま（例：/sample-page/、親子なら /company/about/）
-// /news/ は Next.js 側のページが優先されるので、ここでは作らない
+// Next.js に専用のページがある URL は、ここでは作らない（同じ URL を 2 回書き出さないため）
+//   news：お知らせ（src/app/news/）
+//   terms-of-service：利用規約（src/app/terms-of-service/。WordPress の固定ページは空のまま）
+const DEDICATED_ROUTES = new Set(["news", "terms-of-service"]);
 
 // ビルド中に何度も読み込まないよう、1 回の結果を使い回す
 let pagesCache: Promise<Page[]> | null = null;
@@ -16,10 +19,12 @@ const findPage = async (slug: string[]) => {
 };
 
 export async function generateStaticParams() {
-  return (await pages())
+  const params = (await pages())
     .map((p) => uriToSegments(p.uri))
-    .filter((slug) => slug.length > 0 && slug[0] !== "news")
+    .filter((slug) => slug.length > 0 && !DEDICATED_ROUTES.has(slug[0]))
     .map((slug) => ({ slug }));
+  // 静的書き出しでは、0 件だとビルドが止まる。固定ページが無いときは仮の 1 件（中身は 404）を書き出す
+  return params.length > 0 ? params : [{ slug: [EMPTY_PARAM] }];
 }
 
 export async function generateMetadata({ params }: PageProps<"/[...slug]">): Promise<Metadata> {

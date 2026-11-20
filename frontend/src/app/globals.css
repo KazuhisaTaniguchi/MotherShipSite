@@ -6,5 +6,7 @@
 @import "../styles/lp.css";
 /* お知らせ・固定ページの本文（WordPress から来る HTML） */
 @import "../styles/content.css";
+/* 利用規約など（mock/design/legal.css の写し） */
+@import "../styles/legal.css";
 /* 404 ページ（mock/design/404.css の写し） */
 @import "../styles/404.css";

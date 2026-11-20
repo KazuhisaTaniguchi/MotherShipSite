@@ -130,6 +130,12 @@ export async function getAllPages(): Promise<Page[]> {
     .map((p) => ({ databaseId: p.databaseId, title: p.title, uri: p.uri, content: p.content, modified: p.modified }));
 }
 
+/**
+ * 書き出すページが 0 件のときの仮の URL の部品（静的書き出しは 0 件だとビルドが止まるため）。
+ * 実在しない値なので、そのページは 404 の中身になる。
+ */
+export const EMPTY_PARAM = "_empty";
+
 /** "/company/about/" → ["company", "about"] */
 export const uriToSegments = (uri: string): string[] =>
   uri.split("/").filter(Boolean).map((s) => decodeURIComponent(s));

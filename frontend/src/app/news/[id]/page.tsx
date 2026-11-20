@@ -2,11 +2,13 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { PageHero } from "@/components/PageHero";
-import { formatDate, getAllPosts, getPost, toPlainText } from "@/lib/wordpress";
+import { EMPTY_PARAM, formatDate, getAllPosts, getPost, toPlainText } from "@/lib/wordpress";
 
 // URL は /news/{投稿ID}/（WordPress の投稿 ID = databaseId）
 export async function generateStaticParams() {
   const posts = await getAllPosts();
+  // 静的書き出しでは、0 件だとビルドが止まる。投稿が無いときは仮の 1 件（中身は 404）を書き出す
+  if (posts.length === 0) return [{ id: EMPTY_PARAM }];
   return posts.map((post) => ({ id: String(post.databaseId) }));
 }
 

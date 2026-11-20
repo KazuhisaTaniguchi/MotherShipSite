@@ -13,6 +13,7 @@ export function SiteFooter() {
             ))}
             <Link href="/#download">ダウンロード</Link>
             <Link href="/news/">お知らせ</Link>
+            <Link href="/terms-of-service/">利用規約</Link>
           </nav>
         </div>
         <p className="trademark">Mac、macOS、iPhone、iPad、iPadOS、App Store、Face ID、Touch ID、Mission Controlは、米国およびその他の国や地域で登録されたApple Inc.の商標です。iPhoneの商標は、アイホン株式会社のライセンスにもとづき使用されています。Android、Google PlayはGoogle LLCの商標です。Galaxy Z Foldは、Samsung Electronics Co., Ltd.の商標または登録商標です。TailscaleはTailscale Inc.の商標です。Aqua Voice、BlackHoleは、それぞれの権利者の商標または製品名です。</p>
