@@ -31,7 +31,7 @@ export async function generateMetadata({ params }: PageProps<"/news/[id]">): Pro
       description,
       publishedTime: post.date,
       modifiedTime: post.modified,
-      images: post.featuredImage ? [post.featuredImage.sourceUrl] : undefined,
+      images: post.featuredImage ? [post.featuredImage.sourceUrl] : ["/og.png"],   // アイキャッチが無い記事は、サイト共通の OGP 画像
     },
   };
 }

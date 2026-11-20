@@ -21,8 +21,8 @@ export default function PrivacyPolicy() {
           <h1 id="legal-title">MOTHERSHIP プライバシーポリシー</h1>
           <p className="legal-hero-lead">あなたのMacの画面は、あなたのデバイスにだけ。<br />MOTHERSHIPが、どんな情報を、どう扱うかをまとめました。</p>
           <dl className="legal-dates">
-            <div><dt>制定日</dt><dd><span className="tbd">【未確定：公開日】</span></dd></div>
-            <div><dt>最終更新日</dt><dd><span className="tbd">【未確定：公開日】</span></dd></div>
+            <div><dt>制定日</dt><dd>2026年11月21日</dd></div>
+            <div><dt>最終更新日</dt><dd>2026年11月21日</dd></div>
           </dl>
         </div>
       </section>
@@ -50,7 +50,7 @@ export default function PrivacyPolicy() {
         </nav>
       
         <article className="legal">
-          <p className="legal-intro"><span className="tbd">【未確定：運営者の名前】</span>（以下「運営者」）は、リモートデスクトップアプリ「MOTHERSHIP」と、ウェブサイト「mothershipremote.com」で扱う情報について、個人情報の保護に関する法律などの法令にしたがい、このプライバシーポリシー（以下「本ポリシー」）のとおり取り扱います。</p>
+          <p className="legal-intro">谷口 和久（以下「運営者」）は、リモートデスクトップアプリ「MOTHERSHIP」と、ウェブサイト「mothershipremote.com」で扱う情報について、個人情報の保護に関する法律などの法令にしたがい、このプライバシーポリシー（以下「本ポリシー」）のとおり取り扱います。</p>
       
           <aside className="legal-summary" aria-labelledby="summary-title">
             <h2 id="summary-title">かんたんにまとめると</h2>
@@ -245,13 +245,13 @@ export default function PrivacyPolicy() {
             <h2 id="pp-15-title"><span className="no">15.</span>お問い合わせ窓口</h2>
             <p>本ポリシーと、情報の取り扱いについてのお問い合わせは、次の窓口で受け付けます。</p>
             <dl className="terms-list">
-              <div><dt>運営者</dt><dd><span className="tbd">【未確定：運営者の名前】</span></dd></div>
+              <div><dt>運営者</dt><dd>谷口 和久（Kazuhisa Taniguchi）</dd></div>
               <div><dt>お問い合わせ</dt><dd><Link href="/contact/">お問い合わせフォーム</Link></dd></div>
             </dl>
           </section>
       
           <div className="legal-end">
-            <p>本ポリシーは、<span className="tbd">【未確定：公開日】</span>から適用します。</p>
+            <p>本ポリシーは、2026年11月21日から適用します。</p>
             <p><Link href="/terms-of-service/">利用規約</Link>もあわせてご覧ください。</p>
             <p><Link href="/">← トップページへ</Link></p>
           </div>

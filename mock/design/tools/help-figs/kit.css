@@ -222,7 +222,9 @@
 .hf.is-mini { max-width: 440px; aspect-ratio: 16 / 9; background: var(--grad-wash); }
 .help-qa dd .hf { margin-top: 10px; }
 .legal-summary .hf { margin-top: var(--space-4); }
-.hfm-ph { left: 1.3em; top: 1.2em; width: 9.4em; height: 16.4em; background: #121a2e; }
+.hfm-ph { left: 1.2em; top: 3.5em; width: 10.6em; height: 11.8em; border-radius: 1.3em; background: #121a2e; }
+/* 2026-11-21：手もとの端末は、開いた Galaxy Z Fold7（幅：高さ ≒ 9：10、真ん中に縦の折り目） */
+.hf-ph::after { content: ""; position: absolute; z-index: 8; left: 50%; top: 0; bottom: 0; width: 1px; background: rgba(var(--navy-rgb), .16); pointer-events: none; }
 .hfm-desk { position: absolute; inset: 0; background: linear-gradient(160deg, #c9d8f4, #eaf0fb); }
 .hfm-desk > .hf-w1 { left: 8%; right: 8%; top: 10%; height: 40%; }
 .hfm-desk > .hf-w2 { left: 8%; right: 8%; top: 56%; bottom: 8%; }

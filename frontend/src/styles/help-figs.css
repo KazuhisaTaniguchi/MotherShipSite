@@ -222,7 +222,9 @@
 .hf.is-mini { max-width: 440px; aspect-ratio: 16 / 9; background: var(--grad-wash); }
 .help-qa dd .hf { margin-top: 10px; }
 .legal-summary .hf { margin-top: var(--space-4); }
-.hfm-ph { left: 1.3em; top: 1.2em; width: 9.4em; height: 16.4em; background: #121a2e; }
+.hfm-ph { left: 1.2em; top: 3.5em; width: 10.6em; height: 11.8em; border-radius: 1.3em; background: #121a2e; }
+/* 2026-11-21：手もとの端末は、開いた Galaxy Z Fold7（幅：高さ ≒ 9：10、真ん中に縦の折り目） */
+.hf-ph::after { content: ""; position: absolute; z-index: 8; left: 50%; top: 0; bottom: 0; width: 1px; background: rgba(var(--navy-rgb), .16); pointer-events: none; }
 .hfm-desk { position: absolute; inset: 0; background: linear-gradient(160deg, #c9d8f4, #eaf0fb); }
 .hfm-desk > .hf-w1 { left: 8%; right: 8%; top: 10%; height: 40%; }
 .hfm-desk > .hf-w2 { left: 8%; right: 8%; top: 56%; bottom: 8%; }
@@ -304,7 +306,7 @@
 .hf5-done { display: grid; justify-items: center; gap: .5em; padding: 1.4em .8em; opacity: 0; animation: hf5-done var(--d) ease infinite; }
 .hf5-done i { display: grid; place-items: center; width: 2.4em; height: 2.4em; border-radius: 50%; background: #2fae54; color: #fff; font-size: 1.2em; font-style: normal; font-weight: 800; }
 .hf5-done b { font-size: .86em; line-height: 1.45; }
-.hf5-ph { right: 2em; top: 2.2em; width: 9.8em; height: 16.6em; animation: hf5-ph var(--d) ease infinite; }
+.hf5-ph { right: 1.6em; top: 3.6em; width: 12em; height: 13.3em; border-radius: 1.3em; animation: hf5-ph var(--d) ease infinite; }
 .hf5-cam { position: absolute; inset: 0; background: #131c36; }
 .hf5-qrs { position: absolute; left: 50%; top: 42%; width: 5.2em; padding: .45em; background: #fff; border-radius: .4em; transform: translate(-50%, -50%); animation: hf5-qrs var(--d) ease infinite; }
 .hf5-find { position: absolute; left: 50%; top: 42%; width: 7.4em; height: 7.4em; transform: translate(-50%, -50%); animation: hf5-find var(--d) ease infinite; }
@@ -326,7 +328,7 @@
 .hf6-wifi i:nth-child(1) { width: 2.4em; height: 2.4em; margin: -1.2em 0 0 -1.2em; }
 .hf6-wifi i:nth-child(2) { width: 4.4em; height: 4.4em; margin: -2.2em 0 0 -2.2em; animation-name: hf6-a2; }
 .hf6-wifi i:nth-child(3) { width: 6.4em; height: 6.4em; margin: -3.2em 0 0 -3.2em; animation-name: hf6-a3; }
-.hf6-ph { right: 2.2em; top: 1.4em; width: 12em; height: 18em; }
+.hf6-ph { right: 1.6em; top: 2.6em; width: 13.4em; height: 14.9em; border-radius: 1.3em; }
 .hf6-list { position: absolute; inset: 0; padding: 1.7em .8em 0; background: #0f1730; }
 .hf6-list > p { font-size: .8em; font-weight: 700; line-height: 1.3; color: var(--on-dark-3); }
 .hf6-card { display: grid; gap: .25em; margin-top: .8em; padding: .8em; border-radius: .8em; background: #1c2749; border: .08em solid rgba(255, 255, 255, .14); animation: hf6-card var(--d) ease infinite; }
@@ -467,7 +469,7 @@
 .hf14-ai > i:nth-of-type(3) { width: 72%; background: #8fb0e8; }
 .hf14-in { margin: auto .8em .8em; display: flex; align-items: center; min-height: 2.4em; padding: .4em .7em; border: .14em solid var(--blue); border-radius: .6em; background: #f4f7fd; animation: hf14-flash var(--d) ease infinite; }
 .hf14-in u { display: block; width: 74%; height: .5em; border-radius: .3em; background: var(--ink); animation: hf14-bartext var(--d) ease infinite; }
-.hf14-ph { right: 2em; top: 1.3em; width: 12.4em; height: 18.2em; }
+.hf14-ph { right: 1.6em; top: 1.6em; width: 14em; height: 15.6em; border-radius: 1.3em; }
 .hf14-desk { position: absolute; inset: 0; background: linear-gradient(160deg, #c9d8f4, #eaf0fb); }
 .hf14-desk .hf14-ai { left: 6%; right: 6%; top: 4%; bottom: auto; height: 60%; gap: .55em; }
 .hf14-desk .hf14-in { min-height: 3.1em; align-items: flex-start; }
@@ -503,7 +505,7 @@
 .hf17-qr .hf-wbody { display: grid; place-items: center; }
 .hf17-qr .hf-wbody svg { width: 7em; height: 7em; }
 .hf17-said { position: absolute; z-index: 3; left: 3.2em; top: 11.2em; padding: .5em .8em; border-radius: .5em; background: #fff; box-shadow: 0 .6em 1.4em -.8em rgba(var(--navy-rgb), .6); font-size: 1.05em; font-weight: 700; white-space: nowrap; animation: hf17-said var(--d) ease infinite; }
-.hf17-ph { left: 23.4em; top: 1.6em; width: 8.6em; height: 15.6em; }
+.hf17-ph { left: 23.2em; top: 3.4em; width: 9.6em; height: 10.7em; border-radius: 1.1em; }
 .hf17-cam { position: absolute; inset: 0; display: grid; place-items: center; background: #0b0f1a; animation: hf17-cam var(--d) ease infinite; }
 .hf17-cam > span { position: relative; width: 5.6em; height: 5.6em; padding: .5em; border: .12em dashed rgba(255, 255, 255, .7); border-radius: .6em; }
 .hf17-cam svg { display: block; width: 100%; height: 100%; animation: hf17-camqr var(--d) ease infinite; }
@@ -661,11 +663,11 @@
 
 
 .hf27 { --d: 10s; --fz: 9.2s; }
-.hf27-s { position: absolute; inset: 0; padding: 2.4em .8em 0; text-align: center; color: #fff; background: #121a2e; }
+.hf27-s { position: absolute; inset: 0; padding: 1.4em .8em 0; text-align: center; color: #fff; background: #121a2e; }
 .hf27-s > p { margin-top: .5em !important; line-height: 1.45; }
 .hf27-ttl { font-size: .7em; font-weight: 800; }
 .hf27-sub { font-size: .54em; color: rgba(255, 255, 255, .7); }
-.hf27-s .hfm-btn { top: 10.6em; }
+.hf27-s .hfm-btn { top: 8.2em; }
 .hf27-big { display: grid; place-items: center; width: 2.4em; height: 2.4em; margin: 0 auto; border-radius: 50%; background: #2fae54; font-size: 1.1em; font-weight: 800; }
 .hf27-s1 { animation: hf27-s1 var(--d) ease infinite; }
 .hf27-s2 { animation: hf27-s2 var(--d) ease infinite; }
@@ -684,7 +686,7 @@
 
 .hf28 { --d: 10s; --fz: 9.2s; }
 .hf28-s { position: absolute; inset: 0; padding: 1em .55em 0; color: #fff; background: #121a2e; }
-.hf28-s1 { padding-top: 2.6em; text-align: center; animation: hf28-s1 var(--d) ease infinite; }
+.hf28-s1 { padding-top: 1.6em; text-align: center; animation: hf28-s1 var(--d) ease infinite; }
 .hf28-s1 p { margin-top: .5em !important; line-height: 1.45; }
 .hf28-ttl { font-size: .66em; font-weight: 800; }
 .hf28-sub { font-size: .54em; color: rgba(255, 255, 255, .7); }
@@ -693,7 +695,7 @@
 .hf28-h span { grid-area: 1 / 1; }
 .hf28-h3 { animation: hf28-h3 var(--d) ease infinite; }
 .hf28-h2 { animation: hf28-h2 var(--d) ease infinite; }
-.hf28-row { display: flex; align-items: center; justify-content: space-between; height: 2em; margin-top: .45em; padding: 0 .5em; border-radius: .5em; background: rgba(255, 255, 255, .08); }
+.hf28-row { display: flex; align-items: center; justify-content: space-between; height: 1.7em; margin-top: .35em; padding: 0 .5em; border-radius: .5em; background: rgba(255, 255, 255, .08); }
 .hf28-row b { font-size: .6em; }
 .hf28-row em { padding: .2em .5em; border-radius: .35em; background: rgba(255, 255, 255, .14); font-size: .5em; font-style: normal; font-weight: 700; }
 .hf28-r3 { animation: hf28-r3 var(--d) ease infinite; }
@@ -915,7 +917,7 @@
 @keyframes hf27-s2 { 0% { opacity: 0 } 30% { opacity: 0 } 33% { opacity: 1 } 52% { opacity: 1 } 55% { opacity: 0 } 100% { opacity: 0 } }
 @keyframes hf27-s3 { 0% { opacity: 0 } 52% { opacity: 0 } 55% { opacity: 1 } 78% { opacity: 1 } 81% { opacity: 0 } 100% { opacity: 0 } }
 @keyframes hf27-desk { 0% { opacity: 0 } 78% { opacity: 0 } 81% { opacity: 1 } 100% { opacity: 1 } }
-@keyframes hf27-fin { 0% { opacity: 0; transform: translate(6.05em, 13.2em) scale(1.5) } 20.5% { opacity: 0; transform: translate(6.05em, 13.2em) scale(1.5) } 23% { opacity: 1; transform: translate(6.05em, 13.2em) scale(1) } 24% { opacity: 1; transform: translate(6.05em, 13.2em) scale(.82) } 26% { opacity: 1; transform: translate(6.05em, 13.2em) scale(1) } 29% { opacity: 0; transform: translate(6.05em, 13.2em) scale(1) } 67.5% { opacity: 0; transform: translate(6.05em, 13.2em) scale(1.5) } 70% { opacity: 1; transform: translate(6.05em, 13.2em) scale(1) } 71% { opacity: 1; transform: translate(6.05em, 13.2em) scale(.82) } 73% { opacity: 1; transform: translate(6.05em, 13.2em) scale(1) } 76% { opacity: 0; transform: translate(6.05em, 13.2em) scale(1) } 100% { opacity: 0; transform: translate(6.05em, 13.2em) scale(1) } }
+@keyframes hf27-fin { 0% { opacity: 0; transform: translate(6.6em, 13.15em) scale(1.5) } 20.5% { opacity: 0; transform: translate(6.6em, 13.15em) scale(1.5) } 23% { opacity: 1; transform: translate(6.6em, 13.15em) scale(1) } 24% { opacity: 1; transform: translate(6.6em, 13.15em) scale(.82) } 26% { opacity: 1; transform: translate(6.6em, 13.15em) scale(1) } 29% { opacity: 0; transform: translate(6.6em, 13.15em) scale(1) } 67.5% { opacity: 0; transform: translate(6.6em, 13.15em) scale(1.5) } 70% { opacity: 1; transform: translate(6.6em, 13.15em) scale(1) } 71% { opacity: 1; transform: translate(6.6em, 13.15em) scale(.82) } 73% { opacity: 1; transform: translate(6.6em, 13.15em) scale(1) } 76% { opacity: 0; transform: translate(6.6em, 13.15em) scale(1) } 100% { opacity: 0; transform: translate(6.6em, 13.15em) scale(1) } }
 @keyframes hf27-a { 0% { opacity: 1 } 73% { opacity: 1 } 75% { opacity: 0 } 100% { opacity: 0 } }
 @keyframes hf27-b { 0% { opacity: 0 } 73% { opacity: 0 } 76% { opacity: 1 } 100% { opacity: 1 } }
 @keyframes hf27-t1 { 0% { opacity: 0 } 3% { opacity: 0 } 6% { opacity: 1 } 49% { opacity: 1 } 52% { opacity: 0 } 100% { opacity: 0 } }
@@ -927,7 +929,7 @@
 @keyframes hf28-h2 { 0% { opacity: 0 } 52% { opacity: 0 } 53% { opacity: 1 } 71% { opacity: 1 } 72% { opacity: 0 } 100% { opacity: 0 } }
 @keyframes hf28-r3 { 0% { opacity: 1; background: rgba(255, 255, 255, .08) } 48% { opacity: 1; background: rgba(255, 255, 255, .08) } 49% { opacity: 1; background: rgba(var(--rec-rgb), .45) } 52% { opacity: 0; background: rgba(var(--rec-rgb), .45) } 100% { opacity: 0; background: rgba(var(--rec-rgb), .45) } }
 @keyframes hf28-r4 { 0% { opacity: 0 } 70% { opacity: 0 } 73% { opacity: 1 } 100% { opacity: 1 } }
-@keyframes hf28-fin { 0% { opacity: 0; transform: translate(8.75em, 10.15em) scale(1.5) } 43.5% { opacity: 0; transform: translate(8.75em, 10.15em) scale(1.5) } 46% { opacity: 1; transform: translate(8.75em, 10.15em) scale(1) } 47% { opacity: 1; transform: translate(8.75em, 10.15em) scale(.82) } 49% { opacity: 1; transform: translate(8.75em, 10.15em) scale(1) } 52% { opacity: 0; transform: translate(8.75em, 10.15em) scale(1) } 100% { opacity: 0; transform: translate(8.75em, 10.15em) scale(1) } }
+@keyframes hf28-fin { 0% { opacity: 0; transform: translate(9.75em, 10.5em) scale(1.5) } 43.5% { opacity: 0; transform: translate(9.75em, 10.5em) scale(1.5) } 46% { opacity: 1; transform: translate(9.75em, 10.5em) scale(1) } 47% { opacity: 1; transform: translate(9.75em, 10.5em) scale(.82) } 49% { opacity: 1; transform: translate(9.75em, 10.5em) scale(1) } 52% { opacity: 0; transform: translate(9.75em, 10.5em) scale(1) } 100% { opacity: 0; transform: translate(9.75em, 10.5em) scale(1) } }
 @keyframes hf28-t1 { 0% { opacity: 0 } 3% { opacity: 0 } 6% { opacity: 1 } 28% { opacity: 1 } 31% { opacity: 0 } 100% { opacity: 0 } }
 @keyframes hf28-t2 { 0% { opacity: 0 } 31% { opacity: 0 } 34% { opacity: 1 } 67% { opacity: 1 } 70% { opacity: 0 } 100% { opacity: 0 } }
 @keyframes hf28-t3 { 0% { opacity: 0 } 70% { opacity: 0 } 73% { opacity: 1 } 96% { opacity: 1 } 99% { opacity: 0 } 100% { opacity: 0 } }

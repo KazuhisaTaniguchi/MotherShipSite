@@ -25,6 +25,9 @@
 .hero-note { margin-top: 16px; font-size: 13.5px; color: var(--ink-2); }
 .hero-platforms { margin-top: 30px; font-size: var(--text-note); font-weight: var(--weight-bold); letter-spacing: var(--tracking-wide); color: var(--ink-3); }
 .hero-platforms i { font-style: normal; margin: 0 6px; opacity: .6; }
+/* 2026-11-21：見出しが長くなったので（折りたたみスマホが、MacのAIの操作席になる。）、少し小さく */
+.hero h1.is-fold { font-size: clamp(32px, 4.3vw, 56px); line-height: 1.25; }
+.hero-platforms b { color: var(--ink-2); letter-spacing: 0; }
 .hero-foot { position: relative; margin-top: 44px; padding-top: 18px; border-top: 1px solid rgba(var(--ink-rgb), .12); font-size: var(--text-note); color: var(--ink-3); }
 
 .hero-stage { position: relative; display: grid; place-items: center; padding: 10px 0; }
@@ -149,6 +152,49 @@
 .stage-chip b { font-size: 20px; color: var(--blue-deep); margin-right: 2px; }
 .chip-a { top: -1%; right: -3%; }
 .chip-b { bottom: 17%; left: -16%; display: flex; align-items: center; gap: 8px; }
+
+/* ---- 開く・閉じる・折る（2026-11-21。折りたたみスマホが主役の LP の中心）----
+   4 枚のカード。上の図は写真の代わりのイメージ（実機の写真・動画がそろったら差し替える）。図の中は em（1em = 図の幅の 3%。図は 33.3em × 25em） */
+.forms { background: var(--surface); }
+.forms-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px; }
+.fm { display: flex; flex-direction: column; padding: 14px 14px 20px; border-radius: var(--radius-lg); background: var(--bg); border: 1px solid var(--line); }
+.fm-fig { position: relative; aspect-ratio: 4 / 3; border-radius: 14px; background: var(--grad-wash); overflow: hidden; container-type: inline-size; }
+.fm-in { position: absolute; inset: 0; font-size: 3cqw; }
+.fm-tag { align-self: flex-start; margin: 16px 4px 0; padding: 3px 12px; border-radius: var(--radius-pill); background: var(--grad-accent); color: var(--on-dark); font-size: var(--text-caption); font-weight: var(--weight-heavy); }
+.fm h3 { margin: 10px 4px 6px; font-size: var(--text-subheading); font-weight: var(--weight-heavy); line-height: 1.45; }
+.fm > p:not(.fm-tag) { margin: 0 4px; font-size: var(--text-body-sm); color: var(--ink-2); }
+/* 図の部品：Mac の画面（2 つの窓）、トラックパッドとキー */
+.fm-desk { position: absolute; inset: 0; background: linear-gradient(160deg, #c9d8f4, #eaf0fb); }
+.fm-desk::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 6%; background: rgba(255, 255, 255, .75); }
+.fm-w1, .fm-w2 { position: absolute; border-radius: .5em; background: #fff; box-shadow: 0 .5em 1.2em -.6em rgba(var(--navy-rgb), .5); }
+.fm-w1 { left: 8%; right: 8%; top: 12%; height: 38%; border-top: 1em solid var(--navy); }
+.fm-w1::after { content: ""; position: absolute; left: 10%; right: 25%; top: 22%; height: 12%; border-radius: .3em; background: #28508f; box-shadow: 0 1.6em 0 #28508f, 0 3.2em 0 #8fb0e8; }
+.fm-w2 { left: 8%; right: 8%; top: 56%; bottom: 8%; background: linear-gradient(to top, #8fb0e8 0 30%, transparent 30%) 12% 85% / 14% 60% no-repeat, linear-gradient(to top, #8fb0e8 0 55%, transparent 55%) 34% 85% / 14% 60% no-repeat, linear-gradient(to top, #385cf4 0 80%, transparent 80%) 56% 85% / 14% 60% no-repeat, #fff; }
+.fm-ctl { position: absolute; inset: 0; display: grid; grid-template-rows: 1fr auto; gap: .6em; padding: .8em; background: #1d2333; }
+.fm-pad { border-radius: .5em; background: rgba(255, 255, 255, .1); border: .08em solid rgba(255, 255, 255, .18); }
+.fm-keys { display: grid; gap: .3em; }
+.fm-keys i { height: 1.1em; border-radius: .25em; background: repeating-linear-gradient(90deg, #3a4258 0 1.4em, transparent 1.4em 1.65em); }
+/* 1 閉じたまま（カバー画面：細長い） */
+.fm-cover .fm-dev { position: absolute; left: 12.4em; top: 2.2em; width: 8.6em; height: 20.6em; border: .45em solid var(--device); border-radius: 1.3em; overflow: hidden; box-shadow: 0 1.2em 2.4em -1em rgba(var(--navy-rgb), .6); }
+.fm-cover .fm-w1 { top: 10%; height: 34%; }
+.fm-cover .fm-w2 { top: 48%; bottom: 28%; }
+.fm-float { position: absolute; left: 10%; bottom: 6%; width: 52%; height: 18%; border-radius: .5em; background: rgba(20, 32, 58, .82); border: .1em solid rgba(255, 255, 255, .35); }
+/* 2 開く（ほぼ正方形。真ん中に折り目） */
+.fm-open .fm-dev { position: absolute; left: 6.4em; top: 2.2em; width: 20.5em; height: 20.6em; border: .45em solid var(--device); border-radius: 1.3em; overflow: hidden; box-shadow: 0 1.2em 2.4em -1em rgba(var(--navy-rgb), .6); }
+.fm-open .fm-w1 { right: 46%; top: 12%; height: 76%; }
+.fm-open .fm-w2 { left: 46%; top: 22%; bottom: 14%; }
+.fm-hinge { position: absolute; left: 50%; top: 0; bottom: 0; width: .12em; background: rgba(var(--navy-rgb), .12); }
+/* 3 半分に折って置く（上の画面を起こし、下の画面は机に寝かせる） */
+.fm-top, .fm-bot, .fm-left, .fm-right { position: absolute; border: .4em solid var(--device); background: #1d2333; overflow: hidden; }
+.fm-top { left: 7.2em; top: 2em; width: 19em; height: 10.6em; border-radius: 1em 1em .15em .15em; transform-origin: 50% 100%; transform: perspective(40em) rotateX(6deg); }
+.fm-bot { left: 7.2em; top: 12.6em; width: 19em; height: 10.6em; border-radius: .15em .15em 1em 1em; transform-origin: 50% 0; transform: perspective(40em) rotateX(55deg); box-shadow: 0 1.2em 2em -1em rgba(var(--navy-rgb), .5); }
+.fm-top .fm-w1 { right: 50%; height: 76%; }
+.fm-top .fm-w2 { left: 54%; top: 12%; bottom: 12%; }
+/* 4 本のように持つ（左が Mac の画面、右がトラックパッドとキーボード） */
+.fm-left { left: 4.6em; top: 3.2em; width: 12em; height: 18.6em; border-radius: 1em .15em .15em 1em; transform-origin: 100% 50%; transform: perspective(40em) rotateY(14deg); }
+.fm-right { left: 16.6em; top: 3.2em; width: 12em; height: 18.6em; border-radius: .15em 1em 1em .15em; transform-origin: 0 50%; transform: perspective(40em) rotateY(-28deg); }
+.fm-left .fm-w1 { top: 10%; height: 36%; }
+.fm-left .fm-w2 { top: 52%; }
 
 /* 共感（席を離れたあとの困りごと）。番号つきの一覧（.scene-list）を 3 列で使う */
 .pains { background: var(--surface); padding-top: clamp(56px, 7vw, 90px); }
@@ -1421,6 +1467,7 @@
 @media (max-width: 980px) {
   .feature-lead, .voice-grid, .pricing-grid { grid-template-columns: 1fr; }
   .device-grid, .download-grid, .flow-list { grid-template-columns: repeat(2, 1fr); }
+  .forms-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
 /* スマホ */
@@ -1468,12 +1515,114 @@
   .hero-voice-sub { font-size: 13.5px; }
   .stage-chip { font-size: var(--text-caption); padding: 8px 12px; }
   .device-grid, .download-grid, .flow-list { grid-template-columns: 1fr; }
+  .forms-grid { grid-template-columns: 1fr; }
   .scene-list li { padding-left: 44px; }
   .fit-diagram { padding: 24px 12px; gap: 8px; }
   .voice-buttons { gap: 6px; }
   .vb { width: 40px; height: 40px; font-size: 16px; }
   .vb small { font-size: 8.5px; }
 }
+
+/* ==========================================================================
+   Fold7 に描き直す（2026-11-21）。トップの図の「手もとの端末」を、開いた Galaxy Z Fold7（幅：高さ ≒ 9：10、真ん中に折り目）にする。
+   前のルール（iPad・縦長のスマホ）を、ここで上書きする。Mac・MacBook が主役の図は、そのまま
+   ========================================================================== */
+/* 折り目（縦）。横向きに持つ図（キーボード）は横の折り目 */
+.fit-dev::after, .td-dev::after, .vc-phone::after, .fd-ph::after, .sd-ph::after, .omc-ph::after, .osh-ph::after, .oim-ph::after, .hs-2 .hs-ph::after, .hs-3 .hs-ph::after { content: ""; position: absolute; z-index: 8; left: 50%; top: 0; bottom: 0; width: 1px; background: rgba(var(--navy-rgb), .16); pointer-events: none; }
+.okb-dev::after { content: ""; position: absolute; z-index: 8; left: 0; right: 0; top: 50%; height: 1px; background: rgba(255, 255, 255, .14); pointer-events: none; }
+
+/* 特長 1：回すのをやめ、開いた画面で比べる。左＝16:10 の画面が上下に余白を残して小さく映る／右＝開いた画面と同じ形。レポートをタップすると画面いっぱいに */
+.fit-dev { width: 82%; height: 91%; transform: translate(-50%, -50%); animation: none; }
+.fit-ai { animation: none; left: 5%; right: 52%; top: 12%; bottom: 10%; }
+@keyframes fit-out {
+  0%, 40% { left: 50%; right: 5%; top: 22%; bottom: 22%; z-index: 1; }
+  40.01%, 46% { left: 50%; right: 5%; top: 22%; bottom: 22%; z-index: 3; }
+  54%, 86% { left: 5%; right: 5%; top: 28%; bottom: 7%; z-index: 3; }
+  92%, 100% { left: 50%; right: 5%; top: 22%; bottom: 22%; z-index: 1; }
+}
+
+/* 特長 2：指の操作。端末の形を開いた Fold7 に */
+.td-stage { max-width: 380px; }
+.td-dev { aspect-ratio: 9 / 10; }
+
+/* 声で書く：キーボードで打つと／声で書くと。2 台とも開いた Fold7 に */
+.vc-phone { width: min(200px, 100%); aspect-ratio: 9 / 10; border-radius: 18px; }
+
+/* AIに任せて、出かける：外出先の端末を、開いた Fold7 に */
+.fd-ph { left: 27em; top: 2.6em; width: 12.4em; height: 13.8em; border-radius: 1.1em; }
+.fd-tap { left: 37.4em; top: 11.6em; }
+.fd-press { left: 28.75em; top: 14.65em; }
+.fd-f2 { left: 33.2em; top: 9.6em; }
+.fd-said { right: 1.3em; top: 27.2em; width: 15em; }
+.fd-link { width: 2.8em; }
+.fd-away { left: 44em; }
+@keyframes fd-dot { 0% { transform: translateX(0); opacity: 0; } 15% { opacity: 1; } 85% { opacity: 1; } 100% { transform: translateX(2.3em); opacity: 0; } }
+
+/* 安心：外出先の端末を、開いた Fold7 に */
+.sd-ph { left: 27.4em; top: 2.8em; width: 12em; height: 13.4em; border-radius: 1.1em; }
+.sd-link { width: 7.4em; }
+@keyframes sd-dot { 0% { transform: translateX(0); opacity: 0; } 15% { opacity: 1; } 85% { opacity: 1; } 100% { transform: translateX(6.8em); opacity: 0; } }
+
+/* 使い方：手順 2（QR を読む）と手順 3（つなぐ）の端末を、開いた Fold7 に */
+.hs-2 .hs-ph { right: 1.4em; top: 5.6em; width: 12.6em; height: 14em; border-radius: 1.2em; }
+.hs-3 .hs-ph { right: 1.6em; top: 4.6em; width: 13.4em; height: 14.9em; border-radius: 1.2em; }
+
+/* いつものMacを 1：キーボード。iPad の代わりに、横向きに開いた Fold7（下の半分がキーボード） */
+.okb-dev { left: 7.15em; top: .8em; width: 19em; height: 17.1em; border-radius: 1.1em; }
+.okb-desk { height: 6.4em; }
+.okb-win { width: 8.6em; }
+.okb-bar { top: 6.6em; }
+.okb-c { width: 4.1em; }
+.okb-c small { font-size: .6em; }
+.okb-c1 { left: .5em; }
+.okb-c2 { left: 4.9em; }
+.okb-c3 { left: 9.3em; }
+.okb-c4 { left: 13.7em; }
+.okb-keys { top: 8.7em; }
+.okb-keys i { max-width: 1.8em; }
+.okb-tap { left: 14.55em; top: 8.8em; }
+.okb-drag { left: 18.95em; top: 8.8em; }
+.okb-cap { right: 10.3em; top: 2.2em; }
+@keyframes okb-c1 { 0%, 65% { transform: none; } 72%, 94% { transform: translateX(4.4em); } 98%, 100% { transform: none; } }
+@keyframes okb-c2 {
+  0%, 37% { background: #2c3a63; transform: none; }
+  38%, 44% { background: var(--blue); transform: none; }
+  47%, 65% { background: #2c3a63; transform: none; }
+  72%, 94% { background: #2c3a63; transform: translateX(4.4em); }
+  98%, 100% { background: #2c3a63; transform: none; }
+}
+@keyframes okb-c3 {
+  0%, 63% { transform: none; background: #2c3a63; box-shadow: none; }
+  65% { transform: scale(1.08); background: var(--blue); box-shadow: 0 .5em 1em -.4em rgba(0, 0, 0, .6); }
+  72% { transform: translateX(-8.8em) scale(1.08); background: var(--blue); box-shadow: 0 .5em 1em -.4em rgba(0, 0, 0, .6); }
+  75%, 94% { transform: translateX(-8.8em); background: #2c3a63; box-shadow: none; }
+  98%, 100% { transform: none; background: #2c3a63; box-shadow: none; }
+}
+@keyframes okb-drag { 0%, 62% { opacity: 0; transform: none; } 64%, 66% { opacity: 1; transform: none; } 72% { opacity: 1; transform: translateX(-8.8em); } 75%, 100% { opacity: 0; transform: translateX(-8.8em); } }
+
+/* いつものMacを 2：日本語入力。スマホの代わりに、開いた Fold7（下が切れて見える） */
+.oim-ph { height: 15em; border-radius: 1.1em; }
+
+/* いつものMacを 3：コピー・ファイル・音。スマホの代わりに、開いた Fold7 */
+.osh-ph { left: 21.4em; top: 2.2em; width: 11em; height: 12.2em; border-radius: 1.1em; }
+.osh-spk { top: 5.4em; }
+.osh-fly-t { left: 22.4em; }
+@keyframes osh-fly-t { 0%, 13% { opacity: 0; transform: none; } 14% { opacity: 1; transform: none; } 23% { opacity: 1; transform: translate(-19.4em, .75em); } 25%, 100% { opacity: 0; transform: translate(-19.4em, .75em); } }
+@keyframes osh-fly-f { 0%, 39% { opacity: 0; transform: none; } 40% { opacity: 1; transform: none; } 51% { opacity: 1; transform: translate(8.1em, 5.7em) scale(.55); } 53%, 100% { opacity: 0; transform: translate(8.1em, 5.7em) scale(.55); } }
+@keyframes osh-n1 { 0%, 68% { opacity: 0; transform: none; } 70% { opacity: 1; transform: none; } 80% { opacity: 1; transform: translate(13.2em, 1.6em); } 82%, 100% { opacity: 0; transform: translate(13.2em, 1.6em); } }
+@keyframes osh-n2 { 0%, 74% { opacity: 0; transform: none; } 76% { opacity: 1; transform: none; } 86% { opacity: 1; transform: translate(13.2em, 1.6em); } 88%, 100% { opacity: 0; transform: translate(13.2em, 1.6em); } }
+@keyframes osh-n3 { 0%, 80% { opacity: 0; transform: none; } 82% { opacity: 1; transform: none; } 92% { opacity: 1; transform: translate(13.2em, 1.6em); } 94%, 100% { opacity: 0; transform: translate(13.2em, 1.6em); } }
+
+/* いつものMacを 4：Macの切り替え。スマホの代わりに、開いた Fold7 */
+.omc-ph { left: 1.6em; top: 2.4em; width: 12.6em; height: 14em; border-radius: 1.1em; }
+.omc-row, .omc-sel { height: 2.4em; }
+.omc-r1, .omc-sel { top: 2.2em; }
+.omc-r2 { top: 4.95em; }
+.omc-r3 { top: 7.7em; }
+.omc-add { top: 10.45em; height: 2.1em; }
+.omc-tap2 { left: 8.3em; top: 8.95em; }
+.omc-tap3 { left: 8.3em; top: 11.7em; }
+@keyframes omc-sel { 0%, 33% { transform: none; } 37%, 66% { transform: translateY(2.75em); } 70%, 96% { transform: translateY(5.5em); } 99%, 100% { transform: none; } }
 
 @media (prefers-reduced-motion: reduce) {
   .voice-wave i, .caret { animation: none; }

@@ -214,7 +214,7 @@ CSS.append('''
 .hf5-done { display: grid; justify-items: center; gap: .5em; padding: 1.4em .8em; opacity: 0; animation: %s var(--d) ease infinite; }
 .hf5-done i { display: grid; place-items: center; width: 2.4em; height: 2.4em; border-radius: 50%%; background: #2fae54; color: #fff; font-size: 1.2em; font-style: normal; font-weight: 800; }
 .hf5-done b { font-size: .86em; line-height: 1.45; }
-.hf5-ph { right: 2em; top: 2.2em; width: 9.8em; height: 16.6em; animation: %s var(--d) ease infinite; }
+.hf5-ph { right: 1.6em; top: 3.6em; width: 12em; height: 13.3em; border-radius: 1.3em; animation: %s var(--d) ease infinite; }
 .hf5-cam { position: absolute; inset: 0; background: #131c36; }
 .hf5-qrs { position: absolute; left: 50%%; top: 42%%; width: 5.2em; padding: .45em; background: #fff; border-radius: .4em; transform: translate(-50%%, -50%%); animation: %s var(--d) ease infinite; }
 .hf5-find { position: absolute; left: 50%%; top: 42%%; width: 7.4em; height: 7.4em; transform: translate(-50%%, -50%%); animation: %s var(--d) ease infinite; }
@@ -236,7 +236,7 @@ CSS.append('''
     KF('hf5-ok', T, [(3.5, 'opacity: 0; transform: translate(-50%, -50%) scale(.3)'), (3.75, 'opacity: 1; transform: translate(-50%, -50%) scale(1.14)'), (3.9, 'opacity: 1; transform: translate(-50%, -50%)')]),
 ))
 FIGS.append(fig('hf5', 'デバイスのカメラをMacのQRコードに向けて読み取ると、デバイスにチェックが出て、Macに「登録しました」と表示される様子',
-    LAP('hf5-lap', '<div class="hf5-card"><b>端末を追加</b>' + QR + '</div><div class="hf5-done"><i>✓</i><b>iPhone を<br>登録しました</b></div>', LAPBAR)
+    LAP('hf5-lap', '<div class="hf5-card"><b>端末を追加</b>' + QR + '</div><div class="hf5-done"><i>✓</i><b>Galaxy Z Fold7 を<br>登録しました</b></div>', LAPBAR)
     + '<div class="hf-ph hf5-ph"><div class="hf5-cam"><span class="hf5-qrs">' + QR + '</span><span class="hf5-find"><i></i><i></i><i></i><i></i></span><span class="hf5-scan"></span><span class="hf5-ok">✓</span><em>QRコードを読み取る</em></div></div>',
     room=True))
 
@@ -251,7 +251,7 @@ CSS.append('''
 .hf6-wifi i:nth-child(1) { width: 2.4em; height: 2.4em; margin: -1.2em 0 0 -1.2em; }
 .hf6-wifi i:nth-child(2) { width: 4.4em; height: 4.4em; margin: -2.2em 0 0 -2.2em; animation-name: %s; }
 .hf6-wifi i:nth-child(3) { width: 6.4em; height: 6.4em; margin: -3.2em 0 0 -3.2em; animation-name: %s; }
-.hf6-ph { right: 2.2em; top: 1.4em; width: 12em; height: 18em; }
+.hf6-ph { right: 1.6em; top: 2.6em; width: 13.4em; height: 14.9em; border-radius: 1.3em; }
 .hf6-list { position: absolute; inset: 0; padding: 1.7em .8em 0; background: #0f1730; }
 .hf6-list > p { font-size: .8em; font-weight: 700; line-height: 1.3; color: var(--on-dark-3); }
 .hf6-card { display: grid; gap: .25em; margin-top: .8em; padding: .8em; border-radius: .8em; background: #1c2749; border: .08em solid rgba(255, 255, 255, .14); animation: %s var(--d) ease infinite; }
@@ -549,7 +549,7 @@ CSS.append('''
 .hf14-ai > i:nth-of-type(3) { width: 72%%; background: #8fb0e8; }
 .hf14-in { margin: auto .8em .8em; display: flex; align-items: center; min-height: 2.4em; padding: .4em .7em; border: .14em solid var(--blue); border-radius: .6em; background: #f4f7fd; animation: %s var(--d) ease infinite; }
 .hf14-in u { display: block; width: 74%%; height: .5em; border-radius: .3em; background: var(--ink); animation: %s var(--d) ease infinite; }
-.hf14-ph { right: 2em; top: 1.3em; width: 12.4em; height: 18.2em; }
+.hf14-ph { right: 1.6em; top: 1.6em; width: 14em; height: 15.6em; border-radius: 1.3em; }
 .hf14-desk { position: absolute; inset: 0; background: linear-gradient(160deg, #c9d8f4, #eaf0fb); }
 .hf14-desk .hf14-ai { left: 6%%; right: 6%%; top: 4%%; bottom: auto; height: 60%%; gap: .55em; }
 .hf14-desk .hf14-in { min-height: 3.1em; align-items: flex-start; }
@@ -677,7 +677,7 @@ RULES('hf17', T, 13.6, [
     ('.hf17-qr .hf-wbody', 'display: grid; place-items: center;'),
     ('.hf17-qr .hf-wbody svg', 'width: 7em; height: 7em;'),
     ('.hf17-said', 'position: absolute; z-index: 3; left: 3.2em; top: 11.2em; padding: .5em .8em; border-radius: .5em; background: #fff; box-shadow: 0 .6em 1.4em -.8em rgba(var(--navy-rgb), .6); font-size: 1.05em; font-weight: 700; white-space: nowrap; ' + A(ON('hf17-said', T, 10.9))),
-    ('.hf17-ph', 'left: 23.4em; top: 1.6em; width: 8.6em; height: 15.6em;'),
+    ('.hf17-ph', 'left: 23.2em; top: 3.4em; width: 9.6em; height: 10.7em; border-radius: 1.1em;'),
     ('.hf17-cam', 'position: absolute; inset: 0; display: grid; place-items: center; background: #0b0f1a; ' + A(ON('hf17-cam', T, 3, 5.9))),
     ('.hf17-cam > span', 'position: relative; width: 5.6em; height: 5.6em; padding: .5em; border: .12em dashed rgba(255, 255, 255, .7); border-radius: .6em;'),
     ('.hf17-cam svg', 'display: block; width: 100%; height: 100%; ' + A(ON('hf17-camqr', T, 3.8))),
@@ -919,17 +919,17 @@ FIGS.append(MINI('hf26', '声で書けないときの図。デバイスの🎤�
 # ---- 図 27：「試用期間が終了しました」と出る（10 秒）
 T = 10
 RULES('hf27', T, 9.2, [
-    ('.hf27-s', 'position: absolute; inset: 0; padding: 2.4em .8em 0; text-align: center; color: #fff; background: #121a2e;'),
+    ('.hf27-s', 'position: absolute; inset: 0; padding: 1.4em .8em 0; text-align: center; color: #fff; background: #121a2e;'),
     ('.hf27-s > p', 'margin-top: .5em !important; line-height: 1.45;'),
     ('.hf27-ttl', 'font-size: .7em; font-weight: 800;'),
     ('.hf27-sub', 'font-size: .54em; color: rgba(255, 255, 255, .7);'),
-    ('.hf27-s .hfm-btn', 'top: 10.6em;'),
+    ('.hf27-s .hfm-btn', 'top: 8.2em;'),
     ('.hf27-big', 'display: grid; place-items: center; width: 2.4em; height: 2.4em; margin: 0 auto; border-radius: 50%; background: #2fae54; font-size: 1.1em; font-weight: 800;'),
     ('.hf27-s1', A(STEPS('hf27-s1', T, [(0, 'opacity: 1'), (3, 'opacity: 0')]))),
     ('.hf27-s2', A(ON('hf27-s2', T, 3, 5.2))),
     ('.hf27-s3', A(ON('hf27-s3', T, 5.2, 7.8))),
     ('.hf27 .hfm-desk', A(ON('hf27-desk', T, 7.8))),
-    ('.hf27-fin', A(TAP('hf27-fin', T, [(2.4, 6.05, 13.2), (7.1, 6.05, 13.2)]))),
+    ('.hf27-fin', A(TAP('hf27-fin', T, [(2.4, 6.6, 13.15), (7.1, 6.6, 13.15)]))),
     ('.hf27-st', 'display: grid; margin-top: .2em;'),
     ('.hf27-st b', 'grid-area: 1 / 1; justify-self: start; padding: .3em .8em; border-radius: 99em; font-size: .72em; font-weight: 800; color: #fff;'),
     ('.hf27-a', 'background: var(--rec); ' + A(STEPS('hf27-a', T, [(0, 'opacity: 1'), (7.3, 'opacity: 0')]))),
@@ -952,7 +952,7 @@ FIGS.append(MINI('hf27', '「試用期間が終了しました」と出たとき
 T = 10
 RULES('hf28', T, 9.2, [
     ('.hf28-s', 'position: absolute; inset: 0; padding: 1em .55em 0; color: #fff; background: #121a2e;'),
-    ('.hf28-s1', 'padding-top: 2.6em; text-align: center; ' + A(STEPS('hf28-s1', T, [(0, 'opacity: 1'), (2.9, 'opacity: 0')]))),
+    ('.hf28-s1', 'padding-top: 1.6em; text-align: center; ' + A(STEPS('hf28-s1', T, [(0, 'opacity: 1'), (2.9, 'opacity: 0')]))),
     ('.hf28-s1 p', 'margin-top: .5em !important; line-height: 1.45;'),
     ('.hf28-ttl', 'font-size: .66em; font-weight: 800;'),
     ('.hf28-sub', 'font-size: .54em; color: rgba(255, 255, 255, .7);'),
@@ -961,7 +961,7 @@ RULES('hf28', T, 9.2, [
     ('.hf28-h span', 'grid-area: 1 / 1;'),
     ('.hf28-h3', A(KF('hf28-h3', T, [(5.2, 'opacity: 1'), (5.3, 'opacity: 0'), (7.1, 'opacity: 0'), (7.2, 'opacity: 1')]))),
     ('.hf28-h2', A(KF('hf28-h2', T, [(5.2, 'opacity: 0'), (5.3, 'opacity: 1'), (7.1, 'opacity: 1'), (7.2, 'opacity: 0')]))),
-    ('.hf28-row', 'display: flex; align-items: center; justify-content: space-between; height: 2em; margin-top: .45em; padding: 0 .5em; border-radius: .5em; background: rgba(255, 255, 255, .08);'),
+    ('.hf28-row', 'display: flex; align-items: center; justify-content: space-between; height: 1.7em; margin-top: .35em; padding: 0 .5em; border-radius: .5em; background: rgba(255, 255, 255, .08);'),
     ('.hf28-row b', 'font-size: .6em;'),
     ('.hf28-row em', 'padding: .2em .5em; border-radius: .35em; background: rgba(255, 255, 255, .14); font-size: .5em; font-style: normal; font-weight: 700;'),
     ('.hf28-r3', A(KF('hf28-r3', T, [(4.8, 'opacity: 1; background: rgba(255, 255, 255, .08)'), (4.9, 'opacity: 1; background: rgba(var(--rec-rgb), .45)'), (5.2, 'opacity: 0; background: rgba(var(--rec-rgb), .45)')]))),
@@ -969,7 +969,7 @@ RULES('hf28', T, 9.2, [
     ('.hf28-slot > p', 'grid-area: 1 / 1;'),
     ('.hf28-r4', 'opacity: 0;'),
     ('.hf28-r4', 'background: rgba(var(--blue-rgb), .35); ' + A(ON('hf28-r4', T, 7))),
-    ('.hf28-fin', A(TAP('hf28-fin', T, [(4.7, 8.75, 10.15)]))),
+    ('.hf28-fin', A(TAP('hf28-fin', T, [(4.7, 9.75, 10.5)]))),
     ('.hf28-card p', 'font-size: .64em; line-height: 1.5; color: var(--ink-2);'),
     ('.hf28-card p + p', 'margin-top: .5em !important;'),
     ('.hf28-card b', 'color: var(--ink);'),
@@ -1002,7 +1002,7 @@ RULES('hf29', T, 8, [
 ])
 FIGS.append(MINI('hf29', 'デバイスをなくしたときの図。MOTHERSHIP HOSTのメニューの「登録済みの端末」で、なくしたデバイスを削除すると、そのデバイスからはつなげなくなる。Tailscaleを使っている場合は、Tailscaleでもそのデバイスを外す',
     PHM('', DESK + BAN('hf29-bad', 'この Mac にはつなげません'))
-    + '<div class="hf-win hf29-win">' + wbar('登録済みの端末') + '<div class="hf-wbody"><p class="hf29-row"><b>iPad Air</b><em class="hf-btn">削除</em></p><p class="hf29-row hf29-r2"><b>iPhone（なくした）</b><em class="hf-btn">削除</em></p><p class="hf29-row"><b>Pixel</b><em class="hf-btn">削除</em></p></div></div>'
+    + '<div class="hf-win hf29-win">' + wbar('登録済みの端末') + '<div class="hf-wbody"><p class="hf29-row"><b>iPad Air</b><em class="hf-btn">削除</em></p><p class="hf29-row hf29-r2"><b>Galaxy Z Fold7（なくした）</b><em class="hf-btn">削除</em></p><p class="hf29-row"><b>Pixel</b><em class="hf-btn">削除</em></p></div></div>'
     + '<span class="hf29-ts"><b>Tailscale でも、この端末を外す</b></span>'
     + CURSOR.format(c='hf29-cur')
     + TAG('hf29-t1', '「登録済みの端末」で削除') + TAG('hf29-t2', 'なくした端末からは、つなげない')))

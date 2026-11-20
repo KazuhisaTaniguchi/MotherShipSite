@@ -20,8 +20,8 @@ export function SiteFooter() {
             <Link href="/contact/">お問い合わせ</Link>
           </nav>
         </div>
-        <p className="trademark">Mac、macOS、iPhone、iPad、iPadOS、App Store、Face ID、Touch ID、Mission Controlは、米国およびその他の国や地域で登録されたApple Inc.の商標です。iPhoneの商標は、アイホン株式会社のライセンスにもとづき使用されています。Android、Google PlayはGoogle LLCの商標です。Galaxy Z Foldは、Samsung Electronics Co., Ltd.の商標または登録商標です。TailscaleはTailscale Inc.の商標です。Aqua Voice、BlackHoleは、それぞれの権利者の商標または製品名です。</p>
-        <p className="trademark">MOTHERSHIPは独立して開発されたアプリであり、Apple Inc.、Google LLC、Tailscale Inc.、Aqua Voiceの提供元が認定・後援・承認したものではありません。</p>
+        <p className="trademark">Mac、macOS、iPhone、iPad、iPadOS、App Store、Face ID、Touch ID、Mission Controlは、米国およびその他の国や地域で登録されたApple Inc.の商標です。iPhoneの商標は、アイホン株式会社のライセンスにもとづき使用されています。Android、Google PlayはGoogle LLCの商標です。Galaxy Z Foldは、Samsung Electronics Co., Ltd.の商標または登録商標です。TailscaleはTailscale Inc.の商標です。Claude CodeはAnthropic PBCの、CodexはOpenAIの商標です。Aqua Voice、BlackHoleは、それぞれの権利者の商標または製品名です。</p>
+        <p className="trademark">MOTHERSHIPは独立して開発されたアプリであり、Apple Inc.、Google LLC、Samsung Electronics Co., Ltd.、Anthropic PBC、OpenAI、Tailscale Inc.、Aqua Voiceの提供元が認定・後援・承認したものではありません。</p>
         <div className="footer-bottom"><small>© 2026 MOTHERSHIP</small><a href="#top">ページの先頭へ ↑</a></div>
       </div>
     </footer>

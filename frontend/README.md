@@ -26,7 +26,7 @@ WordPress で「ホームページ」に設定した固定ページは書き出�
 - `src/styles/tokens.css`・`base.css`・`components.css` は `mock/design/designSystem/` の写し、`lp.css` は `mock/design/styles.css` の写し。**直すときは mock 側と両方を直す**。
 - `src/styles/content.css` は、お知らせ・固定ページ用（このプロジェクトで足したもの。値はトークンだけを使う）。
 - ヘッダーの開閉・スクロール（`SiteHeader.tsx`）と HERO のアニメ（`HeroPlayer.tsx`）は `mock/design/script.js` を移したもの。
-- `public/media/hero-demo.mp4` を置くと、HERO のアニメの代わりに動画が再生されます（`mock/design/media/README.md` の決まり）。
+- HERO のアニメは `src/components/HeroFold.tsx`（Fold7。CSS は `src/styles/hero-fold.css`）。（2026-11-21：HERO を Fold7 のアニメに作り直したので、動画に替わる仕組みは無くなった。実機の動画に替えるときは、モックは `index.html` の `.hx` の中、本番は `frontend/src/components/HeroFold.tsx` を差し替える）
 
 ## 使い方
 

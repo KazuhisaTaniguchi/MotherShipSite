@@ -4,8 +4,8 @@
 @import "../styles/components.css";
 /* LP だけの組み方（mock/design/styles.css の写し） */
 @import "../styles/lp.css";
-/* HERO のアニメ（mock/design/hero-variants.css の写し） */
-@import "../styles/hero-demo.css";
+/* HERO のアニメ（Fold7。mock/design/hero-fold.css の写し） */
+@import "../styles/hero-fold.css";
 /* お知らせ・固定ページの本文（WordPress から来る HTML） */
 @import "../styles/content.css";
 /* 利用規約など（mock/design/legal.css の写し） */

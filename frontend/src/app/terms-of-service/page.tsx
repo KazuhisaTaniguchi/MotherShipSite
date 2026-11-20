@@ -21,8 +21,8 @@ export default function TermsOfService() {
           <h1 id="legal-title">MOTHERSHIP 利用規約</h1>
           <p className="legal-hero-lead">MOTHERSHIPを安心して使っていただくための、約束ごとです。<br />はじめてMacにつなぐ前に、ひととおりお読みください。</p>
           <dl className="legal-dates">
-            <div><dt>制定日</dt><dd><span className="tbd">【未確定：公開日】</span></dd></div>
-            <div><dt>最終更新日</dt><dd><span className="tbd">【未確定：公開日】</span></dd></div>
+            <div><dt>制定日</dt><dd>2026年11月21日</dd></div>
+            <div><dt>最終更新日</dt><dd>2026年11月21日</dd></div>
           </dl>
         </div>
       </section>
@@ -55,7 +55,7 @@ export default function TermsOfService() {
         </nav>
       
         <article className="legal">
-          <p className="legal-intro">この利用規約（以下「本規約」）は、<span className="tbd">【未確定：運営者の名前】</span>（以下「運営者」）が提供するリモートデスクトップアプリ「MOTHERSHIP」の使い方について、運営者と利用者のみなさまとの間の約束を定めるものです。</p>
+          <p className="legal-intro">この利用規約（以下「本規約」）は、谷口 和久（以下「運営者」）が提供するリモートデスクトップアプリ「MOTHERSHIP」の使い方について、運営者と利用者のみなさまとの間の約束を定めるものです。</p>
       
           <aside className="legal-summary" aria-labelledby="summary-title">
             <h2 id="summary-title">かんたんにまとめると</h2>
@@ -257,7 +257,7 @@ export default function TermsOfService() {
             <h2 id="art-19-title"><span className="no">第19条</span>準拠法と裁判所</h2>
             <ol className="clauses">
               <li>本規約は、日本の法律にしたがって解釈されます。</li>
-              <li>本アプリや本規約について、運営者と利用者の間で争いが生じたときは、まず話し合いで解決するよう努めます。それでも解決しないときは、<span className="tbd">【未確定：地方裁判所の名前】</span>を、第一審の専属的な合意管轄裁判所とします。</li>
+              <li>本アプリや本規約について、運営者と利用者の間で争いが生じたときは、まず話し合いで解決するよう努めます。それでも解決しないときは、長野地方裁判所を、第一審の専属的な合意管轄裁判所とします。</li>
               <li>本規約の一部が、法令などにより無効と判断された場合でも、そのほかの部分は引き続き効力を持ちます。</li>
             </ol>
           </section>
@@ -266,13 +266,13 @@ export default function TermsOfService() {
             <h2 id="art-20-title"><span className="no">第20条</span>お問い合わせ</h2>
             <p>本規約と本アプリについてのお問い合わせは、次の窓口で受け付けます。</p>
             <dl className="terms-list">
-              <div><dt>運営者</dt><dd><span className="tbd">【未確定：運営者の名前】</span></dd></div>
-              <div><dt>お問い合わせ</dt><dd><span className="tbd">【未確定：お問い合わせのフォームの URL、またはメールアドレス】</span></dd></div>
+              <div><dt>運営者</dt><dd>谷口 和久（Kazuhisa Taniguchi）</dd></div>
+              <div><dt>お問い合わせ</dt><dd><Link href="/contact/">お問い合わせフォーム</Link>、または info@mothershipremote.com</dd></div>
             </dl>
           </section>
       
           <div className="legal-end">
-            <p>附則：本規約は、<span className="tbd">【未確定：公開日】</span>から適用します。</p>
+            <p>附則：本規約は、2026年11月21日から適用します。</p>
             <p><Link href="/">← トップページへ</Link></p>
           </div>
         </article>

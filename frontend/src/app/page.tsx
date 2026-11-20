@@ -1,14 +1,257 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { HeroDemo } from "@/components/HeroDemo";
+import { HeroFold } from "@/components/HeroFold";
 import { getAllPosts } from "@/lib/wordpress";
 
-// トップページ（LP）。mock/design/index.html の <main> をそのまま JSX にしたもの（原稿は mock/contents/lp-content.md の第2版）。
+// トップページ（LP）。mock/design/index.html の <main> をそのまま JSX にしたもの（原稿は mock/contents/lp-content.md の第2版。
+// 2026-11-21 から、Obsidian の「LPとSEOの方針（折りたたみスマホ×MacのAI）」に合わせて、主役を折りたたみスマホに変えた）。
 // モックで赤い枠の「未確定：…」を付けた所（Mac のロック解除 2 か所）は、
 // 対応を確かめるまで、いま確かな文だけを出している（くわしくは mock/contents/README.md の未確定事項 5・7）。
 export const metadata: Metadata = {
-  title: { absolute: "MOTHERSHIP｜スマホからMacをリモート操作。指で動かす、声で書く" },
+  title: { absolute: "MOTHERSHIP｜折りたたみスマホでMacのAIを操作するリモートアプリ" },
 };
+
+// 検索エンジン向けの構造化データ（アプリの情報と、よくある質問）。よくある質問は、下の <details> から書き出したもの。
+// 質問や答えを直したときは、ここも合わせて直す（ページに無い質問を入れない）
+const STRUCTURED_DATA = [
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "MOTHERSHIP",
+    "applicationCategory": "UtilitiesApplication",
+    "operatingSystem": "Android 13+, iOS 27+, iPadOS 27+, macOS 14+",
+    "description": "Galaxy Z Foldなどの折りたたみスマホから、家のMacをリモート操作。端末の形に合わせた画面で文字がそのまま読め、直しは声で（Aqua Voiceに対応）。Claude CodeやCodexなど、MacのAIの進み具合も手もとで。iPhone・iPad・Macからも使えます。買い切り・月額なし。14日間、すべての機能を無料で試せます。",
+    "url": "https://mothershipremote.com/",
+    "image": "https://mothershipremote.com/og.png",
+    "offers": {
+      "@type": "Offer",
+      "price": "2800",
+      "priceCurrency": "JPY"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "どの折りたたみスマホで使えますか？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Android 13以降の折りたたみスマホで動く作りです。実機で動作を確かめたのは、Galaxy Z Fold7です。ほかの機種は、確かめたものから順にお知らせします。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "閉じた画面でも使えますか？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "はい。閉じた画面（カバー画面）では、Macの画面と小さなトラックパッドで、進み具合を確かめられます。Galaxyの設定で、閉じてもアプリを続けて使えるようにしておきます。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "半分に折って使うには、どうしますか？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "つないだまま、半分に折って机に置きます。上の画面がMacの画面に、下の画面がショートカットとトラックパッドになります（⌨でキーボードに切り替え）。本のように持つと、左がMacの画面、右がトラックパッドとキーボードです。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "GalaxyのDeXや、ふつうの画面共有と何がちがいますか？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "DeXは、スマホのアプリをパソコンのような大きな画面で使う機能です。MOTHERSHIPは、家のMacを、スマホから操作するアプリです。ふつうの画面共有はMacの画面を縮めて映しますが、MOTHERSHIPはMacの中に手もとの画面と同じ形のモニターを足して、文字をそのまま読める大きさで映します。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Claude CodeやCodexを、外から操作できますか？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "はい。MOTHERSHIPはMacの画面をそのまま映して動かすので、ターミナルで動くClaude CodeやCodexも、いつもどおり操作できます。外出先から使うには、MacとスマホにTailscaleを入れておきます。MOTHERSHIPに、AIの機能は入っていません。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "どのAIで使えますか？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Macで動くAIなら、どれでも使えます。MOTHERSHIPは、Macの画面をそのまま映して動かすアプリです。ターミナルで動くAIも、エディターのAIも、ブラウザーのAIも、いつもの画面のまま使えます。AIの側の設定は要りません。MOTHERSHIPに、AIの機能は入っていません。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "AIの作業が終わったら、知らせてくれますか？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "いいえ。MOTHERSHIPは、Macの画面を映して動かすアプリです。作業の終わりを知らせる機能はありません。気になったときに開いて、進み具合を見る使い方になります。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "スマホの小さな画面でも、ターミナルの文字は読めますか？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "はい。デバイスと同じ形の専用モニターをMacに用意するので、文字が縮みません。もっと大きく見たいときは、ピンチで拡大できます。細かい文字が多いときは、画質の「文字優先」が向いています。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "ほかのリモートデスクトップと、何がちがいますか？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "映し方がちがいます。MOTHERSHIPは、Macのモニターをそのまま映すのではなく、デバイスと同じ形の専用モニターをMacに用意します。だから、小さな画面でも文字が縮みません。文字の入力に声を使えること（Aqua Voiceに対応）と、買い切りであることも特長です。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "どんな作業に向いていますか？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "AIに任せた作業の確認と次の指示、プログラミング、書類やブラウザでの作業、デザインの確認など、文字や画面をしっかり見る作業に向いています。動きの激しいゲームには向きません。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Windowsのパソコンも操作できますか？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "いいえ。操作できるのはMacだけです。操作する側は、iPhone・iPad・Android・Macに対応しています。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "声で入力するには、何が必要ですか？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Macに、音声入力アプリ「Aqua Voice」（別の会社の製品です）と、無料の仮想オーディオ「BlackHole 2ch」を入れ、Aqua Voiceのマイクを「BlackHole 2ch」にしておきます。あとは、デバイスの🎤ボタンを押している間に話すだけです。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Aqua Voiceがなくても使えますか？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "はい。Aqua Voiceを使うのは、声で入力する機能だけです。画面を見る、指で動かす、キーボードで打つなど、ほかの機能はAqua Voiceなしで使えます。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "声は、どこかに保存されますか？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "MOTHERSHIPは、声を保存しません。声はデバイスからMacへ直接送られ、Macの中でAqua Voiceに渡されます。Aqua Voiceでの声の扱いは、Aqua Voiceの説明をご確認ください。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "外出先からも使えますか？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "はい。MacとデバイスにTailscale（個人なら無料で使えるVPNサービス）を入れておくと、外出先からも接続できます。ルーターの設定を変える必要はありません。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "出かけている間、Macはつけたままにするのですか？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "はい。Macがスリープすると、外からつなげません。MOTHERSHIP HOSTの「待機中もMacをスリープさせない」をオンにしておきます。ノート型のMacは、ふたを閉じるとスリープすることがあります。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Macがロックされているときは？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Mac版のMOTHERSHIPでは、接続先のMacのパスワードを入力してロックを解除できます。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Macを再起動したあとは使えますか？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Macにログインするまでは、MOTHERSHIP HOSTが動かないため接続できません。ログインしたあとは、自動で待ち受けをはじめます（「ログイン時に起動」をオンにした場合）。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "通信量はどのくらいですか？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "画面の動きと回線の状態に合わせて、自動で調整します。画面が止まっている間は、ほとんど通信しません。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "複数のデバイスから同時につなげますか？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "1台のMacにつなげるのは、一度に1台です。別のデバイスからつなぐと、そちらに切り替わります。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "画面や操作の内容は、どこかのサーバーを通りますか？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "MOTHERSHIPのサーバーは通りません。自宅では家のネットワークの中で、外出先ではTailscaleの暗号化されたネットワークを通して、Macとデバイスが直接やり取りします。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "アカウントの登録は必要ですか？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "MOTHERSHIPには、アカウントの登録がありません。Macに表示したQRコードを読み取るだけで使いはじめられます。外出先から使う場合だけ、Tailscaleのアカウントが必要です。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Macにはどんな許可が必要ですか？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "「画面収録」（Macの画面を映すため）と「アクセシビリティ」（キーボードやマウスの操作を伝えるため）の2つです。MOTHERSHIP HOSTのメニューから、設定の画面を開けます。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "デバイスをなくしたら？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "MOTHERSHIP HOSTのメニューにある「登録済みの端末」から、そのデバイスを削除してください。削除したデバイスからは接続できなくなります。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "月額料金はかかりますか？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "かかりません。14日間の試用のあとは、一度の購入でずっと使えます。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Macを2台持っています。2回買う必要がありますか？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "いいえ。一度の購入で、Macを3台まで使えます。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Macを買い替えたときや、4台目のMacで使うときは？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "デバイスの設定の「ライセンス」で、使わなくなったMacを外すと、別のMacに使えます。そのMacにつながずに外せるのは、90日に1回です。Macを手放す前に、MOTHERSHIP HOSTのメニューの「この Mac のライセンスを外す」で外しておくと確実です。"
+        }
+      }
+    ]
+  }
+];
 
 export default async function Home() {
   // 最新のお知らせ（WordPress の投稿の新しい順に 3 件まで）。ビルドのときに読む。投稿が変わると、WordPress からの合図でサイトが作り直される
@@ -16,6 +259,7 @@ export default async function Home() {
 
   return (
   <main id="main">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(STRUCTURED_DATA) }} />
 
       {/* S1 HERO：動画が主役 */}
       <section className="hero" aria-labelledby="hero-title">
@@ -23,8 +267,8 @@ export default async function Home() {
         <div className="wrap hero-grid">
           <div className="hero-copy">
             <p className="pill pill-glass hero-label">AIが働くMacを、手もとから。</p>
-            <h1 id="hero-title">指で動かす。<br /><span className="grad-text">声で書く。</span></h1>
-            <p className="hero-lead">家のMacで、AIが作業中。<br />進み具合を指で確かめて、直しは話すだけ。</p>
+            <h1 id="hero-title" className="is-fold"><span className="nb">折りたたみスマホが、</span><br /><span className="grad-text"><span className="nb">MacのAIの</span><span className="nb">操作席になる。</span></span></h1>
+            <p className="hero-lead">開けば、Macの画面がそのまま読める。<br />直しは、話すだけ。</p>
             <a className="hero-voice" href="#voice">
               <span className="hero-voice-text"><span className="hero-voice-kicker">声で書く</span><b>Aqua Voiceに対応</b><span className="hero-voice-sub"><span className="nb">話すだけで文字が入るから、</span><span className="nb"><mark>キーボードいらず。</mark></span></span><span className="hero-voice-note">Aqua Voiceは別の会社のアプリです。</span></span>
               <span className="hero-voice-arrow" aria-hidden="true">→</span>
@@ -34,33 +278,51 @@ export default async function Home() {
               <a className="btn btn-ghost" href="#features">特長を見る</a>
             </div>
             <p className="hero-note">14日間、すべての機能を無料で。<span className="nb">買い切り・月額なし・アカウント登録なし。</span></p>
-            <p className="hero-platforms">iPhone <i>·</i> iPad <i>·</i> Android <i>·</i> Mac</p>
+            <p className="hero-platforms"><b>Galaxy Z Fold7</b>で動作を確認 <i>·</i> iPhone・iPad・Macからも</p>
           </div>
 
           <div className="hero-stage">
             <div className="stage-glow" aria-hidden="true"></div>
-            <HeroDemo />
+            <HeroFold />
             <div className="stage-chip chip-a" aria-hidden="true"><b>60</b>fps まで</div>
             <div className="stage-chip chip-b" aria-hidden="true"><span className="dot"></span>暗号化して直接つなぐ</div>
           </div>
         </div>
-        <p className="wrap hero-foot">Macの画面を、スマホ・タブレット・別のMacへ。</p>
+        <p className="wrap hero-foot">Macの画面を、折りたたみスマホへ。iPhone・iPad・別のMacにも。</p>
       </section>
 
       {/* S2 共感：席を離れたあとの困りごと */}
       <section className="section pains" aria-labelledby="pains-title">
         <div className="wrap">
-          <h2 className="section-title center" id="pains-title">席を離れたあと、<br className="sp" />こうなっていませんか。</h2>
+          <h2 className="section-title center" id="pains-title"><span className="nb">せっかくの大きな画面、</span><br /><span className="nb">Macのリモートでは活かせていますか。</span></h2>
           <ol className="scene-list is-three">
-            <li><span className="num">01</span><h3>戻ったら、AIが止まっていた</h3><p>長い作業を任せて席を離れたら、AIは確認を待ったまま。離れている間、進んだのか止まったのか、分かりません。</p></li>
-            <li><span className="num">02</span><h3>スマホでつないでも、文字が読めない</h3><p>大きなモニターをそのままスマホに映すと、文字は小さすぎて読めません。拡大して、ずらして、また拡大。</p></li>
-            <li><span className="num">03</span><h3>次の指示が、打ちにくい</h3><p>画面のキーボードを出すと、画面の半分近くが隠れます。AIへの長い指示を、小さなキーで打つのはたいへんです。</p></li>
+            <li><span className="num">01</span><h3>開いても、文字が小さい</h3><p>Macの大きな画面を、そのまま縮めて映すから。広げた画面でも、拡大して、ずらして、また拡大。</p></li>
+            <li><span className="num">02</span><h3>長い指示が、打てない</h3><p>画面のキーボードが、広げた画面の半分を隠します。AIへの長い指示を、小さなキーで打つのはたいへんです。</p></li>
+            <li><span className="num">03</span><h3>AIが止まっていても、気づけない</h3><p>席を離れると、AIが確認を待って止まっていても分かりません。開いてすぐ、確かめられればいいのに。</p></li>
           </ol>
-          <p className="pains-answer"><span className="nb">MOTHERSHIPは、</span><span className="nb">この3つをなくすために作った</span><span className="nb">リモートデスクトップアプリです。</span></p>
+          <p className="pains-answer"><span className="nb">MOTHERSHIPなら、</span><span className="nb">開けばMacの画面がそのまま読めて、</span><span className="nb">直しは話すだけです。</span></p>
         </div>
       </section>
 
-      {/* S3 3つの柱（いつも「くっきり見える → 指で動かす → 声で書く」の順番） */}
+{/* S2b 開く・閉じる・折る（2026-11-21。折りたたみスマホが主役の LP の中心。写真の代わりの図。実機の写真・動画がそろったら差し替える） */}
+    <section className="section forms" id="fold" aria-labelledby="forms-title">
+      <div className="wrap">
+        <div className="section-head center">
+          <p className="kicker">折りたたみスマホで</p>
+          <h2 className="section-title" id="forms-title">形を変えると、<br className="sp" />画面も変わる。</h2>
+          <p className="section-lead">閉じて、開いて、折って。MOTHERSHIPは、折りたたみスマホの形に合わせて、Macの画面と操作の置き場所を変えます。</p>
+        </div>
+        <div className="forms-grid">
+          <article className="fm fm-cover"><div className="fm-fig" role="img" aria-label="閉じたままの折りたたみスマホの図。細長いカバー画面に、Macの画面と小さなトラックパッドが出ている"><div className="fm-in" aria-hidden="true"><div className="fm-dev"><div className="fm-desk"><i className="fm-w1"></i><i className="fm-w2"></i></div><span className="fm-float"></span></div></div></div><p className="fm-tag">閉じたまま</p><h3>ポケットから出して、まず確かめる。</h3><p>カバー画面に、Macの画面と小さなトラックパッド。片手で、進み具合を確かめられます。</p></article>
+          <article className="fm fm-open"><div className="fm-fig" role="img" aria-label="開いた折りたたみスマホの図。広げた画面いっぱいに、Macの画面が映っている"><div className="fm-in" aria-hidden="true"><div className="fm-dev"><div className="fm-desk"><i className="fm-w1"></i><i className="fm-w2"></i></div><i className="fm-hinge"></i></div></div></div><p className="fm-tag">開く</p><h3>開けば、Macがこの画面の形になる。</h3><p>Macの中に、広げた画面と同じ形のモニターを用意。文字が、そのままの大きさで読めます。</p></article>
+          <article className="fm fm-table"><div className="fm-fig" role="img" aria-label="半分に折って机に置いた折りたたみスマホの図。上の画面にMacの画面、下の画面にトラックパッドとキーボード"><div className="fm-in" aria-hidden="true"><div className="fm-top"><div className="fm-desk"><i className="fm-w1"></i><i className="fm-w2"></i></div></div><div className="fm-bot"><div className="fm-ctl"><span className="fm-pad"></span><span className="fm-keys"><i></i><i></i><i></i></span></div></div></div></div><p className="fm-tag">半分に折って置く</p><h3>机に置けば、小さなノートパソコン。</h3><p>上の画面がMacの画面に、下の画面がショートカットとトラックパッドに。キーボードにも切り替えられます。</p></article>
+          <article className="fm fm-book"><div className="fm-fig" role="img" aria-label="本のように持った折りたたみスマホの図。左の画面にMacの画面、右の画面にトラックパッドとキーボード"><div className="fm-in" aria-hidden="true"><div className="fm-left"><div className="fm-desk"><i className="fm-w1"></i><i className="fm-w2"></i></div></div><div className="fm-right"><div className="fm-ctl"><span className="fm-pad"></span><span className="fm-keys"><i></i><i></i><i></i></span></div></div></div></div><p className="fm-tag">本のように持つ</p><h3>読みながら、もう片方で操作する。</h3><p>左にMacの画面、右にトラックパッドとキーボード。</p></article>
+        </div>
+        <p className="note center">図はイメージです（実際の画面とは異なります）。Galaxy Z Fold7で動作を確認しています。</p>
+      </div>
+    </section>
+
+          {/* S3 3つの柱（いつも「くっきり見える → 指で動かす → 声で書く」の順番） */}
       <section className="section promise" aria-labelledby="promise-title">
         <div className="wrap">
           <h2 className="section-title center" id="promise-title">見て、動かして、<br className="sp" />話すだけ。</h2>
@@ -170,7 +432,7 @@ export default async function Home() {
 
           <aside className="callout">
             <h3>どのAIでも、いつものまま。</h3>
-            <p>MOTHERSHIPは、Macの画面をそのまま映して動かすアプリです。ターミナルで動くAIも、エディターのAIも、ブラウザーのAIも、いつもの画面のまま使えます。AIの側の設定や、アカウントの連携は要りません。</p>
+            <p>MOTHERSHIPは、Macの画面をそのまま映して動かすアプリです。Claude CodeやCodexなどターミナルで動くAIも、エディターのAIも、ブラウザーのAIも、いつもの画面のまま使えます。AIの側の設定や、アカウントの連携は要りません。</p>
             <p className="fine">MOTHERSHIPに、AIの機能は入っていません。あなたがMacで使っているAIを、そのまま動かします。</p>
           </aside>
           <p className="note center">外出先から使うには、Tailscaleの準備が要ります。<a href="#how">出かける前の準備を見る</a></p>
@@ -202,7 +464,7 @@ export default async function Home() {
               <p className="fine">専用モニターは、接続を切ると自動で消えます。向きを変えても、Macの窓は自動では並び直りません（Macのふつうの動きです）。重なった窓は、3本指のスワイプで一覧にして選べます。</p>
             </div>
             {/* 図：HERO のアニメと同じ流れ（横向き → 縦に回す → 窓が重なる → レポートを横幅いっぱいに）を、左右で同時に動かして比べる。CSS だけで動く */}
-            <div className="fit-diagram" role="img" aria-label="タブレットを横から縦に回したときの比較の図。大きな画面をそのまま映すと、縦では細い帯のように縮んで文字が読めない。MOTHERSHIPなら、縦にするとMacの画面も縦長になり、文字は大きいまま。重なった窓を広げると、横幅いっぱいに映る。">
+            <div className="fit-diagram" role="img" aria-label="開いた折りたたみスマホでの比較の図。大きな画面をそのまま映すと、上下に余白が残って全体が小さく、文字が読めない。MOTHERSHIPなら、Macの画面が開いた画面と同じ形になり、文字は大きいまま。レポートの窓を広げると、画面いっぱいに映る。">
               <div className="fit-col">
                 <div className="fit-stage" aria-hidden="true">
                   <div className="fit-dev">
@@ -214,7 +476,7 @@ export default async function Home() {
                     </div>
                   </div>
                 </div>
-                <p><b>そのまま映すと</b>大きな画面が縮んで、文字が読めない。縦にすると、細い帯になる</p>
+                <p><b>そのまま映すと</b>大きな画面が縮んで、文字が読めない。上下は余白のまま</p>
               </div>
               <div className="fit-arrow" aria-hidden="true">→</div>
               <div className="fit-col">
@@ -227,7 +489,7 @@ export default async function Home() {
                     </div>
                   </div>
                 </div>
-                <p><b>MOTHERSHIPなら</b>縦でも横でも、デバイスの形の画面に。窓を広げれば、横幅いっぱい</p>
+                <p><b>MOTHERSHIPなら</b>開いた画面と同じ形の画面に。窓を広げれば、画面いっぱい</p>
               </div>
             </div>
           </article>
@@ -276,7 +538,7 @@ export default async function Home() {
                   <li><b>タップ</b>AIの確認のボタンを、指で押す</li>
                   <li><b>2本指</b>上へなぞって、スクロール</li>
                   <li><b>3本指</b>上へスワイプで、窓の一覧。レポートを選ぶ</li>
-                  <li><b>広げる</b>緑のボタンで、横幅いっぱい</li>
+                  <li><b>広げる</b>緑のボタンで、画面いっぱい</li>
                 </ol>
                 <p className="td-note">イメージです（実際の画面とは異なります）</p>
               </div>
@@ -457,8 +719,8 @@ export default async function Home() {
       <section className="section compare" aria-labelledby="compare-title">
         <div className="wrap">
           <div className="section-head center">
-            <h2 className="section-title" id="compare-title">ふつうの画面共有と、<br className="sp" />どこがちがう？</h2>
-            <p className="section-lead">Macのモニターを、そのままスマホに映す。それが、ふつうの画面共有です。<span className="nb">MOTHERSHIPは、映し方から変えました。</span></p>
+            <h2 className="section-title" id="compare-title">縮めて映すのではなく、<br className="sp" />この画面のためのMacを作る。</h2>
+            <p className="section-lead">ふつうの画面共有は、Macのモニターを縮めて映します。<span className="nb">MOTHERSHIPは、Macの中に、手もとの画面と同じ形のモニターを1枚足します。</span><span className="nb">文字の大きさは、Macで見るときと同じ感覚です。</span></p>
           </div>
           <table className="compare-table">
             <thead>
@@ -572,7 +834,7 @@ export default async function Home() {
                   <span className="of-f okb-tap"></span>
                   <span className="of-f okb-drag"></span>
                   <span className="of-cap okb-cap okb-cap1">⌘C で、コピー</span>
-                  <span className="of-cap okb-cap okb-cap2">ショートカットバーから、ワンタップ</span>
+                  <span className="of-cap okb-cap okb-cap2">バーから、ワンタップ</span>
                   <span className="of-cap okb-cap okb-cap3">並びは、自分で変えられる</span>
                 </div>
               </div>
@@ -745,15 +1007,15 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* S12 対応デバイス */}
+          {/* S12 対応デバイス */}
       <section className="section devices" aria-labelledby="devices-title">
         <div className="wrap">
-          <h2 className="section-title center" id="devices-title">いつものデバイスが、<br className="sp" />Macへの入口に。</h2>
+          <h2 className="section-title center" id="devices-title">iPhone・iPad・ふつうのAndroid・<br className="sp" />MacBookからも。</h2>
           <div className="device-grid">
-            <article className="device is-host"><p className="role">操作されるMac</p><h3>MOTHERSHIP HOST</h3><p>macOS 14以降<br /><small>Appleシリコン搭載のMacで動作を確認</small></p></article>
-            <article className="device"><p className="role">操作する側</p><h3>iPhone・iPad</h3><p>MOTHERSHIP<br /><small>対応するOSは、公開時にご案内します</small></p></article>
+            <article className="device is-host"><p className="role">操作されるMac</p><h3>MOTHERSHIP HOST</h3><p>macOS 14以降<br /><small>Appleシリコン搭載のMac（Intel搭載のMacは非対応）</small></p></article>
             <article className="device"><p className="role">操作する側</p><h3>Android</h3><p>MOTHERSHIP<br /><small>Android 13以降。折りたたみにも対応</small></p></article>
-            <article className="device"><p className="role">操作する側</p><h3>別のMac</h3><p>MOTHERSHIP<br /><small>macOS 15以降</small></p></article>
+            <article className="device"><p className="role">操作する側</p><h3>iPhone・iPad</h3><p>MOTHERSHIP<br /><small>iOS 27・iPadOS 27以降</small></p></article>
+            <article className="device"><p className="role">操作する側</p><h3>別のMac</h3><p>MOTHERSHIP<br /><small>macOS 15以降・Appleシリコン搭載のMac</small></p></article>
           </div>
           <p className="note center">操作できるのはMacだけです。WindowsやLinuxのパソコンは操作できません。</p>
         </div>
@@ -864,8 +1126,8 @@ export default async function Home() {
           </div>
           <div className="price-card">
             <p className="price-label">買い切り</p>
-            <p className="price"><span>US$</span>19.99</p>
-            <p className="fine">日本円の価格は、公開時にご案内します。</p>
+            <p className="price">2,800<span>円</span></p>
+            <p className="fine">税込。購入画面に表示される金額が、お支払いの金額です。</p>
             <ul className="ticks small">
               <li>一度の購入で、Macを3台まで使えます。</li>
               <li>購入は、MOTHERSHIPの中から。iPhone・iPadはApp Store、AndroidはGoogle Playの決済です。</li>
@@ -881,7 +1143,16 @@ export default async function Home() {
         <div className="wrap faq-wrap">
           <h2 className="section-title center" id="faq-title">よくある質問</h2>
 
-          <h3 className="faq-group">AIと使い方</h3>
+<h3 className="faq-group">折りたたみスマホ</h3>
+          <div className="faq-list">
+            <details><summary>どの折りたたみスマホで使えますか？</summary><p>Android 13以降の折りたたみスマホで動く作りです。実機で動作を確かめたのは、Galaxy Z Fold7です。ほかの機種は、確かめたものから順にお知らせします。</p></details>
+            <details><summary>閉じた画面でも使えますか？</summary><p>はい。閉じた画面（カバー画面）では、Macの画面と小さなトラックパッドで、進み具合を確かめられます。Galaxyの設定で、閉じてもアプリを続けて使えるようにしておきます。</p></details>
+            <details><summary>半分に折って使うには、どうしますか？</summary><p>つないだまま、半分に折って机に置きます。上の画面がMacの画面に、下の画面がショートカットとトラックパッドになります（⌨でキーボードに切り替え）。本のように持つと、左がMacの画面、右がトラックパッドとキーボードです。</p></details>
+            <details><summary>GalaxyのDeXや、ふつうの画面共有と何がちがいますか？</summary><p>DeXは、スマホのアプリをパソコンのような大きな画面で使う機能です。MOTHERSHIPは、家のMacを、スマホから操作するアプリです。ふつうの画面共有はMacの画面を縮めて映しますが、MOTHERSHIPはMacの中に手もとの画面と同じ形のモニターを足して、文字をそのまま読める大きさで映します。</p></details>
+            <details><summary>Claude CodeやCodexを、外から操作できますか？</summary><p>はい。MOTHERSHIPはMacの画面をそのまま映して動かすので、ターミナルで動くClaude CodeやCodexも、いつもどおり操作できます。外出先から使うには、MacとスマホにTailscaleを入れておきます。MOTHERSHIPに、AIの機能は入っていません。</p></details>
+          </div>
+
+                    <h3 className="faq-group">AIと使い方</h3>
           <div className="faq-list">
             <details><summary>どのAIで使えますか？</summary><p>Macで動くAIなら、どれでも使えます。MOTHERSHIPは、Macの画面をそのまま映して動かすアプリです。ターミナルで動くAIも、エディターのAIも、ブラウザーのAIも、いつもの画面のまま使えます。AIの側の設定は要りません。MOTHERSHIPに、AIの機能は入っていません。</p></details>
             <details><summary>AIの作業が終わったら、知らせてくれますか？</summary><p>いいえ。MOTHERSHIPは、Macの画面を映して動かすアプリです。作業の終わりを知らせる機能はありません。気になったときに開いて、進み具合を見る使い方になります。</p></details>
@@ -932,10 +1203,10 @@ export default async function Home() {
             <h2 className="section-title center" id="download-title"><span className="nb">Macに任せて、</span><span className="nb">出かけよう。</span></h2>
             <p className="section-lead center">14日間、すべての機能を無料で。まずは、操作したいMacにMOTHERSHIP HOSTを入れるところからはじめましょう。</p>
             <div className="download-grid">
-              <div className="dl is-primary"><p className="dl-step">1. 操作されるMacに</p><h3>MOTHERSHIP HOST</h3><p>macOS 14以降</p><span className="pill pill-soft soon">近日公開</span></div>
-              <div className="dl"><p className="dl-step">2. 手もとのデバイスに</p><h3>iPhone・iPad</h3><p>App Store</p><span className="pill pill-ghost soon">近日公開</span></div>
+              <div className="dl is-primary"><p className="dl-step">1. 操作されるMacに</p><h3>MOTHERSHIP HOST</h3><p>このサイトから・macOS 14以降</p><span className="pill pill-soft soon">近日公開</span></div>
               <div className="dl"><p className="dl-step">2. 手もとのデバイスに</p><h3>Android</h3><p>Google Play</p><span className="pill pill-ghost soon">近日公開</span></div>
-              <div className="dl"><p className="dl-step">2. 手もとのデバイスに</p><h3>別のMac</h3><p>macOS 15以降</p><span className="pill pill-ghost soon">近日公開</span></div>
+              <div className="dl"><p className="dl-step">2. 手もとのデバイスに</p><h3>iPhone・iPad</h3><p>App Store</p><span className="pill pill-ghost soon">近日公開</span></div>
+              <div className="dl"><p className="dl-step">2. 手もとのデバイスに</p><h3>別のMac</h3><p>このサイトから・macOS 15以降</p><span className="pill pill-ghost soon">近日公開</span></div>
             </div>
             <p className="fine center">最初に、操作されるMacへ「MOTHERSHIP HOST」を入れてください。そのあとで、手もとのデバイスに「MOTHERSHIP」を入れます。</p>
           </div>

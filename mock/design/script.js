@@ -124,3 +124,13 @@
   if (at > 0) { userPaused = true; elapsed = at; demo.classList.add('is-snap'); apply(); render(at); }
   window.__heroDemo = { seek: (t) => { userPaused = true; elapsed = t; apply(); render(t); }, time: () => elapsed, length: LENGTH };
 })();
+
+// HERO のアニメ（Fold7、2026-11-21）：一時停止のボタン。押すと .hx に is-paused を付け外しする（アニメは CSS だけで動く）
+document.querySelectorAll('[data-hx-pause]').forEach((btn) => {
+  btn.addEventListener('click', () => {
+    const hx = btn.closest('.hx');
+    const paused = hx.classList.toggle('is-paused');
+    btn.setAttribute('aria-pressed', String(paused));
+    btn.setAttribute('aria-label', paused ? 'アニメーションを再生' : 'アニメーションを一時停止');
+  });
+});
