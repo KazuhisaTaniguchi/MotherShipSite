@@ -265,6 +265,26 @@
 .fm-table .fm-desk { --cx0: 24%; --cy0: 34%; --cx1: 62%; --cy1: 60%; }
 .fm-book .fm-desk { --cx0: 28%; --cy0: 24%; --cx1: 58%; --cy1: 62%; }
 
+/* 1 閉じたまま：アプリのカバー画面と同じ形に（2026-11-22。android-client の App.kt「カバー画面」、仕様書 4.4）
+   Mac の画面はカバー画面いっぱい。その上に、小さなトラックパッドが左下に浮く（上に「⠿ トラックパッド」の取っ手）。右下には浮いたツールバー */
+.fm-cover .fm-w2 { left: 8%; right: 8%; top: 10%; bottom: 8%; background-position: 34% 46%, 56% 46%, 78% 46%; background-size: 14% 40%, 14% 40%, 14% 40%; }
+.fm-cover .fm-float { z-index: 3; left: 6%; bottom: 4%; width: 46%; height: 24%; border-radius: .6em; background: rgba(20, 32, 58, .8); border: .08em solid rgba(255, 255, 255, .4); box-shadow: 0 .4em 1em -.4em rgba(var(--navy-rgb), .7); overflow: hidden; }
+.fm-cover .fm-float::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 22%; border-bottom: .06em solid rgba(255, 255, 255, .2); background:
+  linear-gradient(rgba(255, 255, 255, .75) 0 30%, transparent 30% 70%, rgba(255, 255, 255, .75) 70%) 10% 50% / .5em .3em no-repeat,
+  linear-gradient(rgba(255, 255, 255, .55), rgba(255, 255, 255, .55)) 76% 50% / 52% .14em no-repeat,
+  rgba(255, 255, 255, .08); }
+.fm-cover .fm-float::after { left: 12%; top: 36%; width: 1.1em; height: 1.1em; animation-name: fm-finger-s; }
+@keyframes fm-finger-s {
+  0%, 24% { opacity: 0; transform: none; }
+  28% { opacity: 1; transform: none; }
+  52% { opacity: 1; transform: translate(.9em, .4em); }
+  55% { opacity: 1; transform: translate(.9em, .4em) scale(.7); }
+  58%, 74% { opacity: 1; transform: translate(.9em, .4em); }
+  80%, 100% { opacity: 0; transform: translate(.9em, .4em); }
+}
+.fm-cover .fm-dev::after { content: ""; position: absolute; z-index: 3; right: 6%; bottom: 5%; width: 34%; height: 7%; border-radius: 999px; background: radial-gradient(circle, var(--blue) 0 .14em, transparent .15em) 0 50% / 33.3% 100% repeat-x, rgba(255, 255, 255, .88); box-shadow: 0 .3em .8em -.3em rgba(var(--navy-rgb), .6); }
+.fm-cover .fm-desk { --cx0: 30%; --cy0: 22%; --cx1: 64%; --cy1: 42%; }
+
 /* 共感（席を離れたあとの困りごと）。番号つきの一覧（.scene-list）を 3 列で使う */
 .pains { background: var(--surface); padding-top: clamp(56px, 7vw, 90px); }
 .scene-list.is-three { grid-template-columns: repeat(3, 1fr); gap: 0 40px; }
