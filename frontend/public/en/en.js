@@ -155,7 +155,7 @@ document.querySelectorAll('[data-hx-pause]').forEach((btn) => {
 
     const id = form.dataset.cf7Id;
     if (!id) {            // フォームの ID がまだ無い：送らない（「送信しました」と見せかけない）
-      status.textContent = 'The form is being set up. Please try again a little later, or email info@mothershipremote.com.';
+      status.textContent = 'The form is being set up. Please try again a little later.';
       status.classList.add('is-error');
       return;
     }

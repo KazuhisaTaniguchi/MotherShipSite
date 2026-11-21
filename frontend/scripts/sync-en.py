@@ -109,7 +109,7 @@ open(os.path.join(FRONT, 'src/styles/en.css'), 'w', encoding='utf-8').write(css)
 # ---- en.js：HERO の一時停止と、お問い合わせフォーム（mock/design_en/contact.js）----
 cj = rd('contact.js')
 a = "    if (!id) {            // モック：送らない\n      showDone();\n      return;\n    }\n"; assert cj.count(a) == 1
-cj = cj.replace(a, "    if (!id) {            // フォームの ID がまだ無い：送らない（「送信しました」と見せかけない）\n      status.textContent = 'The form is being set up. Please try again a little later, or email info@mothershipremote.com.';\n      status.classList.add('is-error');\n      return;\n    }\n")
+cj = cj.replace(a, "    if (!id) {            // フォームの ID がまだ無い：送らない（「送信しました」と見せかけない）\n      status.textContent = 'The form is being set up. Please try again a little later.';\n      status.classList.add('is-error');\n      return;\n    }\n")
 js = '''// 英語ページ（/en/…）の動き。scripts/sync-en.py が書き出したもの。手で直さない
 // HERO のアニメ：一時停止のボタン
 document.querySelectorAll('[data-hx-pause]').forEach((btn) => {

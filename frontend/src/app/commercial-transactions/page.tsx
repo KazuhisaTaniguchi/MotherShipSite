@@ -41,8 +41,7 @@ export default function CommercialTransactions() {
                   <tr><th scope="row">販売事業者</th><td>谷口 和久（Kazuhisa Taniguchi）<span className="sub">App Store・Google Playで表示される販売者の名前と同じです。</span></td></tr>
                   <tr><th scope="row">運営統括責任者</th><td>谷口 和久</td></tr>
                   <tr><th scope="row">所在地</th><td>ご請求があれば、遅滞なく開示します。</td></tr>
-                  <tr><th scope="row">電話番号</th><td>ご請求があれば、遅滞なく開示します。<span className="sub">お問い合わせは、お問い合わせフォームとメールでお受けしています。</span></td></tr>
-                  <tr><th scope="row">メールアドレス</th><td>info@mothershipremote.com</td></tr>
+                  <tr><th scope="row">電話番号</th><td>ご請求があれば、遅滞なく開示します。<span className="sub">お問い合わせは、お問い合わせフォームでお受けしています。</span></td></tr>
                   <tr><th scope="row">お問い合わせ</th><td><Link href="/contact/">お問い合わせフォーム</Link></td></tr>
                 </tbody>
               </table>

@@ -268,7 +268,7 @@ export default function TermsOfService() {
             <p>本規約と本アプリについてのお問い合わせは、次の窓口で受け付けます。</p>
             <dl className="terms-list">
               <div><dt>運営者</dt><dd>谷口 和久（Kazuhisa Taniguchi）</dd></div>
-              <div><dt>お問い合わせ</dt><dd><Link href="/contact/">お問い合わせフォーム</Link>、または info@mothershipremote.com</dd></div>
+              <div><dt>お問い合わせ</dt><dd><Link href="/contact/">お問い合わせフォーム</Link></dd></div>
             </dl>
           </section>
       
