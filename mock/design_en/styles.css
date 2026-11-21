@@ -1839,3 +1839,10 @@
   .of-fd *, .of-fd *::before, .of-fd *::after { animation-delay: -6.4s !important; animation-play-state: paused !important; }
   .of-pq *, .of-pq *::before, .of-pq *::after { animation-delay: -6s !important; animation-play-state: paused !important; }
 }
+
+/* スマホの節の余白（2026-11-22、モバイル余白レビュー）。トップだけ、節の上下を 72px → 48px に詰める（続く節の間は 144px → 96px）。
+   トップの main だけに効かせる（本番は CSS をまとめて読むので、ほかのページの --section-y は変えない） */
+@media (max-width: 640px) {
+  main:has(> .hero) { --section-y: var(--space-12); }
+  main:has(> .hero) .latest-news { margin-top: calc(var(--space-10) - var(--section-y)); }   /* 配信予定のあと → お知らせの線：40px（前と同じ） */
+}

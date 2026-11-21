@@ -120,3 +120,9 @@
 @media (max-width: 480px) {
   .legal-toc ol { columns: 1; }
 }
+
+/* スマホの余白（2026-11-22、モバイル余白レビュー）。特定商取引法に基づく表記は、本文が囲み（.callout）から始まる。
+   囲みの上の余白が重なり、ヒーローのあとが 72px になっていたので、ほかの規約と同じ 40px にそろえる */
+@media (max-width: 640px) {
+  .legal > .callout:first-child { margin-top: 0; }
+}

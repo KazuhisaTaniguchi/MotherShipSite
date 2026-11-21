@@ -143,3 +143,8 @@ select.input { appearance: none; padding-right: 44px; background: var(--surface)
   .field-row { grid-template-columns: 1fr; gap: 0; }
   .form-actions .btn { width: 100%; }
 }
+
+/* スマホの余白（2026-11-22、モバイル余白レビュー）。ヒーローのあと・案内カードのあとを 64px → 40px。入力欄・ボタンの余白はそのまま */
+@media (max-width: 640px) {
+  .before, .form-section { padding-top: var(--space-10); }
+}
