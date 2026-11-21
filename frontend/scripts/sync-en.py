@@ -51,7 +51,9 @@ out['terms'] = page('terms-of-service')
 out['privacy'] = page('privacy-policy')
 c = page('contact')
 assert c['html'].count('data-cf7-id=""') == 1
-c['html'] = c['html'].replace('data-cf7-id=""', 'data-cf7-id="%%CF7_ID%%"')   # フォームの ID は、ページの側でビルドのときに入れる
+c['html'] = c['html'].replace('data-cf7-id=""', 'data-cf7-id="%%CF7_ID%%"')
+assert c['html'].count('data-recaptcha-key=""') == 1
+c['html'] = c['html'].replace('data-recaptcha-key=""', 'data-recaptcha-key="%%RECAPTCHA_KEY%%"')   # reCAPTCHA のサイトキーも同じ   # フォームの ID は、ページの側でビルドのときに入れる
 out['contact'] = c
 foot = rd('index.html'); foot = foot[foot.index('<footer'):]
 out['trademarks'] = [clean(x) for x in re.findall(r'<p class="trademark">(.*?)</p>', foot, re.S)]

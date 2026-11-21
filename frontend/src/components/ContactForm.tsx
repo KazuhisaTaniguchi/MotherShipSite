@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useRef, useState, type ChangeEvent, type FormEvent } from "react";
+import { loadRecaptcha, recaptchaToken } from "@/lib/recaptcha";
 
 // お問い合わせフォーム（mock/design/contact.html のフォームと contact.js を React にしたもの）。添付ファイルは JPEG・PNG・PDF、1 つ 5MB まで、3 つまで
 // 送信先：WordPress の Contact Form 7 の REST API
@@ -64,6 +65,8 @@ export function ContactForm() {
   const doneRef = useRef<HTMLDivElement>(null);
   const [files, setFiles] = useState<Attachment[]>([]);
   const [attachErrors, setAttachErrors] = useState<string[]>([]);
+
+  useEffect(() => { loadRecaptcha(); }, []);   // このページを開いたら、reCAPTCHA を読み込む
   const attachRef = useRef<HTMLInputElement>(null);
   const filesRef = useRef<Attachment[]>([]);
 
@@ -137,6 +140,8 @@ export function ContactForm() {
       const body = new FormData(form);
       body.append("_wpcf7_unit_tag", `wpcf7-f${FORM_ID}-o1`); // Contact Form 7 の 5.8 以降で必要
       files.forEach((f, i) => body.append(`your-file-${i + 1}`, f.file)); // Contact Form 7 のファイルの項目（your-file-1〜3）
+      const token = await recaptchaToken();   // reCAPTCHA v3（キーが無いあいだは空）
+      if (token) body.append("_wpcf7_recaptcha_response", token);
       const res = await fetch(`${WP_URL}/wp-json/contact-form-7/v1/contact-forms/${FORM_ID}/feedback`, { method: "POST", body });
       const json = (await res.json()) as Cf7Response;
       if (json.status === "mail_sent") {

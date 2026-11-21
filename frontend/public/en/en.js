@@ -22,6 +22,25 @@ document.querySelectorAll('[data-hx-pause]').forEach((btn) => {
   const API_BASE = 'https://api.mothershipremote.com/wp-json/contact-form-7/v1/contact-forms/';
   const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
+  // reCAPTCHA v3（迷惑メールの送信を防ぐ）。フォームの data-recaptcha-key にサイトキーがあるときだけ読み込む。
+  // 送るときに、受け取ったトークンを _wpcf7_recaptcha_response として付ける（判定は Contact Form 7 が行う）
+  const RECAPTCHA_KEY = form.dataset.recaptchaKey || '';
+  if (RECAPTCHA_KEY) {
+    const s = document.createElement('script');
+    s.src = `https://www.google.com/recaptcha/api.js?render=${encodeURIComponent(RECAPTCHA_KEY)}`;
+    s.async = true;
+    document.head.appendChild(s);
+  }
+  const recaptchaToken = () => new Promise((resolve) => {
+    const g = window.grecaptcha;
+    if (!RECAPTCHA_KEY || !g) { resolve(''); return; }
+    const timer = setTimeout(() => resolve(''), 8000);
+    g.ready(() => g.execute(RECAPTCHA_KEY, { action: 'contactform' }).then(
+      (token) => { clearTimeout(timer); resolve(token); },
+      () => { clearTimeout(timer); resolve(''); },
+    ));
+  });
+
   // 同意のチェックが入っているときだけ、送信ボタンを押せるようにする
   const agree = form.querySelector('[name="acceptance-privacy"]');
   const submitNote = document.getElementById('submit-note');
@@ -166,6 +185,8 @@ document.querySelectorAll('[data-hx-pause]').forEach((btn) => {
       const body = new FormData(form);
       body.append('_wpcf7_unit_tag', `wpcf7-f${id}-o1`);   // Contact Form 7 の 5.8 以降で必要
       files.forEach((f, i) => body.append(`your-file-${i + 1}`, f.file));   // Contact Form 7 のファイルの項目（your-file-1〜3）
+      const token = await recaptchaToken();
+      if (token) body.append('_wpcf7_recaptcha_response', token);
       const res = await fetch(`${API_BASE}${id}/feedback`, { method: 'POST', body });
       const json = await res.json();
       if (json.status === 'mail_sent') {
