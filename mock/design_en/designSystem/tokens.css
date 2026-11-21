@@ -1,0 +1,158 @@
+/* 英語版（mock/design_en）の値。日本語版（mock/design/designSystem/tokens.css）の写しに、書体と行間・字間だけ英語向けに変えたもの */
+/* ==========================================================================
+   MOTHERSHIP デザインシステム ｜ 1. トークン（値の決まり）
+   色・文字・余白・角丸・影・動きの値は、ここだけで決める。
+   base.css・components.css・LP（../styles.css）は、ここの変数を使う。
+   見本：index.html ／ 決まり：README.md
+   ========================================================================== */
+:root {
+  /* ---- 色：ブランド ---------------------------------------------------
+     透明度を付けて使う色は「R, G, B」の数字でも持つ。
+     例：rgba(var(--blue-rgb), .12)。色を変えるときは -rgb の行だけを直す。
+     （新しい書き方の rgb(… / .12) にすると、グラデーションの画素がわずかに変わるので、この書き方にそろえる） */
+  --blue-deep: #1e3ec0;                    /* 濃い青：リンクの色、ラベル、グラデーションの始まり */
+  --blue-rgb: 56, 92, 244;
+  --blue: rgb(var(--blue-rgb));            /* #385cf4 主役の青 */
+  --sky-rgb: 56, 175, 238;
+  --sky: rgb(var(--sky-rgb));              /* #38afee 空色：グラデーションの終わり */
+  --cyan-rgb: 168, 248, 255;
+  --cyan: rgb(var(--cyan-rgb));            /* #a8f8ff 暗い面の上のアクセント */
+  --mint-rgb: 185, 234, 247;
+  --mint: rgb(var(--mint-rgb));            /* #b9eaf7 背景のにじみ */
+  --navy-rgb: 20, 38, 81;
+  --navy: rgb(var(--navy-rgb));            /* #142651 夜の面 */
+  --navy-2: #0e1a3a;                       /* 夜の面（いちばん暗い） */
+
+  /* ---- 色：文字と線（明るい面の上） ---------------------------------- */
+  --ink-rgb: 20, 32, 58;
+  --ink: rgb(var(--ink-rgb));              /* #14203a 見出し・本文・濃いボタン */
+  --ink-2: #3a4763;                        /* 説明の文 */
+  --ink-3: #66728c;                        /* 注記・キャプション */
+  --line: #dbe3f1;                         /* 罫線・カードの枠 */
+
+  /* ---- 色：面 --------------------------------------------------------- */
+  --bg-rgb: 245, 247, 252;
+  --bg: rgb(var(--bg-rgb));                /* #f5f7fc ページの地 */
+  --surface: #ffffff;                      /* カード・白い帯 */
+  --tint: #eef2fb;                         /* うすい青の面（キー、表の見出しなど） */
+  --wash: #e9eefa;                         /* 明るいグラデーションの始まり */
+  --wash-2: #cde3fb;                       /* 明るいグラデーションの終わり */
+
+  /* ---- 色：暗い面の上 ------------------------------------------------- */
+  --on-dark: #ffffff;                      /* 見出し */
+  --on-dark-2: #dfe7fa;                    /* 本文 */
+  --on-dark-3: #c7d3ee;                    /* 補足 */
+  --on-dark-4: #93a3c8;                    /* 注記 */
+  --glass: rgba(255, 255, 255, .08);       /* 暗い面の上のパネル */
+  --glass-line: rgba(255, 255, 255, .16);  /* その枠 */
+
+  /* ---- 色：状態 ------------------------------------------------------- */
+  --live-rgb: 47, 191, 138;
+  --live: rgb(var(--live-rgb));            /* #2fbf8a つながっている */
+  --rec-rgb: 255, 83, 107;
+  --rec: rgb(var(--rec-rgb));              /* #ff536b 声を送っている */
+  --error-rgb: 200, 30, 60;
+  --error: rgb(var(--error-rgb));          /* #c81e3c フォームのエラーの文字・枠（--rec は文字には薄いため） */
+
+  /* ---- 色：端末の枠 --------------------------------------------------- */
+  --device: #121a30;                       /* 枠 */
+  --device-screen: #0b1020;                /* 画面の地 */
+
+  /* ---- グラデーション ------------------------------------------------- */
+  --grad-brand: linear-gradient(100deg, var(--blue-deep), var(--blue) 45%, var(--sky));   /* 文字・目立たせる枠 */
+  --grad-accent: linear-gradient(135deg, var(--blue-deep), var(--sky));                   /* アイコンの台・番号 */
+  --grad-navy: linear-gradient(150deg, var(--navy), var(--blue-deep));                    /* 夜のパネル */
+  --grad-wash: linear-gradient(160deg, var(--wash), var(--wash-2));                       /* 図の台 */
+  --grad-hero:                                                                            /* 明るい背景（HERO） */
+    radial-gradient(60% 55% at 85% 20%, rgba(var(--sky-rgb), .42), transparent 70%),
+    radial-gradient(50% 50% at 10% 85%, rgba(var(--mint-rgb), .9), transparent 70%),
+    radial-gradient(45% 45% at 60% 95%, rgba(83, 108, 239, .22), transparent 70%),
+    linear-gradient(160deg, var(--wash) 0%, var(--wash-2) 55%, #e5ebf4 100%);
+  --grad-night:                                                                           /* 夜の背景（声で入力） */
+    radial-gradient(70% 80% at 85% 10%, rgba(var(--blue-rgb), .55), transparent 70%),
+    radial-gradient(60% 60% at 0% 100%, rgba(var(--sky-rgb), .3), transparent 70%),
+    var(--navy-2);
+
+  /* ---- 文字 ----------------------------------------------------------- */
+  --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Hiragino Sans", "Noto Sans JP", sans-serif;   /* 英語版：欧文の書体を先に。日本語（言語の切り替えの「日本語」など）は後ろの書体で出る */
+
+  --text-display: clamp(38px, 5.6vw, 72px);     /* HERO の見出し */
+  --text-title: clamp(27px, 3.5vw, 42px);       /* セクションの見出し（h2） */
+  --text-heading-lg: clamp(25px, 3vw, 36px);    /* 大きいパネルの見出し */
+  --text-heading: clamp(19px, 1.9vw, 23px);     /* カードの見出し（h3） */
+  --text-subheading: 20px;                      /* 小さいカードの見出し */
+  --text-lead-lg: clamp(16px, 1.6vw, 20px);     /* HERO のリード */
+  --text-lead: clamp(15px, 1.25vw, 17px);       /* セクションのリード */
+  --text-body: 16px;                            /* 本文 */
+  --text-body-sm: 15px;                         /* カードの中の本文 */
+  --text-small: 14px;                           /* ナビ・補足 */
+  --text-note: 13px;                            /* 注記・ラベル */
+  --text-caption: 12px;                         /* キャプション */
+
+  --weight-medium: 500;
+  --weight-semibold: 600;
+  --weight-bold: 700;
+  --weight-heavy: 800;                          /* 見出しはこれ */
+
+  --leading-display: 1.12;   /* 英語版：欧文は行間を詰める（日本語版は 1.22） */
+  --leading-heading: 1.25;   /* 日本語版は 1.35 */
+  --leading-note: 1.6;   /* 日本語版は 1.7 */
+  --leading-body: 1.7;   /* 日本語版は 1.85 */
+
+  --tracking-heading: -.012em;   /* 日本語版は .01em */
+  --tracking-wide: .04em;                       /* ピルのラベル */
+  --tracking-label: .06em;                      /* キッカー */
+  --tracking-logo: .14em;                       /* MOTHERSHIP */
+
+  /* ---- 余白（4px の倍数。--space-N = N × 4px） ----------------------- */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+
+  /* ---- レイアウト ----------------------------------------------------- */
+  --wrap: 1120px;                               /* 本文の最大の幅 */
+  --gutter: 24px;                               /* 左右の余白（スマホでは 20px） */
+  --header-h: 68px;                             /* ヘッダーの高さ */
+  --section-y: clamp(72px, 9vw, 120px);         /* セクションの上下 */
+  --section-head-gap: clamp(40px, 5vw, 64px);   /* セクションの見出しと中身の間 */
+  /* 画面の幅の区切り（@media では変数を使えないので、数字で書く）：
+     980px 以下＝2 列を 1 列に ／ 860px 以下＝スマホの組み方 ／ 480px 以下＝小さいスマホ */
+
+  /* ---- 角丸 ----------------------------------------------------------- */
+  --radius-xs: 6px;                             /* フォーカスの枠 */
+  --radius-sm: 10px;                            /* キー・小さな部品 */
+  --radius-md: 16px;                            /* アイコンの台・札 */
+  --radius-lg: 22px;                            /* カード */
+  --radius-xl: 28px;                            /* 大きいカード */
+  --radius-2xl: 36px;                           /* いちばん大きいパネル */
+  --radius-pill: 999px;                         /* ボタン・ピル */
+
+  /* ---- 影 ------------------------------------------------------------- */
+  --shadow-card: 0 18px 50px -24px rgba(var(--navy-rgb), .35);          /* 浮かせるカード・札・メニュー */
+  --shadow-button: 0 14px 30px -14px rgba(var(--ink-rgb), .7);          /* 濃いボタン */
+  --shadow-brand: 0 18px 40px -20px rgba(var(--blue-rgb), .55);         /* 青く目立たせるカード */
+  --shadow-brand-hover: 0 24px 46px -20px rgba(var(--blue-rgb), .7);
+  --shadow-device: 0 0 0 1.5px var(--ink-2), 0 40px 70px -30px rgba(var(--navy-rgb), .65);   /* 端末の枠 */
+
+  /* ---- 動き ----------------------------------------------------------- */
+  --dur-fast: .15s;                             /* 浮き上がり */
+  --dur-base: .2s;                              /* 色・背景・開閉 */
+  --dur-slow: .45s;                             /* 場面の切り替え */
+  --ease-out: cubic-bezier(.2, .8, .2, 1);
+
+  /* ---- 重なりの順 ----------------------------------------------------- */
+  --z-header: 50;
+  --z-skip: 100;
+}
+
+/* スマホでは左右の余白を少し狭く */
+@media (max-width: 860px) {
+  :root { --gutter: 20px; }
+}

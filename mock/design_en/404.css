@@ -1,0 +1,58 @@
+/* ==========================================================================
+   MOTHERSHIP 404 ページ ｜ このページだけの組み方
+   designSystem/tokens.css → base.css → components.css → この 404.css の順に読み込む。
+   値はトークン（var(--…)）だけを使う。部品は .pill・.btn・.phone・.dot をそのまま使う。
+   ========================================================================== */
+
+/* 画面いっぱいの明るい背景。LP の HERO と同じく、ヘッダーの下まで敷く */
+.nf { position: relative; display: grid; align-items: center; min-height: calc(100svh - 40px); margin-top: calc(-1 * var(--header-h)); padding: calc(var(--header-h) + var(--space-12)) 0 var(--space-16); overflow: hidden; }
+.nf-bg { position: absolute; inset: 0; background: var(--grad-hero); }
+.nf-grid { position: relative; display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr); align-items: center; gap: var(--space-10); }
+
+/* 左：文 */
+.nf-label { margin-bottom: var(--space-6); }
+.nf h1 { font-size: var(--text-title); font-weight: var(--weight-heavy); }
+.nf-lead { margin-top: var(--space-6); font-size: var(--text-lead-lg); font-weight: var(--weight-medium); color: var(--ink-2); }
+.nf-actions { display: flex; flex-wrap: wrap; gap: var(--space-3); margin-top: var(--space-8); }
+
+.nf-links { margin-top: var(--space-10); padding-top: var(--space-5); border-top: 1px solid rgba(var(--ink-rgb), .12); }
+.nf-links-title { font-size: var(--text-note); font-weight: var(--weight-heavy); letter-spacing: var(--tracking-label); color: var(--blue-deep); }
+.nf-links ul { display: flex; flex-wrap: wrap; gap: var(--space-2) var(--space-6); margin-top: var(--space-3); }
+.nf-links a { font-size: var(--text-small); font-weight: var(--weight-semibold); color: var(--ink-2); text-decoration: none; }
+.nf-links a::after { content: " →"; color: var(--blue); }
+.nf-links a:hover { color: var(--blue-deep); }
+
+/* 右：つながらない画面の端末 */
+.nf-stage { position: relative; display: grid; place-items: center; padding: var(--space-4) 0; }
+.nf-glow { position: absolute; width: 90%; aspect-ratio: 1; border-radius: 50%; background: radial-gradient(circle, var(--surface), transparent 68%); opacity: .95; }
+.nf-phone { width: min(260px, 62vw); }
+
+.nf-screen { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; padding: 0 var(--space-6); text-align: center; color: var(--on-dark-3); }
+.nf-icon { display: grid; place-items: center; width: 64px; height: 64px; border-radius: var(--radius-md); background: var(--glass); border: 1px solid var(--glass-line); }
+.nf-icon svg { width: 34px; height: 34px; fill: none; stroke: var(--cyan); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.nf-icon circle { fill: var(--cyan); stroke: none; }
+.nf-code { margin-top: var(--space-5); font-size: clamp(56px, 7vw, 72px); font-weight: var(--weight-heavy); line-height: 1; letter-spacing: var(--tracking-heading); background: linear-gradient(100deg, var(--cyan), var(--sky)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.nf-screen-title { margin-top: var(--space-4); font-size: var(--text-body); font-weight: var(--weight-bold); color: var(--on-dark); }
+.nf-screen-text { margin-top: var(--space-2); font-size: var(--text-note); line-height: var(--leading-note); color: var(--on-dark-4); }
+
+/* 端末の横の札（LP の .stage-chip と同じ考え方） */
+.nf-chip { position: absolute; left: 4%; bottom: 18%; display: inline-flex; align-items: center; gap: var(--space-2); padding: var(--space-3) var(--space-4); border-radius: var(--radius-md); background: var(--surface); box-shadow: var(--shadow-card); font-size: var(--text-note); font-weight: var(--weight-bold); color: var(--ink); }
+.nf-dot { background: var(--rec); box-shadow: 0 0 0 4px rgba(var(--rec-rgb), .2); }
+
+/* PC だけの改行 */
+.pc { display: inline; }
+
+/* 2 列 → 1 列 */
+@media (max-width: 980px) {
+  .nf { min-height: 0; }
+  .nf-grid { grid-template-columns: 1fr; gap: var(--space-12); }
+  .nf-copy { text-align: center; }
+  .nf-actions, .nf-links ul { justify-content: center; }
+  .nf-chip { left: 50%; bottom: 6%; transform: translateX(-50%); white-space: nowrap; }
+}
+
+@media (max-width: 860px) {
+  .pc { display: none; }
+  .nf { padding-top: calc(var(--header-h) + var(--space-10)); }
+  .nf-phone { width: min(220px, 58vw); }
+}

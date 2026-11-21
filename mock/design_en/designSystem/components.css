@@ -1,0 +1,192 @@
+/* ==========================================================================
+   MOTHERSHIP デザインシステム ｜ 3. 部品
+   どのページでも使い回す部品。tokens.css → base.css のあとに読み込む。
+   ページだけの組み方（HERO、各セクションの並べ方）は、ここには書かない。
+   見本と HTML の書き方：index.html
+   ========================================================================== */
+
+/* ---- ヘッダー --------------------------------------------------------- */
+.site-header { position: sticky; top: 0; z-index: var(--z-header); transition: background .25s, box-shadow .25s; }
+.site-header.is-scrolled { background: rgba(var(--bg-rgb), .86); backdrop-filter: saturate(1.4) blur(14px); -webkit-backdrop-filter: saturate(1.4) blur(14px); box-shadow: 0 1px 0 var(--line); }
+.header-inner { display: flex; align-items: center; justify-content: space-between; height: var(--header-h); }
+.brand { display: inline-flex; align-items: center; gap: 10px; font-weight: var(--weight-heavy); letter-spacing: var(--tracking-logo); font-size: 15px; text-decoration: none; }
+.brand-mark { width: 30px; height: 30px; }
+.site-nav { display: flex; align-items: center; gap: 28px; font-size: var(--text-small); font-weight: var(--weight-semibold); }
+.site-nav a { text-decoration: none; color: var(--ink-2); }
+.site-nav a:hover { color: var(--blue-deep); }
+.site-nav .nav-cta { background: var(--ink); color: var(--on-dark); padding: 9px 20px; border-radius: var(--radius-pill); }
+.site-nav .nav-cta:hover { background: var(--blue-deep); color: var(--on-dark); }
+.menu-toggle { display: none; width: 44px; height: 44px; border: 0; background: none; padding: 0; cursor: pointer; position: relative; }
+.menu-toggle span { position: absolute; left: 11px; right: 11px; height: 2px; background: var(--ink); border-radius: 2px; transition: transform var(--dur-base), top var(--dur-base); }
+.menu-toggle span:first-child { top: 17px; }
+.menu-toggle span:last-child { top: 26px; }
+.menu-toggle[aria-expanded="true"] span:first-child { top: 21px; transform: rotate(45deg); }
+.menu-toggle[aria-expanded="true"] span:last-child { top: 21px; transform: rotate(-45deg); }
+
+@media (max-width: 860px) {
+  .menu-toggle { display: block; }
+  .site-nav { position: absolute; top: var(--header-h); left: 12px; right: 12px; flex-direction: column; align-items: stretch; gap: 0; background: var(--surface); border-radius: 20px; padding: 10px; box-shadow: var(--shadow-card); border: 1px solid var(--line); opacity: 0; visibility: hidden; transform: translateY(-8px); transition: opacity var(--dur-base), transform var(--dur-base), visibility var(--dur-base); }
+  .site-nav.is-open { opacity: 1; visibility: visible; transform: none; }
+  .site-nav a { padding: 14px 16px; font-size: var(--text-body); border-radius: 12px; }
+  .site-nav .nav-cta { text-align: center; margin-top: 6px; padding: 14px; }
+}
+
+/* ---- ボタン ----------------------------------------------------------- */
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 54px; padding: 0 30px; border-radius: var(--radius-pill); font-weight: var(--weight-bold); font-size: var(--text-body); text-decoration: none; transition: transform var(--dur-fast), background var(--dur-base), box-shadow var(--dur-base); }
+.btn:hover { transform: translateY(-1px); }
+.btn-primary { background: var(--ink); color: var(--on-dark); box-shadow: var(--shadow-button); }
+.btn-primary:hover { background: var(--blue-deep); }
+.btn-ghost { color: var(--ink); border: 1.5px solid rgba(var(--ink-rgb), .22); background: rgba(255, 255, 255, .5); }
+.btn-ghost:hover { background: var(--surface); }
+
+@media (max-width: 480px) {
+  .btn { width: 100%; }
+}
+
+/* ---- ピル（小さなラベル） --------------------------------------------- */
+.pill { display: inline-block; padding: 5px 14px; border-radius: var(--radius-pill); font-size: 12.5px; font-weight: var(--weight-heavy); }
+.pill-glass { font-size: var(--text-note); font-weight: var(--weight-bold); letter-spacing: var(--tracking-wide); color: var(--blue-deep); background: rgba(255, 255, 255, .7); }   /* 明るいグラデーションの上 */
+.pill-brand { padding-block: 4px; color: var(--on-dark); background: linear-gradient(100deg, var(--blue-deep), var(--sky)); }                                                      /* いちばん目立たせる */
+.pill-soft { background: var(--wash); color: var(--blue-deep); }                                                                                                                   /* 白い面の上 */
+.pill-ghost { background: rgba(255, 255, 255, .16); }                                                                                                                                /* 暗い面の上 */
+
+/* ---- セクションと見出し ----------------------------------------------- */
+.section { padding: var(--section-y) 0; }
+.section-title { font-size: var(--text-title); font-weight: var(--weight-heavy); }
+.section-head { max-width: 760px; margin: 0 auto var(--section-head-gap); }
+.section-lead { margin-top: 20px; color: var(--ink-2); font-size: var(--text-lead); }
+.kicker { display: inline-block; font-size: var(--text-note); font-weight: var(--weight-heavy); letter-spacing: var(--tracking-label); color: var(--blue-deep); margin-bottom: 14px; }
+.kicker.light { color: var(--cyan); }                                                /* 暗い面の上 */
+.grad-text { background: var(--grad-brand); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.fine { margin-top: 16px; font-size: var(--text-note); color: var(--ink-3); line-height: var(--leading-note); }
+.note { margin-top: 28px; font-size: var(--text-small); color: var(--ink-3); }
+
+/* ---- チェックのリスト ------------------------------------------------- */
+/* チェックの線の色は画像の中に書いてある（%231e3ec0 = --blue-deep、%23a8f8ff = --cyan）。色を変えたら、ここも直す */
+.ticks { margin-top: 22px; display: grid; gap: 12px; }
+.ticks li { position: relative; padding-left: 30px; line-height: var(--leading-note); }
+.ticks li::before { content: ""; position: absolute; left: 0; top: .32em; width: 19px; height: 19px; border-radius: 50%; background: rgba(var(--blue-rgb), .12) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='none' stroke='%231e3ec0' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m5.5 10.5 3 3 6-7'/%3E%3C/svg%3E") center / 14px no-repeat; }
+.ticks.small { font-size: 14.5px; gap: 9px; }
+.ticks.on-dark li::before { background-color: rgba(var(--cyan-rgb), .18); background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='none' stroke='%23a8f8ff' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m5.5 10.5 3 3 6-7'/%3E%3C/svg%3E"); }
+
+/* ---- カード ----------------------------------------------------------- */
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 32px 28px; }
+.card-icon { display: grid; place-items: center; width: 52px; height: 52px; border-radius: var(--radius-md); background: var(--grad-accent); margin-bottom: 20px; }
+.card-icon svg { width: 26px; height: 26px; fill: none; stroke: #fff; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.card h3 { font-size: var(--text-subheading); margin-bottom: 10px; }
+.card p { color: var(--ink-2); font-size: var(--text-body-sm); }
+
+/* ---- キー ------------------------------------------------------------- */
+kbd { font-family: var(--font-sans); font-size: var(--text-note); font-weight: var(--weight-bold); min-width: 40px; text-align: center; padding: 7px 10px; border-radius: var(--radius-sm); background: var(--tint); border: 1px solid var(--line); border-bottom-width: 3px; color: var(--ink-2); }
+
+/* ---- 囲み（補足・注意） ----------------------------------------------- */
+.callout { margin-top: 36px; background: #eef4fd; border-radius: 20px; padding: 24px 26px; border-left: 5px solid var(--sky); }
+.callout h3 { font-size: 16.5px; margin-bottom: 6px; }
+.callout p { font-size: 14.5px; color: var(--ink-2); }
+
+/* ---- ステップ（番号つきの手順） --------------------------------------- */
+.steps { margin-top: 34px; display: grid; gap: 26px; }
+.steps li { display: grid; grid-template-columns: 48px 1fr; gap: 18px; }
+.step-n { display: grid; place-items: center; width: 48px; height: 48px; border-radius: 50%; background: var(--grad-accent); color: var(--on-dark); font-weight: var(--weight-heavy); font-size: 19px; }
+.steps h3 { font-size: 19px; margin-bottom: 4px; }
+.steps p { color: var(--ink-2); font-size: var(--text-body-sm); }
+
+/* ---- 質問と答え（開閉） ----------------------------------------------- */
+.faq-list { margin-top: clamp(28px, 4vw, 44px); border-top: 1px solid var(--line); }
+.faq-list details { border-bottom: 1px solid var(--line); }
+.faq-list summary { position: relative; cursor: pointer; list-style: none; padding: 22px 44px 22px 0; font-weight: var(--weight-bold); font-size: 16.5px; line-height: 1.6; }
+.faq-list summary::-webkit-details-marker { display: none; }
+.faq-list summary::after { content: ""; position: absolute; right: 8px; top: 50%; width: 10px; height: 10px; border-right: 2px solid var(--blue); border-bottom: 2px solid var(--blue); transform: translateY(-70%) rotate(45deg); transition: transform var(--dur-base); }
+.faq-list details[open] summary::after { transform: translateY(-30%) rotate(-135deg); }
+.faq-list details p { padding: 0 44px 24px 0; color: var(--ink-2); font-size: var(--text-body-sm); }
+
+@media (max-width: 860px) {
+  .faq-list summary { font-size: 15.5px; }
+}
+
+/* ---- 端末の枠 --------------------------------------------------------- */
+/* アプリの画面（暗い配色）は、そのまま置かずに枠に入れる。.phone = iPhone の形、.phone.tablet = iPad の形 */
+.phone { position: relative; width: min(300px, 70vw); }
+.phone-screen { position: relative; aspect-ratio: 1206 / 2622; background: var(--device-screen); border-radius: 44px; border: 9px solid var(--device); box-shadow: var(--shadow-device); overflow: hidden; }
+.phone-screen img, .phone-screen video { width: 100%; height: 100%; object-fit: cover; }
+.phone figcaption { margin-top: 10px; font-size: var(--text-caption); line-height: 1.6; color: var(--ink-3); text-align: center; }
+.tablet .phone-screen { aspect-ratio: 1640 / 2360; border-radius: 30px; border-width: 13px; }
+
+/* ---- 状態の点 --------------------------------------------------------- */
+.dot { display: inline-block; width: 9px; height: 9px; border-radius: 50%; background: var(--live); box-shadow: 0 0 0 4px rgba(var(--live-rgb), .2); }
+
+/* ---- フッター --------------------------------------------------------- */
+.site-footer { padding: 56px 0 40px; color: var(--ink-3); }
+.footer-top { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 18px; padding-bottom: 26px; border-bottom: 1px solid var(--line); color: var(--ink); }
+.footer-top nav { display: flex; flex-wrap: wrap; gap: 8px 22px; font-size: var(--text-small); }
+.footer-top nav a { text-decoration: none; color: var(--ink-2); }
+.footer-top nav a:hover { color: var(--blue-deep); }
+.trademark { margin-top: 20px; font-size: 11.5px; line-height: 1.8; }
+.footer-bottom { display: flex; justify-content: space-between; margin-top: 26px; font-size: var(--text-note); }
+.footer-bottom a { text-decoration: none; }
+
+/* ---- 準備のカード（.vn-steps。2026-11-21）----
+   声で書く準備の 3 つ（トップの「使うために必要なもの」、ヘルプの「声で書く準備」）。明るい背景が基本で、トップの暗い背景の色は styles.css の .voice-need で上書きする。
+   9 秒で 1 周。0–33% 1 Aqua Voice を入れる／33–66% 2 BlackHole 2ch を入れる／66–100% 3 マイクを選ぶ。
+   いまのカードが明るくなり、図の中でバーが伸びて「✓ 入れた」、3 は選ぶ欄が「BlackHole 2ch」に替わる。
+   アイコンは製品のものを使わず、文字（あ・🎤）で表す */
+.vn-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-bottom: 4px; }
+.vn-s { position: relative; padding: 12px 12px 16px; border-radius: 14px; background: var(--bg); border: 1px solid var(--line); }
+.vn-s::after { content: ""; position: absolute; inset: -1px; border-radius: inherit; border: 2px solid var(--blue); box-shadow: 0 14px 32px -20px rgba(var(--blue-rgb), .6); opacity: 0; pointer-events: none; animation: vn-on-1 9s ease infinite; }
+.vn-s2::after { animation-name: vn-on-2; }
+.vn-s3::after { animation-name: vn-on-3; }
+.vn-s h4 { display: flex; align-items: center; gap: 8px; margin-top: 12px; font-size: 15px; line-height: 1.45; color: var(--ink); }
+.vn-s > p { margin-top: 4px; font-size: 13px; line-height: 1.6; color: var(--ink-2); }
+.vn-n { flex: none; display: grid; place-items: center; width: 24px; height: 24px; border-radius: 50%; background: var(--grad-accent); color: var(--on-dark); font-size: 13px; font-weight: var(--weight-heavy); }
+.vn-fig { position: relative; display: grid; place-items: center; height: 104px; border-radius: 10px; background: var(--grad-wash); overflow: hidden; }
+/* 1・2：アプリのカード（名前の下のバーが伸びて、入ったことを表す） */
+.vn-app { display: grid; grid-template-columns: auto 1fr; align-items: center; gap: 6px 10px; width: min(78%, 210px); padding: 10px 12px; border-radius: 10px; background: #fff; box-shadow: 0 10px 22px -14px rgba(0, 0, 0, .6); }
+.vn-ico { grid-row: span 2; display: grid; place-items: center; width: 34px; height: 34px; border-radius: 9px; background: var(--grad-accent); color: #fff; font-size: 17px; font-style: normal; font-weight: var(--weight-heavy); }
+.vn-app b { font-size: 13px; line-height: 1.3; color: var(--ink); white-space: nowrap; }
+.vn-prog { display: block; height: 5px; border-radius: 3px; background: #e3e9f5; overflow: hidden; }
+.vn-prog i { display: block; width: 0; height: 100%; border-radius: inherit; background: var(--blue); animation: vn-prog-1 9s ease-in-out infinite; }
+.vn-s2 .vn-prog i { animation-name: vn-prog-2; }
+.vn-done { position: absolute; right: 8px; bottom: 8px; padding: 2px 9px; border-radius: 99px; background: #34c759; color: #fff; font-size: 11px; font-weight: var(--weight-heavy); line-height: 1.5; opacity: 0; animation: vn-done-1 9s ease infinite; }
+.vn-s2 .vn-done { animation-name: vn-done-2; }
+.vn-s3 .vn-done { animation-name: vn-done-3; }
+/* 3：Aqua Voice の設定の、マイクを選ぶ欄 */
+.vn-set { width: min(86%, 230px); padding: 8px 10px 10px; border-radius: 10px; background: #fff; box-shadow: 0 10px 22px -14px rgba(0, 0, 0, .6); }
+.vn-set > p { margin-bottom: 6px; font-size: 10.5px; font-weight: var(--weight-heavy); color: var(--ink-3); }
+.vn-row { display: flex; align-items: center; gap: 8px; font-size: 12px; font-weight: var(--weight-bold); color: var(--ink); }
+.vn-sel { position: relative; flex: 1; height: 26px; border: 1px solid #d4def2; border-radius: 6px; animation: vn-sel 9s ease infinite; }
+.vn-sel em { position: absolute; left: 8px; right: 18px; top: 50%; transform: translateY(-50%); font-style: normal; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.vn-old { color: var(--ink-3); animation: vn-old 9s ease infinite; }
+.vn-new { color: var(--blue-deep); opacity: 0; animation: vn-new 9s ease infinite; }
+.vn-sel i { position: absolute; right: 6px; top: 50%; transform: translateY(-50%); font-size: 10px; font-style: normal; color: var(--ink-3); }
+.vn-tap { position: absolute; left: 62%; top: 60%; width: 22px; height: 22px; margin: -11px 0 0 -11px; border-radius: 50%; background: rgba(var(--ink-rgb), .28); border: 2px solid rgba(255, 255, 255, .9); opacity: 0; pointer-events: none; animation: vn-tap 9s ease infinite; }
+@keyframes vn-on-1 { 0%, 1% { opacity: 0; } 3%, 31% { opacity: 1; } 34%, 100% { opacity: 0; } }
+@keyframes vn-on-2 { 0%, 33% { opacity: 0; } 36%, 64% { opacity: 1; } 67%, 100% { opacity: 0; } }
+@keyframes vn-on-3 { 0%, 66% { opacity: 0; } 69%, 95% { opacity: 1; } 98%, 100% { opacity: 0; } }
+@keyframes vn-prog-1 { 0%, 4% { width: 0; } 24%, 97% { width: 100%; } 100% { width: 0; } }
+@keyframes vn-prog-2 { 0%, 37% { width: 0; } 57%, 97% { width: 100%; } 100% { width: 0; } }
+@keyframes vn-done-1 { 0%, 24% { opacity: 0; transform: scale(.6); } 27%, 97% { opacity: 1; transform: none; } 100% { opacity: 0; } }
+@keyframes vn-done-2 { 0%, 57% { opacity: 0; transform: scale(.6); } 60%, 97% { opacity: 1; transform: none; } 100% { opacity: 0; } }
+@keyframes vn-done-3 { 0%, 81% { opacity: 0; transform: scale(.6); } 84%, 97% { opacity: 1; transform: none; } 100% { opacity: 0; } }
+@keyframes vn-tap { 0%, 70% { opacity: 0; transform: scale(1.6); } 72% { opacity: 1; transform: scale(1); } 74% { transform: scale(.75); } 76% { opacity: 1; transform: scale(1); } 79%, 100% { opacity: 0; } }
+@keyframes vn-sel { 0%, 74% { border-color: #d4def2; box-shadow: none; } 77%, 97% { border-color: var(--blue); box-shadow: 0 0 0 3px rgba(var(--blue-rgb), .2); } 100% { border-color: #d4def2; box-shadow: none; } }
+@keyframes vn-old { 0%, 74% { opacity: 1; } 76%, 97% { opacity: 0; } 100% { opacity: 1; } }
+@keyframes vn-new { 0%, 74% { opacity: 0; } 76%, 97% { opacity: 1; } 100% { opacity: 0; } }
+@media (max-width: 860px) {
+  .vn-steps { grid-template-columns: 1fr; gap: 10px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  /* ぜんぶ終わったところ（93%）で止め、カードの枠は出さない */
+  .vn-steps *, .vn-steps *::before { animation-delay: -8.4s !important; animation-play-state: paused !important; }
+  .vn-s::after { animation: none; }
+}
+.vn-more { display: inline-block; margin-top: 8px; font-size: 13px; font-weight: var(--weight-bold); color: var(--blue-deep); text-decoration: none; }
+.vn-more:hover { text-decoration: underline; }
+
+/* ---- 英語版だけ：言語の切り替え（「日本語」）と、訳文の注記 ---- */
+.site-nav .nav-lang { padding: 5px 12px; border: 1px solid var(--line); border-radius: var(--radius-pill); font-size: var(--text-note); color: var(--ink-2); }
+.site-nav .nav-lang:hover { border-color: var(--blue); color: var(--blue-deep); }
+.footer-top nav .nav-lang { font-weight: var(--weight-bold); }
+.lang-note { margin-bottom: var(--space-6); padding: 14px 18px; border-left: 3px solid var(--blue); border-radius: 0 var(--radius-sm) var(--radius-sm) 0; background: #eef3ff; font-size: var(--text-small); line-height: var(--leading-note); color: var(--ink-2); }
+@media (max-width: 860px) {
+  .site-nav .nav-lang { align-self: flex-start; margin: 8px 16px; padding: 8px 14px; font-size: var(--text-small); }
+}

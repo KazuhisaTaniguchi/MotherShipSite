@@ -1,0 +1,1085 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#e9eefa">
+  <meta name="description" content="Run Claude Code, Codex, or any AI on your Mac from a foldable phone. MOTHERSHIP fits your Mac's screen to your Galaxy Z Fold, keeps text sharp, and lets you make changes by voice. One-time purchase.">
+  <meta property="og:title" content="Your foldable is mission control for your Mac's AI. | MOTHERSHIP">
+  <meta property="og:description" content="Unfold it, and your Mac's screen is right there, sharp and readable. Need a change? Just say it. A remote app for running your Mac at home from a Galaxy Z Fold or any other foldable phone.">
+  <meta property="og:image" content="og.png">
+  <title>MOTHERSHIP | Remote-control your Mac's AI from a foldable phone</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <!-- 言語ごとのページ（モックなので相対パス。本番では絶対 URL にして、x-default も付ける） -->
+  <link rel="alternate" hreflang="en" href="index.html">
+  <link rel="alternate" hreflang="ja" href="../design/index.html">
+  <!-- デザインシステム（値 → 土台 → 部品）のあとに、このページだけの組み方 -->
+  <link rel="stylesheet" href="designSystem/tokens.css">
+  <link rel="stylesheet" href="designSystem/base.css">
+  <link rel="stylesheet" href="designSystem/components.css">
+  <link rel="stylesheet" href="styles.css">
+  <!-- HERO のアニメ（Fold7。tools/hero-fold/build.py が書き出す） -->
+  <link rel="stylesheet" href="hero-fold.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <header class="site-header" id="top">
+    <div class="wrap header-inner">
+      <a class="brand" href="index.html" aria-label="MOTHERSHIP home">
+        <svg class="brand-mark" viewBox="0 0 128 128" aria-hidden="true"><defs><linearGradient id="bm" x2="1" y2="1"><stop stop-color="#1e3ec0"/><stop offset=".55" stop-color="#385cf4"/><stop offset="1" stop-color="#38afee"/></linearGradient></defs><rect width="128" height="128" rx="27" fill="url(#bm)"/><path d="M60 28 22 86 49 80 60 91 60 75 48 70 60 54Z" fill="#fff"/><path d="M68 28 106 86 79 80 68 91 68 75 80 70 68 54Z" fill="#a8f8ff"/><path d="M64 86 72 98 64 105 56 98Z" fill="#fff"/></svg>
+        <span>MOTHERSHIP</span>
+      </a>
+      <button class="menu-toggle" type="button" aria-label="Open menu" aria-controls="site-nav" aria-expanded="false"><span></span><span></span></button>
+      <nav class="site-nav" id="site-nav" aria-label="Main navigation">
+        <a href="#features">Features</a>
+        <a href="#voice">Voice</a>
+        <a href="#how">How it works</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#faq">FAQ</a>
+        <a class="nav-lang" href="../design/index.html" lang="ja" hreflang="ja">日本語</a>
+        <a class="nav-cta" href="#download">Download</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <!-- S1 HERO：動画が主役 -->
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-bg" aria-hidden="true"></div>
+      <div class="wrap hero-grid">
+        <div class="hero-copy">
+          <p class="pill pill-glass hero-label">Your Mac's AI, within reach.</p>
+          <h1 id="hero-title" class="is-fold"><span class="nb">Your foldable is</span><br><span class="grad-text"><span class="nb">mission control</span> <span class="nb">for your Mac's AI.</span></span></h1>
+          <p class="hero-lead">Unfold it, and your Mac's screen is right there, sharp and readable.<br>Need a change? Just say it.</p>
+          <a class="hero-voice" href="#voice">
+            <span class="hero-voice-text"><span class="hero-voice-kicker">Write by voice</span><b>Works with Aqua Voice</b><span class="hero-voice-sub"><span class="nb">Just talk and the words appear.</span> <span class="nb"><mark>No keyboard needed.</mark></span></span><span class="hero-voice-note">Aqua Voice is a third-party app.</span></span>
+            <span class="hero-voice-arrow" aria-hidden="true">→</span>
+          </a>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#download">Download <span aria-hidden="true">→</span></a>
+            <a class="btn btn-ghost" href="#features">See the features</a>
+          </div>
+          <p class="hero-note">Free for 14 days, every feature included. <span class="nb">One-time purchase. No subscription. No account.</span></p>
+          <p class="hero-platforms">Tested on the <b>Galaxy Z Fold7</b> <i>·</i> Works from iPhone, iPad, and Mac too</p>
+        </div>
+
+        <div class="hero-stage">
+          <div class="stage-glow" aria-hidden="true"></div>
+          <!-- HERO のアニメ（2026-11-21）：Galaxy Z Fold7 を開いて、家の Mac の AI を動かす。中の図は tools/hero-fold/build.py が書き出す（hx の印の間） -->
+          <div class="hx" data-hx><!-- hx --><div class="hx-fig" role="img" aria-label="Illustration of running the AI on a Mac at home from a Galaxy Z Fold7. Unfold the Fold7 and connect, and the Mac's screen fills the unfolded display. The AI is waiting for confirmation, so you tap Allow and scroll to check the result. Hold the mic button and say, “Highlight the month with the highest sales,” and the words land in the AI's input field. Turn the phone upright, and the Mac's screen fits the new shape edge to edge. Pinch to zoom in on the sales chart, and it's redrawn sharp. Fold the phone shut, and the sales chart window fills the cover screen, edge to edge."><div class="hx-in" aria-hidden="true">
+  <div class="hx-half hx-top"></div>
+  <div class="hx-half hx-bot"></div>
+  <div class="hx-open">
+    <i class="hx-wall"></i>
+    <div class="hx-scr">
+      <div class="hx-desk">
+        <i class="hx-mbar"></i>
+        <div class="hx-ai"><b>AI Assistant</b>
+          <div class="hx-log"><div class="hx-logi">
+            <p class="hx-me">Put last month's sales into a report.</p>
+            <div class="hx-work"><i></i><i></i><i></i><i></i><i></i></div>
+            <p class="hx-done">✓ Report ready</p>
+            <p class="hx-me hx-me2">Highlight the month with the highest sales.</p>
+          </div></div>
+          <div class="hx-ask"><span>OK to continue?</span><em class="hx-ok">Allow</em></div>
+          <div class="hx-input"><span class="hx-hint">Type your next request</span><span class="hx-typed">Highlight the month with the highest sales.</span></div>
+        </div>
+        <div class="hx-rep"><b><i></i><i></i><i></i></b><p>Sales Report</p><em><i><u>$45k</u></i><i><u>$70k</u></i><i><u>$55k</u></i><i class="hx-top4"><u>$92k</u><s>Top</s></i><i><u>$62k</u></i></em><span class="hx-plab"><i>Jun</i><i>Jul</i><i>Aug</i><i>Sep</i><i>Oct</i></span></div>
+      </div>
+      <div class="hx-vbar"><span class="hx-mic">🎤</span><span>⌫</span><span class="hx-enter">⏎</span><span>⇥</span><span>⌘C</span><span>⌘V</span></div>
+    </div>
+    <div class="hx-list"><p class="hx-lt">Your Macs</p><div class="hx-row"><i class="hx-mico"></i><p><b>Mac mini (Home)</b><small><i></i>Available on home network</small></p><em class="hx-conn"><span>Connect</span></em><span class="hx-wait">Connecting…</span></div></div>
+    <i class="hx-hinge"></i>
+  </div>
+  <div class="hx-pt"><div class="hx-scr2">
+      <div class="hx-desk">
+        <i class="hx-mbar"></i>
+        <div class="hx-ai"><b>AI Assistant</b>
+          <div class="hx-log"><div class="hx-logi">
+            <p class="hx-me">Put last month's sales into a report.</p>
+            <div class="hx-work"><i></i><i></i><i></i><i></i><i></i></div>
+            <p class="hx-done">✓ Report ready</p>
+            <p class="hx-me hx-me2">Highlight the month with the highest sales.</p>
+          </div></div>
+          <div class="hx-ask"><span>OK to continue?</span><em class="hx-ok">Allow</em></div>
+          <div class="hx-input"><span class="hx-hint">Type your next request</span><span class="hx-typed">Highlight the month with the highest sales.</span></div>
+        </div>
+        <div class="hx-rep"><b><i></i><i></i><i></i></b><p>Sales Report</p><em><i><u>$45k</u></i><i><u>$70k</u></i><i><u>$55k</u></i><i class="hx-top4"><u>$92k</u><s>Top</s></i><i><u>$62k</u></i></em><span class="hx-plab"><i>Jun</i><i>Jul</i><i>Aug</i><i>Sep</i><i>Oct</i></span></div>
+      </div>
+      <div class="hx-vbar"><span class="hx-mic">🎤</span><span>⌫</span><span class="hx-enter">⏎</span><span>⇥</span><span>⌘C</span><span>⌘V</span></div>
+    </div><i class="hx-phinge"></i><i class="hx-fito"></i><i class="hx-fitc hx-fit1"></i><i class="hx-fitc hx-fit2"></i><i class="hx-fitc hx-fit3"></i><i class="hx-fitc hx-fit4"></i><i class="hx-off"></i></div>
+  <div class="hx-cl"><div class="hx-ph hx-pl"></div><div class="hx-ph hx-pr"></div><div class="hx-cov"><div class="hx-cv"><b><i></i><i></i><i></i></b><p>Sales Report</p><em><i><u>$45k</u></i><i><u>$70k</u></i><i><u>$55k</u></i><i><u>$92k</u><s>Top</s></i><i><u>$62k</u></i></em><span><i>Jun</i><i>Jul</i><i>Aug</i><i>Sep</i><i>Oct</i></span></div></div></div>
+  <span class="hx-fitb">✓ Fits edge to edge</span>
+  <span class="hx-said">🎤 Highlight the month with the highest sales.</span>
+  <span class="hx-f hx-f-conn"></span><span class="hx-f hx-f-ok"></span><span class="hx-f2"><i></i><i></i></span><span class="hx-f hx-f-mic"></span><span class="hx-f hx-f-enter"></span><span class="hx-f hx-pz1"></span><span class="hx-f hx-pz2"></span>
+  <span class="hx-cap hx-c1"><i>Unfold your Fold7 and connect</i></span>
+  <span class="hx-cap hx-c2"><i>See how your AI is doing</i></span>
+  <span class="hx-cap hx-c3"><i>Check it with your fingers</i></span>
+  <span class="hx-cap hx-c4"><i>Ask for what's next, by voice</i></span>
+  <span class="hx-cap hx-c5"><i>Turn it upright. Still a perfect fit.</i></span>
+  <span class="hx-cap hx-c6"><i>Pinch to zoom in. It stays sharp.</i></span>
+  <span class="hx-cap hx-c7"><i>Fold it shut. Keep watch from the cover screen.</i></span>
+</div></div>
+<div class="hx-ui"><button class="hx-pause" type="button" data-hx-pause aria-pressed="false" aria-label="Pause animation"><span aria-hidden="true">❚❚</span></button><p class="hx-note">Illustration only; actual screens may differ.</p></div><!-- /hx --></div>
+          <div class="stage-chip chip-a" aria-hidden="true">Up to <b>60</b>fps</div>
+          <div class="stage-chip chip-b" aria-hidden="true"><span class="dot"></span>Encrypted, direct connection</div>
+        </div>
+      </div>
+      <p class="wrap hero-foot">Your Mac's screen, on your foldable. And on your iPhone, iPad, or another Mac.</p>
+    </section>
+
+    <!-- S2 共感：席を離れたあとの困りごと -->
+    <section class="section pains" aria-labelledby="pains-title">
+      <div class="wrap">
+        <h2 class="section-title center" id="pains-title"><span class="nb">You bought the big screen.</span><br><span class="nb">Is your Mac remote app actually using it?</span></h2>
+        <ol class="scene-list is-three">
+            <li><span class="num">01</span><h3>Unfolded, and the text is still tiny</h3><p>Most apps simply shrink your Mac's big display to fit. Even on the unfolded screen, you zoom in, pan around, and zoom in again.</p></li>
+            <li><span class="num">02</span><h3>Long prompts are a chore to type</h3><p>The on-screen keyboard swallows half of your unfolded display. Pecking out a long prompt for your AI on tiny keys gets old fast.</p></li>
+            <li><span class="num">03</span><h3>Your AI is stuck, and you have no idea</h3><p>Step away from your desk, and you can't tell when your AI has stopped to wait for your OK. If only you could flip your phone open and check.</p></li>
+          </ol>
+        <p class="pains-answer"><span class="nb">With MOTHERSHIP, you unfold your phone</span> <span class="nb">and your Mac's screen is right there to read.</span> <span class="nb">Need a change? Just say it.</span></p>
+      </div>
+    </section>
+
+<!-- S2b 開く・閉じる・折る（2026-11-21。折りたたみスマホが主役の LP の中心。写真の代わりの図。実機の写真・動画がそろったら差し替える） -->
+    <section class="section forms" id="fold" aria-labelledby="forms-title">
+      <div class="wrap">
+        <div class="section-head center">
+          <p class="kicker">On your foldable</p>
+          <h2 class="section-title" id="forms-title">Change the shape.<br class="sp"> The screen follows.</h2>
+          <p class="section-lead">Folded, unfolded, or propped half-open: MOTHERSHIP rearranges your Mac's screen and the controls to suit the shape your foldable is in.</p>
+        </div>
+        <div class="forms-grid">
+          <article class="fm fm-cover"><div class="fm-fig" role="img" aria-label="Illustration of a foldable phone, folded shut. The tall, narrow cover screen shows the Mac's screen and a small trackpad."><div class="fm-in" aria-hidden="true"><div class="fm-dev"><div class="fm-desk"><i class="fm-w1"></i><i class="fm-w2"></i></div><span class="fm-float"></span></div></div></div><p class="fm-tag">Folded</p><h3>Pull it out. Take a quick look.</h3><p>The cover screen shows your Mac's screen and a small trackpad. Check on progress with one hand.</p></article>
+          <article class="fm fm-open"><div class="fm-fig" role="img" aria-label="Illustration of a foldable phone, unfolded. The Mac's screen fills the whole inner display."><div class="fm-in" aria-hidden="true"><div class="fm-dev"><div class="fm-desk"><i class="fm-w1"></i><i class="fm-w2"></i></div><i class="fm-hinge"></i></div></div></div><p class="fm-tag">Unfolded</p><h3>Open it, and your Mac takes the shape of this screen.</h3><p>MOTHERSHIP adds a display to your Mac in the same shape as your unfolded screen, so text appears at its true size.</p></article>
+          <article class="fm fm-table"><div class="fm-fig" role="img" aria-label="Illustration of a foldable phone, half-folded on a desk. The top half shows the Mac's screen; the bottom half shows a trackpad and keyboard."><div class="fm-in" aria-hidden="true"><div class="fm-top"><div class="fm-desk"><i class="fm-w1"></i><i class="fm-w2"></i></div></div><div class="fm-bot"><div class="fm-ctl"><span class="fm-pad"></span><span class="fm-keys"><i></i><i></i><i></i></span></div></div></div></div><p class="fm-tag">Half-folded on a desk</p><h3>Set it down, and it's a tiny laptop.</h3><p>The top half becomes your Mac's screen; the bottom half becomes shortcuts and a trackpad. Switch to a keyboard whenever you like.</p></article>
+          <article class="fm fm-book"><div class="fm-fig" role="img" aria-label="Illustration of a foldable phone held like a book. The left half shows the Mac's screen; the right half shows a trackpad and keyboard."><div class="fm-in" aria-hidden="true"><div class="fm-left"><div class="fm-desk"><i class="fm-w1"></i><i class="fm-w2"></i></div></div><div class="fm-right"><div class="fm-ctl"><span class="fm-pad"></span><span class="fm-keys"><i></i><i></i><i></i></span></div></div></div></div><p class="fm-tag">Held like a book</p><h3>Read on one side. Work on the other.</h3><p>Your Mac's screen on the left, trackpad and keyboard on the right.</p></article>
+        </div>
+        <p class="note center">Illustrations only; actual screens may differ. Tested on the Galaxy Z Fold7.</p>
+      </div>
+    </section>
+
+        <!-- S3 3つの柱（いつも「くっきり見える → 指で動かす → 声で書く」の順番） -->
+    <section class="section promise" aria-labelledby="promise-title">
+      <div class="wrap">
+        <h2 class="section-title center" id="promise-title">See it. Touch it.<br class="sp"> Say it.</h2>
+        <div class="promise-grid">
+          <article class="card">
+            <span class="card-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="13" rx="2.5"/><path d="M8 21h8M12 17v4"/></svg></span>
+            <h3>See it clearly</h3>
+            <p>MOTHERSHIP gives your Mac a display shaped like your device. Portrait or landscape, it fits edge to edge, and even small text stays sharp.</p>
+            <a class="card-link" href="#features">Learn more<span aria-hidden="true"> →</span></a>
+          </article>
+          <article class="card">
+            <span class="card-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 11V5.5a1.5 1.5 0 0 1 3 0V11m0-1.5a1.5 1.5 0 0 1 3 0V11m0-.5a1.5 1.5 0 0 1 3 0V15a6 6 0 0 1-6 6h-.6a6 6 0 0 1-4.7-2.3L4 14.5a1.6 1.6 0 0 1 2.5-2L9 14.5"/></svg></span>
+            <h3>Control it by touch</h3>
+            <p>Tap where you'd click. Swipe up with three fingers to see every open window.</p>
+            <a class="card-link" href="#touch">Learn more<span aria-hidden="true"> →</span></a>
+          </article>
+          <article class="card">
+            <span class="card-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5.5 11a6.5 6.5 0 0 0 13 0M12 17.5V21M8.5 21h7"/></svg></span>
+            <h3>Write by voice</h3>
+            <p>Just talk, and your words land on your Mac (works with Aqua Voice). The keyboard stays put away, and the whole screen stays yours.</p>
+            <a class="card-link" href="#voice">Learn more<span aria-hidden="true"> →</span></a>
+          </article>
+        </div>
+        <ul class="promise-band">
+          <li>One-time purchase, no subscription</li>
+          <li>No account needed</li>
+          <li>A direct link between your Mac and your device</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- S4 場面の流れ -->
+    <section class="section flow" aria-labelledby="flow-title">
+      <div class="wrap">
+        <div class="section-head center">
+          <h2 class="section-title" id="flow-title">Hand it off to your AI. Head out.</h2>
+          <p class="section-lead">Your Mac keeps working at home. <span class="nb">All you take with you is your phone.</span></p>
+        </div>
+
+        <!-- 場面の流れの図（2026-11-21）。下の 4 つの手順と同じ時計で動く（16 秒で 1 周）。CSS だけ -->
+        <div class="flow-demo" role="img" aria-label="Illustration of handing work to an AI and heading out. At home, you ask the AI on your Mac to put together a report, set the Mac to stay awake, and leave. While you're out, you open your phone, see your Mac's screen, and notice the AI is waiting for confirmation. You tap Allow, then scroll to check the result. You hold the mic button on your phone and say, “Highlight the month with the highest sales.” The words land in the input field on the Mac, and the tallest bar in the chart is highlighted.">
+          <div class="fd-fig" aria-hidden="true">
+            <div class="fd-in">
+              <span class="fd-place fd-home">Home</span>
+              <span class="fd-place fd-away">Away</span>
+              <div class="fd-mac">
+                <div class="fd-scr">
+                  <div class="fd-mbar"><i></i><b></b><b></b><span class="fd-awake">Keep awake<u></u></span></div>
+                  <div class="fd-ui">
+                    <div class="fd-ai">
+                      <b>AI Assistant</b>
+                      <div class="fd-log"><div class="fd-logi">
+                        <p class="fd-me fd-me1">Put last month's sales into a report.</p>
+                        <div class="fd-work"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+                        <p class="fd-done">✓ Report ready</p>
+                        <p class="fd-me fd-me2">Highlight the month with the highest sales.</p>
+                      </div></div>
+                      <div class="fd-ask"><span>OK to continue?</span><em>Allow</em></div>
+                      <div class="fd-input"><span class="fd-hint">Type your next request</span><span class="fd-t fd-t1">Put last month's sales into a report.</span><span class="fd-t fd-t2">Highlight the month with the highest sales.</span></div>
+                    </div>
+                    <div class="fd-rep"><b><i></i><i></i><i></i></b><p>Sales Report</p><em><i></i><i></i><i></i><i></i><i></i></em></div>
+                  </div>
+                </div>
+                <i class="fd-stand"></i>
+              </div>
+              <div class="fd-link"><i></i></div>
+              <div class="fd-ph">
+                <div class="fd-ui">
+                  <div class="fd-ai">
+                    <b>AI Assistant</b>
+                    <div class="fd-log"><div class="fd-logi">
+                      <p class="fd-me fd-me1">Put last month's sales into a report.</p>
+                      <div class="fd-work"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+                      <p class="fd-done">✓ Report ready</p>
+                      <p class="fd-me fd-me2">Highlight the month with the highest sales.</p>
+                    </div></div>
+                    <div class="fd-ask"><span>OK to continue?</span><em>Allow</em></div>
+                    <div class="fd-input"><span class="fd-hint">Type your next request</span><span class="fd-t fd-t2">Highlight the month with the highest sales.</span></div>
+                  </div>
+                </div>
+                <div class="fd-bar"><span class="fd-mic">🎤</span><i></i><i></i><i></i><i></i></div>
+              </div>
+              <span class="fd-f fd-tap"></span>
+              <span class="fd-f2"><i></i><i></i></span>
+              <span class="fd-f fd-press"></span>
+              <p class="fd-said">Highlight the month with the highest sales.</p>
+            </div>
+          </div>
+          <p class="fd-note">Illustration only; actual screens may differ.</p>
+        </div>
+
+        <ol class="flow-list">
+          <li><span class="step-n">1</span><h3>Before you leave, hand off the job</h3><p>Same Mac, same AI as always. A setting in MOTHERSHIP HOST keeps your Mac awake while you're gone.</p></li>
+          <li><span class="step-n">2</span><h3>While you're out, take a peek</h3><p>Open MOTHERSHIP and tap your Mac. Its screen appears in your hand, exactly as it is. One glance tells you whether the work is moving along or stuck.</p></li>
+          <li><span class="step-n">3</span><h3>Check it with your fingers</h3><p>Scroll through the results. Switch windows. Tap the confirm button. All by touch.</p></li>
+          <li><span class="step-n">4</span><h3>Ask for what's next, by voice</h3><p>Hold 🎤 and talk. Your words land in the input field on your Mac.</p></li>
+        </ol>
+        <p class="flow-end">Back home? Pick up right where you left off, on the big screen.</p>
+
+        <div class="say">
+          <h3 class="say-title">Things you might say</h3>
+          <ul class="say-list">
+            <li>“When the tests pass, open a pull request.”</li>
+            <li>“Highlight the month with the highest sales.”</li>
+            <li>“Draft a reply based on this.”</li>
+          </ul>
+        </div>
+
+        <aside class="callout">
+          <h3>Any AI. Just the way you use it.</h3>
+          <p>MOTHERSHIP shows your Mac's screen as it is and lets you control it. Terminal-based AI like Claude Code and Codex, the AI in your editor, the AI in your browser: they all work exactly as they do at your desk. There's nothing to configure on the AI side and no accounts to link.</p>
+          <p class="fine">MOTHERSHIP has no AI features of its own. It simply lets you run the AI you already use on your Mac.</p>
+        </aside>
+        <p class="note center">To connect from outside your home, you'll need to set up Tailscale. <a href="#how">See what to do before you head out</a></p>
+      </div>
+    </section>
+
+    <!-- 特長（S5 くっきり見える・S6 指で動かす） -->
+    <section class="section features" id="features" aria-labelledby="features-title">
+      <div class="wrap">
+        <div class="section-head center">
+          <p class="kicker">Features</p>
+          <h2 class="section-title" id="features-title">More than mirroring.<br class="sp"> Made for real work.</h2>
+          <p class="section-lead">We built MOTHERSHIP for using your Mac from afar, not just looking at it. Reading text on a small screen, controlling things by touch, writing by voice: we sweated the details on every one.</p>
+        </div>
+
+        <!-- S5 特長 1：くっきり見える -->
+        <article class="feature-lead">
+          <div class="feature-lead-copy">
+            <p class="pill pill-brand feature-tag">1&ensp;See it clearly</p>
+            <h3>Small screen.<br>Sharp text.</h3>
+            <p>Mirror a 27-inch monitor onto a phone, and the text is far too small to read. While you're connected, MOTHERSHIP adds a dedicated display to your Mac that matches the exact size and shape of your device. It fills your screen pixel for pixel, so tiny terminal text and the numbers in a table stay crisp.</p>
+            <ul class="ticks">
+              <li>Hold your device upright for a tall display, or sideways for a wide one. Either way, it fits edge to edge. In portrait, expand a window to read it at full width.</li>
+              <li>The moment the screen stops moving, it's re-sent in high quality. Text stays clean while you read what your AI wrote.</li>
+              <li>Lots of fine print? Switch the picture quality to Text Priority.</li>
+              <li>Pinch to zoom, and the area you're looking at is recaptured at a higher resolution.</li>
+              <li>You can also mirror the monitor you normally use, just as it is.</li>
+            </ul>
+            <p class="fine">The dedicated display disappears automatically when you disconnect. Rotating your device doesn't rearrange your Mac's windows (that's standard Mac behavior). When windows overlap, swipe up with three fingers to see them all and pick one.</p>
+          </div>
+          <!-- 図：HERO のアニメと同じ流れ（横向き → 縦に回す → 窓が重なる → レポートを横幅いっぱいに）を、左右で同時に動かして比べる。CSS だけで動く -->
+          <div class="fit-diagram" role="img" aria-label="Comparison on an unfolded foldable phone. Mirroring a large display as it is leaves blank bars above and below, shrinks everything, and makes the text unreadable. With MOTHERSHIP, the Mac's screen takes the same shape as the unfolded display, and text stays large. Expanding the report window fills the whole screen.">
+            <div class="fit-col">
+              <div class="fit-stage" aria-hidden="true">
+                <div class="fit-dev">
+                  <div class="fit-mac fit-mac-shrunk">
+                    <i class="fit-mbar"></i>
+                    <div class="fit-win fw-1"><b></b><span></span><span></span><span></span><span></span></div>
+                    <div class="fit-win fw-2"><b></b><span></span><span></span><span></span></div>
+                    <div class="fit-win fw-3"><b></b><span></span><span></span><span></span><span></span></div>
+                  </div>
+                </div>
+              </div>
+              <p><b>Plain mirroring</b>The big display shrinks until text is unreadable, with blank bars above and below</p>
+            </div>
+            <div class="fit-arrow" aria-hidden="true">→</div>
+            <div class="fit-col">
+              <div class="fit-stage" aria-hidden="true">
+                <div class="fit-dev is-good">
+                  <div class="fit-mac fit-mac-native">
+                    <i class="fit-mbar"></i>
+                    <div class="fit-win fit-ai"><b></b><span></span><span></span><span></span></div>
+                    <div class="fit-win fit-out"><b></b><em><i></i><i></i><i></i><i></i></em></div>
+                  </div>
+                </div>
+              </div>
+              <p><b>With MOTHERSHIP</b>A display shaped like your unfolded screen. Expand a window to fill it</p>
+            </div>
+          </div>
+        </article>
+
+        <!-- S6 特長 2：指で動かす -->
+        <div class="feature-grid">
+          <article class="feature feature-wide" id="touch">
+            <div>
+              <p class="pill pill-brand feature-tag">2&ensp;Control it by touch</p>
+              <h3>No mouse? Run your Mac with your fingers.</h3>
+              <p>With Direct Touch, wherever you tap is where you click. It feels like touching your Mac's screen itself. When your AI asks for confirmation, just tap the button.</p>
+              <p class="fine">There's a keyboard, too (see “A proper Mac keyboard, too.” below).</p>
+            </div>
+            <ul class="ticks small">
+              <li>Tap to click, touch and hold to right-click, scroll with two fingers.</li>
+              <li>Swipe up with three fingers for Mission Control (all your open windows). Swipe down for the current app's windows. Swipe left or right to switch desktops (on Android, in trackpad mode).</li>
+              <li>Pick, expand, and close windows. You can tap the buttons in a window's top-left corner directly.</li>
+              <li>For precise targets, switch to a mode that turns the whole screen into a trackpad.</li>
+            </ul>
+            <!-- 図：指の操作を 4 つ、順に見せる（12 秒で 1 周。CSS だけで動く）。タップで「許可」→ 2本指でスクロール → 3本指で上にスワイプして窓の一覧、レポートを選ぶ → 緑のボタンで横幅いっぱい -->
+            <div class="touch-demo" role="img" aria-label="Illustration of controlling a Mac by touch. Tap the AI's confirmation button to allow it. Scroll with two fingers. Swipe up with three fingers to show all open windows, then choose the report. Tap the window's green button to expand it to fill the screen.">
+              <div class="td-stage" aria-hidden="true">
+                <div class="td-dev">
+                  <div class="td-mac">
+                    <i class="td-mbar"></i>
+                    <div class="td-win td-ai">
+                      <b></b>
+                      <div class="td-view"><div class="td-scroll"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div></div>
+                      <div class="td-ask"><span></span><em>Allow</em></div>
+                    </div>
+                    <div class="td-win td-out">
+                      <b><i></i><i></i><i></i></b>
+                      <p class="td-name">Sales Report</p>
+                      <div class="td-bars"><i></i><i></i><i></i><i></i><i></i></div>
+                    </div>
+                    <i class="td-dim"></i>
+                    <span class="td-f td-tap1"></span>
+                    <span class="td-f2"><i></i><i></i></span>
+                    <span class="td-f3"><i></i><i></i><i></i></span>
+                    <span class="td-f td-tap2"></span>
+                    <span class="td-f td-tap3"></span>
+                  </div>
+                </div>
+              </div>
+              <ol class="td-steps" aria-hidden="true">
+                <li><b>Tap</b>Tap the AI's confirmation button</li>
+                <li><b>Two fingers</b>Slide up to scroll</li>
+                <li><b>Three fingers</b>Swipe up for all windows, then pick the report</li>
+                <li><b>Expand</b>Tap the green button to fill the screen</li>
+              </ol>
+              <p class="td-note">Illustration only; actual screens may differ.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- S7 特長 3：声で書く（Aqua Voice 連携） -->
+    <section class="section voice" id="voice" aria-labelledby="voice-title">
+      <div class="wrap voice-grid">
+        <div class="voice-copy">
+          <p class="kicker light">3&ensp;Write by voice</p>
+          <h2 class="section-title" id="voice-title"><span class="nb">You talk.</span> <span class="nb">It types.</span><br><span class="nb">The keyboard</span> <span class="nb">stays out of the way.</span></h2>
+          <p class="section-lead">Instructions for an AI are full sentences: too long to type comfortably on a small on-screen keyboard, and bringing up that keyboard hides your screen. MOTHERSHIP works with Aqua Voice, a dictation app for Mac. Speak to the device in your hand, your voice reaches your Mac, and the words appear in whatever app is open. Prompts for your AI, email replies, quick notes: all by voice.</p>
+          <ol class="voice-steps">
+            <li><b>Hold</b><span>Your voice is sent only while you're holding the 🎤 button.</span></li>
+            <li><b>Speak</b><span>Talk into your device's microphone the way you normally would.</span></li>
+            <li><b>Release</b><span>Aqua Voice on your Mac turns it into text and types it at the cursor.</span></li>
+          </ol>
+        </div>
+
+        <!-- 図 1：押す → 話す → 離す → Enter で送る（12 秒で 1 周。左の「押す・話す・離す」の枠も、同じ時計で明るくなる） -->
+        <div class="voice-visual" aria-hidden="true">
+          <div class="voice-card">
+            <div class="voice-wave"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+            <p class="voice-said"><span>“When the tests pass,</span> <span>open a</span> <span>pull request.”</span></p>
+            <div class="voice-arrow">↓</div>
+            <p class="voice-typed"><span class="vt-start"><span class="caret"></span></span><span class="vt-text">When the tests pass, open a pull request.</span><span class="vt-end"><span class="caret"></span></span><span class="vt-sent">⏎ Sent with Enter</span></p>
+            <div class="voice-buttons"><span class="vb vb-mic">🎤</span><span class="vb">⌫</span><span class="vb vb-enter">⏎</span><span class="vb">⇥</span><span class="vb"><small>Copy</small></span><span class="vb"><small>Paste</small></span></div>
+            <p class="voice-phase"><span><b>1</b>Hold</span><span><b>2</b>Speak</span><span><b>3</b>Release, and the text lands on your Mac</span><span><b>4</b>Send with Enter. No keyboard needed</span></p>
+          </div>
+          <p class="voice-visual-note">Illustration</p>
+        </div>
+
+        <div class="voice-more">
+          <ul class="ticks small on-dark">
+            <li>The voice bar holds up to six buttons. Out of the box: 🎤, Delete, Enter, Tab, Copy, and Paste. Talk, then hit Enter to send, all without ever bringing up the keyboard.</li>
+            <li>Swap the bar's buttons for the keys you use most (Esc, arrows, Undo, Mission Control, and more). Drag the bar wherever you like.</li>
+            <li>Want a do-over? Keep holding, slide your finger off the button, and let go to cancel.</li>
+            <li>With an external keyboard, you can make any key your push-to-talk key.</li>
+            <li>Available on iPhone, iPad, and Android.</li>
+          </ul>
+          <!-- 図 3：バーの小わざ（上の箇条書きの 2・3 番目を絵にしたもの） -->
+          <div class="voice-minis" aria-hidden="true">
+            <div class="vm vm-cancel">
+              <div class="vm-fig"><div class="vm-in">
+                <span class="vm-field"><span class="caret"></span></span>
+                <span class="vm-tag">Canceled</span>
+                <div class="vm-bar"><span class="vk vk-mic">🎤</span><span class="vk">⌫</span><span class="vk">⏎</span></div>
+              </div></div>
+              <p><b>Slide off to cancel</b>Keep holding and slide away</p>
+            </div>
+            <div class="vm vm-move">
+              <div class="vm-fig"><div class="vm-in">
+                <span class="vm-win"><b></b><i></i><i></i><i></i><i></i></span>
+                <div class="vm-drag"><div class="vm-bar"><span class="vm-grip">≡</span><span class="vk vk-mic">🎤</span><span class="vk">⌫</span><span class="vk">⏎</span></div></div>
+              </div></div>
+              <p><b>Put the bar anywhere</b>In the way? Drag it aside</p>
+            </div>
+            <div class="vm vm-swap">
+              <div class="vm-fig"><div class="vm-in">
+                <div class="vm-tray"><span>esc</span><span>←</span><span>→</span><span>⌃↑</span></div>
+                <div class="vm-bar"><span class="vk vk-mic">🎤</span><span class="vk vk-flip"><em>⇥</em><em><small>esc</small></em></span><span class="vk vk-flip"><em><small>Copy</small></em><em>←</em></span><span class="vk vk-flip"><em><small>Paste</small></em><em>→</em></span></div>
+              </div></div>
+              <p><b>Swap the buttons</b>Keep your go-to keys on the bar</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 図 2：キーボードで打つと／声で書くと（8 秒で 1 周） -->
+        <div class="voice-compare-wrap">
+          <div class="voice-compare" role="img" aria-label="Comparison of typing on a keyboard and writing by voice. Bringing up the keyboard hides the bottom half of the screen, covering the report, and text goes in a little at a time. Writing by voice keeps the whole screen visible, and the spoken sentence goes in all at once.">
+            <div class="vc-col" aria-hidden="true">
+              <div class="vc-phone">
+                <div class="vc-mac">
+                  <div class="vc-win vc-ai"><b></b><span></span><span></span><span></span><div class="vc-prompt"><i></i></div></div>
+                  <div class="vc-win vc-out"><b></b><em><i></i><i></i><i></i><i></i></em></div>
+                </div>
+                <div class="vc-kb"><i></i><i></i><i></i><i></i><span class="vc-tap"></span></div>
+              </div>
+              <p><b>Typing on a keyboard</b>Half the screen is hidden.<br>Long text is slow going</p>
+            </div>
+            <div class="vc-arrow" aria-hidden="true">→</div>
+            <div class="vc-col" aria-hidden="true">
+              <div class="vc-phone is-good">
+                <div class="vc-mac">
+                  <div class="vc-win vc-ai"><b></b><span></span><span></span><span></span><div class="vc-prompt"><i></i><span class="vc-ok">✓</span></div></div>
+                  <div class="vc-win vc-out"><b></b><em><i></i><i></i><i></i><i></i></em></div>
+                </div>
+                <div class="vc-bar"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+              </div>
+              <p><b>Writing by voice</b>The screen stays open.<br>Long text? Just say it</p>
+            </div>
+          </div>
+          <p class="voice-visual-note" aria-hidden="true">Illustration</p>
+        </div>
+
+        <aside class="voice-need">
+          <h3>What you'll need</h3>
+          <p class="vn-lead">Writing by voice takes three bits of setup on your Mac. You only do each one once.</p>
+          <!-- 準備の 3 つ（2026-11-21）。9 秒で 1 周、カードが順に明るくなり、図の中で「入れる」「選ぶ」が進む。CSS だけ -->
+          <ol class="vn-steps">
+            <li class="vn-s vn-s1">
+              <div class="vn-fig" aria-hidden="true">
+                <div class="vn-app"><i class="vn-ico">A</i><b>Aqua Voice</b><u class="vn-prog"><i></i></u></div>
+                <span class="vn-done">✓ Installed</span>
+              </div>
+              <h4><span class="vn-n">1</span>Install Aqua Voice</h4>
+              <p>A dictation app that turns your voice into text. It's made by a different company than MOTHERSHIP.</p>
+            </li>
+            <li class="vn-s vn-s2">
+              <div class="vn-fig" aria-hidden="true">
+                <div class="vn-app"><i class="vn-ico">🎤</i><b>BlackHole 2ch</b><u class="vn-prog"><i></i></u></div>
+                <span class="vn-done">✓ Installed</span>
+              </div>
+              <h4><span class="vn-n">2</span>Install BlackHole 2ch</h4>
+              <p>A virtual microphone that hands your voice to Aqua Voice. It's free.</p>
+            </li>
+            <li class="vn-s vn-s3">
+              <div class="vn-fig" aria-hidden="true">
+                <div class="vn-set"><p>Aqua Voice settings</p><div class="vn-row"><span>Mic</span><span class="vn-sel"><em class="vn-old">Built-in mic</em><em class="vn-new">BlackHole 2ch</em><i>▾</i></span></div></div>
+                <span class="vn-tap"></span>
+                <span class="vn-done">✓ Selected</span>
+              </div>
+              <h4><span class="vn-n">3</span>Set the mic to BlackHole 2ch</h4>
+              <p>In Aqua Voice's settings, choose which microphone it listens to.</p>
+            </li>
+          </ol>
+          <p class="voice-need-sub">Transcription accuracy depends on Aqua Voice (Aqua Voice is not included with MOTHERSHIP). For step-by-step instructions, see <a href="help.html#voice">Help</a>.</p>
+          <!-- 図 4：声の通り道（6 秒で 1 周。左から順に明るくなる） -->
+          <div class="voice-flow" role="img" aria-label="Diagram of the path your voice takes. What you say into the device in your hand reaches MOTHERSHIP HOST on your Mac. MOTHERSHIP HOST feeds that audio into BlackHole 2ch, a virtual microphone. Aqua Voice listens to BlackHole 2ch, turns the audio into text, and types it at the cursor in the open app. The two things to install on your Mac are BlackHole 2ch and Aqua Voice.">
+            <p class="vf-title" aria-hidden="true">How it works: the path your voice takes</p>
+            <div class="vf-row" aria-hidden="true">
+              <div class="vf-node vf-n1"><b>Your device</b><span>Sends your voice while you hold 🎤</span></div>
+              <i class="vf-link vf-l1"></i>
+              <div class="vf-mac">
+                <p>On your Mac</p>
+                <div class="vf-node vf-n2"><b>MOTHERSHIP HOST</b><span>Receives the audio and passes it on</span></div>
+                <i class="vf-link vf-l2"></i>
+                <div class="vf-node vf-n3 is-need"><em>Install</em><b>BlackHole 2ch</b><span>A virtual mic that hands off the audio</span></div>
+                <i class="vf-link vf-l3"></i>
+                <div class="vf-node vf-n4 is-need"><em>Install</em><b>Aqua Voice</b><span>Turns voice into text</span></div>
+                <i class="vf-link vf-l4"></i>
+                <div class="vf-node vf-n5"><b>The open app</b><span>Text appears at the cursor</span></div>
+              </div>
+            </div>
+          </div>
+          <p class="voice-need-sub">Not using Aqua Voice? You can still enter text with the in-app keyboard or your phone's own keyboard.</p>
+        </aside>
+      </div>
+    </section>
+
+    <!-- S8 特長 4：任せたままにできる -->
+    <section class="section stay" aria-labelledby="stay-title">
+      <div class="wrap">
+        <article class="feature feature-wide">
+          <div>
+            <p class="pill pill-brand feature-tag">Leave it running</p>
+            <h3 id="stay-title">Your Mac stays awake. If the connection drops, it's right back.</h3>
+            <p>When your Mac goes to sleep, the work you handed off stops, and so do connections from outside. MOTHERSHIP HOST has a setting that keeps your Mac awake while it waits. From your device, you connect the same way whether you're at home or out.</p>
+            <p class="fine">To connect from outside your home, install the Tailscale app on both your Mac and your device and sign in to the same account on each. Mac laptops may go to sleep when the lid is closed.</p>
+          </div>
+          <ul class="ticks small">
+            <li>In MOTHERSHIP HOST, turn on “Keep Mac awake while waiting” and “Open at Login.”</li>
+            <li>On your home Wi-Fi, MOTHERSHIP finds your registered Mac and connects automatically.</li>
+            <li>Away from home, you connect through Tailscale, a VPN service that's free for personal use. No router setup required.</li>
+            <li>If you switch from Wi-Fi to cellular, it reconnects on its own.</li>
+            <li>While the screen is still, almost no data is sent. Data usage adapts automatically to your connection.</li>
+            <li>Three picture-quality modes: Balanced (up to 60 fps), Text Priority, and Smoothness Priority.</li>
+            <li>After a period of inactivity, the connection closes automatically (30 minutes by default).</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <!-- S9 比べる：ふつうの画面共有とのちがい（ほかの製品の名前は出さない） -->
+    <section class="section compare" aria-labelledby="compare-title">
+      <div class="wrap">
+        <div class="section-head center">
+          <h2 class="section-title" id="compare-title">Don't shrink your Mac.<br class="sp"> Give it a display made for this screen.</h2>
+          <p class="section-lead">Ordinary screen sharing shrinks your Mac's monitor to fit. MOTHERSHIP adds one more display to your Mac, shaped just like the screen in your hand. Text looks the size it does when you're sitting at your Mac.</p>
+        </div>
+        <table class="compare-table">
+          <thead>
+            <tr><td></td><th scope="col">Plain mirroring</th><th scope="col" class="is-ours">With MOTHERSHIP</th></tr>
+          </thead>
+          <tbody>
+            <tr><th scope="row">Screen shape</th><td>Keeps the shape of your Mac's monitor. On a phone, that means blank bars and everything shown small</td><td class="is-ours">Adds a dedicated display in the shape of your device. It fills the whole screen</td></tr>
+            <tr><th scope="row">Text</th><td>Shrinks. You have to zoom in to read it</td><td class="is-ours">Shown pixel for pixel, so it's readable as it is</td></tr>
+            <tr><th scope="row">When you rotate</th><td>The screen shape doesn't change</td><td class="is-ours">Switches between tall and wide</td></tr>
+            <tr><th scope="row">Touch control</th><td>Buttons show up tiny and are hard to hit</td><td class="is-ours">Everything shows up bigger and is easier to tap. Three-finger swipes work, too</td></tr>
+            <tr><th scope="row">Entering text</th><td>You type on the on-screen keyboard, which hides the screen while it's up</td><td class="is-ours">Write by voice (works with Aqua Voice). There's a keyboard, too</td></tr>
+          </tbody>
+        </table>
+        <div class="compare-notes">
+          <div>
+            <h3>About MOTHERSHIP</h3>
+            <ul class="ticks small">
+              <li>Pay once. There's no subscription.</li>
+              <li>No account to create.</li>
+              <li>Video and input travel directly between your Mac and your device. They never pass through MOTHERSHIP servers.</li>
+            </ul>
+          </div>
+          <div>
+            <h3>What it's not for</h3>
+            <ul class="plain-list">
+              <li>Fast-action games.</li>
+              <li>Controlling Windows or Linux PCs (MOTHERSHIP controls Macs only).</li>
+              <li>Several people using the same Mac at once (only one device can connect at a time).</li>
+            </ul>
+          </div>
+        </div>
+        <p class="note center">With MOTHERSHIP, you can also mirror the monitor you normally use, just as it is.</p>
+      </div>
+    </section>
+
+    <!-- S10 安心・S11 そのほかの特長 -->
+    <section class="section others" aria-labelledby="others-title">
+      <div class="wrap">
+        <!-- S10 安心 -->
+        <article class="feature feature-wide">
+          <div>
+            <h3>Keep private screens private.</h3>
+            <p>While you're connected from somewhere else, the screen of your Mac at home is in plain view of anyone nearby. MOTHERSHIP can black out the Mac's own screen and show it only on your device.</p>
+          </div>
+          <ul class="ticks small">
+            <li>When you connect from outside your home, the screen is hidden automatically. If it was hidden, your Mac locks when you disconnect.</li>
+            <li>Everything is encrypted (TLS 1.3 and more). Video and input travel directly between your Mac and your device, never through MOTHERSHIP servers.</li>
+            <li>Pair with a QR code. Only devices you've registered can connect, and each device's key can't be extracted from the device's secure hardware.</li>
+            <li>Lock the app behind Face ID, Touch ID, or your fingerprint.</li>
+            <li>Your Mac notifies you whenever a device connects or disconnects.</li>
+            <li>No router setup (port forwarding) needed.</li>
+          </ul>
+          <!-- 安心の図（2026-11-21）。12 秒で 1 周：外からつなぐ → Mac の画面は黒く隠れ、手もとにだけ映る → 切断すると Mac はロック。CSS だけ -->
+          <div class="shield-demo" role="img" aria-label="Illustration of keeping a private screen private. Someone is near the Mac at home. When you connect from your phone while you're out, the Mac's screen goes black, so the person nearby can't see it. The screen appears only on your phone, where you can keep working. When you disconnect, the Mac locks.">
+            <div class="sd-fig" aria-hidden="true">
+              <div class="sd-in">
+                <span class="sd-place sd-home">Home</span>
+                <span class="sd-place sd-away">Away</span>
+                <div class="sd-mac">
+                  <div class="sd-scr">
+                    <div class="sd-ui">
+                      <div class="sd-w sd-mail"><b></b><p>Quote (Confidential)</p><i></i><i></i><i></i><i></i></div>
+                      <div class="sd-w sd-rep"><b></b><p>Sales Report</p><em><i></i><i></i><i></i><i></i></em></div>
+                    </div>
+                    <div class="sd-shield"><span>Screen hidden</span></div>
+                    <div class="sd-lock"><i class="sd-avatar"></i><span class="sd-pass">Password</span><small>🔒 Locked</small></div>
+                  </div>
+                  <i class="sd-stand"></i>
+                </div>
+                <div class="sd-person"><i class="sd-head"></i><i class="sd-body"></i><span class="sd-see">👀</span><span class="sd-nope">?</span></div>
+                <div class="sd-link"><i></i><span>🔒 Encrypted, direct</span></div>
+                <div class="sd-ph">
+                  <p class="sd-ph-top"><i></i>Connected</p>
+                  <div class="sd-ui">
+                    <div class="sd-w sd-mail"><b></b><p>Quote (Confidential)</p><i></i><i></i><i></i><i></i></div>
+                    <div class="sd-w sd-rep"><b></b><p>Sales Report</p><em><i></i><i></i><i></i><i></i></em></div>
+                  </div>
+                  <p class="sd-bye">Disconnected</p>
+                </div>
+              </div>
+            </div>
+            <ol class="sd-steps" aria-hidden="true">
+              <li><b>Connect from outside</b>From your phone to your Mac at home</li>
+              <li><b>Hidden automatically</b>The Mac's screen stays black. Only you can see it</li>
+              <li><b>Locked on disconnect</b>When you disconnect, your Mac locks</li>
+            </ol>
+            <p class="sd-note">Illustration only; actual screens may differ.</p>
+          </div>
+        </article>
+
+        <!-- S11 そのほか -->
+        <div class="section-head center others-head">
+          <h2 class="section-title" id="others-title">Your Mac,<br class="sp"> the way you always use it.</h2>
+          <p class="section-lead">For the times when voice and touch aren't enough.</p>
+        </div>
+        <div class="feature-grid">
+          <article class="feature">
+            <!-- 図：キーボード（10 秒で 1 周：⌘C でコピー → ショートカットバーで「ペースト」→ バーのボタンを並べ替え） -->
+            <div class="of-fig of-kb" role="img" aria-label="Illustration of the Mac-layout keyboard. The in-app keyboard has ⌘ and ⌥ keys. Press ⌘ and C to copy, tap Paste on the shortcut bar, and the text is pasted on the Mac. The buttons on the shortcut bar can be rearranged by dragging.">
+              <div class="of-in" aria-hidden="true">
+                <div class="okb-dev">
+                  <div class="okb-desk"><div class="okb-win"><b></b><p class="okb-l1"><span>Sales report draft</span></p><p class="okb-l2">Sales report draft</p></div></div>
+                  <div class="okb-bar"><span class="okb-c okb-c1"><small>Copy</small></span><span class="okb-c okb-c2"><small>Paste</small></span><span class="okb-c okb-c3"><small>Switch</small></span><span class="okb-c okb-c4"><small>Undo</small></span></div>
+                  <div class="okb-keys">
+                    <p><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></p>
+                    <p><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></p>
+                    <p><i>⇧</i><i>Z</i><i>X</i><i class="okb-key-c">C</i><i>V</i><i>B</i><i>N</i><i>M</i><i>⇧</i></p>
+                    <p><i>fn</i><i>⌃</i><i>⌥</i><i class="okb-key-cmd">⌘</i><i class="okb-sp"></i><i>⌘</i><i>⌥</i></p>
+                  </div>
+                </div>
+                <span class="of-f okb-tap"></span>
+                <span class="of-f okb-drag"></span>
+                <span class="of-cap okb-cap okb-cap1">⌘C to copy</span>
+                <span class="of-cap okb-cap okb-cap2">One tap from the bar</span>
+                <span class="of-cap okb-cap okb-cap3">Arrange them your way</span>
+              </div>
+            </div>
+            <h3>A proper Mac keyboard, too.</h3>
+            <p>The app has its own Mac-layout keyboard, complete with ⌘ and ⌥.</p>
+            <ul class="ticks small">
+              <li>Common actions (Copy, Paste, switching apps, and more) are one tap away on the shortcut bar. Arrange them however you like.</li>
+              <li>External keyboards and mice just work (keyboard only on iPhone).</li>
+              <li>Key legends follow the input source you use on your Mac.</li>
+            </ul>
+          </article>
+
+          <article class="feature">
+            <!-- 図：画質を選ぶ（英語版だけのカード。日本語版の「日本語入力」のカードの代わり。12 秒で 1 周：バランス → 文字優先 → 滑らかさ優先） -->
+            <div class="of-fig of-pq" role="img" aria-label="Illustration of the three picture-quality modes. Balanced streams at up to 60 fps at full resolution. Text Priority streams at 30 fps, giving each frame more data so text is sharper. Smoothness Priority keeps 60 fps by lowering the resolution, so motion stays fluid.">
+              <div class="of-in" aria-hidden="true">
+                <div class="opq-dev">
+                  <div class="opq-win"><b></b>
+                    <p class="opq-txt"><span>$ summarize sales --month 10</span><span>Reading 12 files…</span><span>Writing report.md</span><span>Done in 42s ✓</span></p>
+                  </div>
+                  <div class="opq-track"><i class="opq-dot opq-smooth"></i><i class="opq-dot opq-step"></i></div>
+                  <p class="opq-fps"><span class="opq-f60">60 fps</span><span class="opq-f30">30 fps</span></p>
+                </div>
+                <div class="opq-panel">
+                  <i class="opq-sel"></i>
+                  <p class="opq-row"><b>Balanced</b><small>Up to 60 fps, full resolution</small></p>
+                  <p class="opq-row"><b>Text Priority</b><small>30 fps, sharper text</small></p>
+                  <p class="opq-row"><b>Smoothness Priority</b><small>60 fps, even on slow links</small></p>
+                  <p class="opq-meter"><small>Sharpness</small><span><i class="opq-m1"></i></span></p>
+                  <p class="opq-meter"><small>Smoothness</small><span><i class="opq-m2"></i></span></p>
+                </div>
+              </div>
+            </div>
+            <h3>Sharp text or smooth motion. Your call.</h3>
+            <p>Choose how your Mac's screen is streamed, to suit what you're doing.</p>
+            <ul class="ticks small">
+              <li>Text Priority runs at 30 fps, so every frame gets more data and code and documents stay crisp.</li>
+              <li>Smoothness Priority holds 60 fps, even on a slow connection, by lowering the resolution.</li>
+              <li>Balanced gives you up to 60 fps at full resolution. In every mode, data usage adapts to your connection.</li>
+            </ul>
+          </article>
+
+          <article class="feature">
+            <!-- 図：コピー・ファイル・音（12 秒で 1 周：スマホでコピー → Macにペースト／Macのファイル → スマホへ／Macの音 → スマホで聞く） -->
+            <div class="of-fig of-sh" role="img" aria-label="Illustration of copying, file transfer, and audio. Text copied on the phone is pasted on the Mac. A file on the Mac is sent to the phone. Audio playing on the Mac is heard on the phone.">
+              <div class="of-in" aria-hidden="true">
+                <div class="osh-mac">
+                  <div class="osh-scr">
+                    <i class="osh-menu"></i>
+                    <div class="osh-memo"><b></b><p class="osh-paste">Meeting at 3 PM</p></div>
+                    <div class="osh-file"><i></i><small>report.pdf</small></div>
+                    <div class="osh-play"><b></b><p><i class="osh-tri"></i><span class="osh-bar"><i></i></span></p></div>
+                  </div>
+                  <i class="osh-stand"></i>
+                </div>
+                <div class="osh-ph">
+                  <span class="osh-pop"><small>Copy</small></span>
+                  <p class="osh-msg"><span>Meeting at 3 PM</span></p>
+                  <p class="osh-got"><i></i><small>report.pdf</small><b>✓</b></p>
+                  <p class="osh-spk">🔊</p>
+                </div>
+                <span class="osh-fly-t"><small>Meeting at 3 PM</small></span>
+                <span class="osh-fly-f"><i></i></span>
+                <span class="osh-note osh-n1">♪</span><span class="osh-note osh-n2">♫</span><span class="osh-note osh-n3">♪</span>
+                <span class="of-cap osh-cap osh-cap1">Copy here, paste there</span>
+                <span class="of-cap osh-cap osh-cap2">Send and receive files</span>
+                <span class="of-cap osh-cap osh-cap3">Hear your Mac's audio</span>
+              </div>
+            </div>
+            <h3>Copy, files, and sound, too.</h3>
+            <ul class="ticks small">
+              <li>Copy on one, paste on the other. Text and images both come along.</li>
+              <li>Send files from your device to your Mac, or from your Mac to your device. On iPad, just drag and drop onto the Mac's screen.</li>
+              <li>Listen to your Mac's audio on the device in your hand (turn it on in Settings).</li>
+            </ul>
+          </article>
+
+          <article class="feature">
+            <!-- 図：Macの切り替え（9 秒で 1 周：一覧の Mac をタップすると、映る画面が替わる） -->
+            <div class="of-fig of-mc" role="img" aria-label="Illustration of switching between Macs. The app lists your registered Macs. Tapping Mac mini (Home), MacBook Pro (Office), and iMac (Studio) in turn changes which screen is shown. You can register as many Macs as you like; one purchase covers up to three Macs.">
+              <div class="of-in" aria-hidden="true">
+                <div class="omc-ph">
+                  <p class="omc-title">Your Macs</p>
+                  <i class="omc-sel"></i>
+                  <p class="omc-row omc-r1"><i class="omc-ico"></i><span><b>Mac mini</b><small>Home</small></span></p>
+                  <p class="omc-row omc-r2"><i class="omc-ico"></i><span><b>MacBook Pro</b><small>Office</small></span></p>
+                  <p class="omc-row omc-r3"><i class="omc-ico"></i><span><b>iMac</b><small>Studio</small></span></p>
+                  <p class="omc-add"><small>+ Add a Mac</small></p>
+                </div>
+                <div class="omc-view">
+                  <i class="omc-w omc-w1"></i><i class="omc-w omc-w2"></i><i class="omc-w omc-w3"></i>
+                  <div class="omc-win"><b></b><i></i><i></i><i></i></div>
+                  <span class="omc-name omc-n1">Mac mini (Home)</span><span class="omc-name omc-n2">MacBook Pro (Office)</span><span class="omc-name omc-n3">iMac (Studio)</span>
+                  <p class="omc-conn">Connecting…</p>
+                </div>
+                <span class="of-f omc-tap2"></span><span class="of-f omc-tap3"></span>
+                <div class="omc-txt"><p class="omc-cap">Register any number. Tap to switch</p><p class="omc-fine">One purchase covers up to 3 Macs</p></div>
+              </div>
+            </div>
+            <h3>Switch between Macs.</h3>
+            <p>Register as many Macs as you like and switch between them. One purchase covers up to three Macs.</p>
+          </article>
+
+          <article class="feature">
+            <!-- 図：MacBook から家の Mac へ（10 秒で 1 周：つなぐ → 重い書き出しは家の Mac が進める → 完了） -->
+            <div class="of-fig of-mb" role="img" aria-label="Illustration of using a Mac at home from a MacBook. On a MacBook away from home, opening MOTHERSHIP for Mac shows the screen of the Mac at home. The Mac at home handles a heavy export, and you check the result on the MacBook when it's done.">
+              <div class="of-in" aria-hidden="true">
+                <span class="omb-place omb-away">Away</span><span class="omb-place omb-homep">Home</span>
+                <div class="omb-book">
+                  <div class="omb-lid">
+                    <i class="omb-menu"></i>
+                    <div class="omb-mw"><b><small>MOTHERSHIP · Mac at home</small></b>
+                      <div class="omb-desk"><div class="omb-job"><small class="omb-t1">Exporting…</small><small class="omb-t2">✓ Done</small><span class="omb-prog"><i></i></span></div></div>
+                    </div>
+                  </div>
+                  <i class="omb-base"></i>
+                </div>
+                <div class="omb-link"><i></i></div>
+                <div class="omb-home">
+                  <div class="omb-mon"><i class="omb-menu"></i><div class="omb-job"><small class="omb-t1">Exporting…</small><small class="omb-t2">✓ Done</small><span class="omb-prog"><i></i></span></div></div>
+                  <i class="omb-stand"></i>
+                </div>
+                <div class="omb-mini"><small>Mac mini</small><span class="omb-cpu"><i></i><i></i><i></i><i></i><i></i></span></div>
+                <span class="of-cap omb-cap omb-cap1">Connect from your MacBook</span>
+                <span class="of-cap omb-cap omb-cap2">The Mac at home does the heavy lifting</span>
+                <span class="of-cap omb-cap omb-cap3">Check the result when it's done</span>
+              </div>
+            </div>
+            <h3>From your MacBook to your Mac at home.</h3>
+            <p>Carry only a light MacBook, and leave the heavy lifting to the Mac at home. MOTHERSHIP for Mac connects the same way.</p>
+          </article>
+
+          <article class="feature">
+            <!-- 図：折りたたみスマホ（10 秒で 1 周：折って机に置く → 下でなぞるとポインターが動く → キーを打つと上の画面に文字） -->
+            <div class="of-fig of-fd" role="img" aria-label="Illustration of a foldable phone. Half-folded on a desk, the top half shows the Mac's screen and the bottom half becomes a trackpad and keyboard. Sliding a finger on the bottom half moves the pointer, and typing puts text on the top half.">
+              <div class="of-in" aria-hidden="true">
+                <div class="ofd-top">
+                  <div class="ofd-mac"><i class="ofd-menu"></i><div class="ofd-win"><b></b><p><span class="ofd-typed">Got it.</span><i class="ofd-caret"></i></p></div><i class="ofd-ptr"></i></div>
+                </div>
+                <div class="ofd-bot">
+                  <div class="ofd-ctl">
+                    <div class="ofd-pad"><span class="of-f ofd-finger"></span></div>
+                    <div class="ofd-keys">
+                      <p><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></p>
+                      <p><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></p>
+                      <p><i></i><i></i><i></i><i class="ofd-sp"></i><i></i><i></i><i></i></p>
+                    </div>
+                  </div>
+                </div>
+                <span class="of-cap ofd-cap ofd-cap1">Half-fold it and set it down</span>
+                <span class="of-cap ofd-cap ofd-cap2">Slide below to move the pointer</span>
+                <span class="of-cap ofd-cap ofd-cap3">Type below, and text appears up top</span>
+              </div>
+            </div>
+            <h3>Your foldable becomes a tiny Mac.</h3>
+            <p>Half-fold it on a desk, and the top half becomes your Mac's monitor while the bottom half becomes a trackpad and keyboard.</p>
+            <p class="fine">Tested on the Galaxy Z Fold7.</p>
+          </article>
+        </div>
+
+        <div class="no-ai">
+          <h3>For the days you're not using AI, too.</h3>
+          <ul class="plain-list">
+            <li>Need to check that one file while you're out? Open your Mac at home and take a quick look.</li>
+            <li>Want to use your desk Mac from the couch? Your iPad or phone becomes your Mac's screen.</li>
+            <li>Want to keep an eye on an export or a build after you've left your desk? You can.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+        <!-- S12 対応デバイス -->
+    <section class="section devices" aria-labelledby="devices-title">
+      <div class="wrap">
+        <h2 class="section-title center" id="devices-title">From iPhone, iPad, other Android phones,<br class="sp"> and your MacBook, too.</h2>
+        <div class="device-grid">
+          <article class="device is-host"><p class="role">The Mac you control</p><h3>MOTHERSHIP HOST</h3><p>macOS 14 or later<br><small>Mac with Apple silicon (Intel-based Macs aren't supported)</small></p></article>
+          <article class="device"><p class="role">Control it from</p><h3>Android</h3><p>MOTHERSHIP<br><small>Android 13 or later. Works on foldables</small></p></article>
+          <article class="device"><p class="role">Control it from</p><h3>iPhone and iPad</h3><p>MOTHERSHIP<br><small>iOS 27 / iPadOS 27 or later</small></p></article>
+          <article class="device"><p class="role">Control it from</p><h3>Another Mac</h3><p>MOTHERSHIP<br><small>macOS 15 or later. Mac with Apple silicon</small></p></article>
+        </div>
+        <p class="note center">MOTHERSHIP controls Macs only. It can't control Windows or Linux PCs.</p>
+      </div>
+    </section>
+
+    <!-- S13 使い方（2026-11-20 作り直し：3 つのステップを、続きものの動く図で見せる。14 秒で 1 周。細かい設定は書かず、ヘルプへのリンクにする） -->
+    <section class="section how" id="how" aria-labelledby="how-title">
+      <!-- 図で使い回す絵（ロゴの印と、QR コードふうの模様。模様は本物の QR コードではない） -->
+      <svg class="svg-defs" aria-hidden="true"><symbol id="hs-mark" viewBox="0 0 128 128"><path d="M60 28 22 86 49 80 60 91 60 75 48 70 60 54Z" fill="#fff"/><path d="M68 28 106 86 79 80 68 91 68 75 80 70 68 54Z" fill="#a8f8ff"/><path d="M64 86 72 98 64 105 56 98Z" fill="#fff"/></symbol><symbol id="hs-qr" viewBox="0 0 19 19"><path d="M0 0h7v1h-7zM8 0h2v1h-2zM12 0h7v1h-7zM0 1h1v1h-1zM6 1h1v1h-1zM8 1h1v1h-1zM10 1h1v1h-1zM12 1h1v1h-1zM18 1h1v1h-1zM0 2h1v1h-1zM2 2h3v1h-3zM6 2h1v1h-1zM8 2h1v1h-1zM10 2h1v1h-1zM12 2h1v1h-1zM14 2h3v1h-3zM18 2h1v1h-1zM0 3h1v1h-1zM2 3h3v1h-3zM6 3h1v1h-1zM8 3h3v1h-3zM12 3h1v1h-1zM14 3h3v1h-3zM18 3h1v1h-1zM0 4h1v1h-1zM2 4h3v1h-3zM6 4h1v1h-1zM8 4h1v1h-1zM10 4h1v1h-1zM12 4h1v1h-1zM14 4h3v1h-3zM18 4h1v1h-1zM0 5h1v1h-1zM6 5h1v1h-1zM8 5h1v1h-1zM12 5h1v1h-1zM18 5h1v1h-1zM0 6h7v1h-7zM9 6h1v1h-1zM12 6h7v1h-7zM8 7h1v1h-1zM10 7h1v1h-1zM0 8h3v1h-3zM4 8h1v1h-1zM7 8h1v1h-1zM9 8h3v1h-3zM13 8h2v1h-2zM16 8h2v1h-2zM1 9h1v1h-1zM6 9h1v1h-1zM8 9h2v1h-2zM11 9h1v1h-1zM13 9h1v1h-1zM18 9h1v1h-1zM3 10h1v1h-1zM8 10h1v1h-1zM13 10h2v1h-2zM16 10h1v1h-1zM18 10h1v1h-1zM8 11h2v1h-2zM11 11h3v1h-3zM15 11h2v1h-2zM0 12h7v1h-7zM10 12h3v1h-3zM15 12h4v1h-4zM0 13h1v1h-1zM6 13h1v1h-1zM10 13h4v1h-4zM0 14h1v1h-1zM2 14h3v1h-3zM6 14h1v1h-1zM9 14h1v1h-1zM14 14h3v1h-3zM18 14h1v1h-1zM0 15h1v1h-1zM2 15h3v1h-3zM6 15h1v1h-1zM8 15h10v1h-10zM0 16h1v1h-1zM2 16h3v1h-3zM6 16h1v1h-1zM9 16h5v1h-5zM18 16h1v1h-1zM0 17h1v1h-1zM6 17h1v1h-1zM8 17h3v1h-3zM12 17h2v1h-2zM16 17h1v1h-1zM18 17h1v1h-1zM0 18h7v1h-7zM12 18h3v1h-3zM18 18h1v1h-1z" fill="#14203a"/></symbol></svg>
+      <div class="wrap">
+        <div class="section-head center">
+          <p class="kicker">How it works</p>
+          <h2 class="section-title" id="how-title">Up and running<br class="sp"> in three steps.</h2>
+          <p class="section-lead">On your home Wi-Fi, these three steps are all it takes.</p>
+        </div>
+
+        <ol class="how-steps">
+          <li class="hs hs-1">
+            <div class="hs-fig" role="img" aria-label="Illustration: installing MOTHERSHIP HOST on the Mac puts an icon in the menu bar. Then the two permissions, Screen Recording and Accessibility, are turned on.">
+              <div class="hs-in" aria-hidden="true">
+                <div class="hs-lap">
+                  <div class="hs-scr">
+                    <div class="hs-mbar"><i></i><b></b><b></b><b></b><span class="hs-tray"><svg viewBox="0 0 128 128"><use href="#hs-mark"/></svg></span><u></u><u></u></div>
+                    <span class="hs-app"><svg viewBox="0 0 128 128"><use href="#hs-mark"/></svg></span>
+                    <div class="hs-perm"><p><span>Screen Recording</span><i class="hs-tg"></i></p><p><span>Accessibility</span><i class="hs-tg"></i></p></div>
+                    <svg class="hs-cur" viewBox="0 0 12 16"><path d="M1 1v12l3.2-2.8 2 4.6 2-.9-2-4.5H11z" fill="#14203a" stroke="#fff" stroke-width="1" stroke-linejoin="round"/></svg>
+                  </div>
+                  <div class="hs-base"></div>
+                </div>
+              </div>
+            </div>
+            <div class="hs-head"><span class="hs-n"><b>1</b><i>✓</i></span><h3>Install on your Mac</h3></div>
+            <p>Install MOTHERSHIP HOST and follow the prompts to turn on two permissions.</p>
+          </li>
+          <li class="hs hs-2">
+            <div class="hs-fig" role="img" aria-label="Illustration: the phone scans the QR code shown on the Mac with MOTHERSHIP to register.">
+              <div class="hs-in" aria-hidden="true">
+                <div class="hs-lap">
+                  <div class="hs-scr">
+                    <div class="hs-mbar"><i></i><b></b><b></b><b></b><span class="hs-tray"><svg viewBox="0 0 128 128"><use href="#hs-mark"/></svg></span><u></u><u></u></div>
+                    <div class="hs-qrcard"><b>Add Device</b><svg viewBox="0 0 19 19"><use href="#hs-qr"/></svg></div>
+                  </div>
+                  <div class="hs-base"></div>
+                </div>
+                <div class="hs-ph">
+                  <div class="hs-cam">
+                    <span class="hs-qrs"><svg viewBox="0 0 19 19"><use href="#hs-qr"/></svg></span>
+                    <span class="hs-find"><i></i><i></i><i></i><i></i></span>
+                    <span class="hs-scan"></span>
+                    <span class="hs-okb">✓</span>
+                    <em>Scan the QR code</em>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="hs-head"><span class="hs-n"><b>2</b><i>✓</i></span><h3>Scan the QR code</h3></div>
+            <p>Install MOTHERSHIP on your device and scan the QR code on your Mac.</p>
+          </li>
+          <li class="hs hs-3">
+            <div class="hs-fig" role="img" aria-label="Illustration: the registered Mac appears on the phone. Tapping Connect shows the Mac's screen on the phone.">
+              <div class="hs-in" aria-hidden="true">
+                <div class="hs-lap">
+                  <div class="hs-scr">
+                    <div class="hs-mbar"><i></i><b></b><b></b><b></b><span class="hs-tray"><svg viewBox="0 0 128 128"><use href="#hs-mark"/></svg></span><u></u><u></u></div>
+                    <span class="hs-w hs-w1"><b></b><i></i><i></i><i></i></span><span class="hs-w hs-w2"><b></b><em><i></i><i></i><i></i><i></i></em></span>
+                  </div>
+                  <div class="hs-base"></div>
+                </div>
+                <span class="hs-wifi"><i></i><i></i><i></i></span>
+                <div class="hs-ph">
+                  <div class="hs-list">
+                    <p>Your Macs</p>
+                    <span class="hs-search"><i></i><i></i><i></i></span>
+                    <div class="hs-row"><b>Mac mini</b><small>Mac at home</small><em>Connect</em></div>
+                  </div>
+                  <div class="hs-desk"><span class="hs-w hs-w1"><b></b><i></i><i></i><i></i></span><span class="hs-w hs-w2"><b></b><em><i></i><i></i><i></i><i></i></em></span></div>
+                </div>
+              </div>
+            </div>
+            <div class="hs-head"><span class="hs-n"><b>3</b><i>✓</i></span><h3>Connect</h3></div>
+            <p>Tap, and your Mac's screen is in your hand. On the same Wi-Fi, your Mac is found automatically.</p>
+          </li>
+        </ol>
+        <p class="how-note">Illustration only; actual screens may differ.</p>
+        <p class="how-more"><a class="btn btn-ghost" href="help.html">See Help for step-by-step instructions <span aria-hidden="true">→</span></a></p>
+
+        <aside class="how-prep" aria-labelledby="prep-title">
+          <div class="how-prep-head">
+            <h3 id="prep-title">Before you head out</h3>
+            <p>Using it away from home takes a little extra setup.</p>
+          </div>
+          <ul class="prep-list">
+            <li><a href="help.html#outside"><b>Connect from outside</b><span>Tailscale on your Mac and your device.</span><i>Details <span aria-hidden="true">→</span></i></a></li>
+            <li><a href="help.html#keep-awake"><b>Keep your Mac awake</b><span>Turn on the keep-awake setting.</span><i>Details <span aria-hidden="true">→</span></i></a></li>
+            <li><a href="help.html#voice"><b>Write by voice</b><span>Aqua Voice and BlackHole 2ch on your Mac.</span><i>Details <span aria-hidden="true">→</span></i></a></li>
+          </ul>
+        </aside>
+      </div>
+    </section>
+
+    <!-- S14 料金 -->
+    <section class="section pricing" id="pricing" aria-labelledby="pricing-title">
+      <div class="wrap pricing-grid">
+        <div>
+          <p class="kicker">Pricing</p>
+          <h2 class="section-title" id="pricing-title">Try everything<br>free for 14 days.</h2>
+          <p class="section-lead">The apps are free to download. For 14 days from the first time you connect to your Mac, every feature is yours with no limits. Like it? Pay once and keep it for good. There's no subscription.</p>
+        </div>
+        <div class="price-card">
+          <p class="price-label">One-time purchase</p>
+          <p class="price"><span>US$</span>19.99</p>
+          <p class="fine">Prices vary by country and region. The amount shown on the purchase screen is what you pay.</p>
+          <ul class="ticks small">
+            <li>One purchase covers up to three Macs.</li>
+            <li>Buy from inside MOTHERSHIP: through the App Store on iPhone and iPad, or Google Play on Android.</li>
+            <li>Switching devices? Use Restore Purchase to bring your license along.</li>
+          </ul>
+          <p class="fine">When the trial ends, your devices can't connect until you buy a license.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- S15 よくある質問（主役の読者が気にする順） -->
+    <section class="section faq" id="faq" aria-labelledby="faq-title">
+      <div class="wrap faq-wrap">
+        <h2 class="section-title center" id="faq-title">Frequently asked questions</h2>
+
+<h3 class="faq-group">Foldable phones</h3>
+          <div class="faq-list">
+            <details><summary>Which foldable phones does it work on?</summary><p>It's built to run on foldable phones with Android 13 or later. So far, we've tested it on an actual Galaxy Z Fold7. We'll announce other models as we test them.</p></details>
+            <details><summary>Can I use it on the cover screen?</summary><p>Yes. With the phone folded, the cover screen shows your Mac's screen and a small trackpad so you can check on progress. In your Galaxy's settings, allow apps to keep running on the cover screen when you close the phone.</p></details>
+            <details><summary>How do I use it half-folded?</summary><p>While you're connected, fold the phone halfway and set it on a desk. The top half becomes your Mac's screen, and the bottom half becomes shortcuts and a trackpad (tap ⌨ to switch to the keyboard). Hold it like a book, and your Mac's screen is on the left with the trackpad and keyboard on the right.</p></details>
+            <details><summary>How is this different from Samsung DeX or ordinary screen sharing?</summary><p>DeX lets you use your phone's apps on a big, desktop-style screen. MOTHERSHIP goes the other way: it lets you control your Mac at home from your phone. And where ordinary screen sharing shrinks your Mac's screen, MOTHERSHIP adds a display to your Mac in the same shape as the screen in your hand, so text appears at a size you can actually read.</p></details>
+            <details><summary>Can I control Claude Code or Codex while I'm out?</summary><p>Yes. MOTHERSHIP shows your Mac's screen as it is and lets you control it, so terminal-based tools like Claude Code and Codex work just as they always do. To connect from outside your home, install Tailscale on your Mac and your phone. MOTHERSHIP has no AI features of its own.</p></details>
+          </div>
+
+                  <h3 class="faq-group">AI and everyday use</h3>
+        <div class="faq-list">
+          <details><summary>Which AI tools does it work with?</summary><p>Any AI that runs on your Mac. MOTHERSHIP shows your Mac's screen as it is and lets you control it. Terminal-based AI, the AI in your editor, the AI in your browser: they all work exactly as they do at your desk. There's nothing to configure on the AI side. MOTHERSHIP has no AI features of its own.</p></details>
+          <details><summary>Will it notify me when my AI finishes?</summary><p>No. MOTHERSHIP shows your Mac's screen and lets you control it; it doesn't have a feature that tells you when a job is done. The idea is to open it whenever you're curious and see how things are going.</p></details>
+          <details><summary>Can I really read terminal text on a phone-size screen?</summary><p>Yes. Your Mac gets a dedicated display in the same shape as your device, so text isn't shrunk. Pinch to zoom when you want a closer look. For lots of fine print, the Text Priority picture-quality mode is a good fit.</p></details>
+          <details><summary>How is it different from other remote desktop apps?</summary><p>It's the way it shows your screen. Rather than mirroring your Mac's monitor as it is, MOTHERSHIP gives your Mac a dedicated display in the same shape as your device, so text isn't shrunk even on a small screen. You can also write by voice (it works with Aqua Voice), and it's a one-time purchase.</p></details>
+          <details><summary>What kind of work is it good for?</summary><p>Work where you need a good look at text and the screen: checking on jobs you've handed to AI and giving the next instruction, programming, working in documents or a browser, reviewing designs. It's not suited to fast-action games.</p></details>
+          <details><summary>Can it control Windows PCs?</summary><p>No. It controls Macs only. You can control your Mac from an iPhone, iPad, Android device, or another Mac.</p></details>
+        </div>
+
+        <h3 class="faq-group">Voice input</h3>
+        <div class="faq-list">
+          <details><summary>What do I need for voice input?</summary><p>On your Mac, install Aqua Voice (a dictation app from another company) and BlackHole 2ch (a free virtual audio driver), then set Aqua Voice's microphone to BlackHole 2ch. After that, just talk while holding the 🎤 button on your device.</p></details>
+          <details><summary>Can I use MOTHERSHIP without Aqua Voice?</summary><p>Yes. Aqua Voice is needed only for voice input. Everything else, such as viewing the screen, controlling by touch, and typing on the keyboard, works without it.</p></details>
+          <details><summary>Is my voice stored anywhere?</summary><p>MOTHERSHIP doesn't store your voice. Audio is sent directly from your device to your Mac, where it's handed to Aqua Voice. For how Aqua Voice handles audio, please see Aqua Voice's own documentation.</p></details>
+        </div>
+
+        <h3 class="faq-group">Away from home and Mac status</h3>
+        <div class="faq-list">
+          <details><summary>Can I use it when I'm out?</summary><p>Yes. Install Tailscale (a VPN service that's free for personal use) on your Mac and your device, and you can connect from anywhere. You don't need to change any router settings.</p></details>
+          <details><summary>Do I have to leave my Mac on while I'm out?</summary><p>Yes. If your Mac goes to sleep, you can't connect from outside. Turn on “Keep Mac awake while waiting” in MOTHERSHIP HOST. Mac laptops may go to sleep when the lid is closed.</p></details>
+          <details><summary>What if my Mac is locked?</summary><p>With MOTHERSHIP for Mac, you can unlock the Mac you're connecting to by entering its password.</p></details>
+          <details><summary>Does it work after my Mac restarts?</summary><p>Until you log in to your Mac, MOTHERSHIP HOST isn't running, so you can't connect. Once you've logged in, it starts listening automatically (if Open at Login is turned on).</p></details>
+          <details><summary>How much data does it use?</summary><p>It adjusts automatically to what's happening on screen and to your connection. While the screen is still, almost no data is sent.</p></details>
+          <details><summary>Can several devices connect at the same time?</summary><p>Only one device can be connected to a Mac at a time. If you connect from another device, the connection switches to that one.</p></details>
+        </div>
+
+        <h3 class="faq-group">Security</h3>
+        <div class="faq-list">
+          <details><summary>Do my screen and input pass through someone's server?</summary><p>Not through MOTHERSHIP servers. At home, your Mac and your device talk directly over your home network. Away from home, they talk directly over Tailscale's encrypted network.</p></details>
+          <details><summary>Do I need to create an account?</summary><p>MOTHERSHIP has no accounts. Scan the QR code shown on your Mac and you're ready to go. You'll need a Tailscale account only if you want to connect from outside your home.</p></details>
+          <details><summary>What permissions does my Mac need?</summary><p>Two: Screen Recording (to show your Mac's screen) and Accessibility (to pass along keyboard and mouse input). You can open the right settings pane from the MOTHERSHIP HOST menu.</p></details>
+          <details><summary>What if I lose my device?</summary><p>In the MOTHERSHIP HOST menu, open Registered Devices and delete that device. Once it's deleted, it can no longer connect.</p></details>
+        </div>
+
+        <h3 class="faq-group">Pricing</h3>
+        <div class="faq-list">
+          <details><summary>Is there a monthly fee?</summary><p>No. After the 14-day trial, a single purchase is all you need.</p></details>
+          <details><summary>I have two Macs. Do I need to buy it twice?</summary><p>No. One purchase covers up to three Macs.</p></details>
+          <details><summary>What if I replace a Mac, or want to use it with a fourth one?</summary><p>On your device, go to Settings &gt; License and remove a Mac you no longer use. That frees up a slot for another Mac. You can remove a Mac without connecting to it only once every 90 days. Before you part with a Mac, it's safest to remove its license first, using “Remove license from this Mac” in the MOTHERSHIP HOST menu.</p></details>
+        </div>
+      </div>
+    </section>
+
+    <!-- S16 ダウンロード -->
+    <section class="section download" id="download" aria-labelledby="download-title">
+      <div class="wrap">
+        <div class="download-panel">
+          <h2 class="section-title center" id="download-title"><span class="nb">Leave it to your Mac.</span> <span class="nb">Head on out.</span></h2>
+          <p class="section-lead center">Free for 14 days, every feature included. Start by installing MOTHERSHIP HOST on the Mac you want to control.</p>
+          <div class="download-grid">
+            <div class="dl is-primary"><p class="dl-step">1. On the Mac you'll control</p><h3>MOTHERSHIP HOST</h3><p>From this site · macOS 14 or later</p><span class="pill pill-soft soon">Coming soon</span></div>
+            <div class="dl"><p class="dl-step">2. On the device in your hand</p><h3>Android</h3><p>Google Play</p><span class="pill pill-ghost soon">Coming soon</span></div>
+            <div class="dl"><p class="dl-step">2. On the device in your hand</p><h3>iPhone and iPad</h3><p>App Store</p><span class="pill pill-ghost soon">Coming soon</span></div>
+            <div class="dl"><p class="dl-step">2. On the device in your hand</p><h3>Another Mac</h3><p>From this site · macOS 15 or later</p><span class="pill pill-ghost soon">Coming soon</span></div>
+          </div>
+          <p class="fine center">First, install MOTHERSHIP HOST on the Mac you want to control. Then install MOTHERSHIP on the device in your hand.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 最新のお知らせ（2026-11-21 追加）。本番では WordPress の投稿の新しい順に 3 件まで、タイトルだけを並べる（1 件なら 1 件、0 件ならこの節ごと出さない）。下の 3 件はサンプル -->
+    <section class="section latest-news" aria-labelledby="latest-news-title">
+      <div class="wrap latest-news-inner">
+        <div class="latest-news-head">
+          <p class="kicker">NEWS</p>
+          <h2 id="latest-news-title">News</h2>
+        </div>
+        <ul class="latest-news-list">
+          <li><a href="#">(Sample) MOTHERSHIP is now available</a></li>
+          <li><a href="#">(Sample) MOTHERSHIP HOST 1.0.1 released, with more stable connections</a></li>
+          <li><a href="#">(Sample) Our website is live</a></li>
+        </ul>
+        <a class="btn btn-ghost latest-news-more" href="news.html">All news <span aria-hidden="true">→</span></a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="footer-top">
+        <a class="brand" href="index.html"><span>MOTHERSHIP</span></a>
+        <nav aria-label="Footer navigation"><a href="#features">Features</a><a href="#voice">Voice</a><a href="#how">How it works</a><a href="#pricing">Pricing</a><a href="#faq">FAQ</a><a href="#download">Download</a><a href="help.html">Help</a><a href="news.html">News</a><a href="terms-of-service.html">Terms of Service</a><a href="privacy-policy.html">Privacy Policy</a><a href="../design/commercial-transactions.html" hreflang="ja">Legal Notice (Japan, in Japanese)</a><a href="contact.html">Contact</a><a class="nav-lang" href="../design/index.html" lang="ja" hreflang="ja">日本語</a></nav>
+      </div>
+      <p class="trademark">Mac, macOS, iPhone, iPad, iPadOS, App Store, Face ID, Touch ID, and Mission Control are trademarks of Apple Inc., registered in the U.S. and other countries and regions. The iPhone trademark is used in Japan under license from Aiphone K.K. Android and Google Play are trademarks of Google LLC. Galaxy Z Fold and Samsung DeX are trademarks or registered trademarks of Samsung Electronics Co., Ltd. Tailscale is a trademark of Tailscale Inc. Claude Code is a trademark of Anthropic PBC, and Codex is a trademark of OpenAI. Aqua Voice and BlackHole are trademarks or product names of their respective owners.</p>
+      <p class="trademark">MOTHERSHIP is an independently developed app. It is not certified, sponsored, or endorsed by Apple Inc., Google LLC, Samsung Electronics Co., Ltd., Anthropic PBC, OpenAI, Tailscale Inc., or the maker of Aqua Voice.</p>
+      <div class="footer-bottom"><small>© 2026 MOTHERSHIP</small><a href="#top">Back to top ↑</a></div>
+    </div>
+  </footer>
+</body>
+</html>

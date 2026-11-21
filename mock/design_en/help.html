@@ -1,0 +1,462 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#e9eefa">
+  <meta name="description" content="MOTHERSHIP Help. Step-by-step instructions for installing on your Mac and connecting, setting up voice input (Aqua Voice, Homebrew, BlackHole 2ch), getting ready to connect from outside your home, and what to check when something isn't working.">
+  <title>Help | MOTHERSHIP</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <!-- 言語ごとのページ（モックなので相対パス。本番では絶対 URL にして、x-default も付ける） -->
+  <link rel="alternate" hreflang="en" href="help.html">
+  <link rel="alternate" hreflang="ja" href="../design/help.html">
+  <!-- デザインシステム（値 → 土台 → 部品）のあとに、下層ページの組み方（legal.css）と、ヘルプだけの部品（help.css） -->
+  <link rel="stylesheet" href="designSystem/tokens.css">
+  <link rel="stylesheet" href="designSystem/base.css">
+  <link rel="stylesheet" href="designSystem/components.css">
+  <link rel="stylesheet" href="legal.css">
+  <link rel="stylesheet" href="help.css">
+  <link rel="stylesheet" href="help-figs.css">
+  <!-- スマホのメニューとヘッダーの背景 -->
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <header class="site-header" id="top">
+    <div class="wrap header-inner">
+      <a class="brand" href="index.html" aria-label="MOTHERSHIP home">
+        <svg class="brand-mark" viewBox="0 0 128 128" aria-hidden="true"><defs><linearGradient id="bm" x2="1" y2="1"><stop stop-color="#1e3ec0"/><stop offset=".55" stop-color="#385cf4"/><stop offset="1" stop-color="#38afee"/></linearGradient></defs><rect width="128" height="128" rx="27" fill="url(#bm)"/><path d="M60 28 22 86 49 80 60 91 60 75 48 70 60 54Z" fill="#fff"/><path d="M68 28 106 86 79 80 68 91 68 75 80 70 68 54Z" fill="#a8f8ff"/><path d="M64 86 72 98 64 105 56 98Z" fill="#fff"/></svg>
+        <span>MOTHERSHIP</span>
+      </a>
+      <button class="menu-toggle" type="button" aria-label="Open menu" aria-controls="site-nav" aria-expanded="false"><span></span><span></span></button>
+      <nav class="site-nav" id="site-nav" aria-label="Main navigation">
+        <a href="index.html#features">Features</a>
+        <a href="index.html#voice">Voice</a>
+        <a href="index.html#how">How it works</a>
+        <a href="index.html#pricing">Pricing</a>
+        <a href="index.html#faq">FAQ</a>
+        <a class="nav-lang" href="../design/help.html" lang="ja" hreflang="ja">日本語</a>
+        <a class="nav-cta" href="index.html#download">Download</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- 図で使い回す絵（ロゴの印と、QR コードふうの模様。模様は本物の QR コードではない） -->
+  <svg class="svg-defs" aria-hidden="true"><symbol id="hs-mark" viewBox="0 0 128 128"><path d="M60 28 22 86 49 80 60 91 60 75 48 70 60 54Z" fill="#fff"/><path d="M68 28 106 86 79 80 68 91 68 75 80 70 68 54Z" fill="#a8f8ff"/><path d="M64 86 72 98 64 105 56 98Z" fill="#fff"/></symbol><symbol id="hs-qr" viewBox="0 0 19 19"><path d="M0 0h7v1h-7zM8 0h2v1h-2zM12 0h7v1h-7zM0 1h1v1h-1zM6 1h1v1h-1zM8 1h1v1h-1zM10 1h1v1h-1zM12 1h1v1h-1zM18 1h1v1h-1zM0 2h1v1h-1zM2 2h3v1h-3zM6 2h1v1h-1zM8 2h1v1h-1zM10 2h1v1h-1zM12 2h1v1h-1zM14 2h3v1h-3zM18 2h1v1h-1zM0 3h1v1h-1zM2 3h3v1h-3zM6 3h1v1h-1zM8 3h3v1h-3zM12 3h1v1h-1zM14 3h3v1h-3zM18 3h1v1h-1zM0 4h1v1h-1zM2 4h3v1h-3zM6 4h1v1h-1zM8 4h1v1h-1zM10 4h1v1h-1zM12 4h1v1h-1zM14 4h3v1h-3zM18 4h1v1h-1zM0 5h1v1h-1zM6 5h1v1h-1zM8 5h1v1h-1zM12 5h1v1h-1zM18 5h1v1h-1zM0 6h7v1h-7zM9 6h1v1h-1zM12 6h7v1h-7zM8 7h1v1h-1zM10 7h1v1h-1zM0 8h3v1h-3zM4 8h1v1h-1zM7 8h1v1h-1zM9 8h3v1h-3zM13 8h2v1h-2zM16 8h2v1h-2zM1 9h1v1h-1zM6 9h1v1h-1zM8 9h2v1h-2zM11 9h1v1h-1zM13 9h1v1h-1zM18 9h1v1h-1zM3 10h1v1h-1zM8 10h1v1h-1zM13 10h2v1h-2zM16 10h1v1h-1zM18 10h1v1h-1zM8 11h2v1h-2zM11 11h3v1h-3zM15 11h2v1h-2zM0 12h7v1h-7zM10 12h3v1h-3zM15 12h4v1h-4zM0 13h1v1h-1zM6 13h1v1h-1zM10 13h4v1h-4zM0 14h1v1h-1zM2 14h3v1h-3zM6 14h1v1h-1zM9 14h1v1h-1zM14 14h3v1h-3zM18 14h1v1h-1zM0 15h1v1h-1zM2 15h3v1h-3zM6 15h1v1h-1zM8 15h10v1h-10zM0 16h1v1h-1zM2 16h3v1h-3zM6 16h1v1h-1zM9 16h5v1h-5zM18 16h1v1h-1zM0 17h1v1h-1zM6 17h1v1h-1zM8 17h3v1h-3zM12 17h2v1h-2zM16 17h1v1h-1zM18 17h1v1h-1zM0 18h7v1h-7zM12 18h3v1h-3zM18 18h1v1h-1z" fill="#14203a"/></symbol></svg>
+
+  <main id="main">
+    <section class="legal-hero" aria-labelledby="help-title">
+      <div class="legal-hero-bg" aria-hidden="true"></div>
+      <div class="wrap">
+        <p class="pill pill-glass">Help</p>
+        <h1 id="help-title">Getting started with MOTHERSHIP</h1>
+        <p class="legal-hero-lead">This page walks you through installing on your Mac and connecting, then setting up voice input.<br>Work through it from the top and you'll be up and running.</p>
+      </div>
+    </section>
+
+    <div class="wrap legal-layout">
+      <nav class="legal-toc" aria-label="Contents">
+        <p class="legal-toc-title">Contents</p>
+        <ol>
+          <li><a href="#start"><span class="no">1</span>What you'll need</a></li>
+          <li><a href="#setup"><span class="no">2</span>Connect for the first time</a></li>
+          <li><a href="#voice"><span class="no">3</span>Set up voice input</a></li>
+          <li><a href="#outside"><span class="no">4</span>Use it away from home</a></li>
+          <li><a href="#keep-awake"><span class="no">5</span>Keep your Mac awake</a></li>
+          <li><a href="#trouble"><span class="no">6</span>Troubleshooting</a></li>
+        </ol>
+      </nav>
+
+      <article class="legal">
+        <p class="legal-intro">On this page, “Mac” means the Mac you control remotely, and “device” means the iPhone, iPad, or Android device in your hand. There are two apps: MOTHERSHIP HOST, which goes on your Mac, and MOTHERSHIP, which goes on your device. (In the apps themselves, the names appear as “Mothership Host” and “Mothership.”) The figures are illustrations; the actual screens look different.</p>
+
+        <nav class="help-jump" aria-label="Find what you need">
+          <a href="#setup"><b>Connect for the first time</b><span>Install on your Mac, register with a QR code, and connect</span></a>
+          <a href="#voice"><b>Set up voice input</b><span>Installing and setting up Aqua Voice and BlackHole 2ch</span></a>
+          <a href="#outside"><b>Use it away from home</b><span>Setting up Tailscale, and what to check before you leave</span></a>
+          <a href="#trouble"><b>Troubleshooting</b><span>Can't connect, no picture, voice not working</span></a>
+        </nav>
+
+        <aside class="legal-summary" aria-labelledby="summary-title">
+          <h2 id="summary-title">In a nutshell</h2>
+          <ul class="ticks">
+            <li>Install MOTHERSHIP HOST on your Mac and turn on <b>two permissions</b>.</li>
+            <li>Install MOTHERSHIP on your device and scan <b>the QR code on your Mac</b>.</li>
+            <li>Tap Connect, and your Mac's screen appears in your hand. That's all it takes to use it at home.</li>
+            <li>To write by voice, install <b>Aqua Voice</b> and <b>BlackHole 2ch</b> on your Mac, then set Aqua Voice's microphone to BlackHole 2ch.</li>
+            <li>To use it away from home, install <b>Tailscale</b> on your Mac and your device.</li>
+          </ul>
+          <!-- fig:17 --><div class="hf hf17" role="img" aria-label="Illustration of the steps in a nutshell. 1: Install on your Mac and turn on two permissions. 2: Scan the QR code on your Mac with your device. 3: Tap Connect, and your Mac's screen appears in your hand. 4: To write by voice, install Aqua Voice and BlackHole 2ch; hold 🎤 on your device and speak, and the text lands on your Mac. 5: To use it away from home, install Tailscale."><div class="hf-in" aria-hidden="true"><div class="hf-lap hf17-lap"><div class="hf-scr"><div class="hf-lbar"><i></i><b></b><b></b><span class="hf-tray"><svg viewBox="0 0 128 128"><use href="#hs-mark"/></svg></span></div><span class="hf-w hf-w1"><b></b><i></i><i></i><i></i></span><span class="hf-w hf-w2"><b></b><em><i></i><i></i><i></i><i></i></em></span><div class="hf-pop hf17-pop"><div class="hf-r"><b>MOTHERSHIP HOST</b><small>Waiting for connection</small></div><div class="hf-r"><i class="hf-dot hf17-d1"></i><span>Screen Recording</span></div><div class="hf-r"><i class="hf-dot hf17-d2"></i><span>Accessibility</span></div></div><div class="hf-win hf17-qr"><div class="hf-wbar"><i></i><i></i><i></i><b>Add Device</b></div><div class="hf-wbody"><svg viewBox="0 0 19 19"><use href="#hs-qr"/></svg></div></div><span class="hf17-said">Next, fix the chart</span></div><div class="hf-base"></div></div><div class="hf17-tun"><b>Tailscale</b><i></i></div><span class="hf17-away"><i>Away</i></span><div class="hf-ph hf17-ph"><div class="hf17-cam"><span><svg viewBox="0 0 19 19"><use href="#hs-qr"/></svg><b>✓</b></span></div><div class="hfm-desk"><span class="hf-w hf-w1"><b></b><i></i><i></i><i></i></span><span class="hf-w hf-w2"><b></b><em><i></i><i></i><i></i><i></i></em></span></div><div class="hf17-bar"><b>🎤</b><span class="hf-wave"><i></i><i></i><i></i><i></i><i></i></span></div></div><span class="hf-tag hf17-t hf17-t1"><i>1 Install on your Mac, allow 2 permissions</i></span><span class="hf-tag hf17-t hf17-t2"><i>2 Scan the QR code on your Mac</i></span><span class="hf-tag hf17-t hf17-t3"><i>3 Tap Connect to see your Mac</i></span><span class="hf-tag hf17-t hf17-t4"><i>4 Voice: Aqua Voice + BlackHole 2ch</i></span><span class="hf-tag hf17-t hf17-t5"><i>5 Away from home: Tailscale</i></span></div></div><!-- /fig:17 -->
+        </aside>
+
+        <!-- 1 用意するもの -->
+        <section class="article" id="start" aria-labelledby="start-title">
+          <h2 id="start-title"><span class="no">1</span>What you'll need</h2>
+          <dl class="help-need">
+            <div><dt>Mac</dt><dd>A Mac running macOS 14 or later. This is where you install MOTHERSHIP HOST.</dd></div>
+            <div><dt>Device</dt><dd>An iPhone, iPad, or Android device. This is where you install MOTHERSHIP.</dd></div>
+            <div><dt>Home Wi-Fi</dt><dd>For the initial registration, connect your Mac and your device to the same Wi-Fi network.</dd></div>
+            <div><dt>For voice input</dt><dd>Aqua Voice and BlackHole 2ch. Both go on your Mac (<a href="#voice">3 Set up voice input</a>).</dd></div>
+            <div><dt>For use away from home</dt><dd>Tailscale. It goes on both your Mac and your device (<a href="#outside">4 Use it away from home</a>).</dd></div>
+          </dl>
+          <p class="fine">For supported OS versions and other requirements, see <a href="index.html#download">the supported devices on the home page</a>.</p>
+          <!-- fig:1 --><nav class="hflow" aria-label="Steps to get started">
+            <ol class="hflow-main">
+              <li><a href="#setup-mac"><b>1</b><span>Install on your Mac</span><small>Turn on two permissions</small></a></li>
+              <li><a href="#setup-pair"><b>2</b><span>Register your device</span><small>Scan the QR code on your Mac</small></a></li>
+              <li><a href="#setup-connect"><b>3</b><span>Connect</span><small>Ready to use on home Wi-Fi</small></a></li>
+            </ol>
+            <p class="hflow-opt-title">From here on, only if you need it</p>
+            <ul class="hflow-opt">
+              <li><a href="#voice"><span>Set up voice input</span><small>Aqua Voice and BlackHole 2ch</small></a></li>
+              <li><a href="#outside"><span>Set up for use away from home</span><small>Tailscale</small></a></li>
+            </ul>
+          </nav><!-- /fig:1 -->
+        </section>
+
+        <!-- 2 はじめてつなぐ -->
+        <section class="article" id="setup" aria-labelledby="setup-title">
+          <h2 id="setup-title"><span class="no">2</span>Connect for the first time</h2>
+          <p>These are the steps for connecting your Mac and your device on your home Wi-Fi. There are just three.</p>
+
+          <h3 id="setup-mac"><span class="no">Step 1</span>Install MOTHERSHIP HOST on your Mac</h3>
+          <ol class="help-steps">
+            <li>
+              <p>Download MOTHERSHIP HOST and put it in your Applications folder. (Coming soon)</p>
+            </li>
+            <li>
+              <p>Open MOTHERSHIP HOST. No window opens; instead, the MOTHERSHIP HOST icon appears in the menu bar at the top right of your screen.</p>
+              <!-- fig:2 --><div class="hf hf2" role="img" aria-label="Opening MOTHERSHIP HOST puts an icon in the Mac's menu bar. Clicking the icon opens the menu."><div class="hf-in" aria-hidden="true"><div class="hf-mbar"><i></i><b></b><b></b><b></b><span class="hf-tray hf2-tray"><svg viewBox="0 0 128 128"><use href="#hs-mark"/></svg></span><u></u><u></u></div><div class="hf-win hf2-finder"><div class="hf-wbar"><i></i><i></i><i></i><b>Applications</b></div><div class="hf-wbody"><span class="hf2-app"><span class="hf-ico"><svg viewBox="0 0 128 128"><use href="#hs-mark"/></svg></span><small>MOTHERSHIP HOST</small></span><i></i><i></i><i></i><i></i><i></i></div></div><div class="hf-pop hf2-pop"><div class="hf-r"><b>MOTHERSHIP HOST</b><small>Waiting for connection</small></div><div class="hf-r"><span>Registered Devices</span><em class="hf-btn ">Add Device…</em></div><div class="hf-r"><i class="hf-dot "></i><span>Screen Recording</span><em class="hf-btn ">Open Settings</em></div><div class="hf-r"><i class="hf-dot "></i><span>Accessibility</span><em class="hf-btn ">Open Settings</em></div><div class="hf-r "><span>Open at Login</span><i class="hf-tg "></i></div><div class="hf-r "><span>Keep Mac awake while waiting</span><i class="hf-tg "></i></div></div><svg class="hf-cur hf2-cur" viewBox="0 0 12 16"><path d="M1 1v12l3.2-2.8 2 4.6 2-.9-2-4.5H11z" fill="#14203a" stroke="#fff" stroke-width="1" stroke-linejoin="round"/></svg></div></div><!-- /fig:2 -->
+            </li>
+            <li>
+              <p>Click the icon to open the menu, then click <b>Open Settings</b> next to Screen Recording. Your Mac's System Settings opens. Turn on the switch for MOTHERSHIP HOST in the list.</p>
+              <ul><li>If you're asked to “Quit &amp; Reopen,” go ahead and do so.</li></ul>
+            </li>
+            <li>
+              <p>In the same way, click <b>Open Settings</b> next to Accessibility and turn on the switch.</p>
+              <!-- fig:3 --><div class="hf hf3 is-tall" role="img" aria-label="Clicking Open Settings in the menu opens the Mac's System Settings. Turning on the switch for MOTHERSHIP HOST changes the mark in the menu to a green checkmark. The same is done for both Screen Recording and Accessibility."><div class="hf-in" aria-hidden="true"><div class="hf-mbar"><i></i><b></b><b></b><b></b><span class="hf-tray "><svg viewBox="0 0 128 128"><use href="#hs-mark"/></svg></span><u></u><u></u></div><div class="hf-pop "><div class="hf-r"><b>MOTHERSHIP HOST</b><small>Waiting for connection</small></div><div class="hf-r"><span>Registered Devices</span><em class="hf-btn ">Add Device…</em></div><div class="hf-r"><i class="hf-dot hf3-d1"></i><span>Screen Recording</span><em class="hf-btn hf3-b1">Open Settings</em></div><div class="hf-r"><i class="hf-dot hf3-d2"></i><span>Accessibility</span><em class="hf-btn hf3-b2">Open Settings</em></div></div><div class="hf-win hf3-win"><div class="hf-wbar"><i></i><i></i><i></i><b>System Settings</b></div><div class="hf-wbody"><p class="hf3-h"><span>Screen Recording</span><span>Accessibility</span></p><div class="hf3-app"><span class="hf-ico"><svg viewBox="0 0 128 128"><use href="#hs-mark"/></svg></span><b>MOTHERSHIP HOST</b><i class="hf-tg"></i></div><div class="hf-skel"></div><div class="hf-skel"></div></div></div><svg class="hf-cur hf3-cur" viewBox="0 0 12 16"><path d="M1 1v12l3.2-2.8 2 4.6 2-.9-2-4.5H11z" fill="#14203a" stroke="#fff" stroke-width="1" stroke-linejoin="round"/></svg></div></div><!-- /fig:3 -->
+            </li>
+            <li>
+              <p>Go back to the menu. If both Screen Recording and Accessibility have green checkmarks, you're done.</p>
+            </li>
+          </ol>
+          <div class="help-note"><b>What are the two permissions for?</b> Screen Recording is used to show your Mac's screen on your device. Accessibility is used to pass keyboard and mouse input from your device to your Mac.</div>
+
+          <h3 id="setup-pair"><span class="no">Step 2</span>Register your device (QR code)</h3>
+          <ol class="help-steps">
+            <li>
+              <p>Install MOTHERSHIP on your device and open it. (Coming soon)</p>
+              <ul><li>On iPhone or iPad, if you're asked for Local Network permission, choose Allow. It's used to find your Mac on your home Wi-Fi.</li></ul>
+            </li>
+            <li>
+              <p>On your Mac, choose <b>Add Device…</b> from the MOTHERSHIP HOST menu in the menu bar. A window with a QR code opens.</p>
+              <ul><li>The QR code works for five minutes, and only once. If it expires, click “Create new link and QR code” in the window.</li></ul>
+              <!-- fig:4 --><div class="hf hf4" role="img" aria-label="Clicking Add Device… in the Mac's menu opens a window with a QR code."><div class="hf-in" aria-hidden="true"><div class="hf-mbar"><i></i><b></b><b></b><b></b><span class="hf-tray "><svg viewBox="0 0 128 128"><use href="#hs-mark"/></svg></span><u></u><u></u></div><div class="hf-pop "><div class="hf-r"><b>MOTHERSHIP HOST</b><small>Waiting for connection</small></div><div class="hf-r"><span>Registered Devices</span><em class="hf-btn hf4-btn">Add Device…</em></div><div class="hf-r"><i class="hf-dot is-ok"></i><span>Screen Recording</span></div><div class="hf-r"><i class="hf-dot is-ok"></i><span>Accessibility</span></div><div class="hf-r "><span>Open at Login</span><i class="hf-tg "></i></div><div class="hf-r "><span>Keep Mac awake while waiting</span><i class="hf-tg "></i></div></div><div class="hf-win hf4-win"><div class="hf-wbar"><i></i><i></i><i></i><b>Add Device</b></div><div class="hf-wbody"><span class="hf4-qr"><svg viewBox="0 0 19 19"><use href="#hs-qr"/></svg></span><p>4:59 remaining<br>Single use only</p></div></div><svg class="hf-cur hf4-cur" viewBox="0 0 12 16"><path d="M1 1v12l3.2-2.8 2 4.6 2-.9-2-4.5H11z" fill="#14203a" stroke="#fff" stroke-width="1" stroke-linejoin="round"/></svg></div></div><!-- /fig:4 -->
+            </li>
+            <li>
+              <p>On your device, tap <b>Scan QR Code to Pair</b> and point the camera at the QR code on your Mac. If you're asked for camera permission, allow it.</p>
+              <!-- fig:5 --><div class="hf hf5 is-room" role="img" aria-label="Pointing the device's camera at the QR code on the Mac scans it. A checkmark appears on the device, and the Mac shows that the device has been registered."><div class="hf-in" aria-hidden="true"><div class="hf-lap hf5-lap"><div class="hf-scr"><div class="hf-lbar"><i></i><b></b><b></b><span class="hf-tray"><svg viewBox="0 0 128 128"><use href="#hs-mark"/></svg></span></div><div class="hf5-card"><b>Add Device</b><svg viewBox="0 0 19 19"><use href="#hs-qr"/></svg></div><div class="hf5-done"><i>✓</i><b>Galaxy Z Fold7<br>registered</b></div></div><div class="hf-base"></div></div><div class="hf-ph hf5-ph"><div class="hf5-cam"><span class="hf5-qrs"><svg viewBox="0 0 19 19"><use href="#hs-qr"/></svg></span><span class="hf5-find"><i></i><i></i><i></i><i></i></span><span class="hf5-scan"></span><span class="hf5-ok">✓</span><em>Scan the QR code</em></div></div></div></div><!-- /fig:5 -->
+            </li>
+            <li>
+              <p>When the window on your Mac shows “✅ Registered (your device's name),” registration is complete. You can close the window.</p>
+            </li>
+          </ol>
+          <div class="help-note"><b>No account needed.</b> Registered devices are listed under Registered Devices in the MOTHERSHIP HOST menu. If the camera can't read the code, click Copy Link in the QR code window and paste the link into the field on your device to register that way.</div>
+
+          <h3 id="setup-connect"><span class="no">Step 3</span>Connect</h3>
+          <ol class="help-steps">
+            <li>
+              <p>The Mac you registered appears in MOTHERSHIP on your device. If your Mac and your device are on the same Wi-Fi, you'll see “● Available on home network.”</p>
+            </li>
+            <li>
+              <p>Tap <b>Connect</b>. After a moment, your Mac's screen appears on your device.</p>
+              <!-- fig:6 --><div class="hf hf6 is-room" role="img" aria-label="The registered Mac appears on the device, marked as available on the home network. Tapping Connect shows the Mac's screen on the device."><div class="hf-in" aria-hidden="true"><div class="hf-lap hf6-lap"><div class="hf-scr"><div class="hf-lbar"><i></i><b></b><b></b><span class="hf-tray"><svg viewBox="0 0 128 128"><use href="#hs-mark"/></svg></span></div><span class="hf-w hf-w1"><b></b><i></i><i></i><i></i></span><span class="hf-w hf-w2"><b></b><em><i></i><i></i><i></i><i></i></em></span></div><div class="hf-base"></div></div><span class="hf6-wifi"><i></i><i></i><i></i></span><div class="hf-ph hf6-ph"><div class="hf6-list"><p>Your Macs</p><div class="hf6-card"><b>Mac mini</b><small>● Available on home network</small><em>Connect</em></div></div><div class="hf6-desk"><span class="hf-w hf-w1"><b></b><i></i><i></i><i></i></span><span class="hf-w hf-w2"><b></b><em><i></i><i></i><i></i><i></i></em></span></div></div></div></div><!-- /fig:6 -->
+            </li>
+            <li>
+              <p>When you're finished, tap Disconnect on the screen.</p>
+            </li>
+          </ol>
+          <div class="help-note"><b>Try everything for 14 days.</b> For 14 days from the day you first connect, every feature is free to use.</div>
+          <p class="help-next">Next, set up only what you need: <a href="#voice">Set up voice input</a> / <a href="#outside">Use it away from home</a>.</p>
+        </section>
+
+        <!-- 3 声で書く準備 -->
+        <section class="article" id="voice" aria-labelledby="voice-title">
+          <h2 id="voice-title"><span class="no">3</span>Set up voice input (Aqua Voice)</h2>
+          <p>This setup lets your Mac turn what you say to your device into text. <b>Everything is done on your Mac.</b> There's nothing to set up on your device.</p>
+
+          <p>There are three main things to set up. You only do each one once.</p>
+          <!-- 準備のカード（2026-11-21。トップの「使うために必要なもの」と同じ。部品は designSystem/components.css の .vn-*） -->
+          <ol class="vn-steps">
+            <li class="vn-s vn-s1">
+              <div class="vn-fig" aria-hidden="true">
+                <div class="vn-app"><i class="vn-ico">A</i><b>Aqua Voice</b><u class="vn-prog"><i></i></u></div>
+                <span class="vn-done">✓ Installed</span>
+              </div>
+              <h4><span class="vn-n">1</span>Install Aqua Voice</h4>
+              <p>A dictation app that turns your voice into text. It's made by a different company than MOTHERSHIP.</p>
+              <a class="vn-more" href="#voice-aqua">Install it in 3-1 →</a>
+            </li>
+            <li class="vn-s vn-s2">
+              <div class="vn-fig" aria-hidden="true">
+                <div class="vn-app"><i class="vn-ico">🎤</i><b>BlackHole 2ch</b><u class="vn-prog"><i></i></u></div>
+                <span class="vn-done">✓ Installed</span>
+              </div>
+              <h4><span class="vn-n">2</span>Install BlackHole 2ch</h4>
+              <p>A virtual microphone that hands your voice to Aqua Voice. It's free.</p>
+              <a class="vn-more" href="#voice-terminal">Install it in 3-2 to 3-4 →</a>
+            </li>
+            <li class="vn-s vn-s3">
+              <div class="vn-fig" aria-hidden="true">
+                <div class="vn-set"><p>Aqua Voice settings</p><div class="vn-row"><span>Mic</span><span class="vn-sel"><em class="vn-old">Built-in mic</em><em class="vn-new">BlackHole 2ch</em><i>▾</i></span></div></div>
+                <span class="vn-tap"></span>
+                <span class="vn-done">✓ Selected</span>
+              </div>
+              <h4><span class="vn-n">3</span>Set the mic to BlackHole 2ch</h4>
+              <p>In Aqua Voice's settings, choose which microphone it listens to.</p>
+              <a class="vn-more" href="#voice-mic">Choose it in 3-5 →</a>
+            </li>
+          </ol>
+
+          <h3 id="voice-how">How it works, and what to do</h3>
+          <p>The app that turns your voice into text is Aqua Voice, a dictation app for Mac. Aqua Voice listens to your Mac's microphone and transcribes what it hears. So the voice arriving from your device has to be handed to Aqua Voice as if it were microphone audio, and that takes a virtual microphone. That's BlackHole 2ch.</p>
+          <!-- fig:7 --><div class="hfv" role="img" aria-label="Diagram of the path your voice takes. What you say into your device reaches MOTHERSHIP HOST on your Mac. MOTHERSHIP HOST feeds that audio into BlackHole 2ch, a virtual microphone. Aqua Voice listens to BlackHole 2ch, turns the audio into text, and types it into the open app. The two things to install on your Mac are BlackHole 2ch and Aqua Voice.">
+            <div class="hfv-row" aria-hidden="true">
+              <div class="hfv-node hfv-n1"><b>Your device</b><span>Hold 🎤 and speak</span></div>
+              <i class="hfv-link hfv-l1"></i>
+              <div class="hfv-mac">
+                <p>On your Mac</p>
+                <div class="hfv-node hfv-n2"><b>MOTHERSHIP HOST</b><span>Receives the audio, passes it on</span></div>
+                <i class="hfv-link hfv-l2"></i>
+                <div class="hfv-node hfv-n3 is-need"><em>Install</em><b>BlackHole 2ch</b><span>Virtual microphone</span></div>
+                <i class="hfv-link hfv-l3"></i>
+                <div class="hfv-node hfv-n4 is-need"><em>Install</em><b>Aqua Voice</b><span>Turns voice into text</span></div>
+                <i class="hfv-link hfv-l4"></i>
+                <div class="hfv-node hfv-n5"><b>The open app</b><span>Text is typed in</span></div>
+              </div>
+            </div>
+          </div><!-- /fig:7 -->
+          <p>There are six things to do:</p>
+          <ol class="help-steps">
+            <li><p><a href="#voice-aqua">Install Aqua Voice</a></p></li>
+            <li><p><a href="#voice-terminal">Open Terminal</a></p></li>
+            <li><p><a href="#voice-brew">Install Homebrew</a> (the tool used to install BlackHole 2ch)</p></li>
+            <li><p><a href="#voice-blackhole">Install BlackHole 2ch</a></p></li>
+            <li><p><a href="#voice-mic">Set Aqua Voice's microphone to BlackHole 2ch</a></p></li>
+            <li><p><a href="#voice-try">Try talking from your device</a></p></li>
+          </ol>
+          <div class="help-note"><b>These are third-party products.</b> Aqua Voice, Homebrew, and BlackHole are made by companies and people other than MOTHERSHIP (they're not included with MOTHERSHIP). How you install them, and what their screens say, may change.</div>
+
+          <h3 id="voice-aqua"><span class="no">3-1</span>Install Aqua Voice</h3>
+          <p>Download the Mac version from the official Aqua Voice site (<a href="https://aquavoice.com/mac" rel="noopener">aquavoice.com</a>) and install it. It supports both Apple silicon and Intel-based Macs.</p>
+          <p>Once it's installed, first <b>make sure it works normally at your Mac</b>. Click somewhere you can type, such as a note. Hold the <kbd>fn</kbd> key on your keyboard, speak, then let go. If what you said is typed in, you're all set.</p>
+          <!-- fig:8 --><div class="hf hf8" role="img" aria-label="At the Mac, you speak only while holding the fn key on the keyboard. When you release the key, what you said is typed into a note."><div class="hf-in" aria-hidden="true"><div class="hf-win hf8-note"><div class="hf-wbar"><i></i><i></i><i></i><b>Notes</b></div><div class="hf-wbody"><p class="hf8-text"><span>Tomorrow's meeting starts at 10.</span><i class="hf-caret"></i></p></div></div><p class="hf8-bubble"><b>Say</b>“Tomorrow's meeting starts at 10”</p><p class="hf8-pill"><span class="hf-wave"><i></i><i></i><i></i><i></i><i></i></span>Listening</p><div class="hf8-deck"></div><div class="hf8-keys"><span>fn</span><span>⌃</span><span>⌥</span><span>⌘</span><span></span><span>⌘</span><span>⌥</span></div><i class="hf-fin hf8-fin"></i></div></div><!-- /fig:8 -->
+          <div class="help-warn"><b>Leave the recording key set to fn.</b> MOTHERSHIP relies on Aqua Voice's “listen only while fn is held” behavior. If you've changed Aqua Voice's recording key to something else, speaking from your device won't produce text. Aqua Voice's default is <kbd>fn</kbd>. You can check whether it's been changed under Keybindings in Aqua Voice's settings.</div>
+
+          <h3 id="voice-terminal"><span class="no">3-2</span>Open Terminal</h3>
+          <p>From here on, you'll use Terminal, an app that comes with every Mac. Terminal lets you run your Mac with typed commands. It may look intimidating, but all you do is paste in the commands on this page exactly as they are.</p>
+          <ol class="help-steps">
+            <li><p>Hold the <kbd>⌘</kbd> (Command) key and press the space bar. The Spotlight search field appears.</p></li>
+            <li><p>Type “Terminal” and press <kbd>return</kbd>.</p></li>
+            <li><p>A text-only window opens. Paste a command here and press <kbd>return</kbd> to run it.</p></li>
+          </ol>
+          <!-- fig:9 --><div class="hf hf9" role="img" aria-label="Pressing Command and the space bar brings up the search field. Typing Terminal and pressing return opens a Terminal window."><div class="hf-in" aria-hidden="true"><div class="hf-mbar"><i></i><b></b><b></b><b></b><span class="hf-tray "><svg viewBox="0 0 128 128"><use href="#hs-mark"/></svg></span><u></u><u></u></div><div class="hf9-spot"><i></i><p><span class="hf9-type">Terminal</span><i class="hf-caret"></i></p></div><div class="hf9-res"><i>&gt;_</i><b>Terminal</b><small>Applications</small></div><div class="hf9-ka"><span class="hf-key">⌘</span>+<span class="hf-key">space</span></div><div class="hf9-kb"><span class="hf-key">return</span></div><div class="hf-win hf9-term"><div class="hf-wbar"><i></i><i></i><i></i><b>Terminal</b></div><div class="hf-tbody"><p><span class="pr">user@Mac ~ %</span> <i class="hf-caret"></i></p></div></div></div></div><!-- /fig:9 -->
+          <div class="help-note"><b>How to copy a command</b> Click inside any of the navy boxes on this page to select the whole command. Copy it with <kbd>⌘</kbd>+<kbd>C</kbd>, paste it into Terminal with <kbd>⌘</kbd>+<kbd>V</kbd>, then press <kbd>return</kbd>.</div>
+
+          <h3 id="voice-brew"><span class="no">3-3</span>Install Homebrew</h3>
+          <p>Homebrew is a free tool for installing software on a Mac. You'll use it to install BlackHole 2ch.</p>
+          <ol class="help-steps">
+            <li>
+              <p><b>Check whether it's already installed.</b> Run this command:</p>
+              <pre class="help-code"><code>brew --version</code></pre>
+              <ul>
+                <li>If you see “Homebrew” followed by a version number, it's already installed. Skip ahead to <a href="#voice-blackhole">3-4 Install BlackHole 2ch</a>.</li>
+                <li>If you see “command not found,” it isn't installed yet. Go on to the next step.</li>
+              </ul>
+            </li>
+            <li>
+              <p><b>Install Homebrew.</b> Run this command (it's a single line):</p>
+              <pre class="help-code"><code>/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"</code></pre>
+              <ul>
+                <li>When you see “Password:”, type the password you use to log in to your Mac and press <kbd>return</kbd>. <b>Nothing appears on screen as you type, but your input is being entered.</b></li>
+                <li>When you see “Press RETURN/ENTER to continue,” press <kbd>return</kbd>.</li>
+                <li>This takes a few minutes. Along the way, a component called Command Line Tools is installed as well.</li>
+                <li>When you see “Installation successful!”, it's done.</li>
+              </ul>
+            </li>
+            <li>
+              <p><b>Run the “Next steps” commands.</b> Near the end, you may see “Next steps:” followed by two or three lines of commands. If you do, copy those lines and run them one at a time. They set things up so you can use Homebrew from Terminal.</p>
+              <p>For example, they look something like this (this is only an example; <b>use the ones shown on your own screen</b>):</p>
+              <pre class="help-code"><code>echo &gt;&gt; ~/.zprofile
+echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' &gt;&gt; ~/.zprofile
+eval "$(/opt/homebrew/bin/brew shellenv)"</code></pre>
+            </li>
+            <li>
+              <p><b>Make sure it's installed.</b> Run this command once more. If you see “Homebrew” and a version number, it worked.</p>
+              <pre class="help-code"><code>brew --version</code></pre>
+            </li>
+          </ol>
+          <!-- fig:10 --><div class="hf hf10 is-tall" role="img" aria-label="Pasting commands into Terminal and running them. At the Password prompt, you type your Mac's password (nothing appears as you type). At Press RETURN/ENTER to continue, you press return. After a few minutes, Installation successful! appears. Finally, you copy and run the commands shown under Next steps."><div class="hf-in" aria-hidden="true"><div class="hf-win hf10-term"><div class="hf-wbar"><i></i><i></i><i></i><b>Terminal</b></div><div class="hf-tbody"><p class="l1"><span class="pr">%</span> <span>/bin/bash -c "$(curl -fsSL https://…/install.sh)"</span></p><p class="l2"><span class="ar">==&gt;</span> Checking for sudo access…</p><p class="l3">Password: 🔑<i class="hf-caret"></i></p><p class="l4"><span class="ar">==&gt;</span> This script will install: /opt/homebrew</p><p class="l5">Press RETURN/ENTER to continue…</p><p class="l6"><span class="ar">==&gt;</span> Downloading and installing Homebrew…</p><p class="l7"><span class="hf10-bar"><i></i></span></p><p class="l8">==&gt; Installation successful!</p><p class="l9"><span class="ar">==&gt;</span> Next steps:</p><div class="hf10-next"><p>echo &gt;&gt; ~/.zprofile</p><p>eval "$(/opt/homebrew/bin/brew shellenv)"</p></div></div></div><span class="hf-tag hf10-t3"><i>Nothing shows as you type</i></span><span class="hf-tag hf10-t5"><i>Press return</i></span><span class="hf-tag hf10-t7"><i>Takes a few minutes</i></span><span class="hf-tag hf10-t11"><i>↑ Copy these lines and run them one at a time</i></span></div></div><!-- /fig:10 -->
+          <div class="help-note"><b>This is the official command.</b> It's the same one shown on Homebrew's official site (<a href="https://brew.sh/" rel="noopener">brew.sh</a>). If you'd rather be sure, copy it from the official site.</div>
+
+          <h3 id="voice-blackhole"><span class="no">3-4</span>Install BlackHole 2ch</h3>
+          <ol class="help-steps">
+            <li>
+              <p>In Terminal, run this command:</p>
+              <pre class="help-code"><code>brew install --cask blackhole-2ch</code></pre>
+              <ul><li>If you're asked for a password, type your Mac's password and press <kbd>return</kbd>.</li></ul>
+            </li>
+            <li>
+              <p><b>Restart your Mac.</b> BlackHole 2ch won't work until you restart (the installer also tells you a restart is required when it finishes).</p>
+            </li>
+            <li>
+              <p><b>Make sure it's installed.</b> Open System Settings &gt; Sound &gt; Input. If BlackHole 2ch is in the list, it's installed.</p>
+              <!-- fig:11 --><div class="hf hf11" role="img" aria-label="The Input tab under Sound in the Mac's System Settings. BlackHole 2ch now appears in the list. The selected input is still the usual microphone."><div class="hf-in" aria-hidden="true"><div class="hf-win hf-set"><div class="hf-wbar"><i></i><i></i><i></i><b>System Settings</b></div><div class="hf-wbody"><div class="hf-side"><div class="hf-skel"></div><div class="hf-skel"></div><span class="is-sel">Sound</span><div class="hf-skel"></div><div class="hf-skel"></div></div><div class="hf-main"><h4>Sound</h4><div class="hf11-seg"><span>Output</span><span>Input</span></div><div class="hf11-th"><span>Name</span><span>Type</span></div><div class="hf11-row hf11-r1 is-sel"><b>MacBook Microphone</b><small>Built-in</small><span class="hf-tag"><i>Use this one</i></span></div><div class="hf11-row hf11-r2"><b>BlackHole 2ch</b><small>Virtual</small><span class="hf-tag"><i>Installed</i></span></div><div class="hf11-level"><span>Input level</span><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div></div></div></div></div><!-- /fig:11 -->
+            </li>
+          </ol>
+          <div class="help-warn"><b>Don't select BlackHole 2ch here.</b> Leave the Sound input set to your usual microphone (such as the built-in mic). The only place you select BlackHole 2ch is in Aqua Voice's settings, in the next step.</div>
+          <div class="help-note"><b>If you can't restart right now</b> If you can't restart because, say, your AI is in the middle of a job, running this command in Terminal may make BlackHole 2ch available without a restart (your Mac's audio will cut out for a moment). If it still doesn't show up in the list, restart your Mac.<pre class="help-code"><code>sudo killall coreaudiod</code></pre></div>
+
+          <h3 id="voice-mic"><span class="no">3-5</span>Set Aqua Voice's microphone to BlackHole 2ch</h3>
+          <ol class="help-steps">
+            <li><p>Open Aqua Voice's Settings.</p></li>
+            <li><p>Open Audio and choose <b>BlackHole 2ch</b> as the microphone.</p></li>
+          </ol>
+          <!-- fig:12 --><div class="hf hf12" role="img" aria-label="In Aqua Voice's settings, opening Audio and choosing BlackHole 2ch from the list of microphones."><div class="hf-in" aria-hidden="true"><div class="hf-win hf-set"><div class="hf-wbar"><i></i><i></i><i></i><b>Aqua Voice</b></div><div class="hf-wbody"><div class="hf-side"><i class="hf12-sel"></i><span>General</span><span>Audio</span><span>Keybindings</span></div><div class="hf-main"><div class="hf12-gen"><div class="hf-skel"></div><div class="hf-skel"></div><div class="hf-skel"></div><div class="hf-skel"></div></div><div class="hf12-audio"><h4>Audio</h4><div class="hf12-mic"><b>Microphone</b><div class="hf12-dd"><span>MacBook Microphone</span><span>BlackHole 2ch</span></div></div><div class="hf12-list"><span>MacBook Microphone</span><span>BlackHole 2ch</span><span>Earbuds Microphone</span></div></div></div></div></div><svg class="hf-cur hf12-cur" viewBox="0 0 12 16"><path d="M1 1v12l3.2-2.8 2 4.6 2-.9-2-4.5H11z" fill="#14203a" stroke="#fff" stroke-width="1" stroke-linejoin="round"/></svg></div></div><!-- /fig:12 -->
+          <p>That's it. Setup is complete.</p>
+
+          <h3 id="voice-mac">It still works as usual at your Mac</h3>
+          <p>You might wonder: “If Aqua Voice's microphone is set to BlackHole 2ch, won't it stop hearing me when I talk at my Mac?” Don't worry.</p>
+          <p><b>As long as MOTHERSHIP HOST is running, you can use Aqua Voice at your Mac just as before.</b> When you use Aqua Voice at your Mac, MOTHERSHIP HOST passes the audio from your Mac's microphone to BlackHole 2ch. Hold <kbd>fn</kbd> and speak, and your words become text as always. There's no need to switch microphones.</p>
+          <ul class="ticks">
+            <li>Your Mac's speaker and microphone settings don't change. Installing BlackHole 2ch simply adds one more route for audio.</li>
+            <li>The microphone used at your Mac is the one selected in System Settings &gt; Sound &gt; Input. Switch to an earbud mic or anything else, and it just works.</li>
+            <li>Your Mac's microphone is used only while Aqua Voice is listening.</li>
+            <li>While you're speaking from your device, only the audio from your device is passed to Aqua Voice.</li>
+          </ul>
+          <!-- fig:13 --><div class="hfv hfv-two" role="img" aria-label="Diagram of two voice paths side by side. When you speak at your Mac, MOTHERSHIP HOST feeds the audio from the Mac's microphone into BlackHole 2ch. When you speak from your device, MOTHERSHIP HOST feeds the audio from the device's microphone into BlackHole 2ch. Either way, it goes from BlackHole 2ch to Aqua Voice and becomes text.">
+            <p class="hfv-case" aria-hidden="true"><span>When you speak at your Mac</span><span>When you speak from your device</span></p>
+            <div class="hfv-row" aria-hidden="true">
+              <div class="hfv-src">
+                <div class="hfv-node hfv-sa"><b>Mac's microphone</b><span>Hold fn and speak</span></div>
+                <div class="hfv-node hfv-sb"><b>Device's microphone</b><span>Hold 🎤 and speak</span></div>
+              </div>
+              <i class="hfv-link hfv-m1"></i>
+              <div class="hfv-node hfv-h1"><b>MOTHERSHIP HOST</b><span>Passes on either voice</span></div>
+              <i class="hfv-link hfv-m2"></i>
+              <div class="hfv-node hfv-h2"><b>BlackHole 2ch</b><span>Virtual microphone</span></div>
+              <i class="hfv-link hfv-m3"></i>
+              <div class="hfv-node hfv-h3"><b>Aqua Voice</b><span>Turns it into text</span></div>
+            </div>
+          </div><!-- /fig:13 -->
+          <div class="help-warn">
+            <b>Three things to keep in mind</b>
+            <ul>
+              <li><b>Microphone permission:</b> The first time, MOTHERSHIP HOST asks for Microphone permission. Choose Allow.</li>
+              <li><b>When MOTHERSHIP HOST isn't running:</b> What you say at your Mac won't reach Aqua Voice. To be safe, turn on Open at Login in MOTHERSHIP HOST (<a href="#keep-awake">5 Keep your Mac awake</a>). On days you don't use MOTHERSHIP HOST, set Aqua Voice's microphone back to your original mic and everything works as it did before.</li>
+              <li><b>Sound input:</b> If the input in System Settings is set to BlackHole 2ch, your voice at the Mac isn't passed along. Keep the input set to your usual microphone.</li>
+            </ul>
+          </div>
+
+          <h3 id="voice-try"><span class="no">3-6</span>Try talking from your device</h3>
+          <ol class="help-steps">
+            <li><p>Connect to your Mac from your device.</p></li>
+            <li><p>On your Mac's screen, tap where you want the text to go (a note, an AI's input field, and so on).</p></li>
+            <li><p><b>Hold the 🎤 button on screen while you speak</b>, then let go when you're done. The first time, your device asks for microphone permission; allow it.</p></li>
+            <li><p>After a moment, what you said is typed on your Mac.</p></li>
+          </ol>
+          <!-- fig:14 --><div class="hf hf14 is-room" role="img" aria-label="You speak only while holding the 🎤 button on your device. When you release it, what you said is typed into the input field on the Mac."><div class="hf-in" aria-hidden="true"><div class="hf-lap hf14-lap"><div class="hf-scr"><div class="hf-lbar"><i></i><b></b><b></b><span class="hf-tray"><svg viewBox="0 0 128 128"><use href="#hs-mark"/></svg></span></div><div class="hf14-ai"><b></b><i></i><i></i><i></i><div class="hf14-in"><u></u></div></div></div><div class="hf-base"></div></div><div class="hf-ph hf14-ph"><div class="hf14-desk"><div class="hf14-ai"><b></b><i></i><i></i><i></i><div class="hf14-in"><span>Next, fix the chart.</span></div></div><div class="hf14-wave"><span class="hf-wave"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span></div><div class="hf14-bar"><span>🎤</span><span>⌫</span><span>⏎</span><span>⇥</span></div></div></div><span class="hf-tag hf14-ta"><i>Speak only while holding</i></span><span class="hf-tag hf14-tb"><i>Release, and the text lands on your Mac</i></span></div></div><!-- /fig:14 -->
+          <ul class="ticks">
+            <li>Want a do-over? Keep holding, slide your finger off the button, and let go to cancel.</li>
+            <li>The buttons next to 🎤 let you press Enter or Delete. You can change which buttons appear under Voice Bar in your device's settings.</li>
+            <li>To talk using a key on an external keyboard, go to Voice Input (Aqua Voice on Mac) in your device's settings and tap Register Key…</li>
+          </ul>
+
+          <h3 id="voice-trouble">When voice input isn't working</h3>
+          <dl class="help-qa">
+            <div><dt>Your device says “BlackHole 2ch isn't installed on the Mac”</dt><dd>BlackHole 2ch either isn't installed, or your Mac hasn't been restarted since you installed it. Go through <a href="#voice-blackhole">3-4</a> again and restart your Mac.<!-- fig:18 --><div class="hf hf18 is-mini" role="img" aria-label="What to do when your device says BlackHole 2ch isn't installed on the Mac. Install BlackHole 2ch in Terminal on the Mac (3-4) and restart the Mac. Then you can speak from your device."><div class="hf-in" aria-hidden="true"><div class="hf-ph hfm-ph "><div class="hfm-desk"><span class="hf-w hf-w1"><b></b><i></i><i></i><i></i></span><span class="hf-w hf-w2"><b></b><em><i></i><i></i><i></i><i></i></em></span></div><p class="hfm-ban hf18-bad"><i>!</i><span>BlackHole 2ch isn't installed on the Mac</span></p><p class="hfm-ban is-ok hf18-ok"><i>✓</i><span>Ready to talk with 🎤</span></p></div><div class="hf-win hf18-term"><div class="hf-wbar"><i></i><i></i><i></i><b>Terminal</b></div><div class="hf-tbody"><p><span class="pr">$</span> <span class="hf18-cmd">brew install --cask blackhole-2ch</span></p><p class="hf18-done">🍺 blackhole-2ch was successfully installed!</p></div></div><span class="hf18-re"><i>↻</i><b>Restart your Mac</b></span><span class="hf-tag hfm-tag hf18-t1"><i>Install it (3-4)</i></span><span class="hf-tag hfm-tag hf18-t2"><i>Restart your Mac</i></span><span class="hf-tag hfm-tag hf18-t3"><i>Now you can talk</i></span></div></div><!-- /fig:18 --></dd></div>
+            <div><dt>Your device says “Aqua Voice isn't recording from BlackHole 2ch”</dt><dd><ul><li>Make sure Aqua Voice is running on your Mac.</li><li>Make sure Aqua Voice's microphone is set to BlackHole 2ch (<a href="#voice-mic">3-5</a>).</li><li>Make sure Aqua Voice's recording key is set to <kbd>fn</kbd> (<a href="#voice-aqua">3-1</a>).</li></ul><!-- fig:19 --><div class="hf hf19 is-mini" role="img" aria-label="What to do when your device says Aqua Voice isn't recording from BlackHole 2ch. On the Mac, check that Aqua Voice is running, that its microphone is BlackHole 2ch, and that the recording key is fn. Then recording works."><div class="hf-in" aria-hidden="true"><div class="hf-ph hfm-ph "><div class="hfm-desk"><span class="hf-w hf-w1"><b></b><i></i><i></i><i></i></span><span class="hf-w hf-w2"><b></b><em><i></i><i></i><i></i><i></i></em></span></div><p class="hfm-ban hf19-bad"><i>!</i><span>Aqua Voice isn't recording from BlackHole 2ch</span></p><p class="hfm-ban is-ok hf19-ok"><i>✓</i><span>Ready to talk with 🎤</span></p></div><div class="hfm-side hfm-card"><p class="hfm-h">Check on your Mac</p><p class="hfm-ck hf19-c1"><i></i><span>Aqua Voice is running</span></p><p class="hfm-ck hf19-c2"><i></i><span>Mic: <em class="hfm-sel hf19-sel"><b class="hf19-old">MacBook Mic</b><b class="hf19-new">BlackHole 2ch</b></em></span></p><p class="hfm-ck hf19-c3"><i></i><span>Recording key: <kbd class="hf19-fn">fn</kbd></span></p></div><span class="hf-tag hfm-tag hf19-t1"><i>Check these three (3-5, 3-1)</i></span><span class="hf-tag hfm-tag hf19-t2"><i>Recording works again</i></span></div></div><!-- /fig:19 --></dd></div>
+            <div><dt>Aqua Voice has stopped responding at your Mac</dt><dd>Check the three things to keep in mind under “<a href="#voice-mac">It still works as usual at your Mac</a>.”<!-- fig:20 --><div class="hf hf20 is-mini" role="img" aria-label="What to do when Aqua Voice stops responding at your Mac. Check that MOTHERSHIP HOST has microphone permission, that MOTHERSHIP HOST is running, and that the Sound input is your usual microphone. Then holding fn and speaking at your Mac produces text again."><div class="hf-in" aria-hidden="true"><div class="hf-win hf20-memo"><div class="hf-wbar"><i></i><i></i><i></i><b>Notes</b></div><div class="hf-wbody"><p class="hf20-txt">Notes from today's meeting</p></div></div><span class="hf-key hf20-fn">fn</span><span class="hf20-wave"><span class="hf-wave"><i></i><i></i><i></i><i></i><i></i><i></i></span></span><div class="hfm-side hfm-card"><p class="hfm-h">Three things to check</p><p class="hfm-ck hf20-c1"><i></i><span>Mic allowed for MOTHERSHIP HOST</span></p><p class="hfm-ck hf20-c2"><i></i><span>MOTHERSHIP HOST is running</span></p><p class="hfm-ck hf20-c3"><i></i><span>Sound input: <em class="hfm-sel"><b class="hf20-old">BlackHole 2ch</b><b class="hf20-new">Usual mic</b></em></span></p></div><span class="hf-tag hfm-tag hf20-t1"><i>Check these three</i></span><span class="hf-tag hfm-tag hf20-t2"><i>Works at your Mac again</i></span></div></div><!-- /fig:20 --></dd></div>
+            <div><dt>The first word gets cut off when you talk at your Mac</dt><dd>Press <kbd>fn</kbd>, pause for a beat, and then start speaking.<!-- fig:21 --><div class="hf hf21 is-mini" role="img" aria-label="What to do when the first word gets cut off at your Mac. Speak right after pressing fn, and the first word is lost. Press fn, pause for a beat, then speak, and everything is typed from the start."><div class="hf-in" aria-hidden="true"><div class="hf-win hf21-memo"><div class="hf-wbar"><i></i><i></i><i></i><b>Notes</b></div><div class="hf-wbody"><p class="hf21-a"><s>Next,</s> fix the chart.</p><p class="hf21-b">Next, fix the chart.</p></div></div><span class="hf-key hf21-fn">fn</span><span class="hf21-pause"><b>Pause</b></span><span class="hf21-wave"><span class="hf-wave"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span></span><span class="hf-tag hfm-tag hf21-t1"><i>Speak right away, and the first word is lost</i></span><span class="hf-tag hfm-tag hf21-t2"><i>Press fn, pause for a beat, then speak</i></span></div></div><!-- /fig:21 --></dd></div>
+          </dl>
+        </section>
+
+        <!-- 4 外から使う -->
+        <section class="article" id="outside" aria-labelledby="outside-title">
+          <h2 id="outside-title"><span class="no">4</span>Use it away from home (Tailscale)</h2>
+          <p>To connect from outside your home, you'll use Tailscale. Tailscale is a service that securely connects devices in different places, and it's free for personal use. You don't need to change any router settings.</p>
+          <ol class="help-steps">
+            <li><p>Create a Tailscale account.</p></li>
+            <li><p>Install the Tailscale app on your Mac and your device, and sign in to <b>the same account</b> on both.</p></li>
+            <li><p>On your home Wi-Fi, connect to your Mac with MOTHERSHIP once. Your device remembers how to reach your Mac from outside.</p></li>
+            <li><p><b>Try it before you leave.</b> Turn off Wi-Fi on your phone so it's on cellular, then tap Connect in MOTHERSHIP. If your Mac's screen appears, you're all set.</p></li>
+          </ol>
+          <!-- fig:15 --><div class="hfv hfv-out" role="img" aria-label="Diagram of a device away from home connecting to the Mac at home through Tailscale's encrypted tunnel. Input goes from the device to the Mac and the screen from the Mac to the device, directly. Nothing passes through MOTHERSHIP servers.">
+            <div class="hfv-row" aria-hidden="true">
+              <div class="hfv-node hfv-o1"><b>Your device, away</b><span>Cellular or outside Wi-Fi</span></div>
+              <div class="hfv-tunnel"><b>Tailscale</b><span>Encrypted tunnel</span><i></i><i></i><i></i><i></i></div>
+              <div class="hfv-node hfv-o2"><b>Your Mac at home</b><span>MOTHERSHIP HOST</span></div>
+            </div>
+            <p class="hfv-legend" aria-hidden="true"><span>Input (device → Mac)</span><span>Screen (Mac → device)</span></p>
+            <p class="hfv-x" aria-hidden="true">No <s>MOTHERSHIP servers</s> in between. No router setup, either.</p>
+          </div><!-- /fig:15 -->
+          <p>When you're out, just make sure Tailscale is turned on on your device and tap Connect. Even if your Mac shows “○ Not found on home network (connects via Tailscale when away),” you can go ahead and tap Connect.</p>
+          <div class="help-note"><b>If it won't connect</b> Under “Enter address manually” on your device, try entering your Mac's Tailscale name (for example, <code>my-mac.tail1234.ts.net</code>). You can find the name in the Tailscale app.</div>
+          <div class="help-note">
+            <b>Your Mac's screen while you're connected from outside</b>
+            <p>When you connect from outside, the screen of your Mac at home is hidden automatically (so people at home can't see it). When you disconnect, your Mac locks.</p>
+            <p>You can change this with the setting on your device, “Automatically hide the home Mac's screen when connecting from outside,” and the one in MOTHERSHIP HOST, “Lock the Mac on disconnect if its screen was hidden.”</p>
+          </div>
+        </section>
+
+        <!-- 5 Macを起こしておく -->
+        <section class="article" id="keep-awake" aria-labelledby="keep-awake-title">
+          <h2 id="keep-awake-title"><span class="no">5</span>Keep your Mac awake</h2>
+          <p>If your Mac goes to sleep, you can't connect from outside. Before you head out, turn on two switches in the MOTHERSHIP HOST menu.</p>
+          <dl class="help-need">
+            <div><dt>Keep Mac awake while waiting</dt><dd>When this is on, your Mac won't go to sleep while MOTHERSHIP HOST is running.</dd></div>
+            <div><dt>Open at Login</dt><dd>When this is on, MOTHERSHIP HOST starts automatically when you log in to your Mac.</dd></div>
+          </dl>
+          <!-- fig:16 --><div class="hf hf16" role="img" aria-label="In the MOTHERSHIP HOST menu, turning on the switches for Open at Login and Keep Mac awake while waiting, one after the other."><div class="hf-in" aria-hidden="true"><div class="hf-mbar"><i></i><b></b><b></b><b></b><span class="hf-tray "><svg viewBox="0 0 128 128"><use href="#hs-mark"/></svg></span><u></u><u></u></div><div class="hf-pop "><div class="hf-r"><b>MOTHERSHIP HOST</b><small>Waiting for connection</small></div><div class="hf-r"><span>Registered Devices</span><em class="hf-btn ">Add Device…</em></div><div class="hf-r"><i class="hf-dot is-ok"></i><span>Screen Recording</span></div><div class="hf-r"><i class="hf-dot is-ok"></i><span>Accessibility</span></div><div class="hf-r hf16-r1"><span>Open at Login</span><i class="hf-tg hf16-t1"></i></div><div class="hf-r hf16-r2"><span>Keep Mac awake while waiting</span><i class="hf-tg hf16-t2"></i></div></div><svg class="hf-cur hf16-cur" viewBox="0 0 12 16"><path d="M1 1v12l3.2-2.8 2 4.6 2-.9-2-4.5H11z" fill="#14203a" stroke="#fff" stroke-width="1" stroke-linejoin="round"/></svg></div></div><!-- /fig:16 -->
+          <ul class="ticks">
+            <li>Mac laptops may go to sleep when the lid is closed. Plug yours in and leave the lid open.</li>
+            <li>After your Mac restarts, MOTHERSHIP HOST doesn't run until you log in, so you can't connect until then.</li>
+          </ul>
+        </section>
+
+        <!-- 6 うまくいかないとき -->
+        <section class="article" id="trouble" aria-labelledby="trouble-title">
+          <h2 id="trouble-title"><span class="no">6</span>Troubleshooting</h2>
+          <dl class="help-qa">
+            <div><dt>At home, your device can't find your Mac</dt><dd><ul><li>Make sure your Mac and your device are on the same Wi-Fi network.</li><li>Make sure the MOTHERSHIP HOST icon is in your Mac's menu bar. If it isn't, open MOTHERSHIP HOST.</li><li>On iPhone or iPad, go to Settings &gt; Privacy &amp; Security &gt; Local Network and make sure MOTHERSHIP is turned on.</li></ul><!-- fig:22 --><div class="hf hf22 is-mini" role="img" aria-label="What to do when your device can't find your Mac at home. Check that the Mac and the device are on the same Wi-Fi, that the MOTHERSHIP HOST icon is in the Mac's menu bar, and that MOTHERSHIP is turned on under Local Network on iPhone or iPad. Then the Mac is found."><div class="hf-in" aria-hidden="true"><div class="hf-ph hfm-ph "><div class="hf22-list"><p>Your Macs</p><div class="hf22-row"><b>Mac at home</b><small class="hf22-st"><span class="hf22-no">Not found</span><span class="hf22-yes">Available on home network</span></small></div></div></div><div class="hfm-side hfm-card"><p class="hfm-h">Three things to check</p><p class="hfm-ck hf22-c1"><i></i><span>Mac and device on the same Wi-Fi</span></p><p class="hfm-ck hf22-c2"><i></i><span><span class="hf22-ico"><svg viewBox="0 0 128 128"><use href="#hs-mark"/></svg></span> is in the menu bar</span></p><p class="hfm-ck hf22-c3"><i></i><span>Local Network <i class="hf-tg"></i></span></p></div><span class="hf-tag hfm-tag hf22-t1"><i>Check these three</i></span><span class="hf-tag hfm-tag hf22-t2"><i>Your Mac is found</i></span></div></div><!-- /fig:22 --></dd></div>
+            <div><dt>Can't register with the QR code</dt><dd>The QR code works for five minutes, and only once. In the window on your Mac, click “Create new link and QR code” and scan the new code.<!-- fig:23 --><div class="hf hf23 is-mini" role="img" aria-label="What to do when you can't register with the QR code. The QR code works for five minutes, and only once. If it has expired, click Create new link and QR code in the window on the Mac and scan the new code with your device to register."><div class="hf-in" aria-hidden="true"><div class="hf-ph hfm-ph "><div class="hf23-cam"><span><svg viewBox="0 0 19 19"><use href="#hs-qr"/></svg></span></div><p class="hfm-ban is-ok hf23-ok"><i>✓</i><span>Registered</span></p></div><div class="hf-win hf23-win"><div class="hf-wbar"><i></i><i></i><i></i><b>Add Device</b></div><div class="hf-wbody"><span class="hf23-qr"><svg viewBox="0 0 19 19"><use href="#hs-qr"/></svg></span><p class="hf23-msg"><b class="hf23-x">Expired</b><b class="hf23-o">4:59 remaining<br>Single use only</b></p><em class="hf-btn hf23-btn">Create new link and QR code</em></div></div><svg class="hf-cur hf23-cur" viewBox="0 0 12 16"><path d="M1 1v12l3.2-2.8 2 4.6 2-.9-2-4.5H11z" fill="#14203a" stroke="#fff" stroke-width="1" stroke-linejoin="round"/></svg><span class="hf-tag hfm-tag hf23-t1"><i>5 minutes, one use. Expired? Make a new one</i></span><span class="hf-tag hfm-tag hf23-t2"><i>Scan the new QR code</i></span></div></div><!-- /fig:23 --></dd></div>
+            <div><dt>It connects, but there's no picture or you can't control anything</dt><dd>Your Mac's permissions may have been turned off. In the MOTHERSHIP HOST menu, make sure Screen Recording and Accessibility both have green checkmarks (<a href="#setup-mac">Step 1</a>).<!-- fig:24 --><div class="hf hf24 is-mini" role="img" aria-label="What to do when it connects but there's no picture or you can't control anything. When Screen Recording and Accessibility both have green checkmarks in the MOTHERSHIP HOST menu, the Mac's screen appears on your device."><div class="hf-in" aria-hidden="true"><div class="hf-ph hfm-ph "><div class="hfm-desk"><span class="hf-w hf-w1"><b></b><i></i><i></i><i></i></span><span class="hf-w hf-w2"><b></b><em><i></i><i></i><i></i><i></i></em></span></div><div class="hf24-black"><b>No picture</b></div></div><div class="hf-pop "><div class="hf-r"><b>MOTHERSHIP HOST</b><small>Waiting for connection</small></div><div class="hf-r"><i class="hf-dot hf24-d1"></i><span>Screen Recording</span></div><div class="hf-r"><i class="hf-dot hf24-d2"></i><span>Accessibility</span></div></div><span class="hf-tag hfm-tag hf24-t1"><i>Check the Mac's permissions (Step 1)</i></span><span class="hf-tag hfm-tag hf24-t2"><i>Green checks, and you're in</i></span></div></div><!-- /fig:24 --></dd></div>
+            <div><dt>Can't connect from outside</dt><dd><ul><li>Make sure Tailscale is on, and signed in to the same account, on both your device and your Mac.</li><li>Make sure your Mac isn't asleep and that MOTHERSHIP HOST is running (<a href="#keep-awake">5 Keep your Mac awake</a>).</li><li>Under “Enter address manually,” try entering your Mac's Tailscale name (<a href="#outside">4 Use it away from home</a>).</li></ul><!-- fig:25 --><div class="hf hf25 is-mini" role="img" aria-label="What to do when you can't connect from outside. Check that Tailscale is on and signed in to the same account on the device and the Mac, and that the Mac is awake. Then enter the Mac's Tailscale name under Enter address manually, and you can connect."><div class="hf-in" aria-hidden="true"><div class="hf-ph hfm-ph "><div class="hfm-desk"><span class="hf-w hf-w1"><b></b><i></i><i></i><i></i></span><span class="hf-w hf-w2"><b></b><em><i></i><i></i><i></i><i></i></em></span></div><p class="hfm-ban hf25-bad"><i>!</i><span>Couldn't connect</span></p><p class="hfm-ban is-ok hf25-ok"><i>✓</i><span>Connected</span></p></div><div class="hfm-side hfm-card"><p class="hfm-h">Three things to check</p><p class="hfm-ck hf25-c1"><i></i><span>Tailscale on (same account)</span></p><p class="hfm-ck hf25-c2"><i></i><span>Mac is awake (5)</span></p><p class="hfm-ck hf25-c3"><i></i><span>Address: <em class="hf25-in"><b>mac-mini</b></em></span></p></div><span class="hf-tag hfm-tag hf25-t1"><i>Check these three</i></span><span class="hf-tag hfm-tag hf25-t2"><i>Connected from outside</i></span></div></div><!-- /fig:25 --></dd></div>
+            <div><dt>Voice input isn't working</dt><dd>See “<a href="#voice-trouble">When voice input isn't working</a>.”<!-- fig:26 --><div class="hf hf26 is-mini" role="img" aria-label="What to do when voice input isn't working. If holding 🎤 on your device and speaking doesn't produce text, check the four items under When voice input isn't working (BlackHole 2ch, Aqua Voice recording, at your Mac, the first word)."><div class="hf-in" aria-hidden="true"><div class="hf-ph hfm-ph "><div class="hfm-desk"><span class="hf-w hf-w1"><b></b><i></i><i></i><i></i></span><span class="hf-w hf-w2"><b></b><em><i></i><i></i><i></i><i></i></em></span></div><div class="hf26-bar"><b>🎤</b><b>⌫</b><b>⏎</b></div><span class="hf26-q">?</span></div><div class="hfm-side hfm-card hf26-card"><p class="hfm-h">“When voice input isn't working”</p><ul><li><span>BlackHole 2ch isn't installed</span></li><li><span>Aqua Voice isn't recording</span></li><li><span>No response at your Mac</span></li><li><span>First word gets cut off</span></li></ul></div><span class="hf-tag hfm-tag hf26-t1"><i>You talk with 🎤, but no text</i></span><span class="hf-tag hfm-tag hf26-t2"><i>See “When voice input isn't working”</i></span></div></div><!-- /fig:26 --></dd></div>
+            <div><dt>You see “The trial period for this Mac has ended”</dt><dd>Buy a license in MOTHERSHIP on your device (from the trial-ended screen, or under License in Settings). Then connect to your Mac from that device and choose Add when you're asked whether to add the Mac to your license. That Mac is then unlocked (one purchase covers up to three Macs).<!-- fig:27 --><div class="hf hf27 is-mini" role="img" aria-label="What to do when you see that the trial period has ended. Tap Buy on your device to purchase, then connect to the Mac and tap Add when asked whether to add the Mac to your license (1 of 3). The Mac becomes licensed and usable."><div class="hf-in" aria-hidden="true"><div class="hf-ph hfm-ph "><div class="hfm-desk"><span class="hf-w hf-w1"><b></b><i></i><i></i><i></i></span><span class="hf-w hf-w2"><b></b><em><i></i><i></i><i></i><i></i></em></span></div><div class="hf27-s hf27-s1"><p class="hf27-ttl">The trial period for this Mac has ended</p><p class="hf27-sub">To keep using it, buy a license. One purchase covers up to 3 Macs</p><em class="hfm-btn"><span>Buy</span></em></div><div class="hf27-s hf27-s2"><p class="hf27-big">✓</p><p class="hf27-ttl">Purchased</p></div><div class="hf27-s hf27-s3"><p class="hf27-ttl">Add this Mac (Home) to your license?</p><p class="hf27-sub">(1 of 3)</p><em class="hfm-btn"><span>Add</span></em></div></div><span class="hf-fin hf27-fin"></span><div class="hfm-side hfm-card"><p class="hfm-h">This Mac</p><p class="hf27-st"><b class="hf27-a">Trial ended</b><b class="hf27-b">Licensed</b></p><p class="hf27-note">Connect from the device you bought on and add this Mac to your license. Then it's licensed</p></div><span class="hf-tag hfm-tag hf27-t1"><i>Buy on your device</i></span><span class="hf-tag hfm-tag hf27-t2"><i>Add the Mac to your license</i></span><span class="hf-tag hfm-tag hf27-t3"><i>That Mac is unlocked (up to 3)</i></span></div></div><!-- /fig:27 --></dd></div>
+            <div><dt>You see “This purchase covers up to 3 Macs”</dt><dd><ul><li>Under License in your device's settings, remove a Mac you no longer use. That frees up a slot you can use for another Mac.</li><li>You can remove a Mac without connecting to it only once every 90 days.</li><li>When you part with a Mac, it's safest to first click “Remove license from this Mac” in that Mac's MOTHERSHIP HOST menu.</li></ul><!-- fig:28 --><div class="hf hf28 is-mini" role="img" aria-label="What to do when you see that this purchase covers up to 3 Macs. Under License in your device's settings, tap Remove for a Mac you no longer use. That frees one of the three slots so you can add a new Mac. You can remove a Mac without connecting to it once every 90 days."><div class="hf-in" aria-hidden="true"><div class="hf-ph hfm-ph "><div class="hf28-s hf28-s2"><p class="hf28-h"><span class="hf28-h3">Macs on this purchase (3&nbsp;of&nbsp;3)</span><span class="hf28-h2">Macs on this purchase (2&nbsp;of&nbsp;3)</span></p><p class="hf28-row"><b>Mac mini</b><em>Remove</em></p><p class="hf28-row"><b>MacBook Pro</b><em>Remove</em></p><div class="hf28-slot"><p class="hf28-row hf28-r3"><b>Old iMac</b><em>Remove</em></p><p class="hf28-row hf28-r4"><b>New Mac</b><em>Remove</em></p></div></div><div class="hf28-s hf28-s1"><p class="hf28-ttl">This purchase covers up to 3 Macs.</p><p class="hf28-sub">Remove a Mac you no longer use under License in Settings</p></div></div><span class="hf-fin hf28-fin"></span><div class="hfm-side hfm-card hf28-card"><p class="hfm-h">When removing</p><p>Without connecting: <b>once every 90 days</b></p><p>Parting with a Mac? Use “Remove license from this Mac” in its <b>MOTHERSHIP HOST menu</b></p></div><span class="hf-tag hfm-tag hf28-t1"><i>When you hit the 3-Mac limit</i></span><span class="hf-tag hfm-tag hf28-t2"><i>Remove a Mac you don't use</i></span><span class="hf-tag hfm-tag hf28-t3"><i>Use the free slot for a new Mac</i></span></div></div><!-- /fig:28 --></dd></div>
+            <div><dt>You've lost a device</dt><dd>In the MOTHERSHIP HOST menu, open Registered Devices and delete that device. Once it's deleted, it can no longer connect. If you use Tailscale, remove the device from Tailscale as well.<!-- fig:29 --><div class="hf hf29 is-mini" role="img" aria-label="What to do when you've lost a device. Under Registered Devices in the MOTHERSHIP HOST menu, delete the lost device, and it can no longer connect. If you use Tailscale, remove the device from Tailscale as well."><div class="hf-in" aria-hidden="true"><div class="hf-ph hfm-ph "><div class="hfm-desk"><span class="hf-w hf-w1"><b></b><i></i><i></i><i></i></span><span class="hf-w hf-w2"><b></b><em><i></i><i></i><i></i><i></i></em></span></div><p class="hfm-ban hf29-bad"><i>!</i><span>Can't connect to this Mac</span></p></div><div class="hf-win hf29-win"><div class="hf-wbar"><i></i><i></i><i></i><b>Registered Devices</b></div><div class="hf-wbody"><p class="hf29-row"><b>iPad Air</b><em class="hf-btn">Delete</em></p><p class="hf29-row hf29-r2"><b>Galaxy Z Fold7 (lost)</b><em class="hf-btn">Delete</em></p><p class="hf29-row"><b>Pixel</b><em class="hf-btn">Delete</em></p></div></div><span class="hf29-ts"><b>Remove it from Tailscale, too</b></span><svg class="hf-cur hf29-cur" viewBox="0 0 12 16"><path d="M1 1v12l3.2-2.8 2 4.6 2-.9-2-4.5H11z" fill="#14203a" stroke="#fff" stroke-width="1" stroke-linejoin="round"/></svg><span class="hf-tag hfm-tag hf29-t1"><i>Delete it in Registered Devices</i></span><span class="hf-tag hfm-tag hf29-t2"><i>The lost device can't connect</i></span></div></div><!-- /fig:29 --></dd></div>
+          </dl>
+          <div class="callout">
+            <h2>Still stuck?</h2>
+            <p><a href="contact.html">Contact us</a>. If you include the models of your Mac and device, their OS versions, and any message you saw, we can answer sooner.</p>
+          </div>
+        </section>
+      </article>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="footer-top">
+        <a class="brand" href="index.html"><span>MOTHERSHIP</span></a>
+        <nav aria-label="Footer navigation"><a href="index.html#features">Features</a><a href="index.html#voice">Voice</a><a href="index.html#how">How it works</a><a href="index.html#pricing">Pricing</a><a href="index.html#faq">FAQ</a><a href="index.html#download">Download</a><a href="help.html" aria-current="page">Help</a><a href="news.html">News</a><a href="terms-of-service.html">Terms of Service</a><a href="privacy-policy.html">Privacy Policy</a><a href="../design/commercial-transactions.html" hreflang="ja">Legal Notice (Japan, in Japanese)</a><a href="contact.html">Contact</a><a class="nav-lang" href="../design/help.html" lang="ja" hreflang="ja">日本語</a></nav>
+      </div>
+      <p class="trademark">Mac, macOS, iPhone, iPad, iPadOS, App Store, Face ID, Touch ID, and Mission Control are trademarks of Apple Inc., registered in the U.S. and other countries and regions. The iPhone trademark is used in Japan under license from Aiphone K.K. Android and Google Play are trademarks of Google LLC. Galaxy Z Fold and Samsung DeX are trademarks or registered trademarks of Samsung Electronics Co., Ltd. Tailscale is a trademark of Tailscale Inc. Claude Code is a trademark of Anthropic PBC, and Codex is a trademark of OpenAI. Aqua Voice and BlackHole are trademarks or product names of their respective owners.</p>
+      <p class="trademark">MOTHERSHIP is an independently developed app. It is not certified, sponsored, or endorsed by Apple Inc., Google LLC, Samsung Electronics Co., Ltd., Anthropic PBC, OpenAI, Tailscale Inc., or the maker of Aqua Voice.</p>
+      <div class="footer-bottom"><small>© 2026 MOTHERSHIP</small><a href="#top">Back to top ↑</a></div>
+    </div>
+  </footer>
+</body>
+</html>

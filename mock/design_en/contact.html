@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#e9eefa">
+  <meta name="description" content="Contact MOTHERSHIP. Send us your questions about using the app, bug reports, questions about purchases and licenses, and your feedback and requests.">
+  <title>Contact | MOTHERSHIP</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <!-- 言語ごとのページ（モックなので相対パス。本番では絶対 URL にして、x-default も付ける） -->
+  <link rel="alternate" hreflang="en" href="contact.html">
+  <link rel="alternate" hreflang="ja" href="../design/contact.html">
+  <!-- デザインシステム（値 → 土台 → 部品）のあとに、このページだけの組み方 -->
+  <link rel="stylesheet" href="designSystem/tokens.css">
+  <link rel="stylesheet" href="designSystem/base.css">
+  <link rel="stylesheet" href="designSystem/components.css">
+  <link rel="stylesheet" href="contact.css">
+  <!-- スマホのメニューとヘッダーの背景（HERO の部分は、このページでは何もしない） -->
+  <script src="script.js" defer></script>
+  <!-- フォームの確認と送信（モックでは送信しない。contact.js の先頭を参照） -->
+  <script src="contact.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <header class="site-header" id="top">
+    <div class="wrap header-inner">
+      <a class="brand" href="index.html" aria-label="MOTHERSHIP home">
+        <svg class="brand-mark" viewBox="0 0 128 128" aria-hidden="true"><defs><linearGradient id="bm" x2="1" y2="1"><stop stop-color="#1e3ec0"/><stop offset=".55" stop-color="#385cf4"/><stop offset="1" stop-color="#38afee"/></linearGradient></defs><rect width="128" height="128" rx="27" fill="url(#bm)"/><path d="M60 28 22 86 49 80 60 91 60 75 48 70 60 54Z" fill="#fff"/><path d="M68 28 106 86 79 80 68 91 68 75 80 70 68 54Z" fill="#a8f8ff"/><path d="M64 86 72 98 64 105 56 98Z" fill="#fff"/></svg>
+        <span>MOTHERSHIP</span>
+      </a>
+      <button class="menu-toggle" type="button" aria-label="Open menu" aria-controls="site-nav" aria-expanded="false"><span></span><span></span></button>
+      <nav class="site-nav" id="site-nav" aria-label="Main navigation">
+        <a href="index.html#features">Features</a>
+        <a href="index.html#voice">Voice</a>
+        <a href="index.html#how">How it works</a>
+        <a href="index.html#pricing">Pricing</a>
+        <a href="index.html#faq">FAQ</a>
+        <a class="nav-lang" href="../design/contact.html" lang="ja" hreflang="ja">日本語</a>
+        <a class="nav-cta" href="index.html#download">Download</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="contact-hero" aria-labelledby="contact-title">
+      <div class="contact-hero-bg" aria-hidden="true"></div>
+      <div class="wrap">
+        <p class="pill pill-glass">Contact</p>
+        <h1 id="contact-title">Contact</h1>
+        <p class="contact-hero-lead">Questions about how something works, bug reports, feedback, requests: <span class="nb">whatever it is about MOTHERSHIP,</span> <span class="nb">we'd love to hear from you.</span></p>
+      </div>
+    </section>
+
+    <!-- 送る前に、自分で解決できるかもしれないこと -->
+    <section class="before" aria-labelledby="before-title">
+      <div class="wrap">
+        <h2 id="before-title">Before you write</h2>
+        <p class="before-lead">For common questions, you may find the answer right away.</p>
+        <div class="before-grid">
+          <article class="card">
+            <h3>Frequently asked questions</h3>
+            <p>We've gathered the questions we hear most: pricing, using it away from home, accounts, what you need for voice input, and more.</p>
+            <a class="card-link" href="index.html#faq">See the FAQ</a>
+          </article>
+          <article class="card">
+            <h3>If you can't connect</h3>
+            <p>First, check the following:</p>
+            <ul class="ticks small">
+              <li>Is your Mac awake? (Turn on “Keep Mac awake while waiting.”)</li>
+              <li>Does MOTHERSHIP HOST have Screen Recording and Accessibility permissions on your Mac?</li>
+              <li>At home: are your Mac and your device on the same Wi-Fi?</li>
+              <li>Away from home: is Tailscale signed in to the same account on both?</li>
+            </ul>
+          </article>
+          <article class="card">
+            <h3>Purchases and refunds</h3>
+            <p>Payments and refunds are handled by the App Store and Google Play. To ask for a refund, contact the store where you made your purchase. If you switch devices, use Restore Purchase in the app to bring your license along.</p>
+            <a class="card-link" href="terms-of-service.html#art-7">See the Terms of Service (payments and refunds)</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="form-section" aria-labelledby="form-title">
+      <div class="wrap">
+        <h2 id="form-title">Contact form</h2>
+        <div class="form-layout">
+          <div class="form-wrap">
+            <!-- WordPress の Contact Form 7 に送る（フォームの ID は data-cf7-id に入れる）。
+                 name はContact Form 7 のフォームのタグ名にそろえる（your-name など） -->
+            <form class="contact-form" id="contact-form" novalidate data-cf7-id="" aria-describedby="form-note">
+              <p class="form-note" id="form-note">Fields marked <span class="req">Required</span> must be filled in.</p>
+
+              <div class="field">
+                <label for="inquiry-type">Type of inquiry <span class="req">Required</span></label>
+                <select class="input" id="inquiry-type" name="inquiry-type" required aria-describedby="inquiry-type-error">
+                  <option value="">Please choose</option>
+                  <option>How to use the app</option>
+                  <option>Bug report</option>
+                  <option>Purchases and licenses</option>
+                  <option>Feedback or request</option>
+                  <option>Other (press inquiries, etc.)</option>
+                </select>
+                <p class="error-text" id="inquiry-type-error">Please choose a type of inquiry.</p>
+              </div>
+
+              <div class="field-row">
+                <div class="field">
+                  <label for="your-name">Name <span class="req">Required</span></label>
+                  <input class="input" id="your-name" name="your-name" type="text" autocomplete="name" required placeholder="e.g., Alex Smith" aria-describedby="your-name-error">
+                  <p class="error-text" id="your-name-error">Please enter your name.</p>
+                </div>
+                <div class="field">
+                  <label for="your-email">Email address <span class="req">Required</span></label>
+                  <input class="input" id="your-email" name="your-email" type="email" autocomplete="email" inputmode="email" required placeholder="e.g., you@example.com" aria-describedby="your-email-hint your-email-error">
+                  <p class="hint" id="your-email-hint">We'll send our reply to this address.</p>
+                  <p class="error-text" id="your-email-error">Please enter a valid email address.</p>
+                </div>
+              </div>
+
+              <fieldset class="field" aria-describedby="device-hint">
+                <legend>Your device <span class="opt">Optional</span></legend>
+                <p class="hint" id="device-hint">Choose the device or devices you use to control your Mac (select all that apply).</p>
+                <div class="choices">
+                  <label class="choice"><input type="checkbox" name="device[]" value="iPhone"><span>iPhone</span></label>
+                  <label class="choice"><input type="checkbox" name="device[]" value="iPad"><span>iPad</span></label>
+                  <label class="choice"><input type="checkbox" name="device[]" value="Android"><span>Android</span></label>
+                  <label class="choice"><input type="checkbox" name="device[]" value="Mac"><span>Another Mac</span></label>
+                </div>
+              </fieldset>
+
+              <div class="field-row">
+                <div class="field">
+                  <label for="macos-version">macOS version of the Mac you control <span class="opt">Optional</span></label>
+                  <input class="input" id="macos-version" name="macos-version" type="text" placeholder="e.g., macOS 15.3 (Mac mini M2)">
+                </div>
+                <div class="field">
+                  <label for="app-version">App version <span class="opt">Optional</span></label>
+                  <input class="input" id="app-version" name="app-version" type="text" placeholder="e.g., Host 1.0.0 / Android 1.0.0">
+                </div>
+              </div>
+
+              <div class="field">
+                <label for="your-subject">Subject <span class="req">Required</span></label>
+                <input class="input" id="your-subject" name="your-subject" type="text" required placeholder="e.g., Can't connect when away from home" aria-describedby="your-subject-error">
+                <p class="error-text" id="your-subject-error">Please enter a subject.</p>
+              </div>
+
+              <div class="field">
+                <label for="your-message">Message <span class="req">Required</span></label>
+                <textarea class="input" id="your-message" name="your-message" required placeholder="For bug reports, it helps if you tell us what you were doing and what happened." aria-describedby="your-message-error"></textarea>
+                <p class="error-text" id="your-message-error">Please enter your message.</p>
+              </div>
+
+              <!-- 添付ファイル（任意）。JPEG・PNG・PDF だけ、1 つ 5MB まで、3 つまで（contact.js が確かめて、送るときに your-file-1〜3 として付ける） -->
+              <div class="field attach" id="attach-field">
+                <p class="attach-label" id="attach-label">Attachments <span class="opt">Optional</span></p>
+                <p class="hint" id="attach-hint">A screenshot helps us understand what's going on. JPEG, PNG, or PDF; up to 5 MB each; up to three files.</p>
+                <p class="attach-warn" id="attach-warn">Please don't send images that show passwords, QR codes, or other people's personal information. If something like that is visible, cover it up before attaching.</p>
+                <div class="attach-pick">
+                  <input class="attach-input" id="attach-input" type="file" multiple accept=".jpg,.jpeg,.png,.pdf,image/jpeg,image/png,application/pdf" aria-labelledby="attach-label attach-button" aria-describedby="attach-hint attach-warn attach-error">
+                  <label class="btn btn-ghost attach-button" id="attach-button" for="attach-input"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 11.5 12.6 20a5.2 5.2 0 0 1-7.4-7.4l8.8-8.8a3.5 3.5 0 0 1 4.9 4.9l-8.8 8.8a1.7 1.7 0 0 1-2.5-2.5l8.1-8.1"/></svg>Choose files</label>
+                  <span class="attach-count" id="attach-count">0 / 3</span>
+                </div>
+                <ul class="attach-list" id="attach-list" aria-label="Attached files"></ul>
+                <p class="error-text" id="attach-error" role="status"></p>
+              </div>
+
+              <div class="agree-wrap">
+                <label class="agree">
+                  <input type="checkbox" name="acceptance-privacy" value="1" required aria-describedby="agree-error">
+                  <span>I have read and agree to the <a href="terms-of-service.html">Terms of Service</a> and <a href="privacy-policy.html">Privacy Policy</a>.</span>
+                </label>
+                <p class="error-text" id="agree-error">You need to check the box to agree before sending.</p>
+              </div>
+
+              <div class="form-actions">
+                <!-- 同意のチェックが入るまで押せない（contact.js が切り替える） -->
+                <button class="btn btn-primary" type="submit" disabled aria-describedby="submit-note">Send message <span aria-hidden="true">→</span></button>
+                <p class="fine is-locked" id="submit-note">You can send once you've agreed to the Terms of Service and Privacy Policy.</p>
+              </div>
+              <p class="form-status" role="alert" aria-live="assertive"></p>
+            </form>
+
+            <!-- 送信できたら、フォームの代わりにこれを出す -->
+            <div class="contact-form form-done" id="form-done" hidden tabindex="-1">
+              <span class="form-done-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m6 12.5 4 4L18 8"/></svg></span>
+              <h3>Message sent</h3>
+              <p>Thank you for getting in touch.<br>We'll review your message and reply in the order received.</p>
+              <p class="form-done-note">We've sent a confirmation to the email address you entered. If it hasn't arrived, please check your spam folder. If you still can't find it, make sure the address was correct and send your message again.</p>
+              <a class="btn btn-ghost" href="index.html">Back to home</a>
+            </div>
+          </div>
+
+          <aside class="form-aside" aria-label="About contacting us">
+            <div class="aside-box">
+              <h3>For bug reports</h3>
+              <p>Including the following helps us find the cause sooner:</p>
+              <ul class="ticks small">
+                <li>The model of the Mac you control, and its macOS version</li>
+                <li>The device you control it from, and its OS version</li>
+                <li>Whether you're on home Wi-Fi or away from home (Tailscale)</li>
+                <li>What you were doing, and what happened</li>
+                <li>Any message shown in the MOTHERSHIP HOST menu</li>
+              </ul>
+            </div>
+            <div class="aside-box">
+              <h3>About our reply</h3>
+              <p>We review each message and reply in the order received. It may take a few days to get back to you, and replies may be slower on weekends and Japanese public holidays.</p>
+            </div>
+            <div class="callout">
+              <h3>Don't write or show passwords</h3>
+              <p>Please don't include information used to log in or register, such as your Mac's password, your Tailscale password, or an image of a QR code. Make sure none of it appears in attached images, either. We will never ask you for it.</p>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="footer-top">
+        <a class="brand" href="index.html"><span>MOTHERSHIP</span></a>
+        <nav aria-label="Footer navigation"><a href="index.html#features">Features</a><a href="index.html#voice">Voice</a><a href="index.html#how">How it works</a><a href="index.html#pricing">Pricing</a><a href="index.html#faq">FAQ</a><a href="index.html#download">Download</a><a href="help.html">Help</a><a href="news.html">News</a><a href="terms-of-service.html">Terms of Service</a><a href="privacy-policy.html">Privacy Policy</a><a href="../design/commercial-transactions.html" hreflang="ja">Legal Notice (Japan, in Japanese)</a><a href="contact.html" aria-current="page">Contact</a><a class="nav-lang" href="../design/contact.html" lang="ja" hreflang="ja">日本語</a></nav>
+      </div>
+      <p class="trademark">Mac, macOS, iPhone, iPad, iPadOS, App Store, Face ID, Touch ID, and Mission Control are trademarks of Apple Inc., registered in the U.S. and other countries and regions. The iPhone trademark is used in Japan under license from Aiphone K.K. Android and Google Play are trademarks of Google LLC. Galaxy Z Fold and Samsung DeX are trademarks or registered trademarks of Samsung Electronics Co., Ltd. Tailscale is a trademark of Tailscale Inc. Claude Code is a trademark of Anthropic PBC, and Codex is a trademark of OpenAI. Aqua Voice and BlackHole are trademarks or product names of their respective owners.</p>
+      <p class="trademark">MOTHERSHIP is an independently developed app. It is not certified, sponsored, or endorsed by Apple Inc., Google LLC, Samsung Electronics Co., Ltd., Anthropic PBC, OpenAI, Tailscale Inc., or the maker of Aqua Voice.</p>
+      <div class="footer-bottom"><small>© 2026 MOTHERSHIP</small><a href="#top">Back to top ↑</a></div>
+    </div>
+  </footer>
+</body>
+</html>

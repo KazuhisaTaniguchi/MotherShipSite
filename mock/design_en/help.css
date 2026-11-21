@@ -1,0 +1,76 @@
+/* ==========================================================================
+   ヘルプ（help.html）だけの部品
+   ヘッダー・フッター・見出し・目次つきの 2 列は legal.css のものを使う。
+   2026-11-20：まず中身と構成を決めるための下書き。見た目は最小限。
+   画像・アニメの場所は、灰色の枠（.help-ph）に「何を見せるか」を文で書いてある。
+   ========================================================================== */
+
+/* 目的から探す（ページの先頭の 4 つのリンク） */
+.help-jump { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-3); margin-top: var(--space-6); }
+.help-jump a { display: grid; gap: 2px; padding: var(--space-4) var(--space-5); background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-md); color: inherit; text-decoration: none; }
+.help-jump a:hover { border-color: var(--blue); }
+.help-jump b { font-size: var(--text-body); color: var(--ink); }
+.help-jump span { font-size: var(--text-note); line-height: var(--leading-note); color: var(--ink-2); }
+
+/* 番号つきの手順 */
+.help-steps { margin-top: var(--space-4); display: grid; gap: var(--space-5); counter-reset: hs; }
+.help-steps > li { counter-increment: hs; position: relative; padding-left: 44px; }
+.help-steps > li::before { content: counter(hs); position: absolute; left: 0; top: 0; display: grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; background: var(--grad-accent); color: var(--on-dark); font-size: var(--text-note); font-weight: var(--weight-heavy); }
+.help-steps > li > p { margin-top: var(--space-2); }
+.help-steps > li > p:first-child { margin-top: 0; padding-top: 2px; }
+.help-steps ul { margin-top: var(--space-2); display: grid; gap: 6px; padding-left: 1.2em; list-style: disc; font-size: var(--text-small); line-height: var(--leading-note); color: var(--ink-2); }
+
+/* 画像・アニメの置き場所（仮）。灰色の枠に、何を見せるかを文で書く */
+.help-ph { margin-top: var(--space-4); display: grid; place-items: center; align-content: center; gap: 6px; min-height: 180px; padding: var(--space-6); background: #e3e6ec; border: 2px dashed #b4bac6; border-radius: var(--radius-md); text-align: center; }
+.help-ph span { font-size: var(--text-caption); font-weight: var(--weight-heavy); letter-spacing: var(--tracking-label); color: #6b7383; }
+.help-ph p { max-width: 520px; font-size: var(--text-small); line-height: var(--leading-note); color: #4a5262; }
+
+/* コマンド。クリックすると全体が選ばれる（コピーしやすいように） */
+.help-code { margin-top: var(--space-3); padding: var(--space-4) var(--space-5); background: #14203a; border-radius: var(--radius-md); overflow-x: auto; }
+.help-code code { display: block; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 13.5px; line-height: 1.7; color: #e6edf9; white-space: pre; user-select: all; -webkit-user-select: all; }
+.legal code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .92em; }
+.legal p code, .legal li code, .legal dd code { padding: 1px 6px; background: #e9eefa; border-radius: 6px; }
+.legal kbd { display: inline-block; min-width: 1.6em; padding: 0 6px; border: 1px solid #c3ccdd; border-bottom-width: 2px; border-radius: 6px; background: var(--surface); font-family: inherit; font-size: .9em; line-height: 1.6; text-align: center; }
+
+/* 補足（青）と注意（黄） */
+.help-note, .help-warn { margin-top: var(--space-4); padding: var(--space-4) var(--space-5); border-radius: var(--radius-md); font-size: var(--text-small); line-height: var(--leading-note); color: var(--ink-2); }
+.help-note { background: #eef4fd; border-left: 4px solid var(--sky); }
+.help-warn { background: #fff6e0; border-left: 4px solid #e2a700; }
+.help-note b:first-child, .help-warn b:first-child { display: block; margin-bottom: 2px; color: var(--ink); }
+.help-note ul, .help-warn ul { margin-top: 6px; display: grid; gap: 6px; padding-left: 1.2em; list-style: disc; }
+.help-note p + p, .help-warn p + p { margin-top: 6px; }
+
+/* 困ったときの一覧（症状 → 確かめること） */
+.help-qa { margin-top: var(--space-4); display: grid; gap: var(--space-3); }
+.help-qa > div { padding: var(--space-4) var(--space-5); background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-md); }
+.help-qa dt { font-weight: var(--weight-heavy); color: var(--ink); }
+.help-qa dd { margin-top: 6px; font-size: var(--text-small); line-height: var(--leading-note); color: var(--ink-2); }
+.help-qa dd ul { display: grid; gap: 6px; padding-left: 1.2em; list-style: disc; }
+
+/* 用意するものの表 */
+.help-need { margin-top: var(--space-4); display: grid; gap: var(--space-2); }
+.help-need > div { display: grid; grid-template-columns: 9.5em 1fr; gap: var(--space-4); padding: var(--space-3) 0; border-bottom: 1px solid var(--line); }
+.help-need dt { font-weight: var(--weight-heavy); color: var(--ink); }
+.help-need dd { font-size: var(--text-small); line-height: var(--leading-note); color: var(--ink-2); }
+
+/* 節の中の小見出しの前に、少し広い間を空ける。リンクで飛んだとき、ヘッダーに隠れないようにする */
+.article h3 { scroll-margin-top: calc(var(--header-h) + var(--space-4)); padding-top: var(--space-2); }
+.article h3 .no { margin-right: .5em; }
+.help-next { margin-top: var(--space-6); font-size: var(--text-small); color: var(--ink-2); }
+
+@media (max-width: 860px) {
+  .help-jump { grid-template-columns: 1fr; }
+  .help-need > div { grid-template-columns: 1fr; gap: 2px; }
+  .help-ph { min-height: 140px; padding: var(--space-5) var(--space-4); }
+}
+
+/* 目次の番号は 1 文字なので、legal.css の幅（「第1条」用）より詰める */
+.legal-toc .no { min-width: 1.8em; }
+
+/* コマンドの枠の中は、文中のコード用の薄い地（.legal li code など）を打ち消す */
+.legal .help-code code { padding: 0; background: none; border-radius: 0; }
+/* 長いコマンドでページが横に広がらないように、手順の列を縮められるようにする（枠の中だけ横にスクロール） */
+.help-steps, .help-qa { grid-template-columns: minmax(0, 1fr); }
+.help-steps > li, .help-note, .help-warn { min-width: 0; }
+.help-code { max-width: 100%; }
+.help-qa dd, .help-need dd { margin-left: 0; }
