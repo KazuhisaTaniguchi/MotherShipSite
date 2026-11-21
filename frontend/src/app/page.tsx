@@ -267,8 +267,8 @@ export default async function Home() {
         <div className="wrap hero-grid">
           <div className="hero-copy">
             <p className="pill pill-glass hero-label">AIが働くMacを、手もとから。</p>
-            <h1 id="hero-title" className="is-fold"><span className="nb">折りたたみスマホが、</span><br /><span className="grad-text"><span className="nb">MacのAIの</span><span className="nb">操作席になる。</span></span></h1>
-            <p className="hero-lead">開けば、Macの画面がそのまま読める。<br />直しは、話すだけ。</p>
+            <h1 id="hero-title">指で動かす。<br /><span className="grad-text">声で書く。</span></h1>
+            <p className="hero-lead">家のMacで、AIが作業中。<br />進み具合を指で確かめて、直しは話すだけ。</p>
             <a className="hero-voice" href="#voice">
               <span className="hero-voice-text"><span className="hero-voice-kicker">声で書く</span><b>Aqua Voiceに対応</b><span className="hero-voice-sub"><span className="nb">話すだけで文字が入るから、</span><span className="nb"><mark>キーボードいらず。</mark></span></span><span className="hero-voice-note">Aqua Voiceは別の会社のアプリです。</span></span>
               <span className="hero-voice-arrow" aria-hidden="true">→</span>
