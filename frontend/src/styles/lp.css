@@ -1531,14 +1531,28 @@
 .fit-dev::after, .td-dev::after, .vc-phone::after, .fd-ph::after, .sd-ph::after, .omc-ph::after, .osh-ph::after, .oim-ph::after, .hs-2 .hs-ph::after, .hs-3 .hs-ph::after { content: ""; position: absolute; z-index: 8; left: 50%; top: 0; bottom: 0; width: 1px; background: rgba(var(--navy-rgb), .16); pointer-events: none; }
 .okb-dev::after { content: ""; position: absolute; z-index: 8; left: 0; right: 0; top: 50%; height: 1px; background: rgba(255, 255, 255, .14); pointer-events: none; }
 
-/* 特長 1：回すのをやめ、開いた画面で比べる。左＝16:10 の画面が上下に余白を残して小さく映る／右＝開いた画面と同じ形。レポートをタップすると画面いっぱいに */
-.fit-dev { width: 82%; height: 91%; transform: translate(-50%, -50%); animation: none; }
+/* 特長 1（2026-11-21 に動きを戻す）：回す代わりに、閉じる → 開く → 閉じる（10 秒で 1 周）。
+   閉じたまま（細いカバー画面）は、左右とも 16:10 の画面が小さく映る。
+   開くと、左＝上下に余白を残して小さいまま／右＝開いた画面と同じ形に切り替わり、レポートをタップすると画面いっぱいに */
+.fit-dev { width: 82%; height: 91%; transform: translate(-50%, -50%); animation: fit-fold 10s ease-in-out infinite; }
+.fit-dev::after { animation: fit-crease 10s ease-in-out infinite; }
 .fit-ai { animation: none; left: 5%; right: 52%; top: 12%; bottom: 10%; }
+.fit-mac-native { animation: fit-native 10s ease-in-out infinite; }
+.fit-cover { z-index: 4; animation: fit-cover 10s ease-in-out infinite; }
+@keyframes fit-fold {
+  0%, 14% { width: 40%; height: 91%; border-radius: 12px; }
+  24%, 84% { width: 82%; height: 91%; border-radius: 14px; }
+  94%, 100% { width: 40%; height: 91%; border-radius: 12px; }
+}
+@keyframes fit-crease { 0%, 18% { opacity: 0; } 24%, 84% { opacity: 1; } 88%, 100% { opacity: 0; } }
+/* 右だけ：閉じている間は「小さく映る」絵を上に重ね、開いたら消す */
+@keyframes fit-cover { 0%, 18% { opacity: 1; } 26%, 84% { opacity: 0; } 92%, 100% { opacity: 1; } }
+@keyframes fit-native { 0%, 18% { opacity: 0; } 26%, 84% { opacity: 1; } 92%, 100% { opacity: 0; } }
 @keyframes fit-out {
   0%, 40% { left: 50%; right: 5%; top: 22%; bottom: 22%; z-index: 1; }
   40.01%, 46% { left: 50%; right: 5%; top: 22%; bottom: 22%; z-index: 3; }
-  54%, 86% { left: 5%; right: 5%; top: 28%; bottom: 7%; z-index: 3; }
-  92%, 100% { left: 50%; right: 5%; top: 22%; bottom: 22%; z-index: 1; }
+  54%, 74% { left: 5%; right: 5%; top: 28%; bottom: 7%; z-index: 3; }
+  80%, 100% { left: 50%; right: 5%; top: 22%; bottom: 22%; z-index: 1; }
 }
 
 /* 特長 2：指の操作。端末の形を開いた Fold7 に */
@@ -1627,7 +1641,7 @@
 @media (prefers-reduced-motion: reduce) {
   .voice-wave i, .caret { animation: none; }
   /* 動かさず、縦向きでレポートを広げたところ（65%）で止める */
-  .fit-dev, .fit-ai, .fit-out, .fit-out::after { animation-delay: -6.5s; animation-play-state: paused; }
+  .fit-diagram *, .fit-diagram *::after { animation-delay: -6.5s !important; animation-play-state: paused !important; }
   /* 特長 2 の図：窓の一覧でレポートを選んだところ（68%）で止め、札は全部明るく */
   .touch-demo .td-stage * { animation-delay: -8.2s !important; animation-play-state: paused !important; }
   .td-steps li { animation: none; opacity: 1; }
