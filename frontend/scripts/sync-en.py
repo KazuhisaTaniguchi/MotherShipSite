@@ -123,5 +123,9 @@ document.querySelectorAll('[data-hx-pause]').forEach((btn) => {
 });
 ''' + cj
 open(os.path.join(FRONT, 'public/en/en.js'), 'w', encoding='utf-8').write(js)
+# en.js の中身が変わったら、読み込む URL も変える（ブラウザーが古いファイルを使い続けないように）。src/content/en/pages.ts に足す
+import hashlib
+ver = hashlib.sha1(js.encode('utf-8')).hexdigest()[:10]
+open(os.path.join(FRONT, 'src/content/en/pages.ts'), 'a', encoding='utf-8').write('export const EN_JS_VERSION = "%s";\n' % ver)
 shutil.copyfile(os.path.join(MOCK, 'og.png'), os.path.join(FRONT, 'public/og-en.png'))
 print('pages:', {k: len(out[k]['html']) for k in ('top', 'help', 'contact', 'terms', 'privacy')}, 'en.css', len(css), 'en.js', len(js))

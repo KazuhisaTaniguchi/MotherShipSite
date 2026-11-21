@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Script from "next/script";
 import { LangAttr } from "@/components/LangAttr";
-import { TOP } from "@/content/en/pages";
+import { EN_JS_VERSION, TOP } from "@/content/en/pages";
 import { EN_PUBLIC } from "@/lib/i18n";
 
 // 英語のページ（/en/…）。中身は mock/design_en を scripts/sync-en.py で取り込んだもの。
@@ -26,7 +26,8 @@ export default function EnLayout({ children }: LayoutProps<"/en">) {
     <>
       <LangAttr lang="en" />
       {children}
-      <Script src="/en/en.js" strategy="afterInteractive" />
+      {/* ?v= は、en.js の中身から作った印。中身が変わると URL も変わるので、ブラウザーが古いファイルを使い続けない */}
+      <Script src={`/en/en.js?v=${EN_JS_VERSION}`} strategy="afterInteractive" />
     </>
   );
 }
