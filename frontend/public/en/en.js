@@ -198,7 +198,8 @@ document.querySelectorAll('[data-hx-pause]').forEach((btn) => {
           const el = form.querySelector(`[name="${f.field}"], [name="${f.field}[]"]`);
           if (el) check(el) || wrapOf(el)?.classList.add('is-invalid');
         });
-        throw new Error(json.message || 'Your message couldn\'t be sent.');
+        // 原因を調べられるように、Contact Form 7 の結果の種類（spam・mail_failed など）も出す
+        throw new Error(`${json.message || "Your message couldn't be sent."} [${json.status || 'unknown'}]`);
       }
     } catch (err) {
       status.textContent = `Your message couldn't be sent. Please wait a moment and try again. (${err.message})`;

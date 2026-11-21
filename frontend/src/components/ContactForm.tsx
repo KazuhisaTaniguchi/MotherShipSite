@@ -157,7 +157,8 @@ export function ContactForm() {
       });
       if (fileErrors.length) setAttachErrors(fileErrors);
       setErrors((prev) => ({ ...prev, ...fromServer }));
-      setStatus(json.message || "送信できませんでした。");
+      // 原因を調べられるように、Contact Form 7 の結果の種類（spam・mail_failed など）も出す
+      setStatus(`${json.message || "送信できませんでした。"}（${json.status || "unknown"}）`);
     } catch {
       setStatus("送信できませんでした。時間をおいて、もう一度お試しください。");
     } finally {
