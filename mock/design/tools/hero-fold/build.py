@@ -2,7 +2,9 @@
 # 使い方：python3 build.py [mock/design のパス]（省くと、このファイルの 2 つ上のフォルダー）
 #   index.html の <!-- hx --> … <!-- /hx --> の間（HERO の図の HTML）と、hero-fold.css を書き直す。
 #   本番（frontend）には、まだ入れていない（HeroFold.tsx と src/styles/hero-fold.css は前の動きのまま）。
-# 動きは「秒」で書き（実際の秒。SPEED を変えると全体の速さが変わる）、ここで % に直す。1 周 19.4 秒：
+# 動きは「秒」で書き（実際の秒。SPEED を変えると全体の速さが変わる）、ここで % に直す。
+#   はじめに出だし（INTRO 秒。マイナスの秒で書く。速さは掛けない）：家の Mac が出る → 電波がポンポンと 6 回広がる → Mac が消えながら、Fold7 が出る
+#   そのあと 19.4 秒（0 秒から。SPEED を掛ける）：
 #   0–3.1    ふわっと出る → 開く → 一覧 →「Connect」→ Mac の画面に切り替わる
 #   3.1–5.5  AI の進み具合（行が 1 本ずつ伸びる）→「OK to continue?」
 #   5.5–8.0  指で確かめる（Allow を押す → 2 本指でスクロール →「✓ Report ready」）
@@ -23,13 +25,17 @@ SLOW = [(0, 1.3), (16.0, 17.14), (18.4, 19.1)]   # 出て開く／画面が消�
 def W(t):
     return t + sum((min(t, b) - a) * (SPEED - 1) for a, b in SLOW if t > a)
 STILL = 15.6    # 「視差効果を減らす」の設定で止める場面（縦にして、グラフを拡大したところ）
+INTRO = 3.4     # 出だし（家の Mac と電波。2026-11-21、ユーザーの指示）の実際の秒。-INTRO 秒から 0 秒まで
+START = -INTRO
 fmt = lambda x: ('%.3f' % x).rstrip('0').rstrip('.')
-DUR = fmt(W(T) / SPEED)   # 1 周の実際の秒
+def RT(t): return t if t < 0 else W(t) / SPEED   # 0 秒からの実際の秒（出だしはマイナス）
+TOTAL = INTRO + RT(T)
+DUR = fmt(TOTAL)   # 1 周の実際の秒
 OUT = []
-def pct(t): return ('%.2f' % (100.0 * W(t) / W(T))).rstrip('0').rstrip('.') + '%'
+def pct(t): return ('%.2f' % (100.0 * (INTRO + RT(t)) / TOTAL)).rstrip('0').rstrip('.') + '%'
 def KF(name, pts):
     pts = sorted(pts, key=lambda p: p[0])
-    if pts[0][0] > 0: pts = [(0, pts[0][1])] + pts
+    if pts[0][0] > START: pts = [(START, pts[0][1])] + pts
     if pts[-1][0] < T: pts = pts + [(T, pts[-1][1])]
     OUT.append('@keyframes %s { %s }' % (name, ' '.join('%s { %s }' % (pct(t), c) for t, c in pts)))
     return name
@@ -56,6 +62,18 @@ def TAP(cls, x, y, t):
 PERS = 'perspective(60em) '      # はじめに開く（上の半分を起こす）
 PERS2 = 'perspective(140em) '    # 最後に本のように閉じる
 NAVY = 'rgba(var(--navy-rgb), .6)'
+
+# ---- 0. 出だし（-3.4–0）：家の Mac がふわっと出て、AI が作業中（行が伸びる）。電波が Mac の右上から右上へ、ポンポンと 6 回飛ぶ。
+#      Mac は少し小さくなりながら消え（-0.4–0.5 秒）、重なるように Fold7 が出る（下の .hx-in。0–0.7 秒）----
+R += [('.hx-mac', A(KF('hx-mac', [(-3.4, 'opacity: 0; transform: translateY(.9em) scale(.97)' + EO), (-2.75, 'opacity: 1; transform: translateY(0) scale(1)'),
+                                  (-.4, 'opacity: 1; transform: translateY(0) scale(1)' + EIO), (.5, 'opacity: 0; transform: translateY(-.3em) scale(.92)')])))]
+for i, s in enumerate([-2.6, -2.25, -1.9], 1):
+    R += [('.hx-mwin i:nth-of-type(%d)' % i, A(KF('hx-mw%d' % i, [(s, 'transform: scaleX(0)' + EO), (s + .5, 'transform: scaleX(1)')])))]
+R += [('.hx-mtop', A(KF('hx-mtop', [(-1.6, 'background: #8fb0e8' + SOFT), (-1.2, 'background: var(--blue)')])))]
+for i, p in enumerate([-2.55, -2.2, -1.85, -1.5, -1.15, -.8], 1):   # ポン、ポン、…（6 回）
+    R += [('.hx-wave:nth-child(%d)' % i, A(KF('hx-wv%d' % i, [(p - .01, 'opacity: 0; transform: rotate(45deg) scale(.2)'), (p, 'opacity: 1; transform: rotate(45deg) scale(.2)' + EO), (p + 1.2, 'opacity: 0; transform: rotate(45deg) scale(1.5)')])))]
+R += [('.hx-mdot', A(KF('hx-mdot', [(t, v) for p in [-2.55, -2.2, -1.85, -1.5, -1.15, -.8] for (t, v) in [(p - .01, 'transform: scale(1)'), (p, 'transform: scale(1.6)' + EO), (p + .3, 'transform: scale(1)')]])))]
+R += [('.hx-c0', A(FADE('hx-c0', -3.0, -.6, d_in=.4, d_out=.22)))]
 
 # ---- 全体：ふわっと出て、最後は少し沈みながら消える。消えたあと .3 秒おいて、次の周へ ----
 R += [('.hx-in', 'position: absolute; inset: 0; font-size: 2.5cqw; line-height: 1.3; color: var(--ink); ' + A(KF('hx-in', [
@@ -152,7 +170,7 @@ REDUCED = '''@media (prefers-reduced-motion: reduce) {
   .hx *, .hx *::before, .hx *::after { animation-delay: -%ss !important; animation-play-state: paused !important; }
   .hx-ui .hx-pause { display: none; }
 }
-''' % (fmt(STILL), fmt(W(STILL) / SPEED))
+''' % (fmt(STILL), fmt(INTRO + RT(STILL)))
 css = STATIC + '\n'.join('%s { %s }' % r for r in R) + '\n' + REDUCED + '\n/* ---- 動き（tools/hero-fold/build.py が、秒から % に直して書き出したもの）---- */\n' + '\n'.join(OUT) + '\n'
 open(os.path.join(DESIGN, 'hero-fold.css'), 'w', encoding='utf-8').write(css)
 html = open(os.path.join(HERE, 'figure.html'), encoding='utf-8').read().strip()
@@ -160,7 +178,7 @@ html = open(os.path.join(HERE, 'figure.html'), encoding='utf-8').read().strip()
 m = re.search(r'<!-- scr -->(.*?)<!-- /scr -->', html, re.S); assert m and html.count('<!-- scr2 -->') == 1
 clone = m.group(1).replace('<div class="hx-scr">', '<div class="hx-scr2">', 1); assert clone != m.group(1)
 html = html.replace('<!-- scr2 -->', clone).replace('<!-- scr -->', '').replace('<!-- /scr -->', '')
-assert html.count('class="hx-cap ') == len(caps), '札の数が合わない'
+assert html.count('class="hx-cap ') == len(caps) + 1, '札の数が合わない（出だしの hx-c0 を入れて）'
 p = os.path.join(DESIGN, 'index.html'); t = open(p, encoding='utf-8').read()
 pat = re.compile(r'<!-- hx -->.*?<!-- /hx -->', re.S)
 assert pat.search(t), 'index.html に <!-- hx --> の印がない'

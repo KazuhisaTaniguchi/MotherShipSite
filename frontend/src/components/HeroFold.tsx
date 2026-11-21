@@ -3,7 +3,7 @@
 import { useState } from "react";
 
 // HERO のアニメ（2026-11-21 に作り直し）。Galaxy Z Fold7 を開いて、家の Mac の AI を動かす。CSS だけで動く（src/styles/hero-fold.css）。
-// 開いてつなぐ → AI の進み具合 → 指で確かめる → 声で頼む → 縦に持ち替える（ぴったり合う）→ 指で拡大 → 閉じる（カバー画面に映る）。
+// 家の Mac から右上へ電波が飛ぶ（出だし。2026-11-21 追加）→ 開いてつなぐ → AI の進み具合 → 指で確かめる → 声で頼む → 縦に持ち替える（ぴったり合う）→ 指で拡大 → 閉じる（カバー画面に映る）。
 // 図の HTML は、モックで tools/hero-fold/build.py が mock/design/index.html に書き出したものの写し（.hx-pt の中身は .hx-scr の写しで、build.py が入れる）。
 // 直すときは、モックで build.py を実行してから、図の HTML をここへ、mock/design/hero-fold.css を src/styles/hero-fold.css へ写す。
 // ここで持つ状態は、一時停止のボタンだけ。
@@ -11,7 +11,11 @@ export function HeroFold() {
   const [paused, setPaused] = useState(false);
   return (
     <div className={paused ? "hx is-paused" : "hx"}>
-      <div className="hx-fig" role="img" aria-label="Galaxy Z Fold7で、家のMacのAIを動かす様子のイメージ。Fold7を開いて家のMacにつなぐと、Macの画面が広げた画面いっぱいに映る。AIが確認を待っているので、指で「許可」を押し、スクロールして結果を確かめる。🎤を押して「いちばん売上が高い月を、目立たせてください。」と話すと、AIへの指示の欄に文字が入る。縦に持ち替えると、Macの画面が新しい形にぴったり合う。2本の指で広げると売上のグラフが拡大され、くっきり映し直される。閉じると、カバー画面いっぱいに売上のグラフの窓が映る。"><div className="hx-in" aria-hidden="true">
+      <div className="hx-fig" role="img" aria-label="Galaxy Z Fold7で、家のMacのAIを動かす様子のイメージ。家のMacでAIが作業していて、Macから電波が届く。Fold7を開いて家のMacにつなぐと、Macの画面が広げた画面いっぱいに映る。AIが確認を待っているので、指で「許可」を押し、スクロールして結果を確かめる。🎤を押して「いちばん売上が高い月を、目立たせてください。」と話すと、AIへの指示の欄に文字が入る。縦に持ち替えると、Macの画面が新しい形にぴったり合う。2本の指で広げると売上のグラフが拡大され、くっきり映し直される。閉じると、カバー画面いっぱいに売上のグラフの窓が映る。"><div className="hx-intro" aria-hidden="true">
+      <i className="hx-wave"></i><i className="hx-wave"></i><i className="hx-wave"></i><i className="hx-wave"></i><i className="hx-wave"></i><i className="hx-wave"></i>
+      <div className="hx-mac"><div className="hx-mscr"><i className="hx-mmb"></i><div className="hx-mwin"><b></b><i></i><i></i><i></i></div><div className="hx-mchart"><b></b><em><i></i><i></i><i></i><i className="hx-mtop"></i><i></i></em></div><i className="hx-mdot"></i></div><i className="hx-mneck"></i><i className="hx-mfoot"></i></div>
+      <span className="hx-cap hx-c0"><i>家のMacで、AIが作業中</i></span>
+      </div><div className="hx-in" aria-hidden="true">
       <div className="hx-half hx-top"></div>
       <div className="hx-half hx-bot"></div>
       <div className="hx-open">

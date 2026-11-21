@@ -131,3 +131,29 @@
 .hx-pause[aria-pressed="true"] span::before { content: "▶"; font-size: 12px; }
 .hx-note { font-size: var(--text-caption); color: var(--ink-3); }
 .hx.is-paused *, .hx.is-paused *::before, .hx.is-paused *::after { animation-play-state: paused !important; }
+/* 出だし（2026-11-21）：家の Mac（ディスプレイとスタンド）。画面では AI が作業中。電波（.hx-wave）が Mac の右上から右上へ 6 回飛び、Mac は消えて Fold7 に入れ替わる */
+.hx-intro { position: absolute; inset: 0; font-size: 2.5cqw; line-height: 1.3; pointer-events: none; }
+.hx-intro * { box-sizing: border-box; }
+.hx-intro i, .hx-intro em { font-style: normal; }
+.hx-wave { position: absolute; left: 31.1em; top: 8.2em; width: 14em; height: 14em; margin: -7em 0 0 -7em; border-radius: 50%; border: .34em solid transparent; border-top-color: rgba(var(--blue-rgb), .85); transform: rotate(45deg) scale(.2); opacity: 0; }   /* 電波：Mac の右上（メニューバーの緑の点）から、右上へ広がる扇 */
+.hx-mac { position: absolute; inset: 0; opacity: 0; transform-origin: 50% 45%; }
+.hx-mscr { position: absolute; left: 7.4em; top: 7.1em; width: 25.2em; height: 16em; border: .6em solid var(--device); border-radius: 1em; background: linear-gradient(160deg, #c9d8f4, #eaf0fb); overflow: hidden; box-shadow: 0 2em 4em -2em rgba(var(--navy-rgb), .55); }
+.hx-mmb { position: absolute; left: 0; right: 0; top: 0; height: .9em; background: rgba(255, 255, 255, .75); }
+.hx-mwin, .hx-mchart { position: absolute; top: 2em; height: 11.6em; background: #fff; border-radius: .6em; box-shadow: 0 .6em 1.4em -.8em rgba(var(--navy-rgb), .5); overflow: hidden; }
+.hx-mwin { left: 1em; width: 11em; display: grid; align-content: start; gap: .7em; }
+.hx-mwin b { display: block; height: 1.5em; background: var(--navy); }
+.hx-mwin i { display: block; height: .55em; margin: 0 .9em; border-radius: .3em; background: #28508f; transform-origin: 0 50%; transform: scaleX(0); }
+.hx-mwin i:nth-of-type(2) { width: 62%; }
+.hx-mwin i:nth-of-type(3) { width: 45%; background: #8fb0e8; }
+.hx-mchart { left: 12.8em; width: 10.6em; display: flex; flex-direction: column; }
+.hx-mchart b { flex: none; height: 1.5em; background: #e3e9f5; }
+.hx-mchart em { flex: 1; display: flex; align-items: flex-end; gap: .45em; margin: 1.2em .8em .9em; }
+.hx-mchart em i { flex: 1; border-radius: .2em .2em 0 0; background: #8fb0e8; }
+.hx-mchart em i:nth-child(1) { height: 45%; }
+.hx-mchart em i:nth-child(2) { height: 70%; }
+.hx-mchart em i:nth-child(3) { height: 55%; }
+.hx-mchart em i:nth-child(4) { height: 92%; }
+.hx-mchart em i:nth-child(5) { height: 62%; }
+.hx-mdot { position: absolute; right: .9em; top: .2em; width: .5em; height: .5em; border-radius: 50%; background: #34c759; box-shadow: 0 0 0 .15em rgba(52, 199, 89, .3); }   /* メニューバーの、つながる合図 */
+.hx-mneck { position: absolute; left: 17.6em; top: 23em; width: 4.8em; height: 3.6em; background: linear-gradient(90deg, #b9c1d0, #d9dee8 50%, #b9c1d0); clip-path: polygon(8% 0, 92% 0, 100% 100%, 0 100%); }
+.hx-mfoot { position: absolute; left: 14.4em; top: 26.5em; width: 11.2em; height: .8em; border-radius: .4em; background: linear-gradient(#d9dee8, #aeb7c8); box-shadow: 0 .8em 1.4em -.6em rgba(var(--navy-rgb), .45); }
