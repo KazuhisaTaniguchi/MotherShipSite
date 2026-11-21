@@ -1,7 +1,45 @@
+"use client";
+/* eslint-disable @next/next/no-html-link-for-pages -- 英語のページどうし・言語の切り替えは、ふつうのリンクで読み込み直す（<html lang> と public/en/en.js の動きを付け直すため） */
+
 import Link from "next/link";
-import { NAV_ITEMS } from "./nav";
+import { usePathname } from "next/navigation";
+import { TRADEMARKS } from "@/content/en/pages";
+import { isEnPath, langPaths } from "@/lib/i18n";
+import { NAV_ITEMS, NAV_ITEMS_EN } from "./nav";
+
+// 英語のページ（/en/…）のフッター。商標の文は mock/design_en のもの（scripts/sync-en.py が取り込む）
+function SiteFooterEn({ jaPath }: { jaPath: string }) {
+  return (
+    <footer className="site-footer">
+      <div className="wrap">
+        <div className="footer-top">
+          <a className="brand" href="/en/"><span>MOTHERSHIP</span></a>
+          <nav aria-label="Footer navigation">
+            {NAV_ITEMS_EN.map((item) => (
+              <a key={item.href} href={item.href}>{item.label}</a>
+            ))}
+            <a href="/en/#download">Download</a>
+            <a href="/en/help/">Help</a>
+            <a href="/en/news/">News</a>
+            <a href="/en/terms-of-service/">Terms of Service</a>
+            <a href="/en/privacy-policy/">Privacy Policy</a>
+            <a href="/commercial-transactions/" hrefLang="ja">Legal Notice (Japan, in Japanese)</a>
+            <a href="/en/contact/">Contact</a>
+            <a className="nav-lang" href={jaPath} lang="ja" hrefLang="ja">日本語</a>
+          </nav>
+        </div>
+        {TRADEMARKS.map((html, i) => (
+          <p key={i} className="trademark" dangerouslySetInnerHTML={{ __html: html }} />
+        ))}
+        <div className="footer-bottom"><small>© 2026 MOTHERSHIP</small><a href="#top">Back to top ↑</a></div>
+      </div>
+    </footer>
+  );
+}
 
 export function SiteFooter() {
+  const pathname = usePathname() ?? "/";
+  if (isEnPath(pathname)) return <SiteFooterEn jaPath={langPaths(pathname).ja} />;
   return (
     <footer className="site-footer">
       <div className="wrap">

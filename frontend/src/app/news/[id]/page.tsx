@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { PageHero } from "@/components/PageHero";
+import { EN_PUBLIC, langAlternates } from "@/lib/i18n";
 import { EMPTY_PARAM, formatDate, getAllPosts, getPost, toPlainText } from "@/lib/wordpress";
 
 // URL は /news/{投稿ID}/（WordPress の投稿 ID = databaseId）
@@ -20,11 +21,12 @@ const loadPost = async (id: string) => {
 export async function generateMetadata({ params }: PageProps<"/news/[id]">): Promise<Metadata> {
   const post = await loadPost((await params).id);
   if (!post) return {};
-  const description = toPlainText(post.excerpt || post.content);
+  // 英語版のある記事は、抜粋に英語が混ざることがあるので、日本語の本文から作る
+  const description = toPlainText(post.en ? post.content : post.excerpt || post.content);
   return {
     title: post.title,
     description,
-    alternates: { canonical: `/news/${post.databaseId}/` },
+    alternates: post.en && EN_PUBLIC ? langAlternates(`/news/${post.databaseId}/`) : { canonical: `/news/${post.databaseId}/` },
     openGraph: {
       type: "article",
       title: post.title,

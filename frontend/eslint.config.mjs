@@ -12,6 +12,8 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // mock/design_en から書き出したもの（scripts/sync-en.py）
+    "public/en/**",
   ]),
 ]);
 

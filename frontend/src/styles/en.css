@@ -1,0 +1,72 @@
+/* 英語のページ（/en/…。<html lang="en">）だけに効かせる CSS。scripts/sync-en.py が書き出したもの。手で直さない。
+   もとは mock/design_en の、日本語版とちがうところ（designSystem/tokens.css・base.css・components.css、styles.css の「英語版だけ」、tools/help-figs の調整）。
+   :where() で囲んで、もとの決まりと同じ強さにしてある（あとから読み込むので、こちらが勝つ。図ごとの細かい決まりには勝たない） */
+html[lang="en"] {
+  --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Hiragino Sans", "Noto Sans JP", sans-serif;
+  --leading-display: 1.12; --leading-heading: 1.25; --leading-note: 1.6; --leading-body: 1.7;
+  --tracking-heading: -.012em; --tracking-wide: .04em; --tracking-label: .06em;
+}
+:where(html[lang="en"]) i, :where(html[lang="en"]) em { font-style: normal; }
+:where(html[lang="en"]) :is(p, li, dd, summary) { text-wrap: pretty; }
+.lang-note { margin-bottom: var(--space-6); padding: 14px 18px; border-left: 3px solid var(--blue); border-radius: 0 var(--radius-sm) var(--radius-sm) 0; background: #eef3ff; font-size: var(--text-small); line-height: var(--leading-note); color: var(--ink-2); }
+/* 言語の切り替え（JA／EN）。本番だけの部品（モックは「日本語」のリンク 1 つ）。日本語のページでも使う */
+.site-nav .lang-switch { display: inline-flex; gap: 2px; padding: 3px; border: 1px solid var(--line); border-radius: var(--radius-pill); }
+.site-nav .lang-switch a { padding: 4px 10px; border-radius: var(--radius-pill); font-size: var(--text-note); font-weight: var(--weight-bold); letter-spacing: .04em; color: var(--ink-2); }
+.site-nav .lang-switch a[aria-current] { background: var(--ink); color: var(--on-dark); }
+@media (max-width: 860px) {
+  .site-nav .lang-switch { align-self: flex-start; margin: 8px 16px; }
+  .site-nav .lang-switch a { padding: 8px 16px; font-size: var(--text-small); }
+}
+/* 図の中の文字 */
+:where(html[lang="en"]) .vf-l4::after, :where(html[lang="en"]) .hfv-l4::after { content: "Aa"; }
+/* ヘルプの図：英語の文言は長いので、メニューを広げて、文字を少し小さくする */
+:where(html[lang="en"]) .hf-pop { width: 18.6em; }
+:where(html[lang="en"]) .hf-r > span { font-size: .8em; }
+:where(html[lang="en"]) .hf-btn { font-size: .72em; }
+:where(html[lang="en"]) .hf4 .hf-pop { width: 18.3em; }
+:where(html[lang="en"]) .hf4-win { left: .45em; }
+:where(html[lang="en"]) .hf11-th span:first-child { width: 13.2em; }
+:where(html[lang="en"]) .hf11-row b { font-size: .82em; width: 10.9em; }
+
+/* ---- ここから、mock/design_en/styles.css の「英語版だけ」の写し ---- */
+/* HERO：アプリの画面はまだ日本語、という一言（2026-11-21。アプリを英語にしたら消す） */
+.hero-applang { display: inline-block; margin-top: var(--space-4); padding: 7px 14px; border-radius: var(--radius-pill); background: rgba(255, 255, 255, .7); border: 1px solid rgba(var(--ink-rgb), .12); font-size: var(--text-note); line-height: 1.5; color: var(--ink-2); }
+.hero-applang b { color: var(--ink); }
+/* 画質を選ぶカード（.of-pq、接頭辞 opq-）。日本語版の「日本語入力」のカードの代わり。
+   12 秒で 1 周：0–33% バランス（60fps・解像度そのまま）／33–66% 文字優先（30fps・文字がくっきり）／66–100% 滑らかさ優先（解像度を下げて 60fps）。
+   左の Fold7 の中：文字のにじみと、点の動き（なめらか／こま送り）が変わる。右：選んでいる行と、2 本のメーター */
+.opq-dev { position: absolute; left: 1.4em; top: 1.3em; width: 14.5em; height: 16.1em; border: .45em solid var(--device); border-radius: 1.1em; background: linear-gradient(160deg, #c9d8f4, #eaf0fb); overflow: hidden; box-shadow: 0 1.2em 2.4em -1em rgba(var(--navy-rgb), .6); }
+.opq-dev::after { content: ""; position: absolute; z-index: 8; left: 50%; top: 0; bottom: 0; width: 1px; background: rgba(var(--navy-rgb), .16); }
+.opq-win { position: absolute; left: .7em; right: .7em; top: .9em; height: 8.4em; background: #fff; border-radius: .5em; box-shadow: 0 .6em 1.4em -.8em rgba(var(--navy-rgb), .5); overflow: hidden; }
+.opq-win b { display: block; height: .9em; background: var(--navy); }
+.opq-txt { display: grid; gap: .5em; margin: .9em .9em 0; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: .6em; line-height: 1.3; color: #1c2a4a; white-space: nowrap; animation: opq-txt 12s ease infinite; }
+.opq-txt span:last-child { color: #2fae54; font-weight: 700; }
+.opq-track { position: absolute; left: .9em; right: .9em; top: 10.4em; height: 1.6em; border-radius: .8em; background: rgba(255, 255, 255, .75); }
+.opq-dot { position: absolute; left: .2em; top: .2em; width: 1.2em; height: 1.2em; border-radius: 50%; background: var(--blue); }
+.opq-smooth { animation: opq-move 1.6s linear infinite alternate, opq-on-a 12s step-end infinite; }
+.opq-step { animation: opq-move 1.6s steps(5) infinite alternate, opq-on-b 12s step-end infinite; }
+.opq-fps { position: absolute; right: .9em; top: 12.7em; display: grid; }
+.opq-fps span { grid-area: 1 / 1; padding: .2em .7em; border-radius: 1em; background: var(--navy); color: #fff; font-size: .62em; font-weight: var(--weight-heavy); }
+.opq-f60 { animation: opq-on-a 12s step-end infinite; }
+.opq-f30 { animation: opq-on-b 12s step-end infinite; }
+.opq-panel { position: absolute; left: 17.2em; right: 1.2em; top: 1.3em; }
+.opq-row { position: relative; display: grid; gap: .1em; align-content: center; height: 2.7em; margin-bottom: .35em; padding: 0 .8em; border-radius: .6em; background: rgba(255, 255, 255, .62); }
+.opq-row b { font-size: .78em; line-height: 1.25; white-space: nowrap; }
+.opq-row small { font-size: .58em; line-height: 1.3; color: var(--ink-2); white-space: nowrap; }
+.opq-sel { position: absolute; z-index: 1; left: 0; right: 0; top: 0; height: 2.7em; border-radius: .6em; border: .14em solid var(--blue); background: rgba(var(--blue-rgb), .1); animation: opq-sel 12s ease-in-out infinite; }
+.opq-meter { display: grid; grid-template-columns: 5.4em 1fr; align-items: center; gap: .5em; height: 1.5em; margin-top: .3em; }
+.opq-meter small { font-size: .6em; font-weight: var(--weight-bold); color: var(--ink-2); }
+.opq-meter span { height: .55em; border-radius: .3em; background: rgba(var(--navy-rgb), .12); overflow: hidden; }
+.opq-meter i { display: block; height: 100%; border-radius: inherit; background: var(--grad-accent); }
+.opq-m1 { animation: opq-m1 12s ease infinite; }
+.opq-m2 { animation: opq-m2 12s ease infinite; }
+@keyframes opq-move { from { transform: none; } to { transform: translateX(10.2em); } }
+@keyframes opq-on-a { 0% { opacity: 1; } 33.3% { opacity: 0; } 66.6%, 100% { opacity: 1; } }
+@keyframes opq-on-b { 0% { opacity: 0; } 33.3% { opacity: 1; } 66.6%, 100% { opacity: 0; } }
+@keyframes opq-sel { 0%, 31% { transform: none; } 35%, 64% { transform: translateY(3.05em); } 68%, 97% { transform: translateY(6.1em); } 100% { transform: none; } }
+@keyframes opq-m1 { 0%, 31% { width: 75%; } 35%, 64% { width: 100%; } 68%, 97% { width: 48%; } 100% { width: 75%; } }
+@keyframes opq-m2 { 0%, 31% { width: 85%; } 35%, 64% { width: 50%; } 68%, 97% { width: 100%; } 100% { width: 85%; } }
+@keyframes opq-txt { 0%, 31% { filter: blur(.035em); } 35%, 64% { filter: none; } 68%, 97% { filter: blur(.1em); } 100% { filter: blur(.035em); } }
+@media (prefers-reduced-motion: reduce) {
+  .of-pq *, .of-pq *::before, .of-pq *::after { animation-delay: -6s !important; animation-play-state: paused !important; }
+}

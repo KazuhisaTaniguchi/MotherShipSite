@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { langAlternates } from "@/lib/i18n";
 import Link from "next/link";
 
 // 利用規約。mock/design/terms-of-service.html の <main> を JSX にしたもの（スタイルは src/styles/legal.css）
@@ -8,7 +9,7 @@ export const metadata: Metadata = {
   title: "利用規約",
   description:
     "MOTHERSHIP（MOTHERSHIP HOST と、iPhone・iPad・Android・Mac の MOTHERSHIP）の利用規約です。試用期間、購入、接続してよいMac、データの扱いなどを定めています。",
-  alternates: { canonical: "/terms-of-service/" },
+  alternates: langAlternates("/terms-of-service/"),
 };
 
 export default function TermsOfService() {

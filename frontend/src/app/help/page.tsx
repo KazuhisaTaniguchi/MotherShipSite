@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { langAlternates } from "@/lib/i18n";
 import Link from "next/link";
 
 // ヘルプ。mock/design/help.html の <main> を JSX にしたもの（スタイルは src/styles/legal.css・help.css・help-figs.css）。
@@ -8,7 +9,7 @@ export const metadata: Metadata = {
   title: "ヘルプ",
   description:
     "MOTHERSHIPのヘルプです。Macに入れてつなぐまでの手順、声で書くための準備（Aqua Voice・Homebrew・BlackHole 2ch）、外から使う準備、うまくいかないときの確かめ方を説明します。",
-  alternates: { canonical: "/help/" },
+  alternates: langAlternates("/help/"),
 };
 
 export default function Help() {

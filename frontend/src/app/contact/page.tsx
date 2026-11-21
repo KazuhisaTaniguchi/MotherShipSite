@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { langAlternates } from "@/lib/i18n";
 import Link from "next/link";
 import { ContactForm } from "@/components/ContactForm";
 
@@ -9,7 +10,7 @@ export const metadata: Metadata = {
   title: "お問い合わせ",
   description:
     "MOTHERSHIPのお問い合わせ窓口です。使い方のご質問、不具合のご報告、購入・ライセンスについて、ご意見・ご要望をお寄せください。",
-  alternates: { canonical: "/contact/" },
+  alternates: langAlternates("/contact/"),
 };
 
 export default function Contact() {

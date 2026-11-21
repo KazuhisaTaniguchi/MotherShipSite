@@ -46,3 +46,16 @@ npm run build                # out/ に書き出す
 
 - 公開先へのアップロードの方法（`out/` を `mothershipremote.com` の `public_html` へ）と、記事を更新したときに自動でビルドする仕組み。
 - 下書きのプレビュー（静的書き出しでは使えない）。
+
+## 英語版（/en/…。2026-11-21 追加）
+
+- 日本語は今の URL のまま、英語は `/en/`・`/en/help/`・`/en/contact/`・`/en/terms-of-service/`・`/en/privacy-policy/`・`/en/news/`・`/en/news/{投稿ID}/`。特定商取引法は日本語だけ
+- 右上の **JA／EN**（`SiteHeader.tsx` の `.lang-switch`）は、同じページのもう片方の言語へのリンク（対応は `src/lib/i18n.ts` の `langPaths`）
+- **英語のページの中身は、モック（`mock/design_en`）の HTML をそのまま出す**。取り込みは `python3 scripts/sync-en.py`（`src/content/en/pages.ts`・`src/styles/en.css`・`public/en/en.js`・`public/og-en.png` を書き出す。手で直さない）。**英語の文や図を直すときは、モックを直してから、このスクリプトを実行する**
+- ヘッダー・フッター・「本文へ移動」は、URL（`/en/` で始まるか）を見て英語に切り替える
+- `<html lang>`：レイアウトは 1 つなので、書き出したあとに `scripts/set-lang.mjs` が `out/en/` の HTML を `lang="en"` に書き換える（`npm run build` に入っている）。英語だけの CSS（`en.css`）は `html[lang="en"]` で効かせる
+- 検索向け：日本語と英語の両方のページに `hreflang`（ja・en・x-default＝英語）と `canonical`（`langAlternates`）、サイトマップに英語の URL。`src/lib/i18n.ts` の `EN_PUBLIC` を `false` にすると、切り替え・hreflang・サイトマップから英語が消え、英語のページは noindex になる
+- お問い合わせ（英語）：Contact Form 7 の英語用のフォームに送る。ID は環境変数 `NEXT_PUBLIC_CF7_CONTACT_FORM_ID_EN`（`.github/workflows/deploy-frontend.yml`）。空のあいだは送らずに「準備中」と出す
+- お知らせ（英語）：1 つの記事の本文に日本語と英語を書く。クラス `news-en` の区切り線（テーマのパターン「ここから英語版」。`api_theme/inc/news-english.php`）か「[English]」とだけ書いた段落より下が英語。英語のタイトルは、区切りのすぐ下の見出し。切り分けは `src/lib/wordpress.ts` の `splitLang`。区切りの無い記事は日本語だけ
+- 404 のページは 1 枚（日本語）。英語の人のために 1 行だけ英語を添えてある
+

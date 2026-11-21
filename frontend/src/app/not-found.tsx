@@ -24,6 +24,9 @@ export default function NotFound() {
             <p className="pill pill-glass nf-label">404 Not Found</p>
             <h1 id="nf-title">お探しのページに、<br /><span className="grad-text">つながりませんでした。</span></h1>
             <p className="nf-lead">ページが移動したか、削除された可能性があります。<br className="pc" />URLをお確かめのうえ、トップページからお探しください。</p>
+            {/* 404 のページは 1 枚だけ（英語の URL でも、この日本語のページが出る）。英語の人のために 1 行だけ添える */}
+            {/* eslint-disable-next-line @next/next/no-html-link-for-pages -- 言語が変わるので、読み込み直す */}
+            <p className="nf-lead" lang="en" style={{ marginTop: "var(--space-3)", fontSize: "var(--text-small)" }}>Page not found. <a href="/en/">Go to the English home page →</a></p>
             <div className="nf-actions">
               <Link className="btn btn-primary" href="/">トップページへ <span aria-hidden="true">→</span></Link>
               <Link className="btn btn-ghost" href="/#faq">よくある質問</Link>

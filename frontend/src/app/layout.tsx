@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
+import { SkipLink } from "@/components/SkipLink";
 import "./globals.css";
 
 const DESCRIPTION =
@@ -34,9 +35,10 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="ja">
+    // 英語のページ（/en/…）は、書き出したあとで lang="en" に書き換える（scripts/set-lang.mjs）。ここでは ja のままなので、ちがいの警告を止める
+    <html lang="ja" suppressHydrationWarning>
       <body>
-        <a className="skip-link" href="#main">本文へ移動</a>
+        <SkipLink />
         <SiteHeader />
         {children}
         <SiteFooter />

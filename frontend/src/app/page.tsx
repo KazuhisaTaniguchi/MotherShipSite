@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { HeroFold } from "@/components/HeroFold";
+import { langAlternates } from "@/lib/i18n";
 import { getAllPosts } from "@/lib/wordpress";
 
 // トップページ（LP）。mock/design/index.html の <main> をそのまま JSX にしたもの（原稿は mock/contents/lp-content.md の第2版。
@@ -8,7 +9,7 @@ import { getAllPosts } from "@/lib/wordpress";
 // モックで赤い枠の「未確定：…」を付けた所（Mac のロック解除 2 か所）は、
 // 対応を確かめるまで、いま確かな文だけを出している（くわしくは mock/contents/README.md の未確定事項 5・7）。
 export const metadata: Metadata = {
-  title: { absolute: "MOTHERSHIP｜折りたたみスマホでMacのAIを操作するリモートアプリ" },
+  title: { absolute: "MOTHERSHIP｜折りたたみスマホでMacのAIを操作するリモートアプリ" },  alternates: langAlternates("/"),
 };
 
 // 検索エンジン向けの構造化データ（アプリの情報と、よくある質問）。よくある質問は、下の <details> から書き出したもの。

@@ -52,7 +52,30 @@ export type Post = PostSummary & {
   content: string | null;
   modified: string;
   featuredImage: FeaturedImage | null;
+  /** 英語版（本文に「ここから英語」の区切りがある記事だけ） */
+  en: { title: string; content: string } | null;
 };
+
+/** 英語のお知らせ（一覧と記事で使う） */
+export type EnPost = { databaseId: number; title: string; date: string; modified: string; content: string; featuredImage: FeaturedImage | null };
+
+// お知らせは、1 つの記事の本文に日本語と英語を書く。区切りより上が日本語、下が英語。
+// 区切り：クラス news-en の付いた区切り線（テーマのパターン「ここから英語版」）。または「[English]」とだけ書いた段落
+// 英語のタイトル：区切りのすぐ下の見出し（無ければ、日本語のタイトルを使う）
+const EN_MARK = /<hr[^>]*class="[^"]*\bnews-en\b[^"]*"[^>]*>|<p[^>]*>\s*\[(?:English|EN)\]\s*<\/p>/i;
+export function splitLang(content: string | null, jaTitle: string): { ja: string | null; en: { title: string; content: string } | null } {
+  const m = content ? EN_MARK.exec(content) : null;
+  if (!content || !m) return { ja: content, en: null };
+  const ja = content.slice(0, m.index).trim();
+  let body = content.slice(m.index + m[0].length).trim();
+  let title = jaTitle;
+  const h = /^<h[1-4][^>]*>([\s\S]*?)<\/h[1-4]>/i.exec(body);
+  if (h) {
+    title = h[1].replace(/<[^>]+>/g, "").trim() || jaTitle;
+    body = body.slice(h[0].length).trim();
+  }
+  return { ja, en: body ? { title, content: body } : null };
+}
 
 export type Page = {
   databaseId: number;
@@ -103,16 +126,40 @@ export async function getPost(id: number): Promise<Post | null> {
   );
   const post = data.post;
   if (!post || post.status !== "publish") return null;
+  const split = splitLang(post.content, post.title);   // 英語の部分は、日本語のページには出さない
   return {
     databaseId: post.databaseId,
     title: post.title,
     date: post.date,
     modified: post.modified,
     excerpt: post.excerpt,
-    content: post.content,
+    content: split.ja,
     featuredImage: toImage(post.featuredImage),
+    en: split.en,
   };
 }
+
+/** 英語版のあるお知らせ（新しい順）。本文に区切りのある記事だけ */
+export async function getAllPostsEn(): Promise<EnPost[]> {
+  type Raw = { databaseId: number; title: string; date: string; modified: string; content: string | null; featuredImage: RawImage };
+  const posts = await fetchAll<Raw>(
+    `query AllPostsEn($after: String) {
+      posts(first: 100, after: $after, where: { status: PUBLISH, orderby: { field: DATE, order: DESC } }) {
+        pageInfo { hasNextPage endCursor }
+        nodes { databaseId title date modified content ${FEATURED_IMAGE} }
+      }
+    }`,
+    (d: { posts: { nodes: Raw[]; pageInfo: PageInfo } }) => d.posts,
+  );
+  return posts.flatMap((post) => {
+    const en = splitLang(post.content, post.title).en;
+    return en ? [{ databaseId: post.databaseId, title: en.title, date: post.date, modified: post.modified, content: en.content, featuredImage: toImage(post.featuredImage) }] : [];
+  });
+}
+
+/** 英語の日付（例：November 21, 2026） */
+export const formatDateEn = (iso: string): string =>
+  new Date(iso).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric", timeZone: "Asia/Tokyo" });
 
 /** 公開済みの固定ページ（トップページに設定したものは除く。トップは Next.js の LP） */
 export async function getAllPages(): Promise<Page[]> {

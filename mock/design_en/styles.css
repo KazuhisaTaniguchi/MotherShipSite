@@ -1627,6 +1627,9 @@
 /* ==========================================================================
    英語版だけ（mock/design_en）
    ========================================================================== */
+/* HERO：アプリの画面はまだ日本語、という一言（2026-11-21。アプリを英語にしたら消す） */
+.hero-applang { display: inline-block; margin-top: var(--space-4); padding: 7px 14px; border-radius: var(--radius-pill); background: rgba(255, 255, 255, .7); border: 1px solid rgba(var(--ink-rgb), .12); font-size: var(--text-note); line-height: 1.5; color: var(--ink-2); }
+.hero-applang b { color: var(--ink); }
 /* 画質を選ぶカード（.of-pq、接頭辞 opq-）。日本語版の「日本語入力」のカードの代わり。
    12 秒で 1 周：0–33% バランス（60fps・解像度そのまま）／33–66% 文字優先（30fps・文字がくっきり）／66–100% 滑らかさ優先（解像度を下げて 60fps）。
    左の Fold7 の中：文字のにじみと、点の動き（なめらか／こま送り）が変わる。右：選んでいる行と、2 本のメーター */

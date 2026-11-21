@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { langAlternates } from "@/lib/i18n";
 import Link from "next/link";
 
 // プライバシーポリシー。mock/design/privacy-policy.html の <main> を JSX にしたもの（スタイルは src/styles/legal.css）
@@ -8,7 +9,7 @@ export const metadata: Metadata = {
   title: "プライバシーポリシー",
   description:
     "MOTHERSHIP（MOTHERSHIP HOST と、iPhone・iPad・Android・Mac の MOTHERSHIP）と、このウェブサイトのプライバシーポリシーです。画面や操作はMOTHERSHIPのサーバーを通らず、アカウントの登録もありません。",
-  alternates: { canonical: "/privacy-policy/" },
+  alternates: langAlternates("/privacy-policy/"),
 };
 
 export default function PrivacyPolicy() {

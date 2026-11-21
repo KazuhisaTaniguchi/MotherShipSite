@@ -183,3 +183,5 @@ return $count;
 // 記事・固定ページが変わったら、Next.js（mothershipremote.com）をビルドし直す
 require_once get_template_directory() . '/inc/frontend-build-hook.php';
 require_once get_template_directory() . '/inc/contact-attachments.php';
+// お知らせの英語版：ブロックのパターン「ここから英語版」
+require_once get_template_directory() . '/inc/news-english.php';

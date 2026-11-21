@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { PageHero } from "@/components/PageHero";
+import { langAlternates } from "@/lib/i18n";
 import { formatDate, getAllPosts } from "@/lib/wordpress";
 
 export const metadata: Metadata = {
   title: "お知らせ",
   description: "MOTHERSHIPからのお知らせ",
+  alternates: langAlternates("/news/"),
 };
 
 export default async function NewsIndex() {

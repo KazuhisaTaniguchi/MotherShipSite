@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
-import { getAllPosts } from "@/lib/wordpress";
+import { EN_PUBLIC } from "@/lib/i18n";
+import { getAllPosts, getAllPostsEn } from "@/lib/wordpress";
 
 // サイトマップ（/sitemap.xml）。静的書き出しなので、ビルドのときに作る。お知らせの記事も入れる
 export const dynamic = "force-static";
@@ -22,5 +23,21 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     changeFrequency: "yearly" as const,
     priority: 0.5,
   }));
-  return [...pages, ...posts];
+  if (!EN_PUBLIC) return [...pages, ...posts];
+  // 英語のページ（/en/…）
+  const en: MetadataRoute.Sitemap = [
+    { url: `${SITE}/en/`, changeFrequency: "weekly", priority: 0.9 },
+    { url: `${SITE}/en/help/`, changeFrequency: "monthly", priority: 0.7 },
+    { url: `${SITE}/en/news/`, changeFrequency: "weekly", priority: 0.5 },
+    { url: `${SITE}/en/contact/`, changeFrequency: "yearly", priority: 0.4 },
+    { url: `${SITE}/en/terms-of-service/`, changeFrequency: "yearly", priority: 0.3 },
+    { url: `${SITE}/en/privacy-policy/`, changeFrequency: "yearly", priority: 0.3 },
+  ];
+  const enPosts = (await getAllPostsEn()).map((post) => ({
+    url: `${SITE}/en/news/${post.databaseId}/`,
+    lastModified: post.modified,
+    changeFrequency: "yearly" as const,
+    priority: 0.4,
+  }));
+  return [...pages, ...posts, ...en, ...enPosts];
 }

@@ -17,3 +17,6 @@
 @import "../styles/contact.css";
 /* 404 ページ（mock/design/404.css の写し） */
 @import "../styles/404.css";
+
+/* 英語のページ（/en/…）だけに効かせるものと、言語の切り替え（scripts/sync-en.py が書き出す） */
+@import "../styles/en.css";
