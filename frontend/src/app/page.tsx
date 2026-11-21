@@ -474,7 +474,7 @@ export default async function Home() {
               <p className="fine">専用モニターは、接続を切ると自動で消えます。向きを変えても、Macの窓は自動では並び直りません（Macのふつうの動きです）。重なった窓は、3本指のスワイプで一覧にして選べます。</p>
             </div>
             {/* 図：閉じたまま → 開く → レポートを画面いっぱいに → 閉じる、を左右で同時に動かして比べる（2026-11-21）。CSS だけで動く */}
-            <div className="fit-diagram" role="img" aria-label="折りたたみスマホを閉じて、開いたときの比較の図。閉じたカバー画面では、どちらもMacの画面が小さく映る。開くと、大きな画面をそのまま映すやり方では、上下に余白が残って全体が小さく、文字が読めない。MOTHERSHIPなら、Macの画面が開いた画面と同じ形になり、文字は大きいまま。レポートの窓を広げると、画面いっぱいに映る。">
+            <div className="fit-diagram" role="img" aria-label="折りたたみスマホを閉じて、開いたときの比較の図。大きな画面をそのまま映すやり方では、閉じたカバー画面でも開いた画面でも、上下に余白が残って全体が小さく、文字が読めない。MOTHERSHIPなら、閉じても開いても、Macの画面がその画面と同じ形になって画面いっぱいに映り、文字は大きいまま。レポートの窓を広げると、画面いっぱいに映る。">
               <div className="fit-col">
                 <div className="fit-stage" aria-hidden="true">
                   <div className="fit-dev">
@@ -497,15 +497,9 @@ export default async function Home() {
                       <div className="fit-win fit-ai"><b></b><span></span><span></span><span></span></div>
                       <div className="fit-win fit-out"><b></b><em><i></i><i></i><i></i><i></i></em></div>
                     </div>
-                    <div className="fit-mac fit-mac-shrunk fit-cover">
-                      <i className="fit-mbar"></i>
-                      <div className="fit-win fw-1"><b></b><span></span><span></span><span></span><span></span></div>
-                      <div className="fit-win fw-2"><b></b><span></span><span></span><span></span></div>
-                      <div className="fit-win fw-3"><b></b><span></span><span></span><span></span><span></span></div>
-                    </div>
                   </div>
                 </div>
-                <p><b>MOTHERSHIPなら</b>開いた画面と同じ形の画面に。窓を広げれば、画面いっぱい</p>
+                <p><b>MOTHERSHIPなら</b>閉じても開いても、<span className="nb">画面いっぱいに映る</span></p>
               </div>
             </div>
           </article>
