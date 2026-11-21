@@ -25,7 +25,7 @@ const STRUCTURED_DATA = [
     "image": "https://mothershipremote.com/og.png",
     "offers": {
       "@type": "Offer",
-      "price": "2800",
+      "price": "3000",
       "priceCurrency": "JPY"
     }
   },
@@ -1126,7 +1126,7 @@ export default async function Home() {
           </div>
           <div className="price-card">
             <p className="price-label">買い切り</p>
-            <p className="price">2,800<span>円</span></p>
+            <p className="price">3,000<span>円</span></p>
             <p className="fine">税込。購入画面に表示される金額が、お支払いの金額です。</p>
             <ul className="ticks small">
               <li>一度の購入で、Macを3台まで使えます。</li>
