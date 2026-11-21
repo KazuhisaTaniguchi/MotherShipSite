@@ -41,7 +41,7 @@ export default function Help() {
           </nav>
   
           <article className="legal">
-            <p className="legal-intro">このページでは、離れた場所から操作されるMacを「Mac」、手もとのiPhone・iPad・Androidを「デバイス」と呼びます。アプリは2つあります。Macに入れる「MOTHERSHIP HOST」と、デバイスに入れる「MOTHERSHIP」です（アプリの画面では、「Mothership Host」「Mothership」と表示されます）。図は、説明のためのイメージです。実際の画面とは、見た目がちがいます。</p>
+            {/* 2026-11-21：目的から探す を、長い説明文より前に */}
   
             <nav className="help-jump" aria-label="目的から探す">
               <a href="#setup"><b>はじめてつなぐ</b><span>Macに入れて、QRコードで登録して、つなぐまで</span></a>
@@ -49,6 +49,7 @@ export default function Help() {
               <a href="#outside"><b>外から使う</b><span>Tailscaleの準備と、出かける前の確認</span></a>
               <a href="#trouble"><b>うまくいかないとき</b><span>つながらない、映らない、声が入らない</span></a>
             </nav>
+            <p className="legal-intro">このページでは、離れた場所から操作されるMacを「Mac」、手もとのiPhone・iPad・Androidを「デバイス」と呼びます。アプリは2つあります。Macに入れる「MOTHERSHIP HOST」と、デバイスに入れる「MOTHERSHIP」です（アプリの画面では、「Mothership Host」「Mothership」と表示されます）。図は、説明のためのイメージです。実際の画面とは、見た目がちがいます。</p>
   
             <aside className="legal-summary" aria-labelledby="summary-title">
               <h2 id="summary-title">かんたんにまとめると</h2>

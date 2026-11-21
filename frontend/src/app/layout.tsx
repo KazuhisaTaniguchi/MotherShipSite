@@ -3,6 +3,7 @@ import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SkipLink } from "@/components/SkipLink";
 import { Analytics } from "@/components/Analytics";
+import { FigureMotion } from "@/components/FigureMotion";
 import "./globals.css";
 
 const DESCRIPTION =
@@ -45,6 +46,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <SiteHeader />
         {children}
         <SiteFooter />
+        <FigureMotion />
         <Analytics />
       </body>
     </html>

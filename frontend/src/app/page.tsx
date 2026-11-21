@@ -341,19 +341,19 @@ export default async function Home() {
               <span className="card-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="13" rx="2.5"/><path d="M8 21h8M12 17v4"/></svg></span>
               <h3>くっきり見える</h3>
               <p>デバイスと同じ形の画面を、Macに用意。縦でも横でも横幅ぴったりで、小さな文字までくっきり読めます。</p>
-              <a className="card-link" href="#features">くわしく見る<span aria-hidden="true"> →</span></a>
+              <a className="card-link" href="#features">見え方の特長を見る<span aria-hidden="true"> →</span></a>
             </article>
             <article className="card">
               <span className="card-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 11V5.5a1.5 1.5 0 0 1 3 0V11m0-1.5a1.5 1.5 0 0 1 3 0V11m0-.5a1.5 1.5 0 0 1 3 0V15a6 6 0 0 1-6 6h-.6a6 6 0 0 1-4.7-2.3L4 14.5a1.6 1.6 0 0 1 2.5-2L9 14.5"/></svg></span>
               <h3>指で動かす</h3>
               <p>触った場所が、そのままクリック。3本指のスワイプで、開いている窓の一覧も出せます。</p>
-              <a className="card-link" href="#touch">くわしく見る<span aria-hidden="true"> →</span></a>
+              <a className="card-link" href="#touch">指で動かす機能を見る<span aria-hidden="true"> →</span></a>
             </article>
             <article className="card">
               <span className="card-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5.5 11a6.5 6.5 0 0 0 13 0M12 17.5V21M8.5 21h7"/></svg></span>
               <h3>声で書く</h3>
               <p>話すだけで、Macに文字が入ります（Aqua Voiceに対応）。キーボードはしまったまま、画面は広いまま。</p>
-              <a className="card-link" href="#voice">くわしく見る<span aria-hidden="true"> →</span></a>
+              <a className="card-link" href="#voice">声で書く機能を見る<span aria-hidden="true"> →</span></a>
             </article>
           </div>
           <ul className="promise-band">
@@ -1124,9 +1124,9 @@ export default async function Home() {
               <p>外から使うときは、準備が少しあります。</p>
             </div>
             <ul className="prep-list">
-              <li><Link href="/help/#outside"><b>外からつなぐ</b><span>Tailscaleを、Macとデバイスに。</span><i>くわしく <span aria-hidden="true">→</span></i></Link></li>
-              <li><Link href="/help/#keep-awake"><b>Macを起こしておく</b><span>スリープさせない設定を、オンに。</span><i>くわしく <span aria-hidden="true">→</span></i></Link></li>
-              <li><Link href="/help/#voice"><b>声で書く</b><span>Aqua VoiceとBlackHole 2chを、Macに。</span><i>くわしく <span aria-hidden="true">→</span></i></Link></li>
+              <li><Link href="/help/#outside"><b>外からつなぐ</b><span>Tailscaleを、Macとデバイスに。</span><i>ヘルプで見る <span aria-hidden="true">→</span></i></Link></li>
+              <li><Link href="/help/#keep-awake"><b>Macを起こしておく</b><span>スリープさせない設定を、オンに。</span><i>ヘルプで見る <span aria-hidden="true">→</span></i></Link></li>
+              <li><Link href="/help/#voice"><b>声で書く</b><span>Aqua VoiceとBlackHole 2chを、Macに。</span><i>ヘルプで見る <span aria-hidden="true">→</span></i></Link></li>
             </ul>
           </aside>
         </div>
