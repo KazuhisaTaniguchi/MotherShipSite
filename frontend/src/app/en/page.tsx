@@ -1,28 +1,30 @@
 import type { Metadata } from "next";
 import { EnMain } from "@/components/EnMain";
-import { TOP } from "@/content/en/pages";
-import { langAlternates } from "@/lib/i18n";
+import { TOP, TOP_FAQ } from "@/content/en/pages";
+import { faqLd, pageMeta, siteLd } from "@/lib/seo";
+import { JsonLd } from "@/components/JsonLd";
 import { getAllPostsEn } from "@/lib/wordpress";
 
-export const metadata: Metadata = {
-  title: { absolute: TOP.fullTitle },
-  description: TOP.description,
-  alternates: langAlternates("/", "en"),
-};
+export const metadata: Metadata = pageMeta({ lang: "en", path: "/", absolute: true, title: TOP.fullTitle, description: TOP.description });
 
-// 検索エンジン向けの構造化データ（アプリの情報）
-const STRUCTURED_DATA = {
-  "@context": "https://schema.org",
-  "@type": "SoftwareApplication",
-  "name": "MOTHERSHIP",
-  "applicationCategory": "UtilitiesApplication",
-  "operatingSystem": "Android 13+, iOS 27+, iPadOS 27+, macOS 14+",
-  "description": TOP.description,
-  "url": "https://mothershipremote.com/en/",
-  "image": "https://mothershipremote.com/og-en.png",
-  "inLanguage": "en",
-  "offers": { "@type": "Offer", "price": "19.99", "priceCurrency": "USD" },
-};
+// 検索エンジン向けの構造化データ：サイトと運営元、アプリの情報、よくある質問（ページの <details> と同じ中身。sync-en.py が取り出す）
+const STRUCTURED_DATA = [
+  ...siteLd("en"),
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "MOTHERSHIP",
+    "alternateName": "MOTHERSHIP REMOTE",
+    "applicationCategory": "UtilitiesApplication",
+    "operatingSystem": "Android 13+, iOS 27+, iPadOS 27+, macOS 14+",
+    "description": TOP.description,
+    "url": "https://mothershipremote.com/en/",
+    "image": "https://mothershipremote.com/og-en.png",
+    "inLanguage": "en",
+    "offers": { "@type": "Offer", "price": "19.99", "priceCurrency": "USD" },
+  },
+  faqLd(TOP_FAQ, "en"),
+];
 
 const esc = (s: string) => s.replace(/&(?!#?\w+;)/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 
@@ -33,7 +35,7 @@ export default async function Page() {
   const news = posts.length > 0 ? (TOP.newsSection ?? "").replace("%%NEWS_ITEMS%%", items) : "";
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(STRUCTURED_DATA).replace(/</g, "\\u003c") }} />
+      <JsonLd data={STRUCTURED_DATA} />
       <EnMain page={TOP} html={TOP.html.replace("%%NEWS%%", news)} />
     </>
   );

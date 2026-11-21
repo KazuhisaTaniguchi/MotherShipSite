@@ -1,24 +1,31 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { HeroFold } from "@/components/HeroFold";
-import { langAlternates } from "@/lib/i18n";
+import { pageMeta, siteLd } from "@/lib/seo";
 import { getAllPosts } from "@/lib/wordpress";
 
 // トップページ（LP）。mock/design/index.html の <main> をそのまま JSX にしたもの（原稿は mock/contents/lp-content.md の第2版。
 // 2026-11-21 から、Obsidian の「LPとSEOの方針（折りたたみスマホ×MacのAI）」に合わせて、主役を折りたたみスマホに変えた）。
 // モックで赤い枠の「未確定：…」を付けた所（Mac のロック解除 2 か所）は、
 // 対応を確かめるまで、いま確かな文だけを出している（くわしくは mock/contents/README.md の未確定事項 5・7）。
-export const metadata: Metadata = {
-  title: { absolute: "MOTHERSHIP｜折りたたみスマホでMacのAIを操作するリモートアプリ" },  alternates: langAlternates("/"),
-};
+export const metadata: Metadata = pageMeta({
+  path: "/",
+  absolute: true,
+  title: "折りたたみスマホでMacをリモート操作｜MacのAIも手もとで｜MOTHERSHIP",
+  description:
+    "Galaxy Z Foldなどの折りたたみスマホから、家のMacをリモートデスクトップで操作。端末の形に合わせた画面で文字がくっきり読め、Claude CodeやCodexなどMacのAIの進み具合を外出先から確かめて、指示は声で。iPhone・iPad・Androidでも使えます。買い切り・月額なし、14日間無料。",
+});
 
 // 検索エンジン向けの構造化データ（アプリの情報と、よくある質問）。よくある質問は、下の <details> から書き出したもの。
 // 質問や答えを直したときは、ここも合わせて直す（ページに無い質問を入れない）
 const STRUCTURED_DATA = [
+  ...siteLd("ja"),
   {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
     "name": "MOTHERSHIP",
+    "alternateName": "MOTHERSHIP REMOTE",
+    "inLanguage": "ja",
     "applicationCategory": "UtilitiesApplication",
     "operatingSystem": "Android 13+, iOS 27+, iPadOS 27+, macOS 14+",
     "description": "Galaxy Z Foldなどの折りたたみスマホから、家のMacをリモート操作。端末の形に合わせた画面で文字がそのまま読め、直しは声で（Aqua Voiceに対応）。Claude CodeやCodexなど、MacのAIの進み具合も手もとで。iPhone・iPad・Macからも使えます。買い切り・月額なし。14日間、すべての機能を無料で試せます。",
@@ -446,7 +453,7 @@ export default async function Home() {
           <div className="section-head center">
             <p className="kicker">特長</p>
             <h2 className="section-title" id="features-title">映すだけじゃない。<br className="sp" />ちゃんと使える。</h2>
-            <p className="section-lead">MOTHERSHIPは、離れた場所からMacを「見る」ためではなく、「使う」ために作りました。小さな画面で文字を読み、指で動かし、声で書く。その一つひとつを、作り込んでいます。</p>
+            <p className="section-lead">MOTHERSHIPは、離れた場所からMacを「見る」ためではなく、「使う」ために作ったリモートデスクトップアプリです。小さな画面で文字を読み、指で動かし、声で書く。その一つひとつを、作り込んでいます。</p>
           </div>
 
           {/* S5 特長 1：くっきり見える */}

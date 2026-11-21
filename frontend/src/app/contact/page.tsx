@@ -1,21 +1,23 @@
 import type { Metadata } from "next";
-import { langAlternates } from "@/lib/i18n";
+import { breadcrumbLd, pageMeta } from "@/lib/seo";
+import { JsonLd } from "@/components/JsonLd";
 import Link from "next/link";
 import { ContactForm } from "@/components/ContactForm";
 
 // お問い合わせ。mock/design/contact.html の <main> を JSX にしたもの（スタイルは src/styles/contact.css）
 // WordPress にも同じスラッグの固定ページ（お問い合わせ窓口）があるが、表示はこのファイルの内容を使う
 // （src/app/[...slug]/page.tsx は、このスラッグを書き出さない）
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMeta({
+  path: "/contact/",
   title: "お問い合わせ",
   description:
     "MOTHERSHIPのお問い合わせ窓口です。使い方のご質問、不具合のご報告、購入・ライセンスについて、ご意見・ご要望をお寄せください。",
-  alternates: langAlternates("/contact/"),
-};
+});
 
 export default function Contact() {
   return (
     <main id="main">
+      <JsonLd data={breadcrumbLd([{ name: "MOTHERSHIP", path: "/" }, { name: "お問い合わせ", path: "/contact/" }])} />
       <section className="contact-hero" aria-labelledby="contact-title">
         <div className="contact-hero-bg" aria-hidden="true"></div>
         <div className="wrap">

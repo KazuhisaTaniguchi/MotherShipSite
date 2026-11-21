@@ -7,7 +7,7 @@
 #     public/en/en.js           英語ページの動き（HERO の一時停止、お問い合わせフォーム）
 #     public/og-en.png          英語の OGP 画像
 # 英語のページは、HTML をそのまま出す（React の部品には直さない）。リンクはここで本番の URL に書き換える。
-import re, os, json, shutil
+import re, os, json, shutil, html as H
 HERE = os.path.dirname(os.path.abspath(__file__))
 FRONT = os.path.dirname(HERE)
 MOCK = os.path.join(os.path.dirname(FRONT), 'mock', 'design_en')
@@ -30,14 +30,14 @@ def clean(html):
     return re.sub(r'\n\s*\n+', '\n', html).strip()
 def page(name):
     s = rd(name + '.html')
-    title = re.search(r'<title>(.*?)</title>', s).group(1)
+    title = H.unescape(re.search(r'<title>(.*?)</title>', s).group(1))
     d = re.search(r'<meta name="description" content="([^"]*)"', s)
     m = re.search(r'<main id="main"([^>]*)>(.*?)</main>', s, re.S)
     defs = re.search(r'<svg class="svg-defs".*?</svg>', s, re.S)
     body = m.group(2)
     if defs and defs.group(0) not in body: body = defs.group(0) + body      # ヘルプ：図で使い回す絵（<main> の外にある）
     cls = re.search(r'class="([^"]*)"', m.group(1))
-    return dict(title=re.sub(r'\s*\|\s*MOTHERSHIP$', '', title), fullTitle=title, description=(d.group(1) if d else ''), mainClass=(cls.group(1) if cls else ''), html=clean(body))
+    return dict(title=re.sub(r'\s*\|\s*MOTHERSHIP$', '', title), fullTitle=title, description=(H.unescape(d.group(1)) if d else ''), mainClass=(cls.group(1) if cls else ''), html=clean(body))
 
 out = {}
 top = page('index')
@@ -46,6 +46,10 @@ sec = re.search(r'<section class="section latest-news".*?</section>', top['html'
 block = re.sub(r'<ul class="latest-news-list">.*?</ul>', '<ul class="latest-news-list">%%NEWS_ITEMS%%</ul>', sec.group(0), flags=re.S)
 top['html'] = top['html'].replace(sec.group(0), '%%NEWS%%'); top['newsSection'] = block
 out['top'] = top
+# よくある質問（検索エンジン向けの構造化データに使う。ページの <details> と同じ中身）
+plain = lambda x: re.sub(r'\s+', ' ', H.unescape(re.sub(r'<[^>]+>', '', x))).strip()
+faq = [dict(q=plain(q), a=plain(a_)) for q, a_ in re.findall(r'<details[^>]*>\s*<summary[^>]*>(.*?)</summary>(.*?)</details>', top['html'], re.S)]
+assert len(faq) >= 20, len(faq)
 out['help'] = page('help')
 out['terms'] = page('terms-of-service')
 out['privacy'] = page('privacy-policy')
@@ -63,6 +67,7 @@ ts += 'export type EnPage = { title: string; fullTitle: string; description: str
 for k in ('top', 'help', 'contact', 'terms', 'privacy'):
     ts += 'export const %s: EnPage = %s;\n' % (k.upper(), json.dumps(out[k], ensure_ascii=False))
 ts += 'export const TRADEMARKS: string[] = %s;\n' % json.dumps(out['trademarks'], ensure_ascii=False)
+ts += 'export const TOP_FAQ: { q: string; a: string }[] = %s;\n' % json.dumps(faq, ensure_ascii=False)
 open(os.path.join(FRONT, 'src/content/en/pages.ts'), 'w', encoding='utf-8').write(ts)
 
 # ---- en.css ----

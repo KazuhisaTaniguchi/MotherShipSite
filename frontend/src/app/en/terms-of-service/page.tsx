@@ -1,14 +1,16 @@
 import type { Metadata } from "next";
 import { EnMain } from "@/components/EnMain";
+import { JsonLd } from "@/components/JsonLd";
 import { TERMS } from "@/content/en/pages";
-import { langAlternates } from "@/lib/i18n";
+import { breadcrumbLd, pageMeta } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: TERMS.title,
-  description: TERMS.description,
-  alternates: langAlternates("/terms-of-service/", "en"),
-};
+export const metadata: Metadata = pageMeta({ lang: "en", path: "/terms-of-service/", title: TERMS.title, description: TERMS.description });
 
 export default function Page() {
-  return <EnMain page={TERMS} />;
+  return (
+    <>
+      <JsonLd data={breadcrumbLd([{ name: "MOTHERSHIP", path: "/en/" }, { name: "Terms of Service", path: "/en/terms-of-service/" }])} />
+      <EnMain page={TERMS} />
+    </>
+  );
 }

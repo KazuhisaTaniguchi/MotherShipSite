@@ -1,20 +1,22 @@
 import type { Metadata } from "next";
-import { langAlternates } from "@/lib/i18n";
+import { breadcrumbLd, pageMeta } from "@/lib/seo";
+import { JsonLd } from "@/components/JsonLd";
 import Link from "next/link";
 
 // ヘルプ。mock/design/help.html の <main> を JSX にしたもの（スタイルは src/styles/legal.css・help.css・help-figs.css）。
 // 図は mock/design/tools/help-figs/build.py が書き出したもの（help-figs.css もその写し。直すときはモックで直して写す）。
 // モックで赤い枠の「未確定：…」を付けた 6 か所は、本番では印を出さず、いま確かな文だけにしている
-export const metadata: Metadata = {
-  title: "ヘルプ",
+export const metadata: Metadata = pageMeta({
+  path: "/help/",
+  title: "使い方ガイド｜Macへの接続・声で入力・外出先からの接続",
   description:
-    "MOTHERSHIPのヘルプです。Macに入れてつなぐまでの手順、声で書くための準備（Aqua Voice・Homebrew・BlackHole 2ch）、外から使う準備、うまくいかないときの確かめ方を説明します。",
-  alternates: langAlternates("/help/"),
-};
+    "MOTHERSHIPの使い方ガイド。MacにMOTHERSHIP HOSTを入れてスマホ・タブレットとつなぐ手順、声で入力する準備（Aqua Voice・BlackHole 2ch・Homebrew）、外出先から使う設定（Tailscale）、Macをスリープさせない設定、つながらないときの確かめ方を、図つきで説明します。",
+});
 
 export default function Help() {
   return (
     <main id="main">
+      <JsonLd data={breadcrumbLd([{ name: "MOTHERSHIP", path: "/" }, { name: "使い方ガイド", path: "/help/" }])} />
         <svg className="svg-defs" aria-hidden="true"><symbol id="hs-mark" viewBox="0 0 128 128"><path d="M60 28 22 86 49 80 60 91 60 75 48 70 60 54Z" fill="#fff"/><path d="M68 28 106 86 79 80 68 91 68 75 80 70 68 54Z" fill="#a8f8ff"/><path d="M64 86 72 98 64 105 56 98Z" fill="#fff"/></symbol><symbol id="hs-qr" viewBox="0 0 19 19"><path d="M0 0h7v1h-7zM8 0h2v1h-2zM12 0h7v1h-7zM0 1h1v1h-1zM6 1h1v1h-1zM8 1h1v1h-1zM10 1h1v1h-1zM12 1h1v1h-1zM18 1h1v1h-1zM0 2h1v1h-1zM2 2h3v1h-3zM6 2h1v1h-1zM8 2h1v1h-1zM10 2h1v1h-1zM12 2h1v1h-1zM14 2h3v1h-3zM18 2h1v1h-1zM0 3h1v1h-1zM2 3h3v1h-3zM6 3h1v1h-1zM8 3h3v1h-3zM12 3h1v1h-1zM14 3h3v1h-3zM18 3h1v1h-1zM0 4h1v1h-1zM2 4h3v1h-3zM6 4h1v1h-1zM8 4h1v1h-1zM10 4h1v1h-1zM12 4h1v1h-1zM14 4h3v1h-3zM18 4h1v1h-1zM0 5h1v1h-1zM6 5h1v1h-1zM8 5h1v1h-1zM12 5h1v1h-1zM18 5h1v1h-1zM0 6h7v1h-7zM9 6h1v1h-1zM12 6h7v1h-7zM8 7h1v1h-1zM10 7h1v1h-1zM0 8h3v1h-3zM4 8h1v1h-1zM7 8h1v1h-1zM9 8h3v1h-3zM13 8h2v1h-2zM16 8h2v1h-2zM1 9h1v1h-1zM6 9h1v1h-1zM8 9h2v1h-2zM11 9h1v1h-1zM13 9h1v1h-1zM18 9h1v1h-1zM3 10h1v1h-1zM8 10h1v1h-1zM13 10h2v1h-2zM16 10h1v1h-1zM18 10h1v1h-1zM8 11h2v1h-2zM11 11h3v1h-3zM15 11h2v1h-2zM0 12h7v1h-7zM10 12h3v1h-3zM15 12h4v1h-4zM0 13h1v1h-1zM6 13h1v1h-1zM10 13h4v1h-4zM0 14h1v1h-1zM2 14h3v1h-3zM6 14h1v1h-1zM9 14h1v1h-1zM14 14h3v1h-3zM18 14h1v1h-1zM0 15h1v1h-1zM2 15h3v1h-3zM6 15h1v1h-1zM8 15h10v1h-10zM0 16h1v1h-1zM2 16h3v1h-3zM6 16h1v1h-1zM9 16h5v1h-5zM18 16h1v1h-1zM0 17h1v1h-1zM6 17h1v1h-1zM8 17h3v1h-3zM12 17h2v1h-2zM16 17h1v1h-1zM18 17h1v1h-1zM0 18h7v1h-7zM12 18h3v1h-3zM18 18h1v1h-1z" fill="#14203a"/></symbol></svg>
         <section className="legal-hero" aria-labelledby="help-title">
           <div className="legal-hero-bg" aria-hidden="true"></div>

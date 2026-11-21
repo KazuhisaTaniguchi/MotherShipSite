@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { PageHero } from "@/components/PageHero";
-import { EN_PUBLIC, langAlternates } from "@/lib/i18n";
+import { JsonLd } from "@/components/JsonLd";
+import { articleLd, breadcrumbLd, pageMeta } from "@/lib/seo";
 import { EMPTY_PARAM, formatDate, getAllPosts, getPost, toPlainText } from "@/lib/wordpress";
 
 // URL は /news/{投稿ID}/（WordPress の投稿 ID = databaseId）
@@ -21,21 +22,17 @@ const loadPost = async (id: string) => {
 export async function generateMetadata({ params }: PageProps<"/news/[id]">): Promise<Metadata> {
   const post = await loadPost((await params).id);
   if (!post) return {};
-  // 英語版のある記事は、抜粋に英語が混ざることがあるので、日本語の本文から作る
   const description = toPlainText(post.en ? post.content : post.excerpt || post.content);
-  return {
+  return pageMeta({
+    path: `/news/${post.databaseId}/`,
+    both: Boolean(post.en),            // 英語版のある記事だけ、言語の対応を付ける
     title: post.title,
     description,
-    alternates: post.en && EN_PUBLIC ? langAlternates(`/news/${post.databaseId}/`) : { canonical: `/news/${post.databaseId}/` },
-    openGraph: {
-      type: "article",
-      title: post.title,
-      description,
-      publishedTime: post.date,
-      modifiedTime: post.modified,
-      images: post.featuredImage ? [post.featuredImage.sourceUrl] : ["/og.png"],   // アイキャッチが無い記事は、サイト共通の OGP 画像
-    },
-  };
+    type: "article",
+    image: post.featuredImage?.sourceUrl,   // アイキャッチが無い記事は、サイト共通の OGP 画像
+    published: post.date,
+    modified: post.modified,
+  });
 }
 
 export default async function NewsPost({ params }: PageProps<"/news/[id]">) {
@@ -44,6 +41,10 @@ export default async function NewsPost({ params }: PageProps<"/news/[id]">) {
 
   return (
     <main id="main" className="page-main">
+      <JsonLd data={[
+        breadcrumbLd([{ name: "MOTHERSHIP", path: "/" }, { name: "お知らせ", path: "/news/" }, { name: post.title, path: `/news/${post.databaseId}/` }]),
+        articleLd({ lang: "ja", path: `/news/${post.databaseId}/`, title: post.title, description: toPlainText(post.content), published: post.date, modified: post.modified, image: post.featuredImage?.sourceUrl }),
+      ]} />
       <PageHero kicker="NEWS" title={post.title}>
         <p className="page-meta"><time dateTime={post.date}>{formatDate(post.date)}</time></p>
       </PageHero>

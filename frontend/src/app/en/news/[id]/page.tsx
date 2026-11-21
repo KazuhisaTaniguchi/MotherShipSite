@@ -2,7 +2,8 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { PageHero } from "@/components/PageHero";
-import { langAlternates } from "@/lib/i18n";
+import { JsonLd } from "@/components/JsonLd";
+import { articleLd, breadcrumbLd, pageMeta } from "@/lib/seo";
 import { EMPTY_PARAM, formatDateEn, getAllPostsEn, toPlainText } from "@/lib/wordpress";
 
 // 英語のお知らせの記事。URL は /en/news/{投稿ID}/（日本語の /news/{投稿ID}/ と同じ記事の、英語の部分）
@@ -21,20 +22,16 @@ const load = async (id: string) => (await posts()).find((p) => String(p.database
 export async function generateMetadata({ params }: PageProps<"/en/news/[id]">): Promise<Metadata> {
   const post = await load((await params).id);
   if (!post) return {};
-  const description = toPlainText(post.content);
-  return {
+  return pageMeta({
+    lang: "en",
+    path: `/news/${post.databaseId}/`,
     title: post.title,
-    description,
-    alternates: langAlternates(`/news/${post.databaseId}/`, "en"),
-    openGraph: {
-      type: "article",
-      title: post.title,
-      description,
-      publishedTime: post.date,
-      modifiedTime: post.modified,
-      images: post.featuredImage ? [post.featuredImage.sourceUrl] : ["/og-en.png"],
-    },
-  };
+    description: toPlainText(post.content),
+    type: "article",
+    image: post.featuredImage?.sourceUrl,
+    published: post.date,
+    modified: post.modified,
+  });
 }
 
 export default async function NewsPostEn({ params }: PageProps<"/en/news/[id]">) {
@@ -42,6 +39,10 @@ export default async function NewsPostEn({ params }: PageProps<"/en/news/[id]">)
   if (!post) notFound();
   return (
     <main id="main" className="page-main">
+      <JsonLd data={[
+        breadcrumbLd([{ name: "MOTHERSHIP", path: "/en/" }, { name: "News", path: "/en/news/" }, { name: post.title, path: `/en/news/${post.databaseId}/` }]),
+        articleLd({ lang: "en", path: `/en/news/${post.databaseId}/`, title: post.title, description: toPlainText(post.content), published: post.date, modified: post.modified, image: post.featuredImage?.sourceUrl }),
+      ]} />
       <PageHero kicker="NEWS" title={post.title}>
         <p className="page-meta"><time dateTime={post.date}>{formatDateEn(post.date)}</time></p>
       </PageHero>

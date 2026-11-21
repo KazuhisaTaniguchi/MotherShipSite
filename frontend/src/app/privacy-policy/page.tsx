@@ -1,20 +1,22 @@
 import type { Metadata } from "next";
-import { langAlternates } from "@/lib/i18n";
+import { breadcrumbLd, pageMeta } from "@/lib/seo";
+import { JsonLd } from "@/components/JsonLd";
 import Link from "next/link";
 
 // プライバシーポリシー。mock/design/privacy-policy.html の <main> を JSX にしたもの（スタイルは src/styles/legal.css）
 // WordPress にも同じスラッグの固定ページ（中身は空）があるが、表示はこのファイルの内容を使う
 // （src/app/[...slug]/page.tsx は、このスラッグを書き出さない）
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMeta({
+  path: "/privacy-policy/",
   title: "プライバシーポリシー",
   description:
     "MOTHERSHIP（MOTHERSHIP HOST と、iPhone・iPad・Android・Mac の MOTHERSHIP）と、このウェブサイトのプライバシーポリシーです。画面や操作はMOTHERSHIPのサーバーを通らず、アカウントの登録もありません。",
-  alternates: langAlternates("/privacy-policy/"),
-};
+});
 
 export default function PrivacyPolicy() {
   return (
     <main id="main">
+      <JsonLd data={breadcrumbLd([{ name: "MOTHERSHIP", path: "/" }, { name: "プライバシーポリシー", path: "/privacy-policy/" }])} />
       <section className="legal-hero" aria-labelledby="legal-title">
         <div className="legal-hero-bg" aria-hidden="true"></div>
         <div className="wrap">

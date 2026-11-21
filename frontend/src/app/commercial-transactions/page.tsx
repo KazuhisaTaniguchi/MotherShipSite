@@ -1,19 +1,23 @@
 import type { Metadata } from "next";
+import { breadcrumbLd, pageMeta } from "@/lib/seo";
+import { JsonLd } from "@/components/JsonLd";
 import Link from "next/link";
 
 // 特定商取引法に基づく表記。mock/design/commercial-transactions.html の <main> を JSX にしたもの（スタイルは src/styles/legal.css）
 // WordPress にも同じスラッグの固定ページ（中身は空）があるが、表示はこのファイルの内容を使う
 // （src/app/[...slug]/page.tsx は、このスラッグを書き出さない）
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMeta({
+  path: "/commercial-transactions/",
+  both: false,
   title: "特定商取引法に基づく表記",
   description:
     "MOTHERSHIPのライセンス（買い切り）の販売についての、特定商取引法に基づく表記です。販売価格、支払い方法、引き渡しの時期、返品・返金、動作環境を記載しています。",
-  alternates: { canonical: "/commercial-transactions/" },
-};
+});
 
 export default function CommercialTransactions() {
   return (
     <main id="main">
+      <JsonLd data={breadcrumbLd([{ name: "MOTHERSHIP", path: "/" }, { name: "特定商取引法に基づく表記", path: "/commercial-transactions/" }])} />
       <section className="legal-hero" aria-labelledby="legal-title">
         <div className="legal-hero-bg" aria-hidden="true"></div>
         <div className="wrap">

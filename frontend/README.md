@@ -59,3 +59,14 @@ npm run build                # out/ に書き出す
 - お知らせ（英語）：1 つの記事の本文に日本語と英語を書く。クラス `news-en` の区切り線（テーマのパターン「ここから英語版」。`api_theme/inc/news-english.php`）か「[English]」とだけ書いた段落より下が英語。英語のタイトルは、区切りのすぐ下の見出し。切り分けは `src/lib/wordpress.ts` の `splitLang`。区切りの無い記事は日本語だけ
 - 404 のページは 1 枚（日本語）。英語の人のために 1 行だけ英語を添えてある
 
+## SEO（2026-11-21。日本語・英語の全ページ）
+
+ねらう客と言葉は、Obsidian の「LPとSEOの方針（折りたたみスマホ×MacのAI）」。日本語のキャッチコピーと HERO は変えない（ユーザーの指示）。
+
+- **設定は `src/lib/seo.ts` の `pageMeta()` にまとめた**：タイトル（あとに「｜MOTHERSHIP」「 | MOTHERSHIP」）、説明文、正規の URL、言語の対応（hreflang）、OGP（ページごとの title・description・url・locale・画像）、X のカード。ページを足すときは、`export const metadata = pageMeta({...})` と書く
+- **タイトルと説明文**：トップは、ねらう言葉を前に置く（日本語「折りたたみスマホでMacをリモート操作｜MacのAIも手もとで｜MOTHERSHIP」、英語「Mac Remote Desktop for Galaxy Z Fold & Foldables | MOTHERSHIP」）。英語のページのタイトルと説明文は、モック（`mock/design_en` の `<head>`）から取り込む
+- **構造化データ（`src/components/JsonLd.tsx`）**：トップに Organization・WebSite（別名「MOTHERSHIP REMOTE」）・SoftwareApplication・FAQPage（英語の FAQ は `sync-en.py` がページの `<details>` から取り出す。日本語は `src/app/page.tsx` の `STRUCTURED_DATA`。**FAQ を直したら、ここも合わせる**）。下のページに BreadcrumbList。お知らせの記事に Article
+- **サイトマップ**（`src/app/sitemap.ts`）：更新日と、言語の対応（`xhtml:link`）。英語のお知らせの一覧は、英語の記事があるときだけ入れる（0 件のあいだは noindex）
+- **本文に足したもの**：フッターの説明の 1 行（全ページ。「リモートデスクトップアプリ」という分類の言葉を入れるため）、日本語の特長のリードに「リモートデスクトップアプリ」。英語は HERO の小さなラベルを「Mac remote desktop for foldable phones」に
+- やっていないこと：検索の量の調査（道具が無い）、用途別のページ（方針メモ §4.3）、Search Console への登録、OGP 画像の文字の差し替え（日本語の `og.png` は前の見出しのまま）
+

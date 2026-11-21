@@ -1,20 +1,22 @@
 import type { Metadata } from "next";
-import { langAlternates } from "@/lib/i18n";
+import { breadcrumbLd, pageMeta } from "@/lib/seo";
+import { JsonLd } from "@/components/JsonLd";
 import Link from "next/link";
 
 // 利用規約。mock/design/terms-of-service.html の <main> を JSX にしたもの（スタイルは src/styles/legal.css）
 // WordPress にも同じスラッグの固定ページ（中身は空）があるが、表示はこのファイルの内容を使う
 // （src/app/[...slug]/page.tsx は、このスラッグを書き出さない）
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMeta({
+  path: "/terms-of-service/",
   title: "利用規約",
   description:
     "MOTHERSHIP（MOTHERSHIP HOST と、iPhone・iPad・Android・Mac の MOTHERSHIP）の利用規約です。試用期間、購入、接続してよいMac、データの扱いなどを定めています。",
-  alternates: langAlternates("/terms-of-service/"),
-};
+});
 
 export default function TermsOfService() {
   return (
     <main id="main">
+      <JsonLd data={breadcrumbLd([{ name: "MOTHERSHIP", path: "/" }, { name: "利用規約", path: "/terms-of-service/" }])} />
       <section className="legal-hero" aria-labelledby="legal-title">
         <div className="legal-hero-bg" aria-hidden="true"></div>
         <div className="wrap">

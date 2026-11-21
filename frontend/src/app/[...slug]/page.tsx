@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { PageHero } from "@/components/PageHero";
+import { pageMeta } from "@/lib/seo";
 import { EMPTY_PARAM, getAllPages, toPlainText, uriToSegments, type Page } from "@/lib/wordpress";
 
 // 固定ページは WordPress の URL のまま（例：/sample-page/、親子なら /company/about/）
@@ -34,11 +35,7 @@ export async function generateMetadata({ params }: PageProps<"/[...slug]">): Pro
   const { slug } = await params;
   const page = await findPage(slug);
   if (!page) return {};
-  return {
-    title: page.title,
-    description: toPlainText(page.content) || undefined,
-    alternates: { canonical: `/${slug.join("/")}/` },
-  };
+  return pageMeta({ path: `/${slug.join("/")}/`, both: false, title: page.title, description: toPlainText(page.content) });
 }
 
 export default async function FixedPage({ params }: PageProps<"/[...slug]">) {

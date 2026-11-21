@@ -1,14 +1,16 @@
 import type { Metadata } from "next";
 import { EnMain } from "@/components/EnMain";
+import { JsonLd } from "@/components/JsonLd";
 import { PRIVACY } from "@/content/en/pages";
-import { langAlternates } from "@/lib/i18n";
+import { breadcrumbLd, pageMeta } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: PRIVACY.title,
-  description: PRIVACY.description,
-  alternates: langAlternates("/privacy-policy/", "en"),
-};
+export const metadata: Metadata = pageMeta({ lang: "en", path: "/privacy-policy/", title: PRIVACY.title, description: PRIVACY.description });
 
 export default function Page() {
-  return <EnMain page={PRIVACY} />;
+  return (
+    <>
+      <JsonLd data={breadcrumbLd([{ name: "MOTHERSHIP", path: "/en/" }, { name: "Privacy Policy", path: "/en/privacy-policy/" }])} />
+      <EnMain page={PRIVACY} />
+    </>
+  );
 }

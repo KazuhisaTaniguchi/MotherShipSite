@@ -5,19 +5,19 @@ import { SkipLink } from "@/components/SkipLink";
 import "./globals.css";
 
 const DESCRIPTION =
-  "Galaxy Z Foldなどの折りたたみスマホから、家のMacをリモート操作。端末の形に合わせた画面で文字がそのまま読め、直しは声で（Aqua Voiceに対応）。Claude CodeやCodexなど、MacのAIの進み具合も手もとで。iPhone・iPad・Macからも使えます。買い切り・月額なし。14日間、すべての機能を無料で試せます。";
+  "Galaxy Z Foldなどの折りたたみスマホから、家のMacをリモートデスクトップで操作。端末の形に合わせた画面で文字がくっきり読め、Claude CodeやCodexなどMacのAIの進み具合を外出先から確かめて、指示は声で。iPhone・iPad・Androidでも使えます。買い切り・月額なし、14日間無料。";
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "https://mothershipremote.com"),
   title: {
-    default: "MOTHERSHIP｜折りたたみスマホでMacのAIを操作するリモートアプリ",
+    default: "折りたたみスマホでMacをリモート操作｜MacのAIも手もとで｜MOTHERSHIP",
     template: "%s｜MOTHERSHIP",
   },
   description: DESCRIPTION,
   icons: { icon: { url: "/favicon.svg", type: "image/svg+xml" } },
   openGraph: {
-    title: "折りたたみスマホが、MacのAIの操作席になる。｜MOTHERSHIP",
-    description: "開けば、Macの画面がそのまま読める。直しは、話すだけ。Galaxy Z Foldなどの折りたたみスマホから、家のMacを操作するリモートアプリ。",
+    title: "折りたたみスマホでMacをリモート操作｜MacのAIも手もとで｜MOTHERSHIP",
+    description: DESCRIPTION,
     siteName: "MOTHERSHIP",
     locale: "ja_JP",
     type: "website",
