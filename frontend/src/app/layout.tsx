@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SkipLink } from "@/components/SkipLink";
+import { Analytics } from "@/components/Analytics";
 import "./globals.css";
 
 const DESCRIPTION =
@@ -15,6 +16,8 @@ export const metadata: Metadata = {
   },
   description: DESCRIPTION,
   icons: { icon: { url: "/favicon.svg", type: "image/svg+xml" } },
+  // Google Search Console の、サイトの持ち主の確認（公開してよい値。全ページの <head> に出る）
+  verification: { google: "wMEqxsov95lwYJm9sRNeN9Xc7AItyl0NAOACSPgNLrY" },
   openGraph: {
     title: "折りたたみスマホでMacをリモート操作｜MacのAIも手もとで｜MOTHERSHIP",
     description: DESCRIPTION,
@@ -42,6 +45,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <SiteHeader />
         {children}
         <SiteFooter />
+        <Analytics />
       </body>
     </html>
   );

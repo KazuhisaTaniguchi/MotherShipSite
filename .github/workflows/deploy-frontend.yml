@@ -56,6 +56,8 @@ jobs:
           NEXT_PUBLIC_CF7_CONTACT_FORM_ID_EN: "23"
           # reCAPTCHA v3 のサイトキー（公開してよい値。シークレットキーは WordPress の Contact Form 7 に入れる。ここには書かない）。空にすると reCAPTCHA を使わない
           NEXT_PUBLIC_RECAPTCHA_SITE_KEY: "6Lf45youAAAAAKkEH_lsuAFgDnr55iyrDo5nZh9c"
+          # Google のタグ（Google Analytics 4）の ID。公開してよい値。空にすると、解析を読み込まない
+          NEXT_PUBLIC_GTM_ID: "GTM-P8TH689S"
           NEXT_TELEMETRY_DISABLED: "1"
 
       - name: SSH の準備

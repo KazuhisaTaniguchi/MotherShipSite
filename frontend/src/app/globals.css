@@ -20,3 +20,5 @@
 
 /* 英語のページ（/en/…）だけに効かせるものと、言語の切り替え（scripts/sync-en.py が書き出す） */
 @import "../styles/en.css";
+/* 解析への同意の確認 */
+@import "../styles/consent.css";

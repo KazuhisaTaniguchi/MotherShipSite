@@ -7,6 +7,9 @@ import { TRADEMARKS } from "@/content/en/pages";
 import { isEnPath, langPaths } from "@/lib/i18n";
 import { NAV_ITEMS, NAV_ITEMS_EN } from "./nav";
 
+// 解析（Google のタグ）を入れているときだけ、「クッキーの設定」を出す（押すと、同意の確認がもう一度出る）
+const HAS_ANALYTICS = Boolean(process.env.NEXT_PUBLIC_GTM_ID);
+
 // 英語のページ（/en/…）のフッター。商標の文は mock/design_en のもの（scripts/sync-en.py が取り込む）
 function SiteFooterEn({ jaPath }: { jaPath: string }) {
   return (
@@ -25,6 +28,7 @@ function SiteFooterEn({ jaPath }: { jaPath: string }) {
             <a href="/en/privacy-policy/">Privacy Policy</a>
             <a href="/commercial-transactions/" hrefLang="ja">Legal Notice (Japan, in Japanese)</a>
             <a href="/en/contact/">Contact</a>
+            {HAS_ANALYTICS && <button type="button" className="consent-open" data-consent-open>Cookie settings</button>}
             <a className="nav-lang" href={jaPath} lang="ja" hrefLang="ja">日本語</a>
           </nav>
         </div>
@@ -57,6 +61,7 @@ export function SiteFooter() {
             <Link href="/privacy-policy/">プライバシーポリシー</Link>
             <Link href="/commercial-transactions/">特定商取引法に基づく表記</Link>
             <Link href="/contact/">お問い合わせ</Link>
+            {HAS_ANALYTICS && <button type="button" className="consent-open" data-consent-open>クッキーの設定</button>}
           </nav>
         </div>
         <p className="footer-tagline">MOTHERSHIPは、折りたたみスマホ・iPhone・iPad・AndroidからMacを操作する、リモートデスクトップアプリです。</p>
