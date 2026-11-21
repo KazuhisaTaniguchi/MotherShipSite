@@ -1624,10 +1624,10 @@
 
 /* 特長 1（2026-11-21 に動きを戻す）：回す代わりに、閉じる → 開く → 閉じる（10 秒で 1 周）。
    左（そのまま映す）：閉じても開いても、16:10 の画面が上下に黒い帯を残して小さく映る。
-   右（MOTHERSHIP）：いつも画面いっぱい。閉じたカバー画面では窓が縦に並び、開くと左右に並び直す。レポートをタップすると画面いっぱいに */
+   右（MOTHERSHIP）：いつも画面いっぱい。閉じたカバー画面ではグラフの窓だけを画面いっぱいに、開くと AI の窓が現れて左右に並ぶ。レポートをタップすると画面いっぱいに */
 .fit-dev { width: 82%; height: 91%; transform: translate(-50%, -50%); animation: fit-fold 10s ease-in-out infinite; }
 .fit-dev::after { animation: fit-crease 10s ease-in-out infinite; }
-.fit-ai { animation: fit-ai 10s ease-in-out infinite; }
+.fit-ai { left: 5%; right: 52%; top: 12%; bottom: 10%; animation: fit-ai 10s ease-in-out infinite; }
 @keyframes fit-fold {
   0%, 14% { width: 40%; height: 91%; border-radius: 12px; }
   24%, 84% { width: 82%; height: 91%; border-radius: 14px; }
@@ -1635,17 +1635,17 @@
 }
 @keyframes fit-crease { 0%, 18% { opacity: 0; } 24%, 84% { opacity: 1; } 88%, 100% { opacity: 0; } }
 @keyframes fit-ai {
-  0%, 14% { left: 7%; right: 7%; top: 8%; bottom: 53%; }
-  24%, 84% { left: 5%; right: 52%; top: 12%; bottom: 10%; }
-  94%, 100% { left: 7%; right: 7%; top: 8%; bottom: 53%; }
+  0%, 16% { opacity: 0; }
+  24%, 86% { opacity: 1; }
+  92%, 100% { opacity: 0; }
 }
 @keyframes fit-out {
-  0%, 14% { left: 7%; right: 7%; top: 51%; bottom: 8%; z-index: 1; }
+  0%, 14% { left: 6%; right: 6%; top: 7%; bottom: 7%; z-index: 3; }
   24%, 40% { left: 50%; right: 5%; top: 22%; bottom: 22%; z-index: 1; }
   40.01%, 46% { left: 50%; right: 5%; top: 22%; bottom: 22%; z-index: 3; }
   54%, 74% { left: 5%; right: 5%; top: 28%; bottom: 7%; z-index: 3; }
   80%, 84% { left: 50%; right: 5%; top: 22%; bottom: 22%; z-index: 1; }
-  94%, 100% { left: 7%; right: 7%; top: 51%; bottom: 8%; z-index: 1; }
+  94%, 100% { left: 6%; right: 6%; top: 7%; bottom: 7%; z-index: 3; }
 }
 
 /* 特長 2：指の操作。端末の形を開いた Fold7 に */
