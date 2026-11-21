@@ -72,7 +72,7 @@ export default function Help() {
                 <div><dt>声で書くなら</dt><dd>「Aqua Voice」と「BlackHole 2ch」。どちらもMacに入れます（<a href="#voice">3 声で書く準備</a>）。</dd></div>
                 <div><dt>外から使うなら</dt><dd>「Tailscale」。Macとデバイスの両方に入れます（<a href="#outside">4 外から使う</a>）。</dd></div>
               </dl>
-              <p className="fine">対応するOSなどの条件は、<Link href="/#download">トップページの「対応デバイス」</Link>にあります。</p>
+              <p className="fine">使える端末の一覧は、トップページの<Link href="/#devices">「対応デバイス」</Link>に。対応するOSと配信の予定は、<Link href="/#download">「配信予定・インストール先」</Link>にあります。</p>
               {/* fig:1 */}<nav className="hflow" aria-label="使いはじめるまでの流れ">
                 <ol className="hflow-main">
                   <li><a href="#setup-mac"><b>1</b><span>Macに入れる</span><small>2つの許可をオンにする</small></a></li>

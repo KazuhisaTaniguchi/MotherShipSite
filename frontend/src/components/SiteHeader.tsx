@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { EN_PUBLIC, isEnPath, langPaths } from "@/lib/i18n";
 import { BrandMark } from "./BrandMark";
-import { NAV_ITEMS, NAV_ITEMS_EN } from "./nav";
+import { NAV_ITEMS, NAV_ITEMS_EN, DOWNLOAD_LINK } from "./nav";
 
 // mock/design/script.js の「メニューの開閉」と「スクロールしたら背景を付ける」
 // 英語のページ（/en/…）では、文言とリンク先を英語にする。右上の JA／EN は、同じページのもう片方の言語へ（<html lang> が変わるので、ふつうのリンクで読み込み直す）
@@ -71,7 +71,7 @@ export function SiteHeader() {
               <a href={paths.en} lang="en" hrefLang="en" aria-current={en ? "true" : undefined} aria-label="English">EN</a>
             </span>
           )}
-          {en ? <a className="nav-cta" href="/en/#download">Download</a> : <Link className="nav-cta" href="/#download">ダウンロード</Link>}
+          {en ? <a className="nav-cta" href="/en/#download">Download</a> : <Link className="nav-cta" href={DOWNLOAD_LINK.href}>{DOWNLOAD_LINK.label}</Link>}
         </nav>
       </div>
     </header>

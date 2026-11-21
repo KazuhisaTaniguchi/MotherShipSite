@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { DOWNLOAD_LINK } from "@/components/nav";
 import { HeroFold } from "@/components/HeroFold";
 import { pageMeta, siteLd } from "@/lib/seo";
 import { getAllPosts } from "@/lib/wordpress";
@@ -277,15 +278,16 @@ export default async function Home() {
             <p className="pill pill-glass hero-label">AIが働くMacを、手もとから。</p>
             <h1 id="hero-title">指で動かす。<br /><span className="grad-text">声で書く。</span></h1>
             <p className="hero-lead">家のMacで、AIが作業中。<br />進み具合を指で確かめて、直しは話すだけ。</p>
-            <a className="hero-voice" href="#voice">
-              <span className="hero-voice-text"><span className="hero-voice-kicker">声で書く</span><b>Aqua Voiceに対応</b><span className="hero-voice-sub"><span className="nb">話すだけで文字が入るから、</span><span className="nb"><mark>キーボードいらず。</mark></span></span><span className="hero-voice-note">Aqua Voiceは別の会社のアプリです。</span></span>
-              <span className="hero-voice-arrow" aria-hidden="true">→</span>
-            </a>
             <div className="hero-actions">
-              <a className="btn btn-primary" href="#download">ダウンロード <span aria-hidden="true">→</span></a>
+              <a className="btn btn-primary" href="#download">{DOWNLOAD_LINK.cta} <span aria-hidden="true">→</span></a>
               <a className="btn btn-ghost" href="#features">特長を見る</a>
             </div>
             <p className="hero-note">14日間、すべての機能を無料で。<span className="nb">買い切り・月額なし・アカウント登録なし。</span></p>
+            {/* 2026-11-21：主ボタンの後ろへ（見出し → 説明 → 主ボタン → 補足の順）。狭い幅では小さなリンクにする（.is-after） */}
+            <a className="hero-voice is-after" href="#voice">
+              <span className="hero-voice-text"><span className="hero-voice-kicker">声で書く</span><b>Aqua Voiceに対応</b><span className="hero-voice-sub"><span className="nb">話すだけで文字が入るから、</span><span className="nb"><mark>キーボードいらず。</mark></span></span><span className="hero-voice-note">Aqua Voiceは別の会社のアプリです。</span></span>
+              <span className="hero-voice-arrow" aria-hidden="true">→</span>
+            </a>
             <p className="hero-platforms"><b>Galaxy Z Fold7</b>で動作を確認 <i>·</i> iPhone・iPad・Macからも</p>
           </div>
 
@@ -1022,7 +1024,7 @@ export default async function Home() {
       </section>
 
           {/* S12 対応デバイス */}
-      <section className="section devices" aria-labelledby="devices-title">
+      <section className="section devices" id="devices" aria-labelledby="devices-title">
         <div className="wrap">
           <h2 className="section-title center" id="devices-title">iPhone・iPad・ふつうのAndroid・<br className="sp" />MacBookからも。</h2>
           <div className="device-grid">
@@ -1210,19 +1212,30 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* S16 ダウンロード */}
+      {/* S16 ダウンロード（2026-11-21：公開前なので「配信予定・インストール先」。家のMac と 手もとの端末 の 2 つに分ける。
+          配信を始めたら、見出しの上の札・カードの「近日公開」・src/components/nav.ts の DOWNLOAD_LINK を変える） */}
       <section className="section download" id="download" aria-labelledby="download-title">
         <div className="wrap">
           <div className="download-panel">
+            <p className="dl-kicker">配信予定・インストール先</p>
             <h2 className="section-title center" id="download-title"><span className="nb">Macに任せて、</span><span className="nb">出かけよう。</span></h2>
-            <p className="section-lead center">14日間、すべての機能を無料で。まずは、操作したいMacにMOTHERSHIP HOSTを入れるところからはじめましょう。</p>
-            <div className="download-grid">
-              <div className="dl is-primary"><p className="dl-step">1. 操作されるMacに</p><h3>MOTHERSHIP HOST</h3><p>このサイトから・macOS 14以降</p><span className="pill pill-soft soon">近日公開</span></div>
-              <div className="dl"><p className="dl-step">2. 手もとのデバイスに</p><h3>Android</h3><p>Google Play</p><span className="pill pill-ghost soon">近日公開</span></div>
-              <div className="dl"><p className="dl-step">2. 手もとのデバイスに</p><h3>iPhone・iPad</h3><p>App Store</p><span className="pill pill-ghost soon">近日公開</span></div>
-              <div className="dl"><p className="dl-step">2. 手もとのデバイスに</p><h3>別のMac</h3><p>このサイトから・macOS 15以降</p><span className="pill pill-ghost soon">近日公開</span></div>
+            <p className="section-lead center">14日間、すべての機能を無料で。入れるのは、家のMacに1つと、手もとの端末に1つ。どちらも近日公開です。</p>
+            <div className="dl-groups">
+              <div className="dl-group is-host">
+                <h3 className="dl-gtitle"><span className="dl-num">1</span>家のMacに<small>操作されるMacに入れます</small></h3>
+                <div className="dl is-primary"><h4>MOTHERSHIP HOST</h4><p>このサイトから・macOS 14以降</p><span className="pill pill-soft soon">近日公開</span></div>
+              </div>
+              <div className="dl-group">
+                <h3 className="dl-gtitle"><span className="dl-num">2</span>手もとの端末を選ぶ<small>使う端末にだけ、「MOTHERSHIP」を入れます</small></h3>
+                <div className="dl-row">
+                  <div className="dl"><h4>Android</h4><p>Google Play</p><span className="pill pill-ghost soon">近日公開</span></div>
+                  <div className="dl"><h4>iPhone・iPad</h4><p>App Store</p><span className="pill pill-ghost soon">近日公開</span></div>
+                  <div className="dl"><h4>別のMac</h4><p>このサイトから・macOS 15以降</p><span className="pill pill-ghost soon">近日公開</span></div>
+                </div>
+              </div>
             </div>
-            <p className="fine center">最初に、操作されるMacへ「MOTHERSHIP HOST」を入れてください。そのあとで、手もとのデバイスに「MOTHERSHIP」を入れます。</p>
+            <p className="fine center">最初に、家のMac（操作されるMac）へ「MOTHERSHIP HOST」を入れてください。そのあとで、手もとの端末に「MOTHERSHIP」を入れます。</p>
+            <p className="dl-now">配信を始めたら、お知らせでご案内します。<Link className="btn btn-ghost" href="/news/">お知らせを見る <span aria-hidden="true">→</span></Link></p>
           </div>
         </div>
       </section>

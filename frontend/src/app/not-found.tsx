@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { DOWNLOAD_LINK } from "@/components/nav";
 
 // 404 ページ。mock/design/404.html の <main> を JSX にしたもの（スタイルは src/styles/404.css）
 // noindex は Next.js が自動で付ける
@@ -11,7 +12,7 @@ const POPULAR_LINKS = [
   { href: "/#features", label: "特長" },
   { href: "/#how", label: "使い方" },
   { href: "/#pricing", label: "料金" },
-  { href: "/#download", label: "ダウンロード" },
+  { href: DOWNLOAD_LINK.href, label: DOWNLOAD_LINK.label },
 ] as const;
 
 export default function NotFound() {

@@ -35,7 +35,7 @@
         <a href="#how">使い方</a>
         <a href="#pricing">料金</a>
         <a href="#faq">よくある質問</a>
-        <a class="nav-cta" href="#download">ダウンロード</a>
+        <a class="nav-cta" href="#download">配信予定</a>
       </nav>
     </div>
   </header>
@@ -50,15 +50,16 @@
           <p class="pill pill-glass hero-label">AIが働くMacを、手もとから。</p>
           <h1 id="hero-title">指で動かす。<br><span class="grad-text">声で書く。</span></h1>
           <p class="hero-lead">家のMacで、AIが作業中。<br>進み具合を指で確かめて、直しは話すだけ。</p>
-          <a class="hero-voice" href="#voice">
-            <span class="hero-voice-text"><span class="hero-voice-kicker">声で書く</span><b>Aqua Voiceに対応</b><span class="hero-voice-sub"><span class="nb">話すだけで文字が入るから、</span><span class="nb"><mark>キーボードいらず。</mark></span></span><span class="hero-voice-note">Aqua Voiceは別の会社のアプリです。</span></span>
-            <span class="hero-voice-arrow" aria-hidden="true">→</span>
-          </a>
           <div class="hero-actions">
-            <a class="btn btn-primary" href="#download">ダウンロード <span aria-hidden="true">→</span></a>
+            <a class="btn btn-primary" href="#download">配信予定を見る <span aria-hidden="true">→</span></a>
             <a class="btn btn-ghost" href="#features">特長を見る</a>
           </div>
           <p class="hero-note">14日間、すべての機能を無料で。<span class="nb">買い切り・月額なし・アカウント登録なし。</span></p>
+          <!-- 2026-11-21：主ボタンの後ろへ（見出し → 説明 → 主ボタン → 補足の順）。狭い幅では小さなリンクにする（.is-after） -->
+          <a class="hero-voice is-after" href="#voice">
+            <span class="hero-voice-text"><span class="hero-voice-kicker">声で書く</span><b>Aqua Voiceに対応</b><span class="hero-voice-sub"><span class="nb">話すだけで文字が入るから、</span><span class="nb"><mark>キーボードいらず。</mark></span></span><span class="hero-voice-note">Aqua Voiceは別の会社のアプリです。</span></span>
+            <span class="hero-voice-arrow" aria-hidden="true">→</span>
+          </a>
           <p class="hero-platforms"><b>Galaxy Z Fold7</b>で動作を確認 <i>·</i> iPhone・iPad・Macからも</p>
         </div>
 
@@ -855,7 +856,7 @@
     </section>
 
         <!-- S12 対応デバイス -->
-    <section class="section devices" aria-labelledby="devices-title">
+    <section class="section devices" id="devices" aria-labelledby="devices-title">
       <div class="wrap">
         <h2 class="section-title center" id="devices-title">iPhone・iPad・ふつうのAndroid・<br class="sp">MacBookからも。</h2>
         <div class="device-grid">
@@ -1043,19 +1044,30 @@
       </div>
     </section>
 
-    <!-- S16 ダウンロード -->
+    <!-- S16 ダウンロード（2026-11-21：公開前なので「配信予定・インストール先」。家のMac と 手もとの端末 の 2 つに分ける。
+         配信を始めたら、見出しの上の札・カードの「近日公開」・ヘッダーとHEROのボタンの文言（配信予定 → ダウンロード）を変える） -->
     <section class="section download" id="download" aria-labelledby="download-title">
       <div class="wrap">
         <div class="download-panel">
+          <p class="dl-kicker">配信予定・インストール先</p>
           <h2 class="section-title center" id="download-title"><span class="nb">Macに任せて、</span><span class="nb">出かけよう。</span></h2>
-          <p class="section-lead center">14日間、すべての機能を無料で。まずは、操作したいMacにMOTHERSHIP HOSTを入れるところからはじめましょう。</p>
-          <div class="download-grid">
-            <div class="dl is-primary"><p class="dl-step">1. 操作されるMacに</p><h3>MOTHERSHIP HOST</h3><p>このサイトから・macOS 14以降</p><span class="pill pill-soft soon">近日公開</span></div>
-            <div class="dl"><p class="dl-step">2. 手もとのデバイスに</p><h3>Android</h3><p>Google Play</p><span class="pill pill-ghost soon">近日公開</span></div>
-            <div class="dl"><p class="dl-step">2. 手もとのデバイスに</p><h3>iPhone・iPad</h3><p>App Store</p><span class="pill pill-ghost soon">近日公開</span></div>
-            <div class="dl"><p class="dl-step">2. 手もとのデバイスに</p><h3>別のMac</h3><p>このサイトから・macOS 15以降</p><span class="pill pill-ghost soon">近日公開</span></div>
+          <p class="section-lead center">14日間、すべての機能を無料で。入れるのは、家のMacに1つと、手もとの端末に1つ。どちらも近日公開です。</p>
+          <div class="dl-groups">
+            <div class="dl-group is-host">
+              <h3 class="dl-gtitle"><span class="dl-num">1</span>家のMacに<small>操作されるMacに入れます</small></h3>
+              <div class="dl is-primary"><h4>MOTHERSHIP HOST</h4><p>このサイトから・macOS 14以降</p><span class="pill pill-soft soon">近日公開</span></div>
+            </div>
+            <div class="dl-group">
+              <h3 class="dl-gtitle"><span class="dl-num">2</span>手もとの端末を選ぶ<small>使う端末にだけ、「MOTHERSHIP」を入れます</small></h3>
+              <div class="dl-row">
+                <div class="dl"><h4>Android</h4><p>Google Play</p><span class="pill pill-ghost soon">近日公開</span></div>
+                <div class="dl"><h4>iPhone・iPad</h4><p>App Store</p><span class="pill pill-ghost soon">近日公開</span></div>
+                <div class="dl"><h4>別のMac</h4><p>このサイトから・macOS 15以降</p><span class="pill pill-ghost soon">近日公開</span></div>
+              </div>
+            </div>
           </div>
-          <p class="fine center">最初に、操作されるMacへ「MOTHERSHIP HOST」を入れてください。そのあとで、手もとのデバイスに「MOTHERSHIP」を入れます。</p>
+          <p class="fine center">最初に、家のMac（操作されるMac）へ「MOTHERSHIP HOST」を入れてください。そのあとで、手もとの端末に「MOTHERSHIP」を入れます。</p>
+          <p class="dl-now">配信を始めたら、お知らせでご案内します。<a class="btn btn-ghost" href="news.html">お知らせを見る <span aria-hidden="true">→</span></a></p>
         </div>
       </div>
     </section>
@@ -1081,7 +1093,7 @@
     <div class="wrap">
       <div class="footer-top">
         <a class="brand" href="index.html"><span>MOTHERSHIP</span></a>
-        <nav aria-label="フッターナビゲーション"><a href="#features">特長</a><a href="#voice">声で入力</a><a href="#how">使い方</a><a href="#pricing">料金</a><a href="#faq">よくある質問</a><a href="#download">ダウンロード</a><a href="help.html">ヘルプ</a><a href="news.html">お知らせ</a><a href="terms-of-service.html">利用規約</a><a href="privacy-policy.html">プライバシーポリシー</a><a href="commercial-transactions.html">特定商取引法に基づく表記</a><a href="contact.html">お問い合わせ</a></nav>
+        <nav aria-label="フッターナビゲーション"><a href="#features">特長</a><a href="#voice">声で入力</a><a href="#how">使い方</a><a href="#pricing">料金</a><a href="#faq">よくある質問</a><a href="#download">配信予定</a><a href="help.html">ヘルプ</a><a href="news.html">お知らせ</a><a href="terms-of-service.html">利用規約</a><a href="privacy-policy.html">プライバシーポリシー</a><a href="commercial-transactions.html">特定商取引法に基づく表記</a><a href="contact.html">お問い合わせ</a></nav>
       </div>
       <p class="footer-tagline">MOTHERSHIPは、折りたたみスマホ・iPhone・iPad・AndroidからMacを操作する、リモートデスクトップアプリです。</p>
       <p class="trademark">Mac、macOS、iPhone、iPad、iPadOS、App Store、Face ID、Touch ID、Mission Controlは、米国およびその他の国や地域で登録されたApple Inc.の商標です。iPhoneの商標は、アイホン株式会社のライセンスにもとづき使用されています。Android、Google PlayはGoogle LLCの商標です。Galaxy Z Foldは、Samsung Electronics Co., Ltd.の商標または登録商標です。TailscaleはTailscale Inc.の商標です。Claude CodeはAnthropic PBCの、CodexはOpenAIの商標です。Aqua Voice、BlackHoleは、それぞれの権利者の商標または製品名です。</p>

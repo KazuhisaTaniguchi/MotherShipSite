@@ -5,7 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { TRADEMARKS } from "@/content/en/pages";
 import { isEnPath, langPaths } from "@/lib/i18n";
-import { NAV_ITEMS, NAV_ITEMS_EN } from "./nav";
+import { NAV_ITEMS, NAV_ITEMS_EN, DOWNLOAD_LINK } from "./nav";
 
 // 解析（Google のタグ）を入れているときだけ、「クッキーの設定」を出す（押すと、同意の確認がもう一度出る）
 const HAS_ANALYTICS = Boolean(process.env.NEXT_PUBLIC_GTM_ID);
@@ -54,7 +54,7 @@ export function SiteFooter() {
             {NAV_ITEMS.map((item) => (
               <Link key={item.href} href={item.href}>{item.label}</Link>
             ))}
-            <Link href="/#download">ダウンロード</Link>
+            <Link href={DOWNLOAD_LINK.href}>{DOWNLOAD_LINK.label}</Link>
             <Link href="/help/">ヘルプ</Link>
             <Link href="/news/">お知らせ</Link>
             <Link href="/terms-of-service/">利用規約</Link>
