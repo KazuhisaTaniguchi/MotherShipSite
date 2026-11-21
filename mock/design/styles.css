@@ -255,6 +255,16 @@
   100% { transform: perspective(40em) rotateY(-72deg); }
 }
 
+/* 1 画面に窓は 1 つ（2026-11-21）。Mac の画面は、グラフの窓（.fm-w2）だけを画面いっぱいに映す。上の窓（.fm-w1）は出さない */
+.fm-fig .fm-w1 { display: none; }
+.fm-cover .fm-w2 { left: 8%; right: 8%; top: 10%; bottom: 29%; }
+.fm-open .fm-w2 { left: 8%; right: 8%; top: 10%; bottom: 10%; animation: none; }
+.fm-top .fm-w2 { left: 7%; right: 7%; top: 14%; bottom: 10%; }
+.fm-left .fm-w2 { left: 8%; right: 8%; top: 10%; bottom: 10%; }
+.fm-cover .fm-desk { --cx0: 28%; --cy0: 24%; --cx1: 60%; --cy1: 52%; }
+.fm-table .fm-desk { --cx0: 24%; --cy0: 34%; --cx1: 62%; --cy1: 60%; }
+.fm-book .fm-desk { --cx0: 28%; --cy0: 24%; --cx1: 58%; --cy1: 62%; }
+
 /* 共感（席を離れたあとの困りごと）。番号つきの一覧（.scene-list）を 3 列で使う */
 .pains { background: var(--surface); padding-top: clamp(56px, 7vw, 90px); }
 .scene-list.is-three { grid-template-columns: repeat(3, 1fr); gap: 0 40px; }
