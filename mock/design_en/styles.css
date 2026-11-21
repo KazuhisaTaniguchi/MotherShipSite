@@ -196,6 +196,65 @@
 .fm-left .fm-w1 { top: 10%; height: 36%; }
 .fm-left .fm-w2 { top: 52%; }
 
+/* ---- 4 枚のカードの動き（2026-11-21）。どれも 8 秒で 1 周 ----
+   共通：指（トラックパッドの上の丸）でなぞる → Mac のカーソルが同じ向きに動く → グラフの窓をクリック（青い枠）。
+   開く＝カバー画面から開いた形に広がり、窓が並び直す／半分に折る＝上の画面を起こしてから／本＝右の画面を開いてから。
+   カーソルの始まりと終わり（--cx0 など）は、カードごとに変える */
+.fm-pad { position: relative; overflow: hidden; }
+.fm-float::after, .fm-pad::after { content: ""; position: absolute; left: 14%; top: 16%; width: 1.8em; height: 1.8em; border-radius: 50%; background: rgba(120, 170, 255, .55); border: .15em solid #fff; box-shadow: 0 0 .6em rgba(120, 170, 255, .8); opacity: 0; animation: fm-finger 8s ease-in-out infinite; }
+.fm-cover .fm-desk::after, .fm-table .fm-desk::after, .fm-book .fm-desk::after { content: ""; position: absolute; z-index: 5; width: 1.25em; height: 1.8em; background: var(--navy); clip-path: polygon(0 0, 0 78%, 22% 60%, 38% 95%, 52% 89%, 37% 56%, 66% 56%); opacity: 0; animation: fm-cursor 8s ease-in-out infinite; }
+.fm-cover .fm-desk { --cx0: 30%; --cy0: 26%; --cx1: 58%; --cy1: 60%; }
+.fm-table .fm-desk { --cx0: 22%; --cy0: 34%; --cx1: 68%; --cy1: 56%; }
+.fm-book .fm-desk { --cx0: 30%; --cy0: 26%; --cx1: 56%; --cy1: 72%; }
+.fm-cover .fm-w2, .fm-table .fm-w2, .fm-book .fm-w2 { animation: fm-hit 8s ease infinite; }
+.fm-keys i:nth-child(2) { animation: fm-key 8s ease infinite; }
+@keyframes fm-finger {
+  0%, 24% { opacity: 0; transform: none; }
+  28% { opacity: 1; transform: none; }
+  52% { opacity: 1; transform: translate(1.6em, .6em); }
+  55% { opacity: 1; transform: translate(1.6em, .6em) scale(.7); }
+  58%, 74% { opacity: 1; transform: translate(1.6em, .6em); }
+  80%, 100% { opacity: 0; transform: translate(1.6em, .6em); }
+}
+@keyframes fm-cursor {
+  0%, 24% { opacity: 0; left: var(--cx0); top: var(--cy0); }
+  28% { opacity: 1; left: var(--cx0); top: var(--cy0); }
+  52%, 74% { opacity: 1; left: var(--cx1); top: var(--cy1); }
+  80%, 100% { opacity: 0; left: var(--cx1); top: var(--cy1); }
+}
+@keyframes fm-hit {
+  0%, 54% { box-shadow: 0 .5em 1.2em -.6em rgba(var(--navy-rgb), .5), 0 0 0 0 rgba(var(--blue-rgb), 0); }
+  57%, 74% { box-shadow: 0 .5em 1.2em -.6em rgba(var(--navy-rgb), .5), 0 0 0 .25em rgba(var(--blue-rgb), .9); }
+  80%, 100% { box-shadow: 0 .5em 1.2em -.6em rgba(var(--navy-rgb), .5), 0 0 0 0 rgba(var(--blue-rgb), 0); }
+}
+@keyframes fm-key { 0%, 62% { filter: none; } 64%, 68% { filter: brightness(2.2); } 71%, 100% { filter: none; } }
+
+/* 2 開く：細いカバー画面 → 開いた画面（窓は縦に重ねた並び → 左右の並び）→ また閉じる */
+.fm-open .fm-dev { animation: fm-open-dev 8s ease-in-out infinite; }
+.fm-open .fm-w1 { animation: fm-open-w1 8s ease-in-out infinite; }
+.fm-open .fm-w2 { animation: fm-open-w2 8s ease-in-out infinite; }
+.fm-open .fm-hinge { animation: fm-open-hinge 8s ease-in-out infinite; }
+@keyframes fm-open-dev { 0%, 16% { left: 12.4em; width: 8.6em; } 32%, 84% { left: 6.4em; width: 20.5em; } 96%, 100% { left: 12.4em; width: 8.6em; } }
+@keyframes fm-open-w1 { 0%, 18% { right: 8%; top: 10%; height: 34%; } 34%, 82% { right: 46%; top: 12%; height: 76%; } 94%, 100% { right: 8%; top: 10%; height: 34%; } }
+@keyframes fm-open-w2 { 0%, 18% { left: 8%; top: 50%; bottom: 10%; } 34%, 82% { left: 46%; top: 22%; bottom: 14%; } 94%, 100% { left: 8%; top: 50%; bottom: 10%; } }
+@keyframes fm-open-hinge { 0%, 20% { opacity: 0; } 30%, 84% { opacity: 1; } 90%, 100% { opacity: 0; } }
+
+/* 3 半分に折って置く：上の画面を、寝かせたところから起こす */
+.fm-table .fm-top { animation: fm-table-top 8s ease-in-out infinite; }
+@keyframes fm-table-top {
+  0%, 4% { transform: perspective(40em) rotateX(62deg); }
+  20%, 88% { transform: perspective(40em) rotateX(6deg); }
+  100% { transform: perspective(40em) rotateX(62deg); }
+}
+
+/* 4 本のように持つ：右の画面を、閉じかけたところから開く */
+.fm-book .fm-right { animation: fm-book-right 8s ease-in-out infinite; }
+@keyframes fm-book-right {
+  0%, 4% { transform: perspective(40em) rotateY(-72deg); }
+  20%, 88% { transform: perspective(40em) rotateY(-28deg); }
+  100% { transform: perspective(40em) rotateY(-72deg); }
+}
+
 /* 共感（席を離れたあとの困りごと）。番号つきの一覧（.scene-list）を 3 列で使う */
 .pains { background: var(--surface); padding-top: clamp(56px, 7vw, 90px); }
 .scene-list.is-three { grid-template-columns: repeat(3, 1fr); gap: 0 40px; }
@@ -1684,6 +1743,8 @@
   .voice-wave i, .caret { animation: none; }
   /* 動かさず、縦向きでレポートを広げたところ（65%）で止める */
   .fit-diagram *, .fit-diagram *::after { animation-delay: -6.5s !important; animation-play-state: paused !important; }
+  /* 形を変えるの 4 枚：開いて、窓をクリックしたところ（62%）で止める */
+  .fm-fig *, .fm-fig *::before, .fm-fig *::after { animation-delay: -5s !important; animation-play-state: paused !important; }
   /* 特長 2 の図：窓の一覧でレポートを選んだところ（68%）で止め、札は全部明るく */
   .touch-demo .td-stage * { animation-delay: -8.2s !important; animation-play-state: paused !important; }
   .td-steps li { animation: none; opacity: 1; }
