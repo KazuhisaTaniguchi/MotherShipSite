@@ -183,14 +183,9 @@ kbd { font-family: var(--font-sans); font-size: var(--text-note); font-weight: v
 .vn-more { display: inline-block; margin-top: 8px; font-size: 13px; font-weight: var(--weight-bold); color: var(--blue-deep); text-decoration: none; }
 .vn-more:hover { text-decoration: underline; }
 
-/* ---- 英語版だけ：言語の切り替え（「日本語」）と、訳文の注記 ---- */
-.site-nav .nav-lang { padding: 5px 12px; border: 1px solid var(--line); border-radius: var(--radius-pill); font-size: var(--text-note); color: var(--ink-2); }
-.site-nav .nav-lang:hover { border-color: var(--blue); color: var(--blue-deep); }
+/* ---- 英語版だけ：フッターの「日本語」と、訳文の注記 ---- */
 .footer-top nav .nav-lang { font-weight: var(--weight-bold); }
 .lang-note { margin-bottom: var(--space-6); padding: 14px 18px; border-left: 3px solid var(--blue); border-radius: 0 var(--radius-sm) var(--radius-sm) 0; background: #eef3ff; font-size: var(--text-small); line-height: var(--leading-note); color: var(--ink-2); }
-@media (max-width: 860px) {
-  .site-nav .nav-lang { align-self: flex-start; margin: 8px 16px; padding: 8px 14px; font-size: var(--text-small); }
-}
 
 /* ---- 図の動き：画面の外では止める・まとめて止めるボタン（2026-11-21）----
    script.js（本番は src/components/FigureMotion.tsx）が、動く図のある節に data-motion を付け、
@@ -206,4 +201,13 @@ kbd { font-family: var(--font-sans); font-size: var(--text-note); font-weight: v
 .motion-paused .motion-toggle-icon { width: 0; height: 0; border-left: 10px solid currentColor; border-right: 0; border-top: 6px solid transparent; border-bottom: 6px solid transparent; }
 @media (prefers-reduced-motion: reduce) {
   .motion-toggle { display: none; }
+}
+
+/* 言語の切り替え（JA／EN。2026-11-22 に本番から写した）。ヘッダーの「配信予定」の前。日本語・英語のどちらのページでも使う */
+.site-nav .lang-switch { display: inline-flex; gap: 2px; padding: 3px; border: 1px solid var(--line); border-radius: var(--radius-pill); }
+.site-nav .lang-switch a { padding: 4px 10px; border-radius: var(--radius-pill); font-size: var(--text-note); font-weight: var(--weight-bold); letter-spacing: .04em; color: var(--ink-2); }
+.site-nav .lang-switch a[aria-current] { background: var(--ink); color: var(--on-dark); }
+@media (max-width: 860px) {
+  .site-nav .lang-switch { align-self: flex-start; margin: 8px 16px; }
+  .site-nav .lang-switch a { padding: 8px 16px; font-size: var(--text-small); }
 }

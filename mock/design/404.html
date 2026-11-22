@@ -31,6 +31,7 @@
         <a href="index.html#how">使い方</a>
         <a href="index.html#pricing">料金</a>
         <a href="index.html#faq">よくある質問</a>
+        <span class="lang-switch" role="group" aria-label="言語"><a href="404.html" lang="ja" hreflang="ja" aria-current="true" aria-label="日本語">JA</a><a href="../design_en/404.html" lang="en" hreflang="en" aria-label="English">EN</a></span>
         <a class="nav-cta" href="index.html#download">配信予定</a>
       </nav>
     </div>
@@ -44,6 +45,8 @@
           <p class="pill pill-glass nf-label">404 Not Found</p>
           <h1 id="nf-title">お探しのページに、<br><span class="grad-text">つながりませんでした。</span></h1>
           <p class="nf-lead">ページが移動したか、削除された可能性があります。<br class="pc">URLをお確かめのうえ、トップページからお探しください。</p>
+          <!-- 404 のページは 1 枚だけ（本番では英語の URL でも、この日本語のページが出る）。英語の人のために 1 行だけ添える -->
+          <p class="nf-lead" lang="en" style="margin-top: var(--space-3); font-size: var(--text-small);">Page not found. <a href="../design_en/index.html">Go to the English home page →</a></p>
           <div class="nf-actions">
             <a class="btn btn-primary" href="index.html">トップページへ <span aria-hidden="true">→</span></a>
             <a class="btn btn-ghost" href="index.html#faq">よくある質問</a>

@@ -9,14 +9,7 @@ html[lang="en"] {
 :where(html[lang="en"]) i, :where(html[lang="en"]) em { font-style: normal; }
 :where(html[lang="en"]) :is(p, li, dd, summary) { text-wrap: pretty; }
 .lang-note { margin-bottom: var(--space-6); padding: 14px 18px; border-left: 3px solid var(--blue); border-radius: 0 var(--radius-sm) var(--radius-sm) 0; background: #eef3ff; font-size: var(--text-small); line-height: var(--leading-note); color: var(--ink-2); }
-/* 言語の切り替え（JA／EN）。本番だけの部品（モックは「日本語」のリンク 1 つ）。日本語のページでも使う */
-.site-nav .lang-switch { display: inline-flex; gap: 2px; padding: 3px; border: 1px solid var(--line); border-radius: var(--radius-pill); }
-.site-nav .lang-switch a { padding: 4px 10px; border-radius: var(--radius-pill); font-size: var(--text-note); font-weight: var(--weight-bold); letter-spacing: .04em; color: var(--ink-2); }
-.site-nav .lang-switch a[aria-current] { background: var(--ink); color: var(--on-dark); }
-@media (max-width: 860px) {
-  .site-nav .lang-switch { align-self: flex-start; margin: 8px 16px; }
-  .site-nav .lang-switch a { padding: 8px 16px; font-size: var(--text-small); }
-}
+/* 言語の切り替え（JA／EN）は、2026-11-22 からモックと同じく src/styles/components.css にある */
 /* 図の中の文字 */
 :where(html[lang="en"]) .vf-l4::after, :where(html[lang="en"]) .hfv-l4::after { content: "Aa"; }
 /* ヘルプの図：英語の文言は長いので、メニューを広げて、文字を少し小さくする */

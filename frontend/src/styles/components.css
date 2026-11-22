@@ -198,3 +198,12 @@ kbd { font-family: var(--font-sans); font-size: var(--text-note); font-weight: v
 @media (prefers-reduced-motion: reduce) {
   .motion-toggle { display: none; }
 }
+
+/* 言語の切り替え（JA／EN。2026-11-22 に本番から写した）。ヘッダーの「配信予定」の前。日本語・英語のどちらのページでも使う */
+.site-nav .lang-switch { display: inline-flex; gap: 2px; padding: 3px; border: 1px solid var(--line); border-radius: var(--radius-pill); }
+.site-nav .lang-switch a { padding: 4px 10px; border-radius: var(--radius-pill); font-size: var(--text-note); font-weight: var(--weight-bold); letter-spacing: .04em; color: var(--ink-2); }
+.site-nav .lang-switch a[aria-current] { background: var(--ink); color: var(--on-dark); }
+@media (max-width: 860px) {
+  .site-nav .lang-switch { align-self: flex-start; margin: 8px 16px; }
+  .site-nav .lang-switch a { padding: 8px 16px; font-size: var(--text-small); }
+}
