@@ -1211,13 +1211,13 @@ export default async function Home() {
       <section className="section download" id="download" aria-labelledby="download-title">
         <div className="wrap">
           <div className="download-panel">
-            <p className="dl-kicker">配信予定・インストール先</p>
+            <p className="dl-kicker">ダウンロード・配信予定</p>
             <h2 className="section-title center" id="download-title"><span className="nb">Macに任せて、</span><span className="nb">出かけよう。</span></h2>
-            <p className="section-lead center">14日間、すべての機能を無料で。入れるのは、家のMacに1つと、手もとの端末に1つ。どちらも近日公開です。</p>
+            <p className="section-lead center">14日間、すべての機能を無料で。入れるのは、家のMacに1つと、手もとの端末に1つ。家のMacの「MOTHERSHIP HOST」は、いまダウンロードできます。手もとの端末のアプリは、近日公開です。</p>
             <div className="dl-groups">
               <div className="dl-group is-host">
                 <h3 className="dl-gtitle"><span className="dl-num">1</span>家のMacに<small>操作されるMacに入れます</small></h3>
-                <div className="dl is-primary"><h4>MOTHERSHIP HOST</h4><p>このサイトから・macOS 14以降</p><span className="pill pill-soft soon">近日公開</span></div>
+                <div className="dl is-primary"><h4>MOTHERSHIP HOST</h4><p>このサイトから・macOS 14以降</p><p className="dl-ver">バージョン 1.0.0・21 MB</p><a className="btn btn-primary dl-get" href="/downloads/MothershipHost-1.0.0.dmg" download>ダウンロード <span aria-hidden="true">↓</span></a></div>
               </div>
               <div className="dl-group">
                 <h3 className="dl-gtitle"><span className="dl-num">2</span>手もとの端末を選ぶ<small>使う端末にだけ、「MOTHERSHIP」を入れます</small></h3>
