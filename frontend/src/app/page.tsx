@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { DOWNLOAD_LINK } from "@/components/nav";
+import { APP_STORE_URL, DOWNLOAD_LINK } from "@/components/nav";
 import { HeroFold } from "@/components/HeroFold";
 import { pageMeta, siteLd } from "@/lib/seo";
 import { getAllPosts } from "@/lib/wordpress";
@@ -1206,14 +1206,14 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* S16 ダウンロード（2026-11-21：公開前なので「配信予定・インストール先」。家のMac と 手もとの端末 の 2 つに分ける。
-          配信を始めたら、見出しの上の札・カードの「近日公開」・src/components/nav.ts の DOWNLOAD_LINK を変える） */}
+      {/* S16 ダウンロード。家のMac と 手もとの端末 の 2 つに分ける。
+          2026-11-22 HOST、2026-11-24 iPhone・iPad（App Store）を公開。Android・別のMac は、配信を始めたらカードの「近日公開」をボタンに変え、リードと下の案内の文も直す */}
       <section className="section download" id="download" aria-labelledby="download-title">
         <div className="wrap">
           <div className="download-panel">
             <p className="dl-kicker">ダウンロード・配信予定</p>
             <h2 className="section-title center" id="download-title"><span className="nb">Macに任せて、</span><span className="nb">出かけよう。</span></h2>
-            <p className="section-lead center">14日間、すべての機能を無料で。入れるのは、家のMacに1つと、手もとの端末に1つ。家のMacの「MOTHERSHIP HOST」は、いまダウンロードできます。手もとの端末のアプリは、近日公開です。</p>
+            <p className="section-lead center">14日間、すべての機能を無料で。入れるのは、家のMacに1つと、手もとの端末に1つ。家のMacの「MOTHERSHIP HOST」と、iPhone・iPadのアプリは、いまダウンロードできます。AndroidとMacのアプリは、近日公開です。</p>
             <div className="dl-groups">
               <div className="dl-group is-host">
                 <h3 className="dl-gtitle"><span className="dl-num">1</span>家のMacに<small>操作されるMacに入れます</small></h3>
@@ -1223,13 +1223,13 @@ export default async function Home() {
                 <h3 className="dl-gtitle"><span className="dl-num">2</span>手もとの端末を選ぶ<small>使う端末にだけ、「MOTHERSHIP」を入れます</small></h3>
                 <div className="dl-row">
                   <div className="dl"><h4>Android</h4><p>Google Play</p><span className="pill pill-ghost soon">近日公開</span></div>
-                  <div className="dl"><h4>iPhone・iPad</h4><p>App Store</p><span className="pill pill-ghost soon">近日公開</span></div>
+                  <div className="dl"><h4>iPhone・iPad</h4><p>App Store</p><a className="btn btn-primary dl-get" href={APP_STORE_URL} target="_blank" rel="noopener noreferrer">ダウンロード <span aria-hidden="true">→</span></a></div>
                   <div className="dl"><h4>別のMac</h4><p>このサイトから・macOS 15以降</p><span className="pill pill-ghost soon">近日公開</span></div>
                 </div>
               </div>
             </div>
             <p className="fine center">最初に、家のMac（操作されるMac）へ「MOTHERSHIP HOST」を入れてください。そのあとで、手もとの端末に「MOTHERSHIP」を入れます。</p>
-            <p className="dl-now">配信を始めたら、お知らせでご案内します。<Link className="btn btn-ghost" href="/news/">お知らせを見る <span aria-hidden="true">→</span></Link></p>
+            <p className="dl-now">AndroidとMacのアプリは、配信を始めたら、お知らせでご案内します。<Link className="btn btn-ghost" href="/news/">お知らせを見る <span aria-hidden="true">→</span></Link></p>
           </div>
         </div>
       </section>

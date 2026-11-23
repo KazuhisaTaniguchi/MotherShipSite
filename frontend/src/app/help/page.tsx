@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { breadcrumbLd, pageMeta } from "@/lib/seo";
 import { JsonLd } from "@/components/JsonLd";
 import Link from "next/link";
+import { APP_STORE_URL } from "@/components/nav";
 
 // ヘルプ。mock/design/help.html の <main> を JSX にしたもの（スタイルは src/styles/legal.css・help.css・help-figs.css）。
 // 図は mock/design/tools/help-figs/build.py が書き出したもの（help-figs.css もその写し。直すときはモックで直して写す）。
@@ -118,7 +119,7 @@ export default function Help() {
               <h3 id="setup-pair"><span className="no">ステップ2</span>デバイスを登録する（QRコード）</h3>
               <ol className="help-steps">
                 <li>
-                  <p>デバイスにMOTHERSHIPを入れて、開きます。（近日公開）</p>
+                  <p>デバイスにMOTHERSHIPを入れて、開きます。iPhone・iPadは、<a href={APP_STORE_URL} target="_blank" rel="noopener noreferrer">App Store</a>から入れられます。AndroidとMacは、近日公開です。</p>
                   <ul><li>iPhone・iPadで「ローカルネットワーク」の許可を求められたら、「許可」を選びます。家のWi-FiでMacを見つけるために使います。</li></ul>
                 </li>
                 <li>

@@ -16,6 +16,10 @@ export const NAV_ITEMS_EN = [
   { href: "/en/#faq", label: "FAQ" },
 ] as const;
 
-// 配信予定・インストール先（/#download）へのリンクの文言（日本語）。2026-11-21：公開前なので「配信予定」。
-// 配信を始めたら label を「ダウンロード」、cta を「ダウンロード」に戻す（ヘッダー・フッター・HERO・404 がここを使う）
-export const DOWNLOAD_LINK = { href: "/#download", label: "配信予定", cta: "配信予定を見る" } as const;
+// ダウンロード（/#download）へのリンクの文言（日本語）。ヘッダー・フッター・HERO・404 がここを使う。
+// 2026-11-24：iPhone・iPad版をApp Storeで公開したので、「配信予定」から「ダウンロード」に変えた
+// App Store の URL は日本のストア。ほかの国のストアで公開されたら、英語版（mock/design_en）にもリンクを入れる
+export const DOWNLOAD_LINK = { href: "/#download", label: "ダウンロード", cta: "ダウンロード" } as const;
+
+// iPhone・iPad版（App Store）
+export const APP_STORE_URL = "https://apps.apple.com/jp/app/mothership-remote/id6837504217";

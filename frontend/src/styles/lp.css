@@ -1555,6 +1555,8 @@
 /* MOTHERSHIP HOST のダウンロード（2026-11-22 公開）。2 グループの欄では、ボタンをカードの下にそろえる */
 .dl .dl-get { margin-top: 14px; min-height: 44px; padding: 0 22px; font-size: var(--text-small); }
 .dl-groups .dl .dl-get { margin-top: auto; }
+/* 濃い色のカード（手もとの端末）の上では、白いボタンにする（2026-11-24 App Store のリンク） */
+.dl-groups .dl:not(.is-primary) .dl-get { background: #fff; border-color: #fff; color: var(--ink); white-space: nowrap; }
 .dl > p.dl-ver { margin-top: 4px; font-size: var(--text-caption); }
 .dl-now { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 12px 18px; margin-top: 18px; font-size: var(--text-note); color: #d5dff6; }
 .dl-now .btn { min-height: 46px; padding: 0 22px; background: #fff; border-color: #fff; color: var(--ink); }
