@@ -1217,7 +1217,7 @@ export default async function Home() {
             <div className="dl-groups">
               <div className="dl-group is-host">
                 <h3 className="dl-gtitle"><span className="dl-num">1</span>家のMacに<small>操作されるMacに入れます</small></h3>
-                <div className="dl is-primary"><h4>MOTHERSHIP HOST</h4><p>このサイトから・macOS 14以降</p><p>Appleシリコン・Intel搭載のMacに対応</p><p className="dl-ver">バージョン 1.0.0・26 MB</p><a className="btn btn-primary dl-get" href="/downloads/MothershipHost-1.0.0.dmg" download>ダウンロード <span aria-hidden="true">↓</span></a></div>
+                <div className="dl is-primary"><h4>MOTHERSHIP HOST</h4><p>このサイトから・macOS 14以降</p><p>Appleシリコン・Intel搭載のMacに対応</p><p className="dl-ver">バージョン 1.1.0・26 MB</p><a className="btn btn-primary dl-get" href="/downloads/MothershipHost-1.1.0.dmg" download>ダウンロード <span aria-hidden="true">↓</span></a></div>
               </div>
               <div className="dl-group">
                 <h3 className="dl-gtitle"><span className="dl-num">2</span>手もとの端末を選ぶ<small>使う端末にだけ、「MOTHERSHIP」を入れます</small></h3>

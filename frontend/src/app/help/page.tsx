@@ -96,7 +96,7 @@ export default function Help() {
               <h3 id="setup-mac"><span className="no">ステップ1</span>MacにMOTHERSHIP HOSTを入れる</h3>
               <ol className="help-steps">
                 <li>
-                  <p>MOTHERSHIP HOSTを<a href="/downloads/MothershipHost-1.0.0.dmg" download>ダウンロード</a>して、開いたウィンドウの中のアイコンを「アプリケーション」フォルダーに入れます。</p>
+                  <p>MOTHERSHIP HOSTを<a href="/downloads/MothershipHost-1.1.0.dmg" download>ダウンロード</a>して、開いたウィンドウの中のアイコンを「アプリケーション」フォルダーに入れます。</p>
                 </li>
                 <li>
                   <p>MOTHERSHIP HOSTを開きます。ウィンドウは開かず、画面の右上（メニューバー）に、MOTHERSHIP HOSTのアイコンが出ます。</p>
