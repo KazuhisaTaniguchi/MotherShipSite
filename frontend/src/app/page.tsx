@@ -1022,7 +1022,7 @@ export default async function Home() {
         <div className="wrap">
           <h2 className="section-title center" id="devices-title">iPhone・iPad・ふつうのAndroid・<br className="sp" />MacBookからも。</h2>
           <div className="device-grid">
-            <article className="device is-host"><p className="role">操作されるMac</p><h3>MOTHERSHIP HOST</h3><p>macOS 14以降<br /><small>Appleシリコン搭載のMac（Intel搭載のMacは非対応）</small></p></article>
+            <article className="device is-host"><p className="role">操作されるMac</p><h3>MOTHERSHIP HOST</h3><p>macOS 14以降<br /><small>Appleシリコン・Intel搭載のMacに対応</small></p></article>
             <article className="device"><p className="role">操作する側</p><h3>Android</h3><p>MOTHERSHIP<br /><small>Android 13以降。折りたたみにも対応</small></p></article>
             <article className="device"><p className="role">操作する側</p><h3>iPhone・iPad</h3><p>MOTHERSHIP<br /><small>iOS 27・iPadOS 27以降</small></p></article>
             <article className="device"><p className="role">操作する側</p><h3>別のMac</h3><p>MOTHERSHIP<br /><small>macOS 15以降・Appleシリコン搭載のMac</small></p></article>
@@ -1217,7 +1217,7 @@ export default async function Home() {
             <div className="dl-groups">
               <div className="dl-group is-host">
                 <h3 className="dl-gtitle"><span className="dl-num">1</span>家のMacに<small>操作されるMacに入れます</small></h3>
-                <div className="dl is-primary"><h4>MOTHERSHIP HOST</h4><p>このサイトから・macOS 14以降</p><p className="dl-ver">バージョン 1.0.0・21 MB</p><a className="btn btn-primary dl-get" href="/downloads/MothershipHost-1.0.0.dmg" download>ダウンロード <span aria-hidden="true">↓</span></a></div>
+                <div className="dl is-primary"><h4>MOTHERSHIP HOST</h4><p>このサイトから・macOS 14以降</p><p>Appleシリコン・Intel搭載のMacに対応</p><p className="dl-ver">バージョン 1.0.0・26 MB</p><a className="btn btn-primary dl-get" href="/downloads/MothershipHost-1.0.0.dmg" download>ダウンロード <span aria-hidden="true">↓</span></a></div>
               </div>
               <div className="dl-group">
                 <h3 className="dl-gtitle"><span className="dl-num">2</span>手もとの端末を選ぶ<small>使う端末にだけ、「MOTHERSHIP」を入れます</small></h3>

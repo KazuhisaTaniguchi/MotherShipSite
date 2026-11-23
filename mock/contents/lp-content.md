@@ -427,7 +427,7 @@ S2 の 3 つに、同じ順番で答えます。カードから、くわしい�
 
 | 役割 | アプリ | 対応 | 入手先 |
 |---|---|---|---|
-| 操作されるMac | MOTHERSHIP HOST | macOS 14以降【未確定：Appleシリコン搭載のMacで動作確認。Intel搭載のMacは未確認】 | このサイトからダウンロード |
+| 操作されるMac | MOTHERSHIP HOST | macOS 14以降。Appleシリコン・Intel搭載のMacに対応（ユニバーサル版。Intel実機での動作確認は未実施） | このサイトからダウンロード |
 | iPhone・iPad | MOTHERSHIP | 【未確定：今のビルド設定は iOS／iPadOS 27以降】 | App Store |
 | Androidのスマホ・折りたたみ | MOTHERSHIP | Android 13以降 | Google Play |
 | 別のMac（操作する側） | MOTHERSHIP | macOS 15以降 | 【未確定：このサイト、または Mac App Store】 |

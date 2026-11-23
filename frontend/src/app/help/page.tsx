@@ -66,7 +66,7 @@ export default function Help() {
             <section className="article" id="start" aria-labelledby="start-title">
               <h2 id="start-title"><span className="no">1</span>用意するもの</h2>
               <dl className="help-need">
-                <div><dt>Mac</dt><dd>macOS 14以降のMac。「MOTHERSHIP HOST」を入れます。</dd></div>
+                <div><dt>Mac</dt><dd>macOS 14以降のMac（Appleシリコン・Intel搭載のMacに対応）。「MOTHERSHIP HOST」を入れます。</dd></div>
                 <div><dt>デバイス</dt><dd>iPhone・iPad・Androidのどれか。「MOTHERSHIP」を入れます。</dd></div>
                 <div><dt>家のWi-Fi</dt><dd>はじめの登録は、Macとデバイスを同じWi-Fiにつないで行います。</dd></div>
                 <div><dt>声で書くなら</dt><dd>「Aqua Voice」と「BlackHole 2ch」。どちらもMacに入れます（<a href="#voice">3 声で書く準備</a>）。</dd></div>

@@ -75,7 +75,7 @@ export default function CommercialTransactions() {
                     <span className="sub">購入の前に、14日間の試用期間で、お使いの環境で動くことをお確かめください。</span>
                   </td></tr>
                   <tr><th scope="row">動作環境</th><td>
-                    <p>操作されるMac：MOTHERSHIP HOST（macOS 14以降。Appleシリコン搭載のMac。Intel搭載のMacには対応していません）</p>
+                    <p>操作されるMac：MOTHERSHIP HOST（macOS 14以降。Appleシリコン・Intel搭載のMacに対応）</p>
                     <p>iPhone・iPad：MOTHERSHIP（iOS 27・iPadOS 27以降）</p>
                     <p>Android：MOTHERSHIP（Android 13以降）</p>
                     <p>別のMac：MOTHERSHIP（macOS 15以降。Appleシリコン搭載のMac。このサイトから配布）</p>
