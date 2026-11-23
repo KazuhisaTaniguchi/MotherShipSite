@@ -41,7 +41,7 @@ python3 -m http.server 8787 --bind 127.0.0.1
 
 | 項目 | 決定 |
 |---|---|
-| HERO の見出し | 「mission control」の案。Kicker「Your Mac's AI, within reach.」／H1「Your foldable is mission control for your Mac's AI.」／リード「Unfold it, and your Mac's screen is right there, sharp and readable. Need a change? Just say it.」 |
+| HERO の見出し | **2026-11-23 に「Tap to move. Talk to write.」へ変更**（日本語版「指で動かす。声で書く。」に合わせた。組み方も日本語版と同じ：2 行、2 行目だけグラデーション、文字の大きさは `--text-display`。`.is-fold` は外した）。以前は「mission control」の案。Kicker「Your Mac's AI, within reach.」／H1「Your foldable is mission control for your Mac's AI.」／リード「Unfold it, and your Mac's screen is right there, sharp and readable. Need a change? Just say it.」 |
 | 図・ヘルプの中の、アプリの画面の文言 | 英語で書く（アプリはまだ日本語だけ。**英語の文言は仮**。下の「画面の文言」） |
 | 範囲 | 全ページ（トップ・ヘルプ・お問い合わせ・お知らせ・404・利用規約・プライバシーポリシー） |
 | 利用規約・プライバシーポリシー | 全文を英訳し、「日本語版が正」と書く。特定商取引法は日本語のページへリンク（フッターの「Legal Notice (Japan, in Japanese)」） |
@@ -66,7 +66,7 @@ python3 -m http.server 8787 --bind 127.0.0.1
 | 日本語版 | 英語版 |
 |---|---|
 | AIが働くMacを、手もとから。 | Your Mac's AI, within reach. |
-| 折りたたみスマホが、MacのAIの操作席になる。 | Your foldable is mission control for your Mac's AI. |
+| 指で動かす。声で書く。 | Tap to move. Talk to write. |
 | せっかくの大きな画面、Macのリモートでは活かせていますか。 | You bought the big screen. Is your Mac remote app actually using it? |
 | 形を変えると、画面も変わる。 | Change the shape. The screen follows. |
 | ポケットから出して、まず確かめる。 | Pull it out. Take a quick look. |
