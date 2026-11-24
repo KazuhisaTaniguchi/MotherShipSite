@@ -77,7 +77,7 @@ export default function CommercialTransactions() {
                   <tr><th scope="row">動作環境</th><td>
                     <p>操作されるMac：MOTHERSHIP HOST（macOS 14以降。Appleシリコン・Intel搭載のMacに対応）</p>
                     <p>iPhone・iPad：MOTHERSHIP（iOS 27・iPadOS 27以降）</p>
-                    <p>Android：MOTHERSHIP（Android 13以降）</p>
+                    <p>Android：MOTHERSHIP（Android 13以降。スマホ・タブレット）</p>
                     <p>別のMac：MOTHERSHIP（macOS 15以降。Appleシリコン搭載のMac。このサイトから配布）</p>
                     <span className="sub">操作できるのはMacだけです。WindowsやLinuxのパソコンは操作できません。外出先から使うには、MacとデバイスにTailscaleが必要です。</span>
                   </td></tr>

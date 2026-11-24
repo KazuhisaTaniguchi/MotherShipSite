@@ -14,7 +14,7 @@ export const metadata: Metadata = pageMeta({
   absolute: true,
   title: "折りたたみスマホでMacをリモート操作｜MacのAIも手もとで｜MOTHERSHIP",
   description:
-    "Galaxy Z Foldなどの折りたたみスマホから、家のMacをリモートデスクトップで操作。端末の形に合わせた画面で文字がくっきり読め、Claude CodeやCodexなどMacのAIの進み具合を外出先から確かめて、指示は声で。iPhone・iPad・Androidでも使えます。買い切り・月額なし、14日間無料。",
+    "Galaxy Z Foldなどの折りたたみスマホから、家のMacをリモートデスクトップで操作。端末の形に合わせた画面で文字がくっきり読め、Claude CodeやCodexなどMacのAIの進み具合を外出先から確かめて、指示は声で。iPhone・iPad、Androidのスマホ・タブレットでも使えます。買い切り・月額なし、14日間無料。",
 });
 
 // 検索エンジン向けの構造化データ（アプリの情報と、よくある質問）。よくある質問は、下の <details> から書き出したもの。
@@ -124,10 +124,18 @@ const STRUCTURED_DATA = [
       },
       {
         "@type": "Question",
+        "name": "Androidのタブレットでも使えますか？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "はい。スマホと同じアプリを、Android 13以降のタブレットにも入れられます（Google Playも同じです）。タブレットでは、iPadと同じように、画面に合わせた仮想モニターと大きめのキーボードで操作できます。"
+        }
+      },
+      {
+        "@type": "Question",
         "name": "Windowsのパソコンも操作できますか？",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "いいえ。操作できるのはMacだけです。操作する側は、iPhone・iPad・Android・Macに対応しています。"
+          "text": "いいえ。操作できるのはMacだけです。操作する側は、iPhone・iPad・Android（スマホ・タブレット）・Macに対応しています。"
         }
       },
       {
@@ -288,7 +296,7 @@ export default async function Home() {
               <span className="hero-voice-text"><span className="hero-voice-kicker">声で書く</span><b>Aqua Voiceに対応</b><span className="hero-voice-sub"><span className="nb">話すだけで文字が入るから、</span><span className="nb"><mark>キーボードいらず。</mark></span></span><span className="hero-voice-note">Aqua Voiceは別の会社のアプリです。</span></span>
               <span className="hero-voice-arrow" aria-hidden="true">→</span>
             </a>
-            <p className="hero-platforms"><b>Galaxy Z Fold7</b>で動作を確認 <i>·</i> iPhone・iPad・Macからも</p>
+            <p className="hero-platforms"><b>Galaxy Z Fold7</b>で動作を確認 <i>·</i> iPhone・iPad・Androidタブレット・Macからも</p>
           </div>
 
           <div className="hero-stage">
@@ -590,7 +598,7 @@ export default async function Home() {
               <li>バーのボタンは、よく使うキーに入れ替えられます（Esc、矢印、取り消す、Mission Controlなど）。バーは、好きな場所に動かせます。</li>
               <li>言い直したいときは、押したまま指を外へ滑らせて離すと取り消せます。</li>
               <li>外付けキーボードの好きなキーを、「話すキー」にもできます。</li>
-              <li>iPhone・iPad・Androidで使えます。</li>
+              <li>iPhone・iPad・Android（スマホ・タブレット）で使えます。</li>
             </ul>
             {/* 図 3：バーの小わざ（上の箇条書きの 2・3 番目を絵にしたもの） */}
             <div className="voice-minis" aria-hidden="true">
@@ -1020,10 +1028,10 @@ export default async function Home() {
           {/* S12 対応デバイス */}
       <section className="section devices" id="devices" aria-labelledby="devices-title">
         <div className="wrap">
-          <h2 className="section-title center" id="devices-title">iPhone・iPad・ふつうのAndroid・<br className="sp" />MacBookからも。</h2>
+          <h2 className="section-title center" id="devices-title"><span className="nb">iPhone・iPad・</span><span className="nb">Androidのスマホとタブレット・</span><span className="nb">MacBookからも。</span></h2>
           <div className="device-grid">
             <article className="device is-host"><p className="role">操作されるMac</p><h3>MOTHERSHIP HOST</h3><p>macOS 14以降<br /><small>Appleシリコン・Intel搭載のMacに対応</small></p></article>
-            <article className="device"><p className="role">操作する側</p><h3>Android</h3><p>MOTHERSHIP<br /><small>Android 13以降。折りたたみにも対応</small></p></article>
+            <article className="device"><p className="role">操作する側</p><h3>Android</h3><p>MOTHERSHIP<br /><small>Android 13以降。スマホ・タブレット・折りたたみに対応</small></p></article>
             <article className="device"><p className="role">操作する側</p><h3>iPhone・iPad</h3><p>MOTHERSHIP<br /><small>iOS 27・iPadOS 27以降</small></p></article>
             <article className="device"><p className="role">操作する側</p><h3>別のMac</h3><p>MOTHERSHIP<br /><small>macOS 15以降・Appleシリコン搭載のMac</small></p></article>
           </div>
@@ -1169,7 +1177,8 @@ export default async function Home() {
             <details><summary>スマホの小さな画面でも、ターミナルの文字は読めますか？</summary><p>はい。デバイスと同じ形の専用モニターをMacに用意するので、文字が縮みません。もっと大きく見たいときは、ピンチで拡大できます。細かい文字が多いときは、画質の「文字優先」が向いています。</p></details>
             <details><summary>ほかのリモートデスクトップと、何がちがいますか？</summary><p>映し方がちがいます。MOTHERSHIPは、Macのモニターをそのまま映すのではなく、デバイスと同じ形の専用モニターをMacに用意します。だから、小さな画面でも文字が縮みません。文字の入力に声を使えること（Aqua Voiceに対応）と、買い切りであることも特長です。</p></details>
             <details><summary>どんな作業に向いていますか？</summary><p>AIに任せた作業の確認と次の指示、プログラミング、書類やブラウザでの作業、デザインの確認など、文字や画面をしっかり見る作業に向いています。動きの激しいゲームには向きません。</p></details>
-            <details><summary>Windowsのパソコンも操作できますか？</summary><p>いいえ。操作できるのはMacだけです。操作する側は、iPhone・iPad・Android・Macに対応しています。</p></details>
+            <details><summary>Androidのタブレットでも使えますか？</summary><p>はい。スマホと同じアプリを、Android 13以降のタブレットにも入れられます（Google Playも同じです）。タブレットでは、iPadと同じように、画面に合わせた仮想モニターと大きめのキーボードで操作できます。</p></details>
+            <details><summary>Windowsのパソコンも操作できますか？</summary><p>いいえ。操作できるのはMacだけです。操作する側は、iPhone・iPad・Android（スマホ・タブレット）・Macに対応しています。</p></details>
           </div>
 
           <h3 className="faq-group">声で入力</h3>
@@ -1222,7 +1231,7 @@ export default async function Home() {
               <div className="dl-group">
                 <h3 className="dl-gtitle"><span className="dl-num">2</span>手もとの端末を選ぶ<small>使う端末にだけ、「MOTHERSHIP」を入れます</small></h3>
                 <div className="dl-row">
-                  <div className="dl"><h4>Android</h4><p>Google Play</p><span className="pill pill-ghost soon">近日公開</span></div>
+                  <div className="dl"><h4>Android</h4><p>Google Play</p><p>スマホ・タブレットに対応<br />（同じアプリ）</p><span className="pill pill-ghost soon">近日公開</span></div>
                   <div className="dl"><h4>iPhone・iPad</h4><p>App Store</p><a className="btn btn-primary dl-get" href={APP_STORE_URL} target="_blank" rel="noopener noreferrer">ダウンロード <span aria-hidden="true">→</span></a></div>
                   <div className="dl"><h4>別のMac</h4><p>このサイトから・macOS 15以降</p><span className="pill pill-ghost soon">近日公開</span></div>
                 </div>

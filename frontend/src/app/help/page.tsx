@@ -49,7 +49,7 @@ export default function Help() {
           </nav>
   
           <article className="legal">
-            <p className="legal-intro">このページでは、離れた場所から操作されるMacを「Mac」、手もとのiPhone・iPad・Androidを「デバイス」と呼びます。アプリは2つあります。Macに入れる「MOTHERSHIP HOST」と、デバイスに入れる「MOTHERSHIP」です（アプリの画面では、「Mothership Host」「Mothership」と表示されます）。図は、説明のためのイメージです。実際の画面とは、見た目がちがいます。</p>
+            <p className="legal-intro">このページでは、離れた場所から操作されるMacを「Mac」、手もとのiPhone・iPad・Android（スマホ・タブレット）を「デバイス」と呼びます。アプリは2つあります。Macに入れる「MOTHERSHIP HOST」と、デバイスに入れる「MOTHERSHIP」です（アプリの画面では、「Mothership Host」「Mothership」と表示されます）。図は、説明のためのイメージです。実際の画面とは、見た目がちがいます。</p>
   
             <aside className="legal-summary" aria-labelledby="summary-title">
               <h2 id="summary-title">かんたんにまとめると</h2>
@@ -68,7 +68,7 @@ export default function Help() {
               <h2 id="start-title"><span className="no">1</span>用意するもの</h2>
               <dl className="help-need">
                 <div><dt>Mac</dt><dd>macOS 14以降のMac（Appleシリコン・Intel搭載のMacに対応）。「MOTHERSHIP HOST」を入れます。</dd></div>
-                <div><dt>デバイス</dt><dd>iPhone・iPad・Androidのどれか。「MOTHERSHIP」を入れます。</dd></div>
+                <div><dt>デバイス</dt><dd>iPhone・iPad・Android（スマホ・タブレット）のどれか。「MOTHERSHIP」を入れます。</dd></div>
                 <div><dt>家のWi-Fi</dt><dd>はじめの登録は、Macとデバイスを同じWi-Fiにつないで行います。</dd></div>
                 <div><dt>声で書くなら</dt><dd>「Aqua Voice」と「BlackHole 2ch」。どちらもMacに入れます（<a href="#voice">3 声で書く準備</a>）。</dd></div>
                 <div><dt>外から使うなら</dt><dd>「Tailscale」。Macとデバイスの両方に入れます（<a href="#outside">4 外から使う</a>）。</dd></div>

@@ -213,7 +213,7 @@ export function ContactForm() {
         <legend>お使いのデバイス <span className="opt">任意</span></legend>
         <p className="hint" id="device-hint">Macを操作している側のデバイスを選んでください（いくつでも）。</p>
         <div className="choices">
-          {[["iPhone", "iPhone"], ["iPad", "iPad"], ["Android", "Android"], ["Mac", "別のMac"]].map(([value, label]) => (
+          {[["iPhone", "iPhone"], ["iPad", "iPad"], ["Android", "Android（スマホ・タブレット）"], ["Mac", "別のMac"]].map(([value, label]) => (
             <label className="choice" key={value}><input type="checkbox" name="device[]" value={value} /><span>{label}</span></label>
           ))}
         </div>
