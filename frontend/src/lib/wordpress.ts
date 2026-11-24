@@ -157,9 +157,12 @@ export async function getAllPostsEn(): Promise<EnPost[]> {
   });
 }
 
-/** 英語の日付（例：November 21, 2026） */
-export const formatDateEn = (iso: string): string =>
-  new Date(iso).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric", timeZone: "Asia/Tokyo" });
+/** 英語の日付（例：November 21, 2026）。WordPress の日付（日本時間、時差の印なし）の「日」をそのまま使う。
+ *  new Date(iso) だと、ビルドする機械の時刻（GitHub は UTC）として読まれ、15 時以降の記事が翌日になる */
+export const formatDateEn = (iso: string): string => {
+  const [y, m, d] = iso.slice(0, 10).split("-").map(Number);
+  return new Date(Date.UTC(y, m - 1, d)).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric", timeZone: "UTC" });
+};
 
 /** 公開済みの固定ページ（トップページに設定したものは除く。トップは Next.js の LP） */
 export async function getAllPages(): Promise<Page[]> {
