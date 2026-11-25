@@ -1852,3 +1852,9 @@
   main:has(> .hero) { --section-y: var(--space-12); }
   main:has(> .hero) .latest-news { margin-top: calc(var(--space-10) - var(--section-y)); }   /* 配信予定のあと → お知らせの線：40px（前と同じ） */
 }
+
+/* 対応デバイスの下の、用途別のページへのリンク（2026-11-25） */
+.usecase-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 20px; margin-top: 18px; font-size: var(--text-small); }
+.usecase-links span { color: var(--ink-3); font-weight: var(--weight-bold); }
+.usecase-links a { color: var(--blue-deep); font-weight: var(--weight-bold); }
+.usecase-links a:hover { text-decoration: underline; }

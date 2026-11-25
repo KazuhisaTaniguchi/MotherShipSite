@@ -60,3 +60,18 @@
 .entry-body .has-text-align-right { text-align: right; }
 .entry-body .wp-block-image img { margin-inline: auto; }
 .entry-body .wp-block-embed iframe, .entry-body iframe { max-width: 100%; }
+
+/* 用途別のページ（2026-11-25。src/components/UseCasePage.tsx）。お知らせの記事の組み方に、リード・画面の絵・ボタンを足す */
+.usecase-lead { margin-top: 18px; font-size: var(--text-body); line-height: var(--leading-body, 1.9); color: var(--ink-2); }
+.usecase-shot { margin: 0 auto 40px; max-width: 520px; text-align: center; }
+.usecase-shot img { width: 100%; height: auto; border-radius: var(--radius-lg); box-shadow: 0 18px 40px rgba(var(--ink-rgb), .14); }
+.usecase-shot figcaption { margin-top: 12px; font-size: var(--text-caption); color: var(--ink-3); }
+.usecase .entry-body h3 { font-size: var(--text-body); }
+.usecase .entry-body h3 + p { margin-top: .5em; }
+.usecase-cta { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 16px; margin-top: 48px; }
+.usecase-more { margin-top: 48px; padding-top: 28px; border-top: 1px solid var(--line); }
+.usecase-more p { font-size: var(--text-small); font-weight: var(--weight-heavy); color: var(--ink-3); }
+.usecase-more ul { display: flex; flex-wrap: wrap; gap: 8px 22px; margin-top: 12px; }
+.usecase-more a { color: var(--blue-deep); font-size: var(--text-small); font-weight: var(--weight-bold); }
+.usecase-more a:hover { text-decoration: underline; }
+.usecase .entry-body section > div > * + *, .usecase .entry-body h2 + div, .usecase .entry-body section > div + div { margin-top: 1.1em; }

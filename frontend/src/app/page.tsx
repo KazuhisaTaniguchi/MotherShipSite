@@ -4,6 +4,7 @@ import { APP_STORE_URL, DOWNLOAD_LINK } from "@/components/nav";
 import { HeroFold } from "@/components/HeroFold";
 import { pageMeta, siteLd } from "@/lib/seo";
 import { getAllPosts } from "@/lib/wordpress";
+import { USE_CASE_LINKS } from "@/content/usecases";
 
 // トップページ（LP）。mock/design/index.html の <main> をそのまま JSX にしたもの（原稿は mock/contents/lp-content.md の第2版。
 // 2026-11-21 から、Obsidian の「LPとSEOの方針（折りたたみスマホ×MacのAI）」に合わせて、主役を折りたたみスマホに変えた）。
@@ -12,9 +13,9 @@ import { getAllPosts } from "@/lib/wordpress";
 export const metadata: Metadata = pageMeta({
   path: "/",
   absolute: true,
-  title: "折りたたみスマホでMacをリモート操作｜MacのAIも手もとで｜MOTHERSHIP",
+  title: "Macのリモートデスクトップ｜iPhone・iPad・Androidから操作｜MOTHERSHIP",
   description:
-    "Galaxy Z Foldなどの折りたたみスマホから、家のMacをリモートデスクトップで操作。端末の形に合わせた画面で文字がくっきり読め、Claude CodeやCodexなどMacのAIの進み具合を外出先から確かめて、指示は声で。iPhone・iPad、Androidのスマホ・タブレットでも使えます。買い切り・月額なし、14日間無料。",
+    "iPhone・iPad・Androidのスマホやタブレットから、家のMacやMac miniをリモートデスクトップで操作。端末の形に合わせた画面で文字がくっきり読め、Claude CodeやCodexなどMacのAIの進み具合を外出先から確かめて、指示は声で。折りたたみスマホにも対応。買い切り・月額なし、14日間無料。",
 });
 
 // 検索エンジン向けの構造化データ（アプリの情報と、よくある質問）。よくある質問は、下の <details> から書き出したもの。
@@ -1036,6 +1037,7 @@ export default async function Home() {
             <article className="device"><p className="role">操作する側</p><h3>別のMac</h3><p>MOTHERSHIP<br /><small>macOS 15以降・Appleシリコン搭載のMac</small></p></article>
           </div>
           <p className="note center">操作できるのはMacだけです。WindowsやLinuxのパソコンは操作できません。</p>
+          <p className="usecase-links"><span>使い方から探す：</span>{USE_CASE_LINKS.map((l) => <Link key={l.href} href={l.href}>{l.label}</Link>)}</p>
         </div>
       </section>
 

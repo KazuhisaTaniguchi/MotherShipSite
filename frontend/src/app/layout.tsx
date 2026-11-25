@@ -7,12 +7,12 @@ import { FigureMotion } from "@/components/FigureMotion";
 import "./globals.css";
 
 const DESCRIPTION =
-  "Galaxy Z Foldなどの折りたたみスマホから、家のMacをリモートデスクトップで操作。端末の形に合わせた画面で文字がくっきり読め、Claude CodeやCodexなどMacのAIの進み具合を外出先から確かめて、指示は声で。iPhone・iPad・Androidでも使えます。買い切り・月額なし、14日間無料。";
+  "iPhone・iPad・Androidのスマホやタブレットから、家のMacやMac miniをリモートデスクトップで操作。端末の形に合わせた画面で文字がくっきり読め、Claude CodeやCodexなどMacのAIの進み具合を外出先から確かめて、指示は声で。折りたたみスマホにも対応。買い切り・月額なし、14日間無料。";
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "https://mothershipremote.com"),
   title: {
-    default: "折りたたみスマホでMacをリモート操作｜MacのAIも手もとで｜MOTHERSHIP",
+    default: "Macのリモートデスクトップ｜iPhone・iPad・Androidから操作｜MOTHERSHIP",
     template: "%s｜MOTHERSHIP",
   },
   description: DESCRIPTION,
@@ -20,7 +20,7 @@ export const metadata: Metadata = {
   // Google Search Console の、サイトの持ち主の確認（公開してよい値。全ページの <head> に出る）
   verification: { google: "wMEqxsov95lwYJm9sRNeN9Xc7AItyl0NAOACSPgNLrY" },
   openGraph: {
-    title: "折りたたみスマホでMacをリモート操作｜MacのAIも手もとで｜MOTHERSHIP",
+    title: "Macのリモートデスクトップ｜iPhone・iPad・Androidから操作｜MOTHERSHIP",
     description: DESCRIPTION,
     siteName: "MOTHERSHIP",
     locale: "ja_JP",

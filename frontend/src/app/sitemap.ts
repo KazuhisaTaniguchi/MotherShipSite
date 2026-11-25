@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { EN_PUBLIC } from "@/lib/i18n";
 import { getAllPosts, getAllPostsEn } from "@/lib/wordpress";
+import { USE_CASE_SLUGS } from "@/content/usecases";
 
 // サイトマップ（/sitemap.xml）。静的書き出しなので、ビルドのときに作る。
 // 日本語と英語の両方にあるページは、言語の対応（hreflang）も書く。お知らせの記事も入れる
@@ -35,6 +36,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   if (newsEn) out.push({ url: `${SITE}/en/news/`, lastModified: now, changeFrequency: "weekly", priority: 0.5, alternates: langs("/news/") });
   // 日本語だけのページ
   out.push({ url: `${SITE}/commercial-transactions/`, lastModified: now, changeFrequency: "yearly", priority: 0.3 });
+  // 用途別のページ（日本語だけ。src/content/usecases.ts）
+  for (const slug of USE_CASE_SLUGS) out.push({ url: `${SITE}/${slug}/`, lastModified: now, changeFrequency: "monthly", priority: 0.7 });
   // お知らせの記事
   for (const post of posts) {
     const path = `/news/${post.databaseId}/`;
