@@ -11,6 +11,9 @@ import { isEnPath } from "@/lib/i18n";
 // ・はじめは「同意していない」状態でタグを読み込む（Google の同意モード。クッキーは使われない）。
 //   画面の下の確認で「同意する」を押した人だけ、解析のクッキーを使って計測する。選んだ結果はブラウザーに覚えておく
 // ・フッターの「クッキーの設定」（data-consent-open）で、あとから選び直せる
+// ・ストアとダウンロードのリンクが押されたら、イベントを送る（2026-11-25。GA のキーイベント）。
+//   リンクは document でまとめて受けるので、ページごとの印は要らない（英語の HTML・お知らせの本文のリンクも数える）。
+//   .dmg は GA の「ファイルのダウンロード」の自動計測の対象外なので、ここで送る
 const GTM_ID = process.env.NEXT_PUBLIC_GTM_ID ?? "";
 const KEY = "ms-analytics-consent";   // "granted" か "denied"
 
@@ -19,6 +22,21 @@ const gtag = (...args: unknown[]) => {
   const w = window as unknown as { dataLayer?: unknown[]; gtag?: (...a: unknown[]) => void };
   w.gtag?.(...args);
 };
+
+/** 押されたリンクから、送るイベントを決める（当てはまらないリンクは null）。値の名前は、GA にはじめからある項目に合わせる */
+function linkEvent(a: HTMLAnchorElement): { name: string; params: Record<string, string> } | null {
+  let url: URL;
+  try { url = new URL(a.href, location.href); } catch { return null; }
+  const base = { link_url: url.href, link_domain: url.hostname };
+  if (url.hostname === location.hostname && /^\/downloads\/[^/]+\.dmg$/i.test(url.pathname)) {
+    return { name: "host_download", params: { ...base, file_name: url.pathname.split("/").pop() ?? "", file_extension: "dmg" } };
+  }
+  if (url.hostname === "apps.apple.com") {
+    return { name: url.searchParams.get("platform") === "mac" ? "mac_app_store_click" : "app_store_click", params: base };
+  }
+  if (url.hostname === "play.google.com") return { name: "google_play_click", params: base };
+  return null;
+}
 
 export function Analytics() {
   const en = isEnPath(usePathname() ?? "/");
@@ -30,9 +48,16 @@ export function Analytics() {
     try { saved = localStorage.getItem(KEY); } catch { /* 保存できないブラウザーでは、毎回たずねる */ }
     // まだ選んでいない人にだけ、確認を出す（ページを開いた直後に出す）
     const timer = saved !== "granted" && saved !== "denied" ? setTimeout(() => setOpen(true), 0) : undefined;
-    const reopen = (e: Event) => { if ((e.target as HTMLElement).closest("[data-consent-open]")) setOpen(true); };
-    document.addEventListener("click", reopen);
-    return () => { clearTimeout(timer); document.removeEventListener("click", reopen); };
+    const onClick = (e: Event) => {
+      const target = e.target as HTMLElement | null;
+      if (!target?.closest) return;
+      if (target.closest("[data-consent-open]")) setOpen(true);
+      const link = target.closest("a[href]") as HTMLAnchorElement | null;
+      const ev = link ? linkEvent(link) : null;
+      if (ev) gtag("event", ev.name, ev.params);
+    };
+    document.addEventListener("click", onClick);
+    return () => { clearTimeout(timer); document.removeEventListener("click", onClick); };
   }, []);
 
   if (!GTM_ID) return null;
