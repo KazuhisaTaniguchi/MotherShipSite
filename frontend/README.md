@@ -68,6 +68,6 @@ npm run build                # out/ に書き出す
 - **構造化データ（`src/components/JsonLd.tsx`）**：トップに Organization・WebSite（別名「MOTHERSHIP REMOTE」）・SoftwareApplication・FAQPage（英語の FAQ は `sync-en.py` がページの `<details>` から取り出す。日本語は `src/app/page.tsx` の `STRUCTURED_DATA`。**FAQ を直したら、ここも合わせる**）。下のページに BreadcrumbList。お知らせの記事に Article
 - **サイトマップ**（`src/app/sitemap.ts`）：更新日と、言語の対応（`xhtml:link`）。英語のお知らせの一覧は、英語の記事があるときだけ入れる（0 件のあいだは noindex）
 - **本文に足したもの**：フッターの説明の 1 行（全ページ。「リモートデスクトップアプリ」という分類の言葉を入れるため）、日本語の特長のリードに「リモートデスクトップアプリ」。英語は HERO の小さなラベルを「Mac remote desktop for foldable phones」に
-- **用途別のページ（2026-11-25、日本語だけ）**：`/mac-remote-desktop-ipad/`・`/mac-remote-desktop-iphone/`・`/mac-remote-desktop-android/`・`/mac-mini-remote-desktop/`。中身は `src/content/usecases.ts`、形は `src/components/UseCasePage.tsx`（お知らせの記事と同じ組み方）。**モックには無い**（本番だけ）。機能や対応環境、配信の状態（Android は近日公開）を変えたら、ここも直す。トップの対応デバイスの下からリンク
-- やっていないこと：英語の用途別のページ、「Aqua Voice をスマホから」のページ（Aqua Voice 側のスマホ対応を確かめてから）、Search Console への登録、OGP 画像の文字の差し替え（日本語の `og.png` は前の見出しのまま）
+- **用途別のページ（2026-11-25、日本語と英語）**：`/mac-remote-desktop-ipad/`・`/mac-remote-desktop-iphone/`・`/mac-remote-desktop-android/`・`/mac-mini-remote-desktop/`・`/claude-code-from-phone/`・`/codex-from-phone/`（英語は `/en/` の下に同じスラッグ）。中身は `src/content/usecases.ts`（日本語）・`usecases-en.ts`（英語）、形は `src/components/UseCasePage.tsx`（お知らせの記事と同じ組み方）。**モックには無い**（本番だけ）。機能や対応環境、配信の状態（Android は近日公開）を変えたら、ここも直す。トップの対応デバイスの下からリンク
+- やっていないこと：「Aqua Voice をスマホから」のページ（Aqua Voice 自身が iPhone のキーボードと Android のアプリを出しているので、検索の意図に合わない。作らない）、Search Console への登録、OGP 画像の文字の差し替え（日本語の `og.png` は前の見出しのまま）
 

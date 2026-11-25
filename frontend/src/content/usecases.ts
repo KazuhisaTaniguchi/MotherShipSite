@@ -4,6 +4,8 @@
 import { APP_STORE_URL } from "@/components/nav";
 
 export type UseCase = {
+  /** ページの言語（省くと日本語）。英語は src/content/usecases-en.ts */
+  lang?: "ja" | "en";
   slug: string;
   /** <title>。あとに「｜MOTHERSHIP」が付く */
   title: string;
@@ -15,8 +17,9 @@ export type UseCase = {
   /** 本文（h2 ごと） */
   sections: { h2: string; html: string }[];
   faq: { q: string; a: string }[];
-  /** いちばん下のボタン。store が null のときは「近日公開」 */
+  /** いちばん下のボタン。store が null のときは「近日公開」（soon に出す文） */
   store: { label: string; href: string } | null;
+  soon?: string;
 };
 
 const A = (href: string, text: string) => `<a href="${href}" target="_blank" rel="noopener noreferrer">${text}</a>`;
@@ -49,6 +52,145 @@ const voice = (device: string) => ({
   html: `<p>${device}の🎤ボタンを押している間に話すと、その声がMacに届き、開いているアプリに文字が入ります。画面のキーボードを出さないので、Macの画面は広いままです。</p>
 <p>声で入力するには、Macに音声入力アプリ「Aqua Voice」（別の会社の製品です）と、無料の仮想オーディオ「BlackHole 2ch」を入れておきます。準備は、<a href="/help/#voice">ヘルプの「声で書く準備」</a>にまとめてあります。Aqua Voiceを使わないときは、アプリ内のキーボードか、${device}のキーボードで入力できます。</p>`,
 });
+
+// ---- AI の道具とくらべるページ ----
+const aiSetup = {
+  h2: "MOTHERSHIPのはじめかた（3ステップ）",
+  html: `<ol>
+<li>家のMacに、<a href="/#download">MOTHERSHIP HOST</a>を入れます（macOS 14以降。Appleシリコン・Intel搭載のMacに対応）。</li>
+<li>iPhone・iPadに、${A(APP_STORE_URL, "App Store")}からMOTHERSHIPを入れます。Android版は、Google Playで近日公開です。</li>
+<li>Macに出るQRコードを読み取って登録し、「接続」をタップします。</li>
+</ol>
+<p>外出先から使うには、MacとスマホにTailscaleを入れておきます（<a href="/help/#outside">外から使う</a>）。声で指示するには、MacにAqua VoiceとBlackHole 2chを入れておきます（<a href="/help/#voice">声で書く準備</a>）。</p>`,
+};
+
+const AI_PAGES: UseCase[] = [
+  {
+    slug: "claude-code-from-phone",
+    title: "Claude Codeをスマホから操作する方法｜公式のRemote Controlと、Macの画面ごと操作する方法",
+    description:
+      "Claude Codeをスマホから操作する方法を整理しました。公式のRemote Control、Claude Code on the web、そしてMacの画面ごとスマホに映して操作する方法（MOTHERSHIP）。それぞれの向き・不向きと、ブラウザーのプレビューやほかのアプリも一緒に見たいときの選び方。",
+    kicker: "Claude Codeを、スマホから",
+    h1: "Claude Codeを、スマホから操作する方法",
+    lead: "MacでClaude Codeに作業を任せて、席を離れる。その間の進み具合を見て、次の指示を出す方法は、いくつかあります。公式の機能と、Macの画面ごと操作する方法を、向き・不向きと一緒に整理しました（2026年11月時点）。",
+    image: { src: "/images/usecases/ai.jpg", alt: "家のMacで動くAIの確認待ちに、iPhoneから「許可する」をタップしているMOTHERSHIPの画面。", width: 644, height: 1400, caption: "Macの画面をそのまま映すので、確認のボタンも指で押せます。" },
+    sections: [
+      {
+        h2: "方法は、大きく3つ",
+        html: `<table>
+<thead><tr><th>方法</th><th>どこで動くか</th><th>スマホで見えるもの</th></tr></thead>
+<tbody>
+<tr><th>Remote Control（公式）</th><td>自分のMacのClaude Code</td><td>Claude Codeのやり取り</td></tr>
+<tr><th>Claude Code on the web（公式）</th><td>Anthropicのクラウド</td><td>Claude Codeのやり取り</td></tr>
+<tr><th>Macの画面ごと操作（MOTHERSHIP）</th><td>自分のMac</td><td>Macの画面ぜんぶ</td></tr>
+</tbody>
+</table>
+<p>公式の機能のくわしい条件や手順は変わることがあるので、${A("https://code.claude.com/docs/ja/mobile", "Claude Codeの公式ドキュメント")}で確かめてください。</p>`,
+      },
+      {
+        h2: "公式のRemote Controlが向いている場面",
+        html: `<p>Remote Controlは、Macで動いているClaude Codeのセッションを、スマホのClaudeアプリやブラウザーから操作する公式の機能です。ファイルや道具はMacの中のままで、やり取りの画面だけが手もとに来ます。</p>
+<ul>
+<li>Claude Codeとのやり取りだけで、作業が進むとき。</li>
+<li>スマホに合わせた画面で、手早く返事をしたいとき。</li>
+<li>追加のアプリを入れたくないとき。</li>
+</ul>
+<p>まずは公式の機能を試すのが、いちばん手軽です。</p>`,
+      },
+      {
+        h2: "Macの画面ごと操作する方法が向いている場面",
+        html: `<p>MOTHERSHIPは、Macの画面をそのままスマホに映して動かすリモートデスクトップアプリです。Claude Codeの専用の道具ではありませんが、次のようなときに役に立ちます。</p>
+<ul>
+<li><b>ターミナルの外も見たいとき</b>：ブラウザーのプレビュー、シミュレーター、エディター、デザインのアプリなど、Claude Codeが作ったものを、その目で確かめられます。</li>
+<li><b>いくつものAIや道具を、同時に使っているとき</b>：Claude CodeもCodexも、ターミナルの窓を切り替えるだけです。AIの側の設定は要りません。</li>
+<li><b>いつものターミナルの画面のまま、続けたいとき</b>：Macで開いているセッションを、そのまま操作します。</li>
+<li><b>長い指示を、声で出したいとき</b>：🎤を押して話すと、Macの入力欄に文字が入ります（MacにAqua Voiceが必要です）。</li>
+</ul>
+<p>スマホでも文字が読めるように、MOTHERSHIPはスマホと同じ形の専用モニターをMacに用意します。Macのモニターを縮めて映すのではないので、ターミナルの文字がくっきり読めます。</p>`,
+      },
+      {
+        h2: "MOTHERSHIPに、できないこと",
+        html: `<ul>
+<li><b>作業の終わりを知らせる機能はありません</b>。気になったときに開いて、進み具合を見る使い方になります。</li>
+<li>MOTHERSHIPに、AIの機能は入っていません。Macの画面を映して動かすアプリです。</li>
+<li>Macがスリープすると、つなげません。MOTHERSHIP HOSTの「待機中もMacをスリープさせない」をオンにしておきます。</li>
+<li>外出先から使うには、MacとスマホにTailscaleが必要です。</li>
+</ul>
+<p>公式の機能とMOTHERSHIPは、どちらか一方を選ぶものではありません。ふだんは公式の機能で返事をして、画面で確かめたいときだけMOTHERSHIPを開く、という使い分けもできます。</p>`,
+      },
+      aiSetup,
+      pricing,
+    ],
+    faq: [
+      { q: "Claude Codeを、スマホから操作できますか？", a: "はい。公式のRemote ControlやClaude Code on the webのほか、MOTHERSHIPのようなリモートデスクトップで、Macの画面ごとスマホから操作する方法があります。" },
+      { q: "MOTHERSHIPは、Claude Codeの公式のアプリですか？", a: "いいえ。MOTHERSHIPは独立して開発されたリモートデスクトップアプリです。Anthropicが認定・後援・承認したものではありません。MOTHERSHIPに、AIの機能は入っていません。" },
+      { q: "Claude Codeの作業が終わったら、MOTHERSHIPが知らせてくれますか？", a: "いいえ。MOTHERSHIPに、作業の終わりを知らせる機能はありません。気になったときに開いて、進み具合を見る使い方になります。" },
+      { q: "スマホの小さな画面でも、ターミナルの文字は読めますか？", a: "はい。デバイスと同じ形の専用モニターをMacに用意するので、文字が縮みません。もっと大きく見たいときは、ピンチで拡大できます。細かい文字が多いときは、画質の「文字優先」が向いています。" },
+    ],
+    store: { label: "App Storeでダウンロード", href: APP_STORE_URL },
+  },
+  {
+    slug: "codex-from-phone",
+    title: "Codexをスマホから操作する方法｜公式のモバイルアプリと、Macの画面ごと操作する方法",
+    description:
+      "Codexをスマホから操作する方法を整理しました。ChatGPTのモバイルアプリからMacのCodexにつなぐ公式の方法と、Macの画面ごとスマホに映して操作する方法（MOTHERSHIP）。それぞれの向き・不向きと、プレビューやほかのアプリも一緒に見たいときの選び方。",
+    kicker: "Codexを、スマホから",
+    h1: "Codexを、スマホから操作する方法",
+    lead: "MacでCodexに作業を任せて、席を離れる。その間の進み具合を見て、次の指示を出す方法を、公式の機能と、Macの画面ごと操作する方法に分けて整理しました（2026年11月時点）。",
+    image: { src: "/images/usecases/ai.jpg", alt: "家のMacで動くAIの確認待ちに、iPhoneから「許可する」をタップしているMOTHERSHIPの画面。", width: 644, height: 1400, caption: "Macの画面をそのまま映すので、確認のボタンも指で押せます。" },
+    sections: [
+      {
+        h2: "方法は、大きく2つ",
+        html: `<table>
+<thead><tr><th>方法</th><th>スマホで見えるもの</th><th>向いている場面</th></tr></thead>
+<tbody>
+<tr><th>ChatGPTのモバイルアプリ（公式）</th><td>Codexのタスクとやり取り</td><td>タスクの確認、承認、差分のレビュー</td></tr>
+<tr><th>Macの画面ごと操作（MOTHERSHIP）</th><td>Macの画面ぜんぶ</td><td>プレビューやほかのアプリも見ながら進める</td></tr>
+</tbody>
+</table>
+<p>公式の機能のくわしい条件や手順は変わることがあるので、${A("https://learn.chatgpt.com/ja-JP/docs/mobile", "OpenAIの公式の説明")}で確かめてください。</p>`,
+      },
+      {
+        h2: "公式のモバイルアプリが向いている場面",
+        html: `<p>ChatGPTのモバイルアプリからは、つないだコンピューターのCodexを開いて、進行中のタスクの確認、コマンドの承認、変更の差分のレビュー、新しいタスクの開始ができます。ファイルやターミナルは、コンピューターの側に残ります。</p>
+<ul>
+<li>Codexとのやり取りだけで、作業が進むとき。</li>
+<li>スマホに合わせた画面で、承認やレビューを手早く済ませたいとき。</li>
+<li>追加のアプリを入れたくないとき。</li>
+</ul>`,
+      },
+      {
+        h2: "Macの画面ごと操作する方法が向いている場面",
+        html: `<p>MOTHERSHIPは、Macの画面をそのままスマホに映して動かすリモートデスクトップアプリです。Codexの専用の道具ではありませんが、次のようなときに役に立ちます。</p>
+<ul>
+<li><b>Codexの外も見たいとき</b>：ブラウザーのプレビュー、シミュレーター、エディターなど、Codexが作ったものを、その目で確かめられます。</li>
+<li><b>ターミナルで動かしているCodexを、そのまま続けたいとき</b>：Macで開いている画面を、そのまま操作します。</li>
+<li><b>いくつものAIや道具を、同時に使っているとき</b>：CodexもClaude Codeも、窓を切り替えるだけです。AIの側の設定は要りません。</li>
+<li><b>長い指示を、声で出したいとき</b>：🎤を押して話すと、Macの入力欄に文字が入ります（MacにAqua Voiceが必要です）。</li>
+</ul>
+<p>スマホでも文字が読めるように、MOTHERSHIPはスマホと同じ形の専用モニターをMacに用意します。Macのモニターを縮めて映すのではないので、文字がくっきり読めます。</p>`,
+      },
+      {
+        h2: "MOTHERSHIPに、できないこと",
+        html: `<ul>
+<li><b>作業の終わりを知らせる機能はありません</b>。気になったときに開いて、進み具合を見る使い方になります。</li>
+<li>MOTHERSHIPに、AIの機能は入っていません。Macの画面を映して動かすアプリです。</li>
+<li>操作できるのはMacだけです。WindowsやLinuxのパソコンは操作できません。</li>
+<li>Macがスリープすると、つなげません。外出先から使うには、MacとスマホにTailscaleが必要です。</li>
+</ul>`,
+      },
+      aiSetup,
+      pricing,
+    ],
+    faq: [
+      { q: "Codexを、スマホから操作できますか？", a: "はい。ChatGPTのモバイルアプリからつなぐ公式の方法のほか、MOTHERSHIPのようなリモートデスクトップで、Macの画面ごとスマホから操作する方法があります。" },
+      { q: "MOTHERSHIPは、Codexの公式のアプリですか？", a: "いいえ。MOTHERSHIPは独立して開発されたリモートデスクトップアプリです。OpenAIが認定・後援・承認したものではありません。MOTHERSHIPに、AIの機能は入っていません。" },
+      { q: "どのAIで使えますか？", a: "Macで動くAIなら、どれでも使えます。MOTHERSHIPは、Macの画面をそのまま映して動かすアプリです。ターミナルで動くAIも、エディターのAIも、ブラウザーのAIも、いつもの画面のまま使えます。" },
+      { q: "月額料金はかかりますか？", a: "かかりません。14日間の試用のあとは、一度の購入（3,000円・税込）でずっと使えます。" },
+    ],
+    store: { label: "App Storeでダウンロード", href: APP_STORE_URL },
+  },
+];
 
 export const USE_CASES: UseCase[] = [
   {
@@ -256,6 +398,9 @@ export const USE_CASES: UseCase[] = [
   },
 ];
 
+// AI の道具とくらべるページ（2026-11-25。公式の機能の説明は、各社の公式の説明にもとづく。変わりやすいので、ときどき見直す）
+USE_CASES.push(...AI_PAGES);
+
 export const USE_CASE_SLUGS = USE_CASES.map((u) => u.slug);
 export const getUseCase = (slug: string) => USE_CASES.find((u) => u.slug === slug)!;
 
@@ -265,4 +410,6 @@ export const USE_CASE_LINKS = [
   { href: "/mac-remote-desktop-ipad/", label: "iPadからMacを操作" },
   { href: "/mac-remote-desktop-android/", label: "AndroidからMacを操作" },
   { href: "/mac-mini-remote-desktop/", label: "Mac miniを手もとから" },
+  { href: "/claude-code-from-phone/", label: "Claude Codeをスマホから" },
+  { href: "/codex-from-phone/", label: "Codexをスマホから" },
 ] as const;

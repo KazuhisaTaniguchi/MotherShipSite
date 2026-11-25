@@ -26,6 +26,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { path: "/terms-of-service/", freq: "yearly", pri: 0.3 },
     { path: "/privacy-policy/", freq: "yearly", pri: 0.3 },
   ];
+  // 用途別のページ（日本語と英語。src/content/usecases.ts・usecases-en.ts）
+  for (const slug of USE_CASE_SLUGS) both.push({ path: `/${slug}/`, freq: "monthly", pri: 0.7 });
   const out: MetadataRoute.Sitemap = [];
   for (const p of both) {
     const alternates = EN_PUBLIC ? langs(p.path) : undefined;
@@ -38,8 +40,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   if (newsEn) out.push({ url: `${SITE}/en/news/`, lastModified: now, changeFrequency: "weekly", priority: 0.5, alternates: langs("/news/") });
   // 日本語だけのページ
   out.push({ url: `${SITE}/commercial-transactions/`, lastModified: now, changeFrequency: "yearly", priority: 0.3 });
-  // 用途別のページ（日本語だけ。src/content/usecases.ts）
-  for (const slug of USE_CASE_SLUGS) out.push({ url: `${SITE}/${slug}/`, lastModified: now, changeFrequency: "monthly", priority: 0.7 });
   // お知らせの記事
   for (const post of posts) {
     const path = `/news/${post.databaseId}/`;

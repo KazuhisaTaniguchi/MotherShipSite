@@ -6,7 +6,9 @@ import type { Metadata } from "next";
 export const EN_PUBLIC = true;
 
 /** 英語のページがある、日本語のパス */
-const BOTH = ["/", "/help/", "/contact/", "/terms-of-service/", "/privacy-policy/", "/news/"];
+// 用途別のページ（src/content/usecases.ts・usecases-en.ts）は、日本語と英語が同じスラッグ
+const BOTH = ["/", "/help/", "/contact/", "/terms-of-service/", "/privacy-policy/", "/news/",
+  "/mac-remote-desktop-ipad/", "/mac-remote-desktop-iphone/", "/mac-remote-desktop-android/", "/mac-mini-remote-desktop/", "/claude-code-from-phone/", "/codex-from-phone/"];
 
 const withSlash = (p: string) => (p.endsWith("/") ? p : `${p}/`);
 
