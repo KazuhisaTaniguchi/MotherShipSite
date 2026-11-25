@@ -74,7 +74,7 @@ LP 全体の原稿と、実画面の素材です。
 | お支払い方法 | App Store・Google Play で確定。「Macのアプリからの購入は準備中」の一文は消した |
 | iPhone・iPad の対応 OS | iOS 27・iPadOS 27以降 |
 | Intel 搭載の Mac | HOST は 1.0.0・ビルド 3（2026-11-23）からユニバーサル版（Apple シリコン・Intel 対応）。Mac 版（MOTHERSHIP）は Apple シリコン用のまま |
-| Mac 版 MOTHERSHIP の入手先 | このサイトから配布 |
+| Mac 版 MOTHERSHIP の入手先 | **Mac App Store**（1.1.0。iPhone・iPad と同じアプリのユニバーサル購入。Apple シリコン・Intel 対応）。公開の切り替えは枝 `release/apps-1.1` |
 | ダウンロードの「近日公開」 | URL と公開日が決まるまで、このまま |
 | Aqua Voice の提供元の書き方 | 「Aqua Voiceの提供元」のまま（社名が分かったら直す） |
 | OGP 画像 | 作った（`frontend/public/og.png`、写し `../design/og.png`。1200×630）。全ページの og:image と twitter:card（summary_large_image）。お知らせの記事でアイキャッチが無いときも、この画像 |

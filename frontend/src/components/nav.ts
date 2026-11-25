@@ -23,3 +23,5 @@ export const DOWNLOAD_LINK = { href: "/#download", label: "ダウンロード", 
 
 // iPhone・iPad版（App Store）
 export const APP_STORE_URL = "https://apps.apple.com/jp/app/mothership-remote/id6837504217";
+// Mac 版（同じアプリ・ユニバーサル購入）。Mac App Store のページを開く
+export const MAC_APP_STORE_URL = "https://apps.apple.com/jp/app/mothership-remote/id6837504217?platform=mac";
