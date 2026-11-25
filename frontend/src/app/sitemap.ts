@@ -9,6 +9,8 @@ export const dynamic = "force-static";
 
 const SITE = process.env.NEXT_PUBLIC_SITE_URL ?? "https://mothershipremote.com";
 type Entry = MetadataRoute.Sitemap[number];
+// WordPress の日付は日本時間で、時差の印が無い（例 2026-11-24T19:38:39）。そのままだと Search Console が「無効な日付」とするので、+09:00 を付ける
+const jst = (d: string) => (/[zZ]|[+-]\d\d:?\d\d$/.test(d) ? d : `${d}+09:00`);
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const now = new Date();
@@ -42,12 +44,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   for (const post of posts) {
     const path = `/news/${post.databaseId}/`;
     const hasEn = EN_PUBLIC && enIds.has(post.databaseId);
-    out.push({ url: `${SITE}${path}`, lastModified: post.date, changeFrequency: "yearly", priority: 0.5, alternates: hasEn ? langs(path) : undefined });
+    out.push({ url: `${SITE}${path}`, lastModified: jst(post.date), changeFrequency: "yearly", priority: 0.5, alternates: hasEn ? langs(path) : undefined });
   }
   if (EN_PUBLIC) {
     for (const post of enPosts) {
       const path = `/news/${post.databaseId}/`;
-      out.push({ url: `${SITE}/en${path}`, lastModified: post.modified, changeFrequency: "yearly", priority: 0.4, alternates: langs(path) });
+      out.push({ url: `${SITE}/en${path}`, lastModified: jst(post.modified), changeFrequency: "yearly", priority: 0.4, alternates: langs(path) });
     }
   }
   return out;
