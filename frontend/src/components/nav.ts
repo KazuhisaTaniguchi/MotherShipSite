@@ -23,3 +23,6 @@ export const DOWNLOAD_LINK = { href: "/#download", label: "ダウンロード", 
 
 // iPhone・iPad版（App Store）
 export const APP_STORE_URL = "https://apps.apple.com/jp/app/mothership-remote/id6837504217";
+
+// Homebrew の公式サイト（セットアップ動画「声で書く準備」の下と、ヘルプに出す）。日本語と英語で URL がちがう
+export const HOMEBREW_URL = { ja: "https://brew.sh/ja/", en: "https://brew.sh" } as const;

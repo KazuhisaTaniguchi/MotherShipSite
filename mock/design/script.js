@@ -163,3 +163,90 @@ document.querySelectorAll('[data-hx-pause]').forEach((btn) => {
   }, { rootMargin: '0px 0px -15% 0px' });
   sections.forEach((s) => { s.setAttribute('data-motion', ''); io.observe(s); });
 })();
+
+// セットアップ動画（2026-11-27）：figure[data-setup-video] のプレーヤー。本番は frontend/src/components/SetupVideo.tsx（同じ動き）
+// ・動画のテロップは下の端にある。ブラウザーの再生バーはそこに重なるので、操作は動画の下に自前で出す（JavaScript が動かないときは controls のまま）
+// ・data-chapters="秒:名前|秒:名前…" のボタンで、そのステップへ飛ぶ（秒は tools/setup-video/stage.html の場面の頭）
+// ・モックは 1280×720 だけ。本番は、広い画面で 1920×1080 も使う
+document.querySelectorAll('figure[data-setup-video]').forEach((fig) => {
+  const player = fig.querySelector('.sv-player'), frame = fig.querySelector('.sv-frame'), video = fig.querySelector('video');
+  if (!player || !frame || !video) return;
+  const { title, length } = fig.dataset;
+  const duration = parseFloat(fig.dataset.duration);
+  const chapters = fig.dataset.chapters.split('|').map((c) => { const i = c.indexOf(':'); return { t: parseFloat(c.slice(0, i)), label: c.slice(i + 1) }; });
+  const clock = (s) => `${Math.floor(s / 60)}:${String(Math.floor(s % 60)).padStart(2, '0')}`;
+  const spoken = (s) => (s >= 60 ? `${Math.floor(s / 60)}分${Math.floor(s % 60)}秒` : `${Math.floor(s)}秒`);
+  const el = (tag, cls, attrs = {}) => { const e = document.createElement(tag); if (cls) e.className = cls; Object.entries(attrs).forEach(([k, v]) => e.setAttribute(k, v)); return e; };
+  const FULL = '<svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7V3h4M17 7V3h-4M3 13v4h4M17 13v4h-4"/></svg>';
+  const UNFULL = FULL.replace(/d="[^"]+"/, 'd="M7 3v4H3M13 3v4h4M7 17v-4H3M13 17v-4h4"');
+
+  video.controls = false;
+  player.setAttribute('data-ready', '');
+
+  const start = el('button', 'sv-start', { type: 'button', 'aria-label': `動画を再生：${title}（${length}）` });
+  start.innerHTML = `<span class="sv-start-pill"><span class="sv-ico-play" aria-hidden="true"></span>動画を見る<small>${length}</small></span>`;
+  frame.appendChild(start);
+
+  const bar = el('div', 'sv-bar');
+  const playBtn = el('button', 'sv-btn', { type: 'button', 'aria-label': '再生' });
+  const playIco = el('span', 'sv-ico-play', { 'aria-hidden': 'true' });
+  playBtn.appendChild(playIco);
+  const range = el('input', 'sv-seek', { type: 'range', min: '0', max: String(duration), step: '0.1', value: '0', 'aria-label': '再生位置' });
+  const timeText = el('span', 'sv-time', { 'aria-hidden': 'true' });
+  const fullBtn = el('button', 'sv-btn', { type: 'button', 'aria-label': '全画面で見る' });
+  fullBtn.innerHTML = FULL;
+  bar.append(playBtn, range, timeText, fullBtn);
+
+  const list = el('ol', 'sv-chapters', { 'aria-label': '見たいところから再生' });
+  const chips = chapters.map((c) => {
+    const li = el('li'), b = el('button', '', { type: 'button' });
+    b.textContent = c.label;
+    b.addEventListener('click', () => seek(c.t, true));
+    li.appendChild(b); list.appendChild(li);
+    return b;
+  });
+  player.append(bar, list);
+
+  const show = (t) => {
+    const x = Math.min(t, duration);
+    range.value = String(x);
+    range.style.setProperty('--sv-pos', `${(x / duration) * 100}%`);
+    range.setAttribute('aria-valuetext', `${spoken(x)}／${spoken(Math.round(duration))}`);
+    timeText.textContent = `${clock(x)} / ${clock(Math.round(duration))}`;
+    const cur = chapters.reduce((found, c, i) => (x >= c.t - 0.05 ? i : found), -1);
+    chips.forEach((b, i) => { if (i === cur) b.setAttribute('aria-current', 'true'); else b.removeAttribute('aria-current'); });
+  };
+  const toggle = () => { if (video.paused) video.play().catch(() => {}); else video.pause(); };
+  // まだ読み込んでいない動画は、長さが分かってから位置を合わせる
+  function seek(t, play) {
+    const set = () => { video.currentTime = t; };
+    if (video.readyState >= 1) set(); else video.addEventListener('loadedmetadata', set, { once: true });
+    show(t);
+    if (play) video.play().catch(() => {}); else if (video.readyState < 1) video.load();
+  }
+  const setPlaying = (on) => { playIco.className = on ? 'sv-ico-pause' : 'sv-ico-play'; playBtn.setAttribute('aria-label', on ? '一時停止' : '再生'); };
+
+  start.addEventListener('click', toggle);
+  video.addEventListener('click', toggle);
+  playBtn.addEventListener('click', toggle);
+  range.addEventListener('input', () => seek(parseFloat(range.value), false));
+  video.addEventListener('play', () => {
+    document.querySelectorAll('video').forEach((o) => { if (o !== video) o.pause(); });   // ほかの動画は止める
+    start.remove();
+    setPlaying(true);
+  });
+  video.addEventListener('pause', () => setPlaying(false));
+  video.addEventListener('ended', () => setPlaying(false));
+  video.addEventListener('timeupdate', () => show(video.currentTime));
+  fullBtn.addEventListener('click', () => {
+    if (document.fullscreenElement) document.exitFullscreen();
+    else if (player.requestFullscreen) player.requestFullscreen().catch(() => {});
+    else if (video.webkitEnterFullscreen) video.webkitEnterFullscreen();   // iPhone：動画だけを全画面にできる（操作は iOS のもの）
+  });
+  document.addEventListener('fullscreenchange', () => {
+    const on = document.fullscreenElement === player;
+    fullBtn.innerHTML = on ? UNFULL : FULL;
+    fullBtn.setAttribute('aria-label', on ? '全画面をやめる' : '全画面で見る');
+  });
+  show(0);
+});

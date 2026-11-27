@@ -207,3 +207,52 @@ kbd { font-family: var(--font-sans); font-size: var(--text-note); font-weight: v
   .site-nav .lang-switch { align-self: flex-start; margin: 8px 16px; }
   .site-nav .lang-switch a { padding: 8px 16px; font-size: var(--text-small); }
 }
+
+/* セットアップ動画（2026-11-27。ヘルプの 3・4、トップの「出かける前に」、用途別のページ。動画は mock/design/tools/setup-video で作る）
+   動画のテロップは下の端にあるので、操作（再生・位置・全画面・ステップへ飛ぶ）は動画の下に出す。
+   動きは、本番は src/components/SetupVideo.tsx、モックは script.js。JavaScript が動かないときは、ブラウザーの再生バーのまま */
+.setup-video { margin: var(--space-5) 0 0; }
+.sv-player { --sv-fg: var(--ink); --sv-sub: var(--ink-3); --sv-track: var(--line); --sv-chip: var(--surface); --sv-chip-line: var(--line);
+  overflow: hidden; border-radius: var(--radius-lg); border: 1px solid var(--line); background: var(--surface); box-shadow: var(--shadow-card); }
+.sv-frame { position: relative; container-type: inline-size; background: var(--navy-2); }
+.setup-video video { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; border-radius: 0; background: var(--navy-2); }
+.sv-player[data-ready] video { cursor: pointer; }
+/* 再生前：枠ぜんたいが押せる。見える札は、表紙の題とテロップの間（上から 75%）に置く */
+.sv-start { position: absolute; inset: 0; display: block; width: 100%; padding: 0; border: 0; background: none; cursor: pointer; }
+.sv-start-pill { position: absolute; left: 50%; top: 75%; transform: translate(-50%, -50%); display: inline-flex; align-items: center; gap: .55em; padding: .5em 1.15em .5em .95em; border-radius: var(--radius-pill); background: var(--ink); color: var(--on-dark); font-size: clamp(12px, 2.9cqi, 17px); font-weight: var(--weight-bold); line-height: 1.4; white-space: nowrap; box-shadow: var(--shadow-button); transition: transform .2s ease, background-color .2s ease; }
+.sv-start-pill small { font-size: .82em; font-weight: var(--weight-regular, 400); opacity: .8; }
+.sv-start:hover .sv-start-pill { background: var(--blue-deep); transform: translate(-50%, -50%) scale(1.04); }
+.sv-start:focus-visible { outline: none; }
+.sv-start:focus-visible .sv-start-pill { outline: 3px solid var(--blue); outline-offset: 3px; }
+/* 再生＝右向きの三角、一時停止＝縦の 2 本 */
+.sv-ico-play { flex: none; width: 0; height: 0; border-left: .78em solid currentColor; border-top: .48em solid transparent; border-bottom: .48em solid transparent; }
+.sv-ico-pause { flex: none; width: .78em; height: .92em; border-left: .28em solid currentColor; border-right: .28em solid currentColor; }
+.sv-bar { display: flex; align-items: center; gap: 6px; padding: 6px 8px; color: var(--sv-fg); }
+.sv-btn { flex: none; display: grid; place-items: center; width: 40px; height: 40px; padding: 0; border: 0; border-radius: 50%; background: none; color: inherit; font-size: 15px; cursor: pointer; }
+.sv-btn:hover { background: rgba(var(--blue-rgb), .1); }
+.sv-seek { flex: 1; min-width: 0; height: 24px; margin: 0 4px; padding: 0; background: none; cursor: pointer; -webkit-appearance: none; appearance: none; }
+.sv-seek::-webkit-slider-runnable-track { height: 6px; border-radius: 3px; background: linear-gradient(to right, var(--blue) var(--sv-pos, 0%), var(--sv-track) var(--sv-pos, 0%)); }
+.sv-seek::-moz-range-track { height: 6px; border-radius: 3px; background: var(--sv-track); }
+.sv-seek::-moz-range-progress { height: 6px; border-radius: 3px; background: var(--blue); }
+.sv-seek::-webkit-slider-thumb { -webkit-appearance: none; width: 16px; height: 16px; margin-top: -5px; border: 0; border-radius: 50%; background: var(--blue); box-shadow: 0 0 0 3px var(--surface); }
+.sv-seek::-moz-range-thumb { width: 16px; height: 16px; border: 0; border-radius: 50%; background: var(--blue); }
+.sv-time { flex: none; margin-right: 2px; font-size: var(--text-note); font-variant-numeric: tabular-nums; color: var(--sv-sub); white-space: nowrap; }
+.setup-video .sv-chapters { display: flex; flex-wrap: wrap; gap: 6px; margin: 0; padding: 2px 12px 12px; list-style: none; }
+.setup-video .sv-chapters li { margin: 0; }
+.sv-chapters button { padding: 5px 12px; border: 1px solid var(--sv-chip-line); border-radius: var(--radius-pill); background: var(--sv-chip); color: var(--sv-fg); font-size: var(--text-note); font-weight: var(--weight-bold); line-height: 1.5; cursor: pointer; }
+.sv-chapters button:hover { border-color: var(--blue); }
+.sv-chapters button[aria-current] { border-color: var(--blue); background: var(--blue); color: var(--on-dark); }
+figure.setup-video figcaption { margin-top: 10px; font-size: var(--text-note); line-height: 1.6; color: var(--ink-3); text-align: left; }
+.setup-video figcaption b { display: block; color: var(--ink); }
+.sv-link { display: block; margin-top: 2px; }
+.sv-link a { color: var(--blue-deep); font-weight: var(--weight-bold); text-decoration: underline; text-underline-offset: 3px; }
+/* 全画面：暗い地に、動画を画面いっぱい。操作は下に残す */
+.sv-player:fullscreen { --sv-fg: var(--on-dark); --sv-sub: rgba(255, 255, 255, .7); --sv-track: rgba(255, 255, 255, .28); --sv-chip: transparent; --sv-chip-line: rgba(255, 255, 255, .35);
+  display: flex; flex-direction: column; justify-content: center; width: 100%; height: 100%; padding: 12px max(12px, 2vw); border: 0; border-radius: 0; background: var(--navy-2); }
+.sv-player:fullscreen .sv-frame { width: min(100%, calc((100vh - 150px) * 16 / 9)); margin: 0 auto; background: none; }
+.sv-player:fullscreen .sv-bar, .sv-player:fullscreen .sv-chapters { width: min(100%, calc((100vh - 150px) * 16 / 9)); margin-left: auto; margin-right: auto; }
+.sv-player:fullscreen .sv-chapters { justify-content: center; padding-bottom: 4px; }
+.sv-player:fullscreen .sv-btn:hover { background: rgba(255, 255, 255, .14); }
+.sv-player:fullscreen .sv-seek::-webkit-slider-thumb { box-shadow: none; }
+.prep-videos { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: start; gap: 18px; margin-top: 4px; scroll-margin-top: 96px; }
+@media (max-width: 760px) { .prep-videos { grid-template-columns: 1fr; gap: 6px; } }

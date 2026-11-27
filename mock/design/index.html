@@ -511,7 +511,7 @@
               <p>Aqua Voiceの設定で、聞き取るマイクを選びます。</p>
             </li>
           </ol>
-          <p class="voice-need-sub">文字にする精度は、Aqua Voiceによります（Aqua Voiceは、MOTHERSHIPには含まれません）。くわしい手順は、<a href="help.html#voice">ヘルプ</a>にあります。</p>
+          <p class="voice-need-sub">文字にする精度は、Aqua Voiceによります（Aqua Voiceは、MOTHERSHIPには含まれません）。準備の流れは<a href="#setup-videos">動画（1分25秒）</a>で、くわしい手順は<a href="help.html#voice">ヘルプ</a>で見られます。</p>
           <!-- 図 4：声の通り道（6 秒で 1 周。左から順に明るくなる） -->
           <div class="voice-flow" role="img" aria-label="声の通り道の図。手もとのデバイスで話した声は、MacのMOTHERSHIP HOSTに届く。MOTHERSHIP HOSTは、その声を仮想のマイク「BlackHole 2ch」に流す。Aqua VoiceがBlackHole 2chの声を聞いて文字にし、開いているアプリのカーソルの位置に入力する。Macに入れておくのは、BlackHole 2chとAqua Voiceの2つ。">
             <p class="vf-title" aria-hidden="true">しくみ：声の通り道</p>
@@ -949,7 +949,11 @@
         <aside class="how-prep" aria-labelledby="prep-title">
           <div class="how-prep-head">
             <h3 id="prep-title">出かける前に</h3>
-            <p>外から使うときは、準備が少しあります。</p>
+            <p>外から使うときは、準備が少しあります。動画で、流れを見られます。</p>
+          </div>
+          <div class="prep-videos" id="setup-videos">
+            <figure class="setup-video" data-setup-video data-title="外から使う準備（Tailscale）" data-length="52秒" data-duration="51.5" data-chapters="4.5:しくみ|12.5:1 アカウント|19:2 アプリを入れる|28.5:3 家でつなぐ|36.5:4 外で試す"><div class="sv-player"><div class="sv-frame"><video controls playsinline preload="none" poster="media/setup-outside-poster.jpg" width="1280" height="720" aria-label="外から使う準備の動画。Tailscaleのアカウントを作る、MacとデバイスにTailscaleを入れて同じアカウントでログインする、家のWi-FiでいちどMOTHERSHIPでつなぐ、Wi-Fiを切って試す、の順に説明する。音は出ない"><source src="media/setup-outside.mp4" type="video/mp4"></video></div></div><figcaption><b>動画で見る：外から使う準備（Tailscale）</b>52秒・音は出ません</figcaption></figure>
+            <figure class="setup-video" data-setup-video data-title="声で書く準備（Aqua Voice・BlackHole 2ch）" data-length="1分25秒" data-duration="84.5" data-chapters="4.5:しくみ|12:1 Aqua Voice|26.5:2 BlackHole 2ch|63:3 マイクを選ぶ|70.5:話して確かめる"><div class="sv-player"><div class="sv-frame"><video controls playsinline preload="none" poster="media/setup-voice-poster.jpg" width="1280" height="720" aria-label="声で書く準備の動画。Aqua Voiceを入れる、ターミナルでHomebrewとBlackHole 2chを入れてMacを再起動する、Aqua VoiceのマイクをBlackHole 2chにする、デバイスから話して確かめる、の順に説明する。音は出ない"><source src="media/setup-voice.mp4" type="video/mp4"></video></div></div><figcaption><b>動画で見る：声で書く準備（Aqua Voice・BlackHole 2ch）</b>1分25秒・音は出ません<span class="sv-link">STEP 2で使う「Homebrew」の公式サイト：<a href="https://brew.sh/ja/" target="_blank" rel="noopener noreferrer">brew.sh/ja/</a></span></figcaption></figure>
           </div>
           <ul class="prep-list">
             <li><a href="help.html#outside"><b>外からつなぐ</b><span>Tailscaleを、Macとデバイスに。</span><i>ヘルプで見る <span aria-hidden="true">→</span></i></a></li>

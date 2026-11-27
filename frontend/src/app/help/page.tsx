@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import { breadcrumbLd, pageMeta } from "@/lib/seo";
 import { JsonLd } from "@/components/JsonLd";
 import Link from "next/link";
-import { APP_STORE_URL } from "@/components/nav";
+import { SetupVideo } from "@/components/SetupVideo";
+import { APP_STORE_URL, HOMEBREW_URL } from "@/components/nav";
 
 // ヘルプ。mock/design/help.html の <main> を JSX にしたもの（スタイルは src/styles/legal.css・help.css・help-figs.css）。
 // 図は mock/design/tools/help-figs/build.py が書き出したもの（help-figs.css もその写し。直すときはモックで直して写す）。
@@ -158,6 +159,7 @@ export default function Help() {
             <section className="article" id="voice" aria-labelledby="voice-title">
               <h2 id="voice-title"><span className="no">3</span>声で書く準備（Aqua Voice）</h2>
               <p>デバイスに話しかけた声を、Macで文字にするための準備です。<b>作業は、すべてMacで行います。</b>デバイスの側に、準備は要りません。</p>
+              <SetupVideo id="voice" />
   
               <p>準備は、大きく3つです。どれも、はじめに1回だけです。</p>
               {/* 準備のカード（2026-11-21。トップの「使うために必要なもの」と同じ。部品は designSystem/components.css の .vn-*） */}
@@ -268,7 +270,7 @@ export default function Help() {
                 </li>
               </ol>
               {/* fig:10 */}<div className="hf hf10 is-tall" role="img" aria-label="ターミナルにコマンドを貼り付けて実行する様子。「Password:」ではMacのパスワードを打つ（打った文字は出ない）。「Press RETURN/ENTER to continue」ではreturnキーを押す。数分待つと「Installation successful!」と出る。最後の「Next steps:」の下に出たコマンドを、コピーして実行する"><div className="hf-in" aria-hidden="true"><div className="hf-win hf10-term"><div className="hf-wbar"><i></i><i></i><i></i><b>ターミナル</b></div><div className="hf-tbody"><p className="l1"><span className="pr">%</span> <span>/bin/bash -c &quot;$(curl -fsSL https://…/install.sh)&quot;</span></p><p className="l2"><span className="ar">==&gt;</span> Checking for sudo access…</p><p className="l3">Password: 🔑<i className="hf-caret"></i></p><p className="l4"><span className="ar">==&gt;</span> This script will install: /opt/homebrew</p><p className="l5">Press RETURN/ENTER to continue…</p><p className="l6"><span className="ar">==&gt;</span> Downloading and installing Homebrew…</p><p className="l7"><span className="hf10-bar"><i></i></span></p><p className="l8">==&gt; Installation successful!</p><p className="l9"><span className="ar">==&gt;</span> Next steps:</p><div className="hf10-next"><p>echo &gt;&gt; ~/.zprofile</p><p>eval &quot;$(/opt/homebrew/bin/brew shellenv)&quot;</p></div></div></div><span className="hf-tag hf10-t3"><i>打っても、文字は出ません</i></span><span className="hf-tag hf10-t5"><i>return キーを押す</i></span><span className="hf-tag hf10-t7"><i>数分かかります</i></span><span className="hf-tag hf10-t11"><i>↑ この行をコピーして、1行ずつ実行</i></span></div></div>{/* /fig:10 */}
-              <div className="help-note"><b>このコマンドは、公式のものです。</b>Homebrewの公式サイト（<a href="https://brew.sh/ja/" rel="noopener noreferrer" target="_blank">brew.sh</a>）に書いてあるコマンドと同じです。心配なときは、公式サイトからコピーしてください。</div>
+              <div className="help-note"><b>このコマンドは、公式のものです。</b>Homebrewの公式サイト（<a href={HOMEBREW_URL.ja} rel="noopener noreferrer" target="_blank">brew.sh</a>）に書いてあるコマンドと同じです。心配なときは、公式サイトからコピーしてください。</div>
   
               <h3 id="voice-blackhole"><span className="no">3-4</span>BlackHole 2chを入れる</h3>
               <ol className="help-steps">
@@ -356,6 +358,7 @@ export default function Help() {
             <section className="article" id="outside" aria-labelledby="outside-title">
               <h2 id="outside-title"><span className="no">4</span>外から使う（Tailscale）</h2>
               <p>家の外からつなぐには、「Tailscale（テイルスケール）」を使います。Tailscaleは、離れた機器どうしを安全につなぐサービスで、個人なら無料で使えます。ルーターの設定を変える必要は、ありません。</p>
+              <SetupVideo id="outside" />
               <ol className="help-steps">
                 <li><p>Tailscaleのアカウントを作ります。</p></li>
                 <li><p>MacとデバイスにTailscaleのアプリを入れて、<b>同じアカウント</b>でログインします。</p></li>

@@ -1,0 +1,422 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>MOTHERSHIP セットアップ動画の舞台</title>
+<!-- 開き方：stage.html?v=voice（声で書く準備）／?v=outside（外から使う準備）。?t=秒 でその時刻で止める。作り方は README.md -->
+<link rel="stylesheet" href="stage.css">
+<style>
+  .abs { position: absolute; }
+  .keyhot { position: absolute; inset: -1.5px; border-radius: 12px; background: var(--blue); color: #fff; display: grid; place-items: center; opacity: 0; box-shadow: 0 2px 0 var(--blue-deep); transform: translateY(2px); }
+  .key { position: relative; }
+  .spot { display: flex; align-items: center; gap: 16px; background: rgba(255,255,255,.96); border-radius: 22px; box-shadow: 0 22px 50px rgba(20,38,81,.25), 0 0 0 1px rgba(20,38,81,.1); padding: 0 26px; font-size: 30px; font-weight: 700; }
+  .spot > i { font-size: 30px; }
+  .res { display: flex; align-items: center; gap: 16px; background: var(--blue); color: #fff; border-radius: 16px; padding: 12px 22px; font-size: 24px; font-weight: 800; box-shadow: 0 14px 30px rgba(56,92,244,.35); }
+  .res i { width: 44px; height: 44px; border-radius: 10px; background: #101a33; display: grid; place-items: center; font-family: Menlo, monospace; font-size: 17px; }
+  .res small { font-size: 17px; font-weight: 600; opacity: .85; margin-left: 8px; }
+  .hint { display: flex; align-items: center; gap: 12px; }
+  .big { font-size: 34px; font-weight: 800; }
+  .restart { display: flex; align-items: center; gap: 18px; background: #fff; border-radius: 22px; border: 2.5px solid var(--blue); padding: 18px 34px; box-shadow: 0 16px 36px rgba(56,92,244,.25); }
+  .restart i { font-size: 52px; color: var(--blue); line-height: 1; }
+  .restart b { font-size: 32px; display: block; } .restart span { font-size: 19px; color: var(--ink-3); font-weight: 600; }
+  .seg { display: inline-flex; background: #e4e9f3; border-radius: 10px; padding: 4px; margin-bottom: 14px; }
+  .seg span { font-size: 18px; font-weight: 700; padding: 6px 26px; border-radius: 8px; color: var(--ink-3); }
+  .seg span.on { background: #fff; color: var(--ink); box-shadow: 0 1px 4px rgba(20,38,81,.15); }
+  .row .tag { right: 96px; top: 9px; }
+  .ck { display: flex; flex-direction: column; gap: 14px; }
+  .ck p { display: flex; align-items: center; gap: 14px; font-size: 25px; font-weight: 800; background: #fff; border: 2px solid var(--line); border-radius: 16px; padding: 14px 22px; }
+  .ck p i { width: 36px; height: 36px; border-radius: 50%; background: var(--grad-accent); color: #fff; display: grid; place-items: center; font-size: 19px; flex: none; }
+  .legend { display: flex; gap: 26px; font-size: 19px; font-weight: 700; color: var(--ink-2); }
+  .legend span::before { content: ""; display: inline-block; width: 12px; height: 12px; border-radius: 50%; background: #5fd0e0; margin-right: 8px; }
+  .legend span + span::before { background: #f0b040; }
+  .tog .on.init { opacity: 1; }
+</style>
+</head>
+<body>
+<div id="stage">
+<svg width="0" height="0" style="position:absolute"><symbol id="mk" viewBox="0 0 128 128"><path d="M60 28 22 86 49 80 60 91 60 75 48 70 60 54Z" fill="#fff"/><path d="M68 28 106 86 79 80 68 91 68 75 80 70 68 54Z" fill="#a8f8ff"/><path d="M64 86 72 98 64 105 56 98Z" fill="#fff"/></symbol><symbol id="cur" viewBox="0 0 12 16"><path d="M1 1v12l3.2-2.8 2 4.6 2-.9-2-4.5H11z" fill="#14203a" stroke="#fff" stroke-width="1" stroke-linejoin="round"/></symbol></svg>
+
+<!-- ================= 1 本目：声で書く準備（Aqua Voice・BlackHole 2ch） ================= -->
+<main data-v="voice">
+  <div class="top">
+    <div class="brand"><svg><use href="#mk"/></svg>MOTHERSHIP</div>
+    <div class="ttl">声で書く準備</div>
+    <div class="chips">
+      <div class="chip"><i>1</i>Aqua Voice<span class="on" data-from="#a2" data-to="#a3"><i>1</i>Aqua Voice</span></div>
+      <div class="chip"><i>2</i>BlackHole 2ch<span class="on" data-from="#a4" data-to="#a7"><i>2</i>BlackHole 2ch</span></div>
+      <div class="chip"><i>3</i>マイクを選ぶ<span class="on" data-from="#a8" data-to="#a8"><i>3</i>マイクを選ぶ</span></div>
+    </div>
+  </div>
+  <div class="capbar"></div>
+
+  <!-- 表紙 -->
+  <section class="sc" id="a0" data-len="4.5">
+    <div class="art cover">
+      <span class="k" data-in="0.2">MOTHERSHIP の準備ガイド</span>
+      <h1 data-in="0.4"><span>声で書く</span>準備</h1>
+      <p data-in="0.8">「Aqua Voice」と「BlackHole 2ch」を、Macに入れます</p>
+      <div class="pills" data-in="1.3"><span>3ステップ</span><span>はじめに1回だけ</span><span>作業は、すべてMacで</span></div>
+    </div>
+    <p class="cap" data-in="0.6">デバイスに話した声を、Macで文字にするための準備です。</p>
+  </section>
+
+  <!-- しくみ -->
+  <section class="sc" id="a1" data-len="7.5">
+    <div class="art flow">
+      <div class="node" data-in="0.3"><span class="ico">📱</span><b>デバイス</b><span>🎤を押して話す</span></div>
+      <i class="arrow" data-in="0.9" data-dy="0" style="margin:0 10px"></i>
+      <div class="macbox" data-in="0.8">
+        <p>Macの中</p>
+        <div class="node" data-in="1.2" style="width:176px"><b>MOTHERSHIP<br>HOST</b><span>声を受け取る</span></div>
+        <i class="arrow" data-in="1.7" data-dy="0" style="margin:0 8px"></i>
+        <div class="node need" data-in="2.0" style="width:176px"><em class="must" data-in="4.3" data-dy="6">入れる</em><b>BlackHole 2ch</b><span>仮想のマイク</span></div>
+        <i class="arrow" data-in="2.5" data-dy="0" style="margin:0 8px"></i>
+        <div class="node need" data-in="2.8" style="width:176px"><em class="must" data-in="4.5" data-dy="6">入れる</em><b>Aqua Voice</b><span>声を文字にする</span></div>
+        <i class="arrow" data-in="3.3" data-dy="0" style="margin:0 8px"></i>
+        <div class="node" data-in="3.6" style="width:176px"><span class="ico">⌨️</span><b>開いているアプリ</b><span>文字が入る</span></div>
+      </div>
+    </div>
+    <p class="cap" data-in="0.4" data-out="4.2">声は、この順番でMacの中を流れて、文字になります。</p>
+    <p class="cap" data-in="4.3">Macに入れるのは、「Aqua Voice」と「BlackHole 2ch」の2つです。</p>
+  </section>
+
+  <!-- STEP 1：Aqua Voice を入れる -->
+  <section class="sc" id="a2" data-len="7">
+    <div class="art">
+      <div class="win abs" style="left:240px;top:30px;width:800px;height:440px" data-in="0.2">
+        <div class="wbar"><i></i><i></i><i></i><span class="addr">aquavoice.com/mac</span></div>
+        <div class="abs" style="left:0;right:0;top:92px;text-align:center"><p class="big">Aqua Voice</p><p style="font-size:20px;color:var(--ink-3);font-weight:600;margin-top:6px">声を文字にする、音声入力のアプリ（Mac版）</p></div>
+        <span class="btn abs" style="left:270px;top:210px;width:260px;height:60px;justify-content:center">ダウンロード ↓</span>
+        <div class="abs" style="left:190px;top:310px;width:420px" data-in="2.5" data-out="4.7"><span class="pbar" style="width:420px;background:#e4e9f3"><i data-grow="2.6,1.8" style="background:var(--grad-accent)"></i></span><p style="font-size:18px;font-weight:700;color:var(--ink-3);margin-top:8px;text-align:center">Macに入れています…</p></div>
+        <div class="abs" style="left:0;right:0;top:318px;text-align:center" data-in="4.8"><span class="done">Aqua Voice を入れました</span></div>
+      </div>
+      <i class="rip abs" style="left:640px;top:270px" data-pulse="2.2"></i>
+      <svg class="cur abs" style="left:900px;top:420px" data-move="1.0,1.0,-250,-140"><use href="#cur"/></svg>
+    </div>
+    <p class="cap" data-in="0.3"><span class="st">STEP 1</span>公式サイト aquavoice.com から、Aqua Voice のMac版を入れます。</p>
+  </section>
+
+  <!-- STEP 1 のつづき：Mac の前で試す -->
+  <section class="sc" id="a3" data-len="7.5">
+    <div class="art">
+      <div class="win abs" style="left:150px;top:40px;width:620px;height:290px" data-in="0.2">
+        <div class="wbar"><i></i><i></i><i></i><b>メモ</b></div>
+        <div class="wbody"><p style="font-size:28px;font-weight:700;white-space:nowrap"><span class="ty" data-type="4.7,1.0">明日の会議は、10時からです。</span></p></div>
+      </div>
+      <div class="hint abs" style="left:150px;top:372px" data-in="0.5">
+        <span class="key">fn<span class="keyhot" data-show="1.4,4.6">fn</span></span><span class="key">⌃</span><span class="key">⌥</span><span class="key">⌘</span><span class="key" style="min-width:230px"></span>
+      </div>
+      <span class="tag abs" style="left:150px;top:452px" data-in="1.4" data-out="4.7">fn を押している間だけ、話す</span>
+      <p class="say abs" style="left:810px;top:70px" data-in="1.7" data-out="4.7"><em>話す</em>「明日の会議は、10時からです」</p>
+      <p class="say abs" style="left:810px;top:180px;display:flex;align-items:center;gap:12px" data-in="1.8" data-out="4.7"><span class="wave" data-wave="1.8,4.6"><i></i><i></i><i></i><i></i><i></i><i></i></span>聞き取り中</p>
+      <span class="tag ok no abs" style="left:810px;top:300px" data-in="5.6">✓ 話した文が入れば、大丈夫</span>
+    </div>
+    <p class="cap" data-in="0.3" data-out="5.4">入れたら、Macの前で試します。<kbd>fn</kbd>キーを押している間だけ話して、離します。</p>
+    <p class="cap" data-in="5.5">録音のキーは <kbd>fn</kbd> のままに。<small>（変えると、デバイスから話せません）</small></p>
+  </section>
+
+  <!-- STEP 2：ターミナルを開く -->
+  <section class="sc" id="a4" data-len="6.5">
+    <div class="art">
+      <div class="hint abs" style="left:520px;top:24px" data-in="0.4" data-out="3.9"><span class="key">⌘</span><span class="plus">＋</span><span class="key" style="min-width:150px">スペース</span></div>
+      <div class="spot abs" style="left:290px;top:110px;width:700px;height:76px" data-in="0.9" data-out="3.9"><i>🔍</i><span class="ty" data-type="1.6,0.9">ターミナル</span></div>
+      <div class="res abs" style="left:290px;top:204px;width:700px" data-in="2.6" data-out="3.9"><i>&gt;_</i>ターミナル<small>アプリケーション</small></div>
+      <div class="hint abs" style="left:1010px;top:206px" data-in="2.9" data-out="3.9"><span class="key" style="min-width:110px">return</span></div>
+      <div class="win term abs" style="left:240px;top:60px;width:800px;height:380px" data-in="4.0">
+        <div class="wbar"><i></i><i></i><i></i><b>ターミナル</b></div>
+        <div class="tbody"><p><span class="pr">user@Mac ~ %</span> ▍</p></div>
+      </div>
+      <span class="tag up no abs" style="left:420px;top:462px" data-in="4.5">ここにコマンドを貼り付けて、return キーを押します</span>
+    </div>
+    <p class="cap" data-in="0.3"><span class="st">STEP 2</span>「ターミナル」を開きます。<kbd>⌘</kbd>＋<kbd>スペース</kbd> →「ターミナル」と打って <kbd>return</kbd>。</p>
+  </section>
+
+  <!-- STEP 2：Homebrew -->
+  <section class="sc" id="a5" data-len="14">
+    <div class="art">
+      <div class="win term abs" style="left:110px;top:8px;width:800px;height:506px" data-in="0.1">
+        <div class="wbar"><i></i><i></i><i></i><b>ターミナル</b></div>
+        <div class="tbody">
+          <p><span class="pr">%</span> <span class="ty" data-type="0.5,0.8">brew --version</span></p>
+          <p data-in="1.6" data-dy="0"><span class="ng">zsh: command not found: brew</span></p>
+          <p data-in="4.3" data-dy="0"><span class="pr">%</span> /bin/bash -c "$(curl -fsSL https://…/install.sh)"</p>
+          <p data-in="5.1" data-dy="0"><span class="ar">==&gt;</span> Checking for sudo access…</p>
+          <p data-in="5.6" data-dy="0">Password: 🔑</p>
+          <p data-in="7.2" data-dy="0">Press RETURN/ENTER to continue…</p>
+          <p data-in="8.4" data-dy="0"><span class="ar">==&gt;</span> Downloading and installing Homebrew…</p>
+          <p data-in="8.5" data-dy="0"><span class="pbar"><i data-grow="8.6,1.6"></i></span></p>
+          <p data-in="10.4" data-dy="0"><span class="ok">==&gt; Installation successful!</span></p>
+          <p data-in="11.0" data-dy="0"><span class="ar">==&gt;</span> Next steps:</p>
+          <p data-in="11.2" data-dy="0">    echo &gt;&gt; ~/.zprofile</p>
+          <p data-in="11.2" data-dy="0">    eval "$(/opt/homebrew/bin/brew shellenv)"</p>
+        </div>
+      </div>
+      <span class="tag abs" style="left:928px;top:100px" data-in="2.0" data-out="4.2">まだ入っていません</span>
+      <span class="tag abs" style="left:928px;top:135px" data-in="4.5" data-out="5.6">コマンドを貼り付ける</span>
+      <span class="tag warn abs" style="left:928px;top:205px" data-in="5.9" data-out="7.3">打っても、文字は出ません</span>
+      <span class="tag abs" style="left:928px;top:240px" data-in="7.5" data-out="8.6">return キーを押す</span>
+      <span class="tag abs" style="left:928px;top:310px" data-in="8.8" data-out="10.5">数分かかります</span>
+      <span class="tag ok abs" style="left:928px;top:345px" data-in="10.6">成功です</span>
+      <span class="tag abs" style="left:928px;top:432px" data-in="11.6">コピーして、1行ずつ実行</span>
+    </div>
+    <p class="cap" data-in="0.3" data-out="4.2">Homebrew（ソフトを入れる無料の道具）があるか、確かめます。<small>数字が出たら、次へ。</small></p>
+    <p class="cap" data-in="4.3" data-out="10.9">無ければ、ヘルプのコマンドを貼り付けて <kbd>return</kbd>。パスワードは、画面に出ません。</p>
+    <p class="cap" data-in="11.0">最後の「Next steps:」の下に出たコマンドも、コピーして1行ずつ実行します。</p>
+  </section>
+
+  <!-- STEP 2：BlackHole 2ch を入れて、再起動 -->
+  <section class="sc" id="a6" data-len="8">
+    <div class="art">
+      <div class="win term abs" style="left:190px;top:30px;width:900px;height:210px" data-in="0.1">
+        <div class="wbar"><i></i><i></i><i></i><b>ターミナル</b></div>
+        <div class="tbody">
+          <p><span class="pr">%</span> <span class="ty" data-type="0.6,1.6">brew install --cask blackhole-2ch</span></p>
+          <p data-in="2.6" data-dy="0"><span class="ar">==&gt;</span> Installing Cask blackhole-2ch</p>
+          <p data-in="3.6" data-dy="0"><span class="ok">🍺  blackhole-2ch was successfully installed!</span></p>
+        </div>
+      </div>
+      <div class="restart abs" style="left:400px;top:300px" data-in="4.8"><i>↻</i><div><b>Macを再起動します</b><span>再起動するまで、BlackHole 2ch は使えません</span></div></div>
+    </div>
+    <p class="cap" data-in="0.3" data-out="4.6">次のコマンドで、BlackHole 2ch（仮想のマイク）を入れます。</p>
+    <p class="cap" data-in="4.7">入れ終わったら、Macを再起動します。</p>
+  </section>
+
+  <!-- STEP 2：入ったことを確かめる -->
+  <section class="sc" id="a7" data-len="8">
+    <div class="art">
+      <div class="win abs" style="left:215px;top:20px;width:850px;height:470px" data-in="0.1">
+        <div class="wbar"><i></i><i></i><i></i><b>システム設定</b></div>
+        <div class="set" style="height:430px">
+          <div class="side"><div class="sk"></div><div class="sk"></div><span class="sel">サウンド</span><div class="sk"></div><div class="sk"></div></div>
+          <div class="main">
+            <h4>サウンド</h4>
+            <div class="seg"><span>出力</span><span class="on">入力</span></div>
+            <div class="row sel"><b>MacBookのマイク</b><small>内蔵</small><span class="tag no" data-in="4.6">選ぶのは、こちらのまま</span></div>
+            <div class="row" data-in="1.4"><b>BlackHole 2ch</b><small>仮想</small><span class="tag ok no" data-in="2.2">✓ 入っています</span></div>
+            <div class="row" style="opacity:.55"><b>イヤホンのマイク</b><small>Bluetooth</small></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p class="cap" data-in="0.3" data-out="4.3">「システム設定」›「サウンド」›「入力」に BlackHole 2ch があれば、成功です。</p>
+    <p class="cap" data-in="4.4">ここでは、BlackHole 2ch を選びません。いつものマイクのままにします。</p>
+  </section>
+
+  <!-- STEP 3：Aqua Voice のマイクを選ぶ -->
+  <section class="sc" id="a8" data-len="7.5">
+    <div class="art">
+      <div class="win abs" style="left:215px;top:20px;width:850px;height:440px" data-in="0.1">
+        <div class="wbar"><i></i><i></i><i></i><b>Aqua Voice — Settings</b></div>
+        <div class="set" style="height:400px">
+          <div class="side"><span>General<span class="selbg" style="opacity:1" data-hide="1.6">General</span></span><span>Audio<span class="selbg" data-show="1.6">Audio</span></span><span>Keybindings</span></div>
+          <div class="main">
+            <div class="abs" style="left:28px;right:28px;top:26px" data-hide="1.6"><div class="sk" style="height:34px;border-radius:10px;background:#e4e9f3;margin-bottom:14px;width:40%"></div><div class="sk" style="height:56px;border-radius:12px;background:#eef1f7;margin-bottom:12px"></div><div class="sk" style="height:56px;border-radius:12px;background:#eef1f7"></div></div>
+            <div data-in="1.7" data-dy="0">
+              <h4>Audio</h4>
+              <div class="row"><b>Microphone</b><div class="dd">MacBookのマイク<span class="v2" data-show="4.6">BlackHole 2ch</span></div></div>
+            </div>
+            <div class="menu" style="top:150px;right:46px" data-in="3.0" data-out="4.8" data-dy="0"><span>MacBookのマイク</span><span>BlackHole 2ch<span class="hl" data-show="3.9">BlackHole 2ch</span></span><span>イヤホンのマイク</span></div>
+            <div class="abs" style="left:28px;top:250px" data-in="5.2"><span class="done">マイクは「BlackHole 2ch」</span></div>
+          </div>
+        </div>
+      </div>
+      <i class="rip abs" style="left:307px;top:144px" data-pulse="1.55"></i>
+      <i class="rip abs" style="left:894px;top:173px" data-pulse="2.95"></i>
+      <i class="rip abs" style="left:884px;top:282px" data-pulse="4.45"></i>
+      <svg class="cur abs" style="left:700px;top:430px" data-move="0.8,0.7,-393,-286;2.2,0.7,194,-257;3.4,0.6,184,-148"><use href="#cur"/></svg>
+    </div>
+    <p class="cap" data-in="0.3"><span class="st">STEP 3</span>Aqua Voice の設定 ›「Audio」で、マイクを「BlackHole 2ch」にします。</p>
+  </section>
+
+  <!-- 試す：デバイスから話す -->
+  <section class="sc" id="a9" data-len="8.5">
+    <div class="art">
+      <div class="lap abs" style="left:110px;top:60px" data-in="0.2">
+        <div class="lscr"><div>
+          <div class="mini" style="left:40px;top:34px;width:456px;height:250px"><b class="h"></b><i class="l"></i><i class="l" style="width:80%"></i><i class="l" style="width:60%"></i><i class="l" style="width:72%;margin-bottom:22px"></i><div class="inp" style="margin-top:34px"><span class="ty" data-type="4.5,1.1">次は、グラフを直してください。</span></div></div>
+        </div></div>
+        <div class="base"></div>
+      </div>
+      <div class="ph abs" style="left:930px;top:84px;height:420px" data-in="0.3">
+        <div class="scr">
+          <div class="sbar"><span>MOTHERSHIP</span><span>● 接続中</span></div>
+          <div style="margin:4px 12px;height:210px;border-radius:12px;background:linear-gradient(160deg,#24345f,#3a5ad0);position:relative"><div class="mini" style="left:14px;top:16px;width:170px;height:120px;padding:9px"><b class="h"></b><i class="l"></i><i class="l" style="width:70%"></i></div></div>
+          <div class="abs" style="left:0;right:0;top:268px;text-align:center" data-in="1.3" data-out="4.2" data-dy="0"><span class="wave" data-wave="1.3,4.1"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span></div>
+          <div class="abs" style="left:0;right:0;bottom:10px;display:flex;justify-content:center"><span class="mic">🎤<span class="hot" data-show="1.2,4.1">🎤</span></span></div>
+        </div>
+      </div>
+      <i class="rip abs" style="left:1055px;top:450px" data-pulse="1.2"></i>
+      <p class="say abs" style="left:690px;top:6px" data-in="1.5" data-out="4.2"><em>話す</em>「次は、グラフを直してください。」</p>
+      <span class="tag no abs" style="left:640px;top:432px" data-in="1.2" data-out="4.2">押している間だけ、話す →</span>
+      <span class="tag ok up abs" style="left:250px;top:452px" data-in="5.2">離すと、Macに文字が入る</span>
+    </div>
+    <p class="cap" data-in="0.3" data-out="4.3">準備は終わりです。デバイスの 🎤 を押したまま話して、離します。</p>
+    <p class="cap" data-in="4.4">少し待つと、話した文がMacに入ります。</p>
+  </section>
+
+  <!-- おわり -->
+  <section class="sc" id="a10" data-len="5.5">
+    <div class="art cover">
+      <span class="done" data-in="0.2" style="font-size:26px">準備ができました</span>
+      <h1 data-in="0.4" style="font-size:66px">これで、<span>声で書けます。</span></h1>
+      <p data-in="0.9">コマンドと、くわしい手順は「ヘルプ」に</p>
+      <span class="url" data-in="1.3">mothershipremote.com/help</span>
+      <p class="fine" data-in="1.8">Aqua Voice・Homebrew・BlackHole は、MOTHERSHIP とは別の会社などのソフトです。画面や入れ方は、変わることがあります。</p>
+    </div>
+    <p class="cap" data-in="0.5">うまくいかないときは、ヘルプの「声で書けないとき」を見てください。</p>
+  </section>
+</main>
+
+<!-- ================= 2 本目：外から使う準備（Tailscale） ================= -->
+<main data-v="outside">
+  <div class="top">
+    <div class="brand"><svg><use href="#mk"/></svg>MOTHERSHIP</div>
+    <div class="ttl">外から使う準備</div>
+    <div class="chips">
+      <div class="chip"><i>1</i>アカウント<span class="on" data-from="#b2" data-to="#b2"><i>1</i>アカウント</span></div>
+      <div class="chip"><i>2</i>アプリを入れる<span class="on" data-from="#b3" data-to="#b3"><i>2</i>アプリを入れる</span></div>
+      <div class="chip"><i>3</i>家でつなぐ<span class="on" data-from="#b4" data-to="#b4"><i>3</i>家でつなぐ</span></div>
+      <div class="chip"><i>4</i>外で試す<span class="on" data-from="#b5" data-to="#b5"><i>4</i>外で試す</span></div>
+    </div>
+  </div>
+  <div class="capbar"></div>
+
+  <section class="sc" id="b0" data-len="4.5">
+    <div class="art cover">
+      <span class="k" data-in="0.2">MOTHERSHIP の準備ガイド</span>
+      <h1 data-in="0.4"><span>外から使う</span>準備</h1>
+      <p data-in="0.8">「Tailscale」を、Macとデバイスの両方に入れます</p>
+      <div class="pills" data-in="1.3"><span>4ステップ</span><span>個人なら無料</span><span>ルーターの設定は不要</span></div>
+    </div>
+    <p class="cap" data-in="0.6">家の外から、家のMacにつなぐための準備です。</p>
+  </section>
+
+  <section class="sc" id="b1" data-len="8">
+    <div class="art" style="flex-direction:column;gap:26px">
+      <div style="display:flex;align-items:center">
+        <div class="node" data-in="0.3" style="width:230px;min-height:150px"><span class="ico">📱</span><b>外出先のデバイス</b><span>モバイル回線や、外のWi-Fi</span></div>
+        <div class="tunnel" data-in="0.9"><b>Tailscale</b><span>暗号化された通り道</span>
+          <i class="dot" data-move="1.6,1.4,270,0;3.3,0.01,0,0;3.4,1.4,270,0;5.1,0.01,0,0;5.2,1.4,270,0;6.9,0.01,0,0"></i>
+          <i class="dot b" style="left:290px" data-move="2.0,1.4,-270,0;3.7,0.01,0,0;3.8,1.4,-270,0;5.5,0.01,0,0;5.6,1.4,-270,0;7.3,0.01,0,0"></i>
+        </div>
+        <div class="node" data-in="1.3" style="width:230px;min-height:150px"><span class="ico">🖥️</span><b>家のMac</b><span>MOTHERSHIP HOST</span></div>
+      </div>
+      <p class="legend" data-in="1.8"><span>操作（デバイス → Mac）</span><span>画面（Mac → デバイス）</span></p>
+      <p class="x" data-in="4.4"><s>MOTHERSHIPのサーバー</s> は通りません。ルーターの設定も、要りません。</p>
+    </div>
+    <p class="cap" data-in="0.4" data-out="4.2">Tailscale は、離れた機器どうしを安全につなぐサービスです。</p>
+    <p class="cap" data-in="4.3">操作も画面も、デバイスとMacが直接やり取りします。</p>
+  </section>
+
+  <section class="sc" id="b2" data-len="6.5">
+    <div class="art">
+      <div class="win abs" style="left:240px;top:30px;width:800px;height:440px" data-in="0.2">
+        <div class="wbar"><i></i><i></i><i></i><span class="addr">tailscale.com</span></div>
+        <div class="abs" style="left:0;right:0;top:92px;text-align:center"><p class="big">Tailscale</p><p style="font-size:20px;color:var(--ink-3);font-weight:600;margin-top:6px">離れた機器どうしを、安全につなぐサービス</p></div>
+        <span class="btn abs" style="left:250px;top:210px;width:300px;height:60px;justify-content:center">アカウントを作る</span>
+        <div class="abs" style="left:0;right:0;top:318px;text-align:center" data-in="3.0"><span class="done">アカウントができました</span></div>
+      </div>
+      <i class="rip abs" style="left:640px;top:270px" data-pulse="2.2"></i>
+      <svg class="cur abs" style="left:900px;top:420px" data-move="1.0,1.0,-250,-140"><use href="#cur"/></svg>
+    </div>
+    <p class="cap" data-in="0.3"><span class="st">STEP 1</span>Tailscale の公式サイトで、アカウントを作ります。</p>
+  </section>
+
+  <section class="sc" id="b3" data-len="9.5">
+    <div class="art" style="gap:22px">
+      <div class="card" data-in="0.3">
+        <h3>🖥️ 家のMac</h3>
+        <div class="tsapp">
+          <div class="nm"><i>:::</i>Tailscale</div>
+          <div style="position:relative;width:100%;height:30px">
+            <span class="abs" style="left:0;top:0" data-in="0.9" data-out="2.9" data-dy="0"><span class="pbar" style="width:210px;background:#e4e9f3"><i data-grow="1.0,1.6" style="background:var(--grad-accent)"></i></span></span>
+            <span class="st abs" style="left:0;top:0" data-in="3.0" data-out="4.6" data-dy="0">ログインします…</span>
+            <span class="stok abs" style="left:0;top:0" data-in="4.7" data-dy="0">接続済み</span>
+          </div>
+          <span class="acct" data-in="4.7">you@example.com</span>
+        </div>
+        <p class="fine" style="font-size:15px;white-space:nowrap">tailscale.com か Mac App Store から</p>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:12px;width:300px">
+        <i class="arrow" data-in="5.6" data-dy="0" data-tf="scaleX(-1)" style="width:120px;transform-origin:center"></i>
+        <span class="same" data-in="5.4">同じアカウントでログイン</span>
+        <i class="arrow" data-in="5.6" data-dy="0" style="width:120px"></i>
+      </div>
+      <div class="card" data-in="0.5">
+        <h3>📱 デバイス</h3>
+        <div class="tsapp">
+          <div class="nm"><i>:::</i>Tailscale</div>
+          <div style="position:relative;width:100%;height:30px">
+            <span class="abs" style="left:0;top:0" data-in="1.3" data-out="3.3" data-dy="0"><span class="pbar" style="width:210px;background:#e4e9f3"><i data-grow="1.4,1.6" style="background:var(--grad-accent)"></i></span></span>
+            <span class="st abs" style="left:0;top:0" data-in="3.4" data-out="5.0" data-dy="0">ログインします…</span>
+            <span class="stok abs" style="left:0;top:0" data-in="5.1" data-dy="0">接続済み</span>
+          </div>
+          <span class="acct" data-in="5.1">you@example.com</span>
+        </div>
+        <p class="fine" style="font-size:15px;white-space:nowrap">App Store か Google Play から</p>
+      </div>
+    </div>
+    <p class="cap" data-in="0.3" data-out="5.2"><span class="st">STEP 2</span>Macとデバイスの両方に、Tailscale のアプリを入れます。</p>
+    <p class="cap" data-in="5.3"><span class="st">STEP 2</span>かならず、同じアカウントでログインします。</p>
+  </section>
+
+  <section class="sc" id="b4" data-len="8">
+    <div class="art">
+      <div class="house" data-in="0.2">
+        <p>🏠 家のWi-Fi</p>
+        <div class="lap" style="transform:scale(.62);transform-origin:left center;margin-right:-250px">
+          <div class="lscr"><div><div class="mini" style="left:40px;top:34px;width:300px;height:180px"><b class="h"></b><i class="l"></i><i class="l" style="width:70%"></i><i class="l" style="width:85%"></i></div></div></div>
+          <div class="base"></div>
+        </div>
+        <div class="ph" style="width:230px;height:400px">
+          <div class="scr">
+            <div class="sbar"><span>MOTHERSHIP</span><span>Wi-Fi</span></div>
+            <div class="list"><div class="m"><span>🖥️ 自宅のMac<small>● 見つかりました</small></span></div><div class="go">接続<i class="rip w" style="left:50%;top:50%" data-pulse="2.4"></i></div></div>
+            <div class="macview" data-show="3.0"><div class="mini" style="left:14px;top:20px;width:170px;height:120px;padding:9px"><b class="h"></b><i class="l"></i><i class="l" style="width:70%"></i></div></div>
+          </div>
+        </div>
+      </div>
+      <span class="tag ok abs" style="left:1012px;top:226px" data-in="3.8">✓ デバイスが、外からの<br>つなぎ先を覚えます</span>
+    </div>
+    <p class="cap" data-in="0.3"><span class="st">STEP 3</span>家のWi-Fiで、いちど MOTHERSHIP でMacにつなぎます。</p>
+  </section>
+
+  <section class="sc" id="b5" data-len="9.5">
+    <div class="art" style="gap:56px">
+      <div class="ph" style="width:260px;height:460px" data-in="0.2">
+        <div class="scr">
+          <div class="sbar"><span>MOTHERSHIP</span><span data-in="1.9" data-dy="0">4G</span></div>
+          <div class="srow"><span>Wi-Fi</span><span class="tog"><span class="on init" data-hide="1.4"></span></span></div>
+          <div class="srow"><span>Tailscale</span><span class="tog"><span class="on init"></span></span></div>
+          <div class="list"><div class="m"><span>🖥️ 自宅のMac<small style="color:var(--ink-3)">○ 外出先は Tailscale で接続</small></span></div><div class="go">接続<i class="rip w" style="left:50%;top:50%" data-pulse="4.8"></i></div></div>
+          <div class="macview" data-show="5.5"><div class="mini" style="left:14px;top:20px;width:190px;height:130px;padding:9px"><b class="h"></b><i class="l"></i><i class="l" style="width:70%"></i><i class="l" style="width:85%"></i></div></div>
+        </div>
+      </div>
+      <div class="ck">
+        <p data-in="0.8"><i>1</i>スマホのWi-Fiを切る（モバイル回線に）</p>
+        <p data-in="2.6"><i>2</i>Tailscale がオンなのを確かめる</p>
+        <p data-in="4.0"><i>3</i>MOTHERSHIP の「接続」をタップ</p>
+        <span class="done" data-in="6.0" style="align-self:flex-start">Macの画面が映れば、準備は終わり</span>
+      </div>
+    </div>
+    <p class="cap" data-in="0.3" data-out="5.6"><span class="st">STEP 4</span>出かける前に、試します。スマホのWi-Fiを切って、「接続」をタップ。</p>
+    <p class="cap" data-in="5.7"><span class="st">STEP 4</span>Macの画面が映れば、準備は終わりです。</p>
+  </section>
+
+  <section class="sc" id="b6" data-len="5.5">
+    <div class="art cover">
+      <span class="done" data-in="0.2" style="font-size:26px">準備ができました</span>
+      <h1 data-in="0.4" style="font-size:66px">これで、<span>外からつなげます。</span></h1>
+      <p data-in="0.9">外では、Tailscale がオンなのを確かめて「接続」をタップするだけ</p>
+      <span class="url" data-in="1.3">mothershipremote.com/help</span>
+      <p class="fine" data-in="1.8">Tailscale は、MOTHERSHIP とは別の会社のサービスです。画面や入れ方は、変わることがあります。</p>
+    </div>
+    <p class="cap" data-in="0.5">つながらないときは、ヘルプの「外から使う」を見てください。</p>
+  </section>
+</main>
+
+<i class="bar"></i>
+</div>
+<script src="stage.js"></script>
+</body>
+</html>

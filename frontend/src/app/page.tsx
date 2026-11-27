@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { APP_STORE_URL, DOWNLOAD_LINK } from "@/components/nav";
 import { HeroFold } from "@/components/HeroFold";
+import { SetupVideo } from "@/components/SetupVideo";
 import { pageMeta, siteLd } from "@/lib/seo";
 import { getAllPosts } from "@/lib/wordpress";
 import { USE_CASE_LINKS } from "@/content/usecases";
@@ -687,7 +688,7 @@ export default async function Home() {
                 <p>Aqua Voiceの設定で、聞き取るマイクを選びます。</p>
               </li>
             </ol>
-            <p className="voice-need-sub">文字にする精度は、Aqua Voiceによります（Aqua Voiceは、MOTHERSHIPには含まれません）。くわしい手順は、<Link href="/help/#voice">ヘルプ</Link>にあります。</p>
+            <p className="voice-need-sub">文字にする精度は、Aqua Voiceによります（Aqua Voiceは、MOTHERSHIPには含まれません）。準備の流れは<a href="#setup-videos">動画（1分25秒）</a>で、くわしい手順は<Link href="/help/#voice">ヘルプ</Link>で見られます。</p>
             {/* 図 4：声の通り道（6 秒で 1 周。左から順に明るくなる） */}
             <div className="voice-flow" role="img" aria-label="声の通り道の図。手もとのデバイスで話した声は、MacのMOTHERSHIP HOSTに届く。MOTHERSHIP HOSTは、その声を仮想のマイク「BlackHole 2ch」に流す。Aqua VoiceがBlackHole 2chの声を聞いて文字にし、開いているアプリのカーソルの位置に入力する。Macに入れておくのは、BlackHole 2chとAqua Voiceの2つ。">
               <p className="vf-title" aria-hidden="true">しくみ：声の通り道</p>
@@ -1125,7 +1126,11 @@ export default async function Home() {
           <aside className="how-prep" aria-labelledby="prep-title">
             <div className="how-prep-head">
               <h3 id="prep-title">出かける前に</h3>
-              <p>外から使うときは、準備が少しあります。</p>
+              <p>外から使うときは、準備が少しあります。動画で、流れを見られます。</p>
+            </div>
+            <div className="prep-videos" id="setup-videos">
+              <SetupVideo id="outside" />
+              <SetupVideo id="voice" />
             </div>
             <ul className="prep-list">
               <li><Link href="/help/#outside"><b>外からつなぐ</b><span>Tailscaleを、Macとデバイスに。</span><i>ヘルプで見る <span aria-hidden="true">→</span></i></Link></li>

@@ -2,6 +2,7 @@
 // 事実は、トップページ（src/app/page.tsx）とヘルプに書いてあることだけ。機能や対応環境を変えたら、ここも直す。
 // 本文の HTML は、このファイルに書いたものだけをそのまま出す（外から来た文字は入れない）。
 import { APP_STORE_URL } from "@/components/nav";
+import type { SetupVideoId } from "@/components/SetupVideo";
 
 export type UseCase = {
   /** ページの言語（省くと日本語）。英語は src/content/usecases-en.ts */
@@ -14,8 +15,8 @@ export type UseCase = {
   h1: string;
   lead: string;
   image: { src: string; alt: string; width: number; height: number; caption: string };
-  /** 本文（h2 ごと） */
-  sections: { h2: string; html: string }[];
+  /** 本文（h2 ごと）。video を書くと、その段の終わりにセットアップ動画を出す（日本語だけ。動画は src/components/SetupVideo.tsx） */
+  sections: { h2: string; html: string; video?: SetupVideoId }[];
   faq: { q: string; a: string }[];
   /** いちばん下のボタン。store が null のときは「近日公開」（soon に出す文） */
   store: { label: string; href: string } | null;
@@ -33,7 +34,8 @@ const outside = (device: string) => ({
 <li>Wi-Fiからモバイル回線に切り替わっても、自動でつなぎ直します。</li>
 <li>映像と操作は、Macと${device}の間で直接やり取りします。MOTHERSHIPのサーバーは通りません。</li>
 </ul>
-<p>くわしい手順は、<a href="/help/#outside">ヘルプの「外から使う」</a>にあります。</p>`,
+<p>準備の流れは、下の動画で見られます。くわしい手順は、<a href="/help/#outside">ヘルプの「外から使う」</a>にあります。</p>`,
+  video: "outside" as const,
 });
 
 const pricing = {
@@ -50,7 +52,8 @@ const pricing = {
 const voice = (device: string) => ({
   h2: "長い文は、声で",
   html: `<p>${device}の🎤ボタンを押している間に話すと、その声がMacに届き、開いているアプリに文字が入ります。画面のキーボードを出さないので、Macの画面は広いままです。</p>
-<p>声で入力するには、Macに音声入力アプリ「Aqua Voice」（別の会社の製品です）と、無料の仮想オーディオ「BlackHole 2ch」を入れておきます。準備は、<a href="/help/#voice">ヘルプの「声で書く準備」</a>にまとめてあります。Aqua Voiceを使わないときは、アプリ内のキーボードか、${device}のキーボードで入力できます。</p>`,
+<p>声で入力するには、Macに音声入力アプリ「Aqua Voice」（別の会社の製品です）と、無料の仮想オーディオ「BlackHole 2ch」を入れておきます。準備の流れは下の動画で、くわしい手順は<a href="/help/#voice">ヘルプの「声で書く準備」</a>で見られます。Aqua Voiceを使わないときは、アプリ内のキーボードか、${device}のキーボードで入力できます。</p>`,
+  video: "voice" as const,
 });
 
 // ---- AI の道具とくらべるページ ----

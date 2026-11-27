@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { PageHero } from "@/components/PageHero";
 import { JsonLd } from "@/components/JsonLd";
+import { SetupVideo } from "@/components/SetupVideo";
 import { breadcrumbLd, faqLd } from "@/lib/seo";
 import { USE_CASE_LINKS, type UseCase } from "@/content/usecases";
 import { USE_CASE_LINKS_EN } from "@/content/usecases-en";
@@ -36,6 +37,7 @@ export function UseCasePage({ page }: { page: UseCase }) {
                 <h2>{s.h2}</h2>
                 {/* このサイトのファイル（src/content/usecases*.ts）に書いた HTML だけを出す */}
                 <div dangerouslySetInnerHTML={{ __html: s.html }} />
+                {s.video && <SetupVideo id={s.video} lang={lang} />}
               </section>
             ))}
             <section>
