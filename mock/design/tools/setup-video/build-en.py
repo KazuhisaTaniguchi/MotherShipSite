@@ -18,7 +18,7 @@ SNIPPETS = [
   ('「ターミナル」を開きます。<kbd>⌘</kbd>＋<kbd>スペース</kbd> →「ターミナル」と打って <kbd>return</kbd>。', 'Open Terminal: press <kbd>⌘</kbd>+<kbd>Space</kbd>, type “Terminal”, then press <kbd>return</kbd>.'),
   ('Homebrew（ソフトを入れる無料の道具）があるか、確かめます。<small>数字が出たら、次へ。</small>', 'Check whether you have Homebrew, a free tool for installing software. <small>See a version number? Skip ahead.</small>'),
   ('無ければ、ヘルプのコマンドを貼り付けて <kbd>return</kbd>。パスワードは、画面に出ません。', 'If not, paste the command from Help and press <kbd>return</kbd>. Your password won\'t show as you type.'),
-  ('<s>MOTHERSHIPのサーバー</s> は通りません。ルーターの設定も、要りません。', 'No <s>MOTHERSHIP servers</s> in between. No router setup, either.'),
+  ('<s>MOTHERSHIPのサーバー</s> は通りません。ルーターの設定も、要りません。', 'They never pass through MOTHERSHIP servers. No router setup, either.'),
   ('✓ デバイスが、外からの<br>つなぎ先を覚えます', '✓ Device remembers<br>the route to your Mac'),
   ('>mothershipremote.com/help<', '>mothershipremote.com/en/help<'),
 ]
