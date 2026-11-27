@@ -950,7 +950,12 @@
         <aside class="how-prep" aria-labelledby="prep-title">
           <div class="how-prep-head">
             <h3 id="prep-title">Before you head out</h3>
-            <p>Using it away from home takes a little extra setup.</p>
+            <p>Using it away from home takes a little extra setup. These videos walk you through it.</p>
+          </div>
+          <!-- セットアップ動画（英語版。2026-11-27。日本語のモックと同じ形。動画は ../design/media/setup-*-en.mp4、プレーヤーは script.js） -->
+          <div class="prep-videos" id="setup-videos">
+            <figure class="setup-video" data-setup-video data-title="Remote access setup (Tailscale)" data-length="52 sec" data-duration="51.5" data-chapters="4.5:How it works|12.5:1 Account|19:2 Install the app|28.5:3 Connect at home|36.5:4 Test outside"><div class="sv-player"><div class="sv-frame"><video controls playsinline preload="none" poster="../design/media/setup-outside-en-poster.jpg" width="1280" height="720" aria-label="Video: setting up remote access. Create a Tailscale account, install Tailscale on your Mac and your device and sign in to the same account, connect once with MOTHERSHIP on your home Wi-Fi, then turn off Wi-Fi and test. No sound."><source src="../design/media/setup-outside-en.mp4" type="video/mp4"></video></div></div><figcaption><b>Watch: Remote access setup (Tailscale)</b>52 sec · No sound</figcaption></figure>
+            <figure class="setup-video" data-setup-video data-title="Voice input setup (Aqua Voice, BlackHole 2ch)" data-length="1 min 25 sec" data-duration="84.5" data-chapters="4.5:How it works|12:1 Aqua Voice|26.5:2 BlackHole 2ch|63:3 Choose the mic|70.5:Try talking"><div class="sv-player"><div class="sv-frame"><video controls playsinline preload="none" poster="../design/media/setup-voice-en-poster.jpg" width="1280" height="720" aria-label="Video: setting up voice input. Install Aqua Voice, install Homebrew and BlackHole 2ch in Terminal and restart your Mac, set Aqua Voice's microphone to BlackHole 2ch, then talk from your device to check. No sound."><source src="../design/media/setup-voice-en.mp4" type="video/mp4"></video></div></div><figcaption><b>Watch: Voice input setup (Aqua Voice, BlackHole 2ch)</b>1 min 25 sec · No sound<span class="sv-link">Official site for Homebrew, used in Step 2: <a href="https://brew.sh" target="_blank" rel="noopener noreferrer">brew.sh</a></span></figcaption></figure>
           </div>
           <ul class="prep-list">
             <li><a href="help.html#outside"><b>Connect from outside</b><span>Tailscale on your Mac and your device.</span><i>Details <span aria-hidden="true">→</span></i></a></li>

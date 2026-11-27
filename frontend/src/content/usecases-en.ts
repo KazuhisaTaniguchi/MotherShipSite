@@ -17,6 +17,7 @@ const outside = (device: string) => ({
 <li>Video and input travel directly between your Mac and your ${device}. They don't pass through MOTHERSHIP's servers.</li>
 </ul>
 <p>The full walkthrough is in <a href="/en/help/#outside">Help: Use it away from home</a>.</p>`,
+  video: "outside" as const,
 });
 
 const pricing = {
@@ -34,6 +35,7 @@ const voice = (device: string) => ({
   h2: "Say the long parts",
   html: `<p>Hold the mic button on your ${device} and talk. Your voice goes to your Mac, and the words are typed into whatever app is open. The on-screen keyboard stays out of the way, so you keep the whole screen.</p>
 <p>Voice input needs two things on your Mac: Aqua Voice (a dictation app from another company) and BlackHole 2ch (a free virtual audio device). Setup is covered in <a href="/en/help/#voice">Help: Set up voice input</a>. Without Aqua Voice, you can still type with the in-app keyboard or your ${device}'s keyboard.</p>`,
+  video: "voice" as const,
 });
 
 const setup = (device: string, os: string) => ({

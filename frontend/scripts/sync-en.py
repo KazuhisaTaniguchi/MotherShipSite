@@ -4,7 +4,7 @@
 #   書き出すもの（手で直さない。モックを直してから、もう一度実行する）：
 #     src/content/en/pages.ts   各ページの <main> の HTML・タイトル・説明、フッターの商標の文
 #     src/styles/en.css         英語のときだけ効かせる CSS（文字組み、図の幅、英語版だけのカード）
-#     public/en/en.js           英語ページの動き（HERO の一時停止、お問い合わせフォーム）
+#     public/en/en.js           英語ページの動き（HERO の一時停止、お問い合わせフォーム、セットアップ動画のプレーヤー）
 #     public/og-en.png          英語の OGP 画像
 # 英語のページは、HTML をそのまま出す（React の部品には直さない）。リンクはここで本番の URL に書き換える。
 import re, os, json, shutil, html as H
@@ -27,6 +27,10 @@ def link(m):
 def clean(html):
     html = re.sub(r'<!--.*?-->', '', html, flags=re.S)
     html = re.sub(r'href=(")([^"]*)"', link, html)
+    # セットアップ動画：モックの場所（../design/media/）を本番の /videos/ に。広い画面では 1920×1080 を読む（日本語の SetupVideo.tsx と同じ）
+    html = re.sub(r'<source src="\.\./design/media/(setup-[\w-]+)\.mp4" type="video/mp4">', r'<source src="/videos/\1-1080.mp4" type="video/mp4" media="(min-width: 1000px)"><source src="/videos/\1.mp4" type="video/mp4">', html)
+    html = html.replace('poster="../design/media/', 'poster="/videos/')
+    assert '../design/media/' not in html
     return re.sub(r'\n\s*\n+', '\n', html).strip()
 def page(name):
     s = rd(name + '.html')
@@ -120,6 +124,10 @@ document.querySelectorAll('[data-hx-pause]').forEach((btn) => {
   });
 });
 ''' + cj
+# セットアップ動画のプレーヤー（mock/design_en/script.js の setup-video:start〜end）
+sj = rd('script.js')
+sv = sj[sj.index('// ---- setup-video:start ----'):sj.index('// ---- setup-video:end ----')]
+js += '\n' + sv
 open(os.path.join(FRONT, 'public/en/en.js'), 'w', encoding='utf-8').write(js)
 # en.js の中身が変わったら、読み込む URL も変える（ブラウザーが古いファイルを使い続けないように）。src/content/en/pages.ts に足す
 import hashlib

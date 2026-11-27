@@ -15,7 +15,7 @@ export type UseCase = {
   h1: string;
   lead: string;
   image: { src: string; alt: string; width: number; height: number; caption: string };
-  /** 本文（h2 ごと）。video を書くと、その段の終わりにセットアップ動画を出す（日本語だけ。動画は src/components/SetupVideo.tsx） */
+  /** 本文（h2 ごと）。video を書くと、その段の終わりにセットアップ動画を出す（英語のページは英語版の動画。動画は src/components/SetupVideo.tsx） */
   sections: { h2: string; html: string; video?: SetupVideoId }[];
   faq: { q: string; a: string }[];
   /** いちばん下のボタン。store が null のときは「近日公開」（soon に出す文） */

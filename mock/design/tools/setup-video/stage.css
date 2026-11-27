@@ -171,3 +171,25 @@ i, em { font-style: normal; }
 .macview { position: absolute; inset: 34px 0 0 0; background: linear-gradient(160deg, #24345f, #3a5ad0); opacity: 0; }
 .x { font-size: 20px; font-weight: 700; color: var(--ink-2); background: rgba(255,255,255,.8); border-radius: 12px; padding: 10px 18px; }
 .x s { color: #c81e3c; text-decoration-thickness: 3px; }
+
+/* ---- 英語版（stage-en.html）：長くなる文に合わせて、少しだけ詰める ---- */
+html[lang="en"] .node b { white-space: normal; font-size: 18px; line-height: 1.25; }
+html[lang="en"] .node span { font-size: 15px; }
+html[lang="en"] .cap { font-size: 25px; line-height: 1.35; }
+html[lang="en"] .cap small { font-size: 20px; }
+html[lang="en"] .cover h1 { font-size: 72px; }
+html[lang="en"] .cover p { font-size: 25px; }
+html[lang="en"] .chip { font-size: 14px; padding-right: 12px; }
+html[lang="en"] .chip .on { padding-right: 12px; }
+html[lang="en"] .tag { font-size: 18px; }
+html[lang="en"] .ck p { font-size: 23px; }
+html[lang="en"] .list .m { font-size: 15px; }
+html[lang="en"] #a10 h1, html[lang="en"] #b6 h1 { font-size: 56px !important; }
+html[lang="en"] .say { font-size: 18px; }
+html[lang="en"] .row .tag { font-size: 16px; }
+html[lang="en"] .menu { width: 290px; }
+html[lang="en"] .menu span { white-space: nowrap; }
+html[lang="en"] .ph .sbar { font-size: 12px; padding: 0 12px; }
+html[lang="en"] .same { font-size: 17px; padding: 9px 16px; }
+html[lang="en"] .tag.ok br + * , html[lang="en"] .tag { letter-spacing: 0; }
+html[lang="en"] #b6 h1 { font-size: 48px !important; }

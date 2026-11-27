@@ -13,7 +13,7 @@
 - トップの「出かける前に」（2 本。`#setup-videos`。「声で書く」の節からもここへリンク）
 - ヘルプの 3・4 の先頭
 - 用途別のページ（iPad・iPhone・Android・Mac mini）の「長い文は、声で」「外出先からつなぐには」の段（本番だけ。`src/content/usecases.ts` の `video`）
-- 英語のページには載せていない（テロップが日本語のため）
+- 英語のページには、英語版の動画を載せる（下の「英語版」）
 
 ## プレーヤー（2026-11-27）
 - テロップが下の端にあり、ブラウザーの再生バーが重なるので、操作は動画の下に自前で出す：再生・位置・全画面・ステップへ飛ぶボタン。再生前は「動画を見る」の札
@@ -36,6 +36,15 @@
 - MP4：`swiftc -O encode.swift -o encode` → `./encode <コマのフォルダー> out.mp4 1280 720 30 900000`（macOS の AVFoundation。ffmpeg は使っていない）
 - サイト用は 1280×720・約 0.9 Mbps と、広い画面用の 1920×1080・約 1.8 Mbps（本番の `public/videos/` だけ。2026-11-27 から）。1920×1080 は SNS・YouTube にも使える
 
+## 英語版（2026-11-27）
+- 動画：`setup-voice-en.mp4`・`setup-outside-en.mp4`（＋ `-1080`・`-poster.jpg`）。長さ・場面の秒は日本語版と同じ
+- 舞台：`stage-en.html` は **`python3 build-en.py` が `stage.html` から作る**（手で直さない）。訳は `build-en.py` の中。`stage.html` に文を足して訳を足し忘れると、日本語が残っているとして止まる。言い回しは英語版のヘルプに合わせる
+- 英語で長くなる所の詰めは、`stage.css` の終わりの `html[lang="en"] …`
+- 作り方は日本語版と同じ（`render.mjs` に `stage-en.html` を渡す）
+- 載せている所：英語のトップ「Before you head out」、英語のヘルプの 3・4、英語の用途別のページ
+  - トップ・ヘルプ：`mock/design_en/index.html`・`help.html` の `<figure data-setup-video>`（動画は `../design/media/`）と、`mock/design_en/script.js` の `setup-video:start`〜`end`。`frontend/scripts/sync-en.py` が、動画の場所を `/videos/` に直し、1080p の行を足し、プレーヤーを `public/en/en.js` に写す
+  - 用途別のページ：`SetupVideo.tsx` の `lang="en"`（題・ステップ名・操作の文は同じファイルの `SETUP_VIDEOS_EN`・`UI`）
+- **日本語版を作り直したら、英語版も作り直す**（`build-en.py` → コマ撮り → MP4）
+
 ## まだ
-- 英語版（テロップと画面の文を英語に）
 - ナレーション（音声）は無い
