@@ -311,6 +311,23 @@ export default async function Home() {
         <p className="wrap hero-foot">Macの画面を、折りたたみスマホへ。iPhone・iPad・別のMacにも。</p>
       </section>
 
+      {/* Android のテスター募集（2026-11-28。人数がそろったら、この節ごと消す。CSS は styles.css の .tester-call） */}
+      <section className="tester-call" id="android-testers" aria-labelledby="tester-title">
+        <div className="wrap">
+          <div>
+            <p className="tester-kicker"><span className="dot" aria-hidden="true"></span>Android テスター募集中</p>
+            <h2 id="tester-title"><span className="nb">Android版の公開に、</span><span className="nb accent">あなたの力を。</span></h2>
+            <p className="tester-lead">Google Playで公開するには、<span className="nb">12人以上に14日間</span>テストしてもらう必要があります。<span className="nb">無料で、Macがなくても参加できます。</span></p>
+          </div>
+          <ol className="tester-steps">
+            <li><b><span className="nb">Googleグループに</span><span className="nb">参加</span></b><a className="tester-btn" href="https://groups.google.com/g/mothership-remote-testers" target="_blank" rel="noopener">グループを開く <span aria-hidden="true">↗</span></a></li>
+            <li><b><span className="nb">Androidで</span><span className="nb">テスト版を</span><span className="nb">インストール</span></b><a className="tester-btn" href="https://play.google.com/apps/testing/com.mothershipremote.client" target="_blank" rel="noopener">テストに参加する <span aria-hidden="true">↗</span></a></li>
+            <li><b><span className="nb">14日間、</span><span className="nb">入れたままに</span></b><span className="tester-sub">ときどき開くだけでOK。</span></li>
+          </ol>
+          <p className="tester-note">アプリの中の購入は押さないでください（テスト中も実際に請求されます）。グループに入ると、メールアドレスは運営者にだけ見えます。「アイテムが見つかりません」と出たら、30分ほどおいて開き直してください。</p>
+        </div>
+      </section>
+
       {/* S2 共感：席を離れたあとの困りごと */}
       <section className="section pains" aria-labelledby="pains-title">
         <div className="wrap">
