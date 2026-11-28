@@ -73,7 +73,9 @@
     var(--navy-2);
 
   /* ---- 文字 ----------------------------------------------------------- */
-  --font-sans: "Hiragino Sans", "Noto Sans JP", "Yu Gothic", system-ui, sans-serif;
+  /* ヒラギノ（Mac・iPhone）→ 無い端末（Android・Windows）は Noto Sans JP（2026-11-28。本番は Web フォントを src/app/layout.tsx で取り込み、--font-noto-jp に入る。モックでは端末に入っている Noto Sans JP）
+     ヒラギノと Noto の間は、Apple の端末にだけある書体（ヒラギノに無い記号 ⌘⏎✓ などを、前と同じ書体で出すため。Android には無いので飛ばされる）。Arial・Helvetica は Android で Roboto になるので入れない */
+  --font-sans: "Hiragino Sans", -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN", "Lucida Grande", "Zapf Dingbats", "Apple Color Emoji", var(--font-noto-jp, "Noto Sans JP"), "Yu Gothic", system-ui, sans-serif;
 
   --text-display: clamp(38px, 5.6vw, 72px);     /* HERO の見出し */
   --text-title: clamp(27px, 3.5vw, 42px);       /* セクションの見出し（h2） */

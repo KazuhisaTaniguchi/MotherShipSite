@@ -1,10 +1,18 @@
 import type { Metadata, Viewport } from "next";
+import { Inter, Noto_Sans_JP } from "next/font/google";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SkipLink } from "@/components/SkipLink";
 import { Analytics } from "@/components/Analytics";
 import { FigureMotion } from "@/components/FigureMotion";
 import "./globals.css";
+
+// Web フォント（2026-11-28）：Mac・iPhone は端末のヒラギノ（英語は San Francisco）で表示し、それが無い端末（Android・Windows）だけ、
+// 近い形の Noto Sans JP（英語は Inter）を使う。順番は tokens.css の --font-sans。
+// ・ビルドのときに Google Fonts から取り込み、このサイトから配る（見る人のブラウザーは Google に通信しない）
+// ・preload しない：ヒラギノがある端末では使われないので、読み込まれない。日本語は文字の範囲ごとのファイルなので、使う文字の分だけ読む
+const notoJp = Noto_Sans_JP({ variable: "--font-noto-jp", display: "swap", preload: false, adjustFontFallback: false });
+const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: "swap", preload: false, adjustFontFallback: false });
 
 const DESCRIPTION =
   "iPhone・iPad・Androidのスマホやタブレットから、家のMacやMac miniをリモートデスクトップで操作。端末の形に合わせた画面で文字がくっきり読め、Claude CodeやCodexなどMacのAIの進み具合を外出先から確かめて、指示は声で。折りたたみスマホにも対応。買い切り・月額なし、14日間無料。";
@@ -40,7 +48,7 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     // 英語のページ（/en/…）は、書き出したあとで lang="en" に書き換える（scripts/set-lang.mjs）。ここでは ja のままなので、ちがいの警告を止める
-    <html lang="ja" suppressHydrationWarning>
+    <html lang="ja" className={`${notoJp.variable} ${inter.variable}`} suppressHydrationWarning>
       <body>
         <SkipLink />
         <SiteHeader />

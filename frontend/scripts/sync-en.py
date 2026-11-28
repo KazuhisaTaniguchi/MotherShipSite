@@ -83,7 +83,7 @@ css = '''/* 英語のページ（/en/…。<html lang="en">）だけに効かせ
    もとは mock/design_en の、日本語版とちがうところ（designSystem/tokens.css・base.css・components.css、styles.css の「英語版だけ」、tools/help-figs の調整）。
    :where() で囲んで、もとの決まりと同じ強さにしてある（あとから読み込むので、こちらが勝つ。図ごとの細かい決まりには勝たない） */
 html[lang="en"] {
-  --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Hiragino Sans", "Noto Sans JP", sans-serif;
+  --font-sans: -apple-system, BlinkMacSystemFont, "Helvetica Neue", "Lucida Grande", "Zapf Dingbats", "Apple Color Emoji", "Hiragino Sans", var(--font-inter, "Inter"), var(--font-noto-jp, "Noto Sans JP"), system-ui, sans-serif;
   --leading-display: 1.12; --leading-heading: 1.25; --leading-note: 1.6; --leading-body: 1.7;
   --tracking-heading: -.012em; --tracking-wide: .04em; --tracking-label: .06em;
 }

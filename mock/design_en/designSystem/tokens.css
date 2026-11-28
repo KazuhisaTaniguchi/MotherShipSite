@@ -74,7 +74,7 @@
     var(--navy-2);
 
   /* ---- 文字 ----------------------------------------------------------- */
-  --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Hiragino Sans", "Noto Sans JP", sans-serif;   /* 英語版：欧文の書体を先に。日本語（言語の切り替えの「日本語」など）は後ろの書体で出る */
+  --font-sans: -apple-system, BlinkMacSystemFont, "Helvetica Neue", "Lucida Grande", "Zapf Dingbats", "Apple Color Emoji", "Hiragino Sans", var(--font-inter, "Inter"), var(--font-noto-jp, "Noto Sans JP"), system-ui, sans-serif;   /* 英語版：欧文の書体を先に。Mac・iPhone は San Francisco、無い端末は Inter（2026-11-28。本番は Web フォント）。日本語（言語の切り替えの「日本語」など）は後ろの書体で出る */
 
   --text-display: clamp(38px, 5.6vw, 72px);     /* HERO の見出し */
   --text-title: clamp(27px, 3.5vw, 42px);       /* セクションの見出し（h2） */
