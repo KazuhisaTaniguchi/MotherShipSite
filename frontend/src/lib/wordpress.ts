@@ -4,20 +4,51 @@ const ENDPOINT =
 
 type GraphQLResponse<T> = { data?: T; errors?: { message: string }[] };
 
+// つながらない・時間切れ・サーバー側のエラーのときは、間を空けてやり直す（2026-11-28）。
+// GitHub Actions のビルドで、WordPress への接続がときどき時間切れになり、デプロイが止まっていた（11/27・11/28。やり直しで通った）。
+// 中身の誤り（4xx・GraphQL のエラー）は、やり直しても同じなので、すぐ止める。
+const ATTEMPTS = 5;                      // 1 回目＋やり直し 4 回
+const TIMEOUT_MS = 30_000;               // 1 回の問い合わせの上限（つながるまでの上限は Node の 10 秒）
+const WAIT_MS = [2_000, 5_000, 10_000, 20_000];   // やり直す前に待つ時間（合わせて約 40 秒）
+
+/** やり直しても直らない失敗（中身の誤り） */
+class PermanentError extends Error {}
+
+const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
+
 async function fetchGraphQL<T>(query: string, variables: Record<string, unknown> = {}): Promise<T> {
+  const name = /^\s*query\s+(\w+)/.exec(query)?.[1] ?? "query";
+  for (let attempt = 1; ; attempt++) {
+    try {
+      return await fetchGraphQLOnce<T>(query, variables);
+    } catch (e) {
+      if (e instanceof PermanentError || attempt >= ATTEMPTS) throw e;
+      const wait = WAIT_MS[attempt - 1];
+      const cause = e instanceof Error ? (e.cause instanceof Error ? `${e.message}（${e.cause.message}）` : e.message) : String(e);
+      console.warn(`WPGraphQL（${name}）の読み込みに失敗。${wait / 1000} 秒後にやり直します（${attempt}/${ATTEMPTS - 1}）：${cause}`);
+      await sleep(wait);
+    }
+  }
+}
+
+async function fetchGraphQLOnce<T>(query: string, variables: Record<string, unknown>): Promise<T> {
   const res = await fetch(ENDPOINT, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ query, variables }),
+    signal: AbortSignal.timeout(TIMEOUT_MS),
   });
   if (!res.ok) {
-    throw new Error(`WPGraphQL の読み込みに失敗しました（HTTP ${res.status}）：${ENDPOINT}`);
+    const message = `WPGraphQL の読み込みに失敗しました（HTTP ${res.status}）：${ENDPOINT}`;
+    // 5xx と 429（混んでいる）は一時的なことがあるので、やり直す
+    if (res.status >= 500 || res.status === 429) throw new Error(message);
+    throw new PermanentError(message);
   }
   const json = (await res.json()) as GraphQLResponse<T>;
   if (json.errors?.length) {
-    throw new Error(`WPGraphQL のエラー：${json.errors.map((e) => e.message).join(" / ")}`);
+    throw new PermanentError(`WPGraphQL のエラー：${json.errors.map((e) => e.message).join(" / ")}`);
   }
-  if (!json.data) throw new Error("WPGraphQL から data が返りませんでした");
+  if (!json.data) throw new PermanentError("WPGraphQL から data が返りませんでした");
   return json.data;
 }
 

@@ -45,7 +45,14 @@ jobs:
 
       - run: npm ci
 
-      - run: npm run build
+      # WordPress からの読み込みは、失敗すると中でやり直す（src/lib/wordpress.ts。合わせて約 40 秒）。
+      # それでも止まったときのために、1 分待ってビルドをもう 1 回だけ試す（2026-11-28。接続の時間切れでデプロイが 2 回止まったため）
+      - name: ビルド
+        run: |
+          npm run build && exit 0
+          echo "::warning::ビルドに失敗。60 秒後にもう 1 回だけ試します"
+          sleep 60
+          npm run build
         env:
           WORDPRESS_GRAPHQL_ENDPOINT: https://api.mothershipremote.com/graphql
           NEXT_PUBLIC_SITE_URL: https://mothershipremote.com
