@@ -1815,3 +1815,30 @@
 .usecase-links span { color: var(--ink-3); font-weight: var(--weight-bold); }
 .usecase-links a { color: var(--blue-deep); font-weight: var(--weight-bold); }
 .usecase-links a:hover { text-decoration: underline; }
+
+/* Android のテスター募集（2026-11-28。Google Play の「12 人・14 日間」の非公開テストのため、HERO のすぐ下に出す。
+   人数がそろったら、この節の CSS と、ページの <section class="tester-call"> を消す。日本語・英語で同じ） */
+.tester-call { position: relative; padding: 40px 0; background: var(--grad-navy); color: var(--on-dark-2); overflow: hidden; }
+.tester-call::before { content: ""; position: absolute; inset: -40% -10% auto auto; width: 520px; height: 520px; border-radius: 50%; background: radial-gradient(closest-side, rgba(var(--sky-rgb), .35), transparent); pointer-events: none; }
+.tester-call .wrap { position: relative; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr); gap: 28px 48px; align-items: center; }
+.tester-kicker { display: inline-flex; align-items: center; gap: 8px; margin: 0 0 12px; padding: 6px 14px; border-radius: var(--radius-pill); background: rgba(var(--live-rgb), .16); border: 1px solid rgba(var(--live-rgb), .5); color: #9ff0cf; font-size: var(--text-note); font-weight: var(--weight-heavy); letter-spacing: var(--tracking-wide); }
+.tester-kicker .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--live); box-shadow: 0 0 0 4px rgba(var(--live-rgb), .25); }
+.tester-call h2 { margin: 0; color: var(--on-dark); font-size: clamp(24px, 3vw, 34px); line-height: 1.3; }
+.tester-call h2 .accent { color: var(--cyan); }
+.tester-lead { margin: 12px 0 0; color: var(--on-dark-2); line-height: 1.7; }
+.tester-steps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin: 0; padding: 0; list-style: none; counter-reset: tstep; }
+.tester-steps li { display: flex; flex-direction: column; gap: 10px; padding: 16px; border-radius: var(--radius-lg); background: var(--glass); border: 1px solid var(--glass-line); counter-increment: tstep; }
+.tester-steps li::before { content: counter(tstep); display: inline-grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; background: var(--grad-accent); color: #fff; font-weight: var(--weight-heavy); font-size: 15px; }
+.tester-steps b { color: var(--on-dark); line-height: 1.4; }
+.tester-steps .tester-btn { display: inline-flex; align-items: center; justify-content: center; gap: 6px; min-height: 44px; margin-top: auto; padding: 0 14px; border-radius: var(--radius-pill); background: #fff; color: var(--ink); font-weight: var(--weight-bold); font-size: var(--text-small); text-decoration: none; transition: transform var(--dur-fast), background var(--dur-base); }
+.tester-steps .tester-btn:hover { background: var(--cyan); transform: translateY(-1px); }
+.tester-steps .tester-sub { margin-top: auto; color: var(--on-dark-3); font-size: var(--text-small); line-height: 1.5; }
+.tester-note { grid-column: 1 / -1; margin: 0; color: var(--on-dark-4); font-size: var(--text-note); line-height: 1.6; }
+@media (max-width: 860px) {
+  .tester-call { padding: 32px 0; }
+  .tester-call .wrap { grid-template-columns: 1fr; }
+  .tester-steps { grid-template-columns: 1fr; }
+  .tester-steps li { flex-direction: row; flex-wrap: wrap; align-items: center; }
+  .tester-steps b { flex: 1; min-width: 0; }
+  .tester-steps .tester-btn, .tester-steps .tester-sub { flex-basis: 100%; margin-top: 0; }
+}
